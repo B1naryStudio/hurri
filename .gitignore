@@ -1,3 +1,4 @@
 *sublime*
 node_modules/
+bower_components/
 .DS_store
