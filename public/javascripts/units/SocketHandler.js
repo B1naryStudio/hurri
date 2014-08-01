@@ -1,1 +1,0 @@
-define(["socketio"],function(t){var o=function(){this.socket=t("http://localhost:1000"),this.socket.on("news",function(t){console.log(t),this.socket.emit("my other event",{my:"data"})})};return new o});

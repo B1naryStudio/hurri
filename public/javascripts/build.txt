@@ -1,8 +1,0 @@
-
-main.js
-----------------
-d:/projects/academy-player/bower_components/underscore/underscore.js
-d:/projects/academy-player/bower_components/socket.io-client/socket.io.js
-units/SocketHandler.js
-app.js
-main.js

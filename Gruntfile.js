@@ -42,9 +42,7 @@ module.exports = function (grunt) {
 		jade: {
 			compile: {
 				options: {
-					data: {
-						debug: false
-					}
+					debug: true
 				},
 				files: {
 					'public/index.html': 'frontend/views/index.jade'
@@ -66,20 +64,17 @@ module.exports = function (grunt) {
 
 		open : {
 			dev : {
-			  path: 'http://127.0.0.1:3550/'
-		  }
+				path: 'http://127.0.0.1:3550/'
+			}
 		},
 
 		copy: {			
-			libs: {
-				files: [
-					{
-						expand: false,
-						src: ['bower_components/requirejs/require.js'],
-						dest: 'public/javascripts/libs/require.js'
-					}
-				]
-			}
+			libs: {files: [{expand: false, src: ['bower_components/requirejs/require.js'], dest: 'public/javascripts/libs/require.js'}]},
+			js: {files: [{expand: true, cwd: 'frontend/javascripts/', src: ['**'], dest: 'public/javascripts/'}]}
+		},
+
+		clean: {	
+			public_js: { src: ['public/javascripts']}
 		},
 
 		requirejs: {
@@ -114,5 +109,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-open');
 
-	grunt.registerTask('default', ['jshint', 'jade', 'stylus', 'requirejs', 'copy']);
+	grunt.registerTask('default', ['jshint', 'jade', 'stylus', 'clean', 'copy']);
+	grunt.registerTask('release', ['jshint', 'jade', 'stylus', 'clean', 'requirejs', 'copy:libs']);
 };

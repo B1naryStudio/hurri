@@ -1,1 +1,0 @@
-define(["underscore","units/SocketHandler"],function(e){e.templateSettings={evaluate:/\{\{(.+?)\}\}/g,interpolate:/\{\{=(.+?)\}\}/g,escape:/\{\{-(.+?)\}\}/g}});
