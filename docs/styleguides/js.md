@@ -67,7 +67,7 @@ bar[0] = 9;
 console.log(foo[0], bar[0]); // => 9, 9
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## Objects
 
@@ -115,7 +115,7 @@ var superman = {
   type: 'alien'
 };
 ~~~
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## Arrays
 
@@ -167,7 +167,7 @@ function trigger() {
 }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Strings
@@ -218,7 +218,7 @@ var errorMessage = 'This is a super long error that ' +
   'fast.';
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Functions
@@ -281,7 +281,7 @@ function yup(name, options, args) {
 }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 
@@ -317,7 +317,7 @@ function getProp(prop) {
 var isJedi = getProp('jedi');
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Variables
@@ -433,7 +433,7 @@ function() {
 }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Hoisting
@@ -525,7 +525,7 @@ function example() {
 
   - For more information refer to [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting) by [Ben Cherry](http://www.adequatelygood.com/)
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 
@@ -580,7 +580,7 @@ if (collection.length) {
 
   - For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Blocks
@@ -634,7 +634,7 @@ if (a === 5){
 }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Comments
@@ -700,7 +700,7 @@ function Calculator() {
 }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Whitespace
@@ -728,7 +728,7 @@ function() {
   - Place 1 space before the leading brace. Functions could be an exception.
 
 ~~~
-// good
+// bad
 function test(){
   console.log('test');
 }
@@ -809,7 +809,7 @@ var leds = stage.selectAll('.led')
     .call(tron.led);
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## Commas
 
@@ -843,7 +843,7 @@ var hero = {
 };
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Semicolons
@@ -865,7 +865,7 @@ var hero = {
 
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Type Casting & Coercion
@@ -958,7 +958,7 @@ Number(0.00000003); //result is 3e-8
     var hasAge = !!age;
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## Type Checking
 
@@ -1004,7 +1004,7 @@ if (typeof b !== 'undefined' && b !== null){
 }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## Default values
 
@@ -1170,7 +1170,7 @@ check.
     };
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Accessors
@@ -1224,7 +1224,7 @@ check.
     };
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Constructors
@@ -1312,7 +1312,7 @@ successfully and causes no side effects.
     };
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Events
@@ -1346,20 +1346,20 @@ prefer:
     });
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## jQuery
 
 - Don't use jQuery.
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## ECMAScript 5 Compatibility
 
 - Refer to [Kangax](https://twitter.com/kangax/)'s ES5 [compatibility table](http://kangax.github.com/es5-compat-table/)
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Testing
@@ -1372,7 +1372,7 @@ prefer:
     }
 ~~~
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Performance
@@ -1386,7 +1386,7 @@ prefer:
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
   - Loading...
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 
 ## Resources
@@ -1443,7 +1443,7 @@ prefer:
   - [Dustin Diaz](http://dustindiaz.com/)
   - [nettuts](http://net.tutsplus.com/?s=javascript)
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
 
 ## In the Wild
 
@@ -1498,4 +1498,4 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[[⬆]](#TOC)**
+**[[⬆]](#table-of-contents)**
