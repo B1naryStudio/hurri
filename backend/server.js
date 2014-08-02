@@ -7,6 +7,6 @@ var app = express();
 var staticPath = path.normalize(__dirname + '/../public');
 app.use(express.static(staticPath));
 
-var routes = require('api/routes')(app);
+var routes = require('./api/routes')(app);
 
 app.listen(3055);
