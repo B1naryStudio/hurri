@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 			},
 			scripts: {
 				files: ['<%= javascripts %>'],
-				tasks: ['jshint:client']
+				tasks: ['javascripts']
 			},
 			server_js: {
 				files: ['<%= server_js %>'],
@@ -30,23 +30,9 @@ module.exports = function (grunt) {
 					livereload: false
 				}
 			},
-			jade: {
-				files: ['<%= views %>'],
-				tasks: ['jade']
-			},
 			styles: {
 				files: ['<%= stylesheets %>'],
 				tasks: ['stylus']
-			}
-		},
-		jade: {
-			compile: {
-				options: {
-					debug: true
-				},
-				files: {
-					'public/index.html': 'frontend/views/index.jade'
-				}
 			}
 		},
 		stylus: {
@@ -64,7 +50,7 @@ module.exports = function (grunt) {
 
 		open : {
 			dev : {
-				path: 'http://127.0.0.1:3550/'
+				path: 'http://localhost:3055/'
 			}
 		},
 
@@ -102,13 +88,13 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-jade');
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-open');
 
-	grunt.registerTask('default', ['jshint', 'jade', 'stylus', 'clean', 'copy']);
-	grunt.registerTask('release', ['jshint', 'jade', 'stylus', 'clean', 'requirejs', 'copy:libs']);
+	grunt.registerTask('default', ['jshint', 'stylus', 'clean', 'copy', 'open']);
+	grunt.registerTask('release', ['jshint', 'stylus', 'clean', 'requirejs', 'copy:libs']);
+	grunt.registerTask('javascripts', ['jshint', 'clean', 'copy']);
 };
