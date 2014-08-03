@@ -12,4 +12,4 @@ var userAuthSchema = new Schema({
     registrationAccounts : [{name : String, email : String, accountType : String}],
     alerts : [{name : String, type : String, additionalInfo : String}],
     online : Boolean
-})
+});

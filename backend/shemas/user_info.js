@@ -9,4 +9,4 @@ var userInfoSchema = new Schema({
 	liked : [Schema.Types.ObjectId],
 	totalListened : Number,
 	group : [Schema.Types.ObjectId]
-})
+});

@@ -8,4 +8,4 @@ var dialogSchema = new Schema({
     dialogue : [{
     	 _id : Schema.Types.ObjectId, user_auth_id : Schema.Types.ObjectId, date : Date, message : String
         }]
-})
+});

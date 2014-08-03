@@ -8,4 +8,4 @@ var singerSchema = new Schema({
     albums_id : [Schema.Types.ObjectId],
     genres : [String],
     bio : String
-})
+});

@@ -7,4 +7,4 @@ var radioSchema = new Schema({
     listeners : [Schema.Types.ObjectId],
     tracks : [Schema.Types.ObjectId],
     active : Boolean
-})
+});
