@@ -1,7 +1,8 @@
-var albumRepository = require('../repositories/albumRepository');
+var AlbumRepository = require('../repositories/albumRepository');
+var albumRepository = new AlbumRepository();
 
 module.exports = function(app){
-	app.get('album/album/:id', function(req, res, next){
+	app.get('/album/album/:id', function(req, res, next){
 		res.json(albumRepository.getById(req.param.id));
 	});
 

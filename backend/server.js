@@ -10,3 +10,5 @@ app.use(express.static(staticPath));
 var routes = require('./api/routes')(app);
 
 app.listen(3055);
+
+module.exports = app;

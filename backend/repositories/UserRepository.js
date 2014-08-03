@@ -8,6 +8,7 @@ UserRepository.prototype.getGroups = function(first_argument) {
 };
 UserRepository.prototype.getPlaylists = function(first_argument) {
 
+};
 
 UserRepository.prototype.getPlaylistsShare = function(first_argument, second_argument) {
 
