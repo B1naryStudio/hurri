@@ -3,6 +3,5 @@ define(['marionette'], function(Marionette){
 		template: '#sidebar-template'
 	});
 
-	sidebarNavView = new SidebarNavView();
-	sidebarNavView.render();
+	return SidebarNavView();
 });

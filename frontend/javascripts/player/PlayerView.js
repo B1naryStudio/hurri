@@ -3,6 +3,5 @@ define(['marionette'], function(Marionette){
 		template: '#player-template'
 	});
 
-	playerView = new PlayerView();
-	playerView.render();
+	return PlayerView();
 });

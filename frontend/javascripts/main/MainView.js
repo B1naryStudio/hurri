@@ -3,6 +3,5 @@ define(['marionette'], function(Marionette){
 		template: '#playlists-template'
 	});
 
-	playlistsView = new PlaylistsView();
-	playlistsView.render();
+	return PlaylistsView();
 });

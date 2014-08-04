@@ -3,6 +3,6 @@ define(['marionette'], function(Marionette){
 		template: '#song-info-template'
 	});
 
-	songInfoView = new SongInfoView();
-	songInfoView.render();
+	return SongInfoView();
+
 });
