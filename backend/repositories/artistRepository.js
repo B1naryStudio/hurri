@@ -1,15 +1,30 @@
-function UserRepository(){}
+function ArtistRepository(){}
 
-UserRepository.prototype.add = function(first_argument) {
-
-};
-
-UserRepository.prototype.delete = function(){
+ArtistRepository.prototype.getById = function(first_argument) {
 
 };
-
-UserRepository.prototype.update = function(){
+ArtistRepository.prototype.getByName = function(first_argument) {
 
 };
+ArtistRepository.prototype.addArtist = function(first_argument) {
 
-module.exports = UserRepository;
+};
+ArtistRepository.prototype.editArtist = function(first_argument) {
+
+};
+ArtistRepository.prototype.editBio = function(first_argument) {
+
+};
+ArtistRepository.prototype.editGenres = function(first_argument) {
+
+};
+ArtistRepository.prototype.editPicture = function(first_argument) {
+
+};
+ArtistRepository.prototype.editName = function(first_argument) {
+
+};
+ArtistRepository.prototype.deleteArtist = function(first_argument) {
+
+};
+module.exports = ArtistRepository;
