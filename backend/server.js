@@ -19,3 +19,5 @@ var routes = require('./api/routes')(app);
 var viewRoutes = require('./view_routes/routes')(app);
 
 app.listen(3055);
+
+module.exports = app;
