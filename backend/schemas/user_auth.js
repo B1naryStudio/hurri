@@ -9,8 +9,16 @@ var userAuthSchema = new Schema({
     age : Number,
     email : String,
     friends : [Schema.Types.ObjectId],
-    registrationAccounts : [{name : String, email : String, accountType : String}],
-    alerts : [{name : String, type : String, additionalInfo : String}],
+    registrationAccounts : [{
+        name : String, 
+        email : String, 
+        accountType : String
+    }],
+    alerts : [{
+        name : String, 
+        type : String, 
+        additionalInfo : String
+    }],
     online : Boolean
 });
 

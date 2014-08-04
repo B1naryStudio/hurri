@@ -6,8 +6,11 @@ var dialogSchema = new Schema({
     id1 : Schema.Types.ObjectId,
     id2 : Schema.Types.ObjectId,
     dialogue : [{
-    	 _id : Schema.Types.ObjectId, user_auth_id : Schema.Types.ObjectId, date : Date, message : String
-        }]
+    	 _id : Schema.Types.ObjectId, 
+    	 user_auth_id : Schema.Types.ObjectId, 
+    	 date : Date, 
+    	 message : String
+    }]
 });
 
 module.exports = mongoose.model('Dialog', dialogSchema);

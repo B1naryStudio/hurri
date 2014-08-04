@@ -7,9 +7,14 @@ var albumSchema = new Schema({
     cover : String,
     duration : Number,
     release_date : Date,
-    singer : { singer_id : Schema.Types.ObjectId },
+    singer : Schema.Types.ObjectId,
     genres : [String],
-    comment : [{_id : Schema.Types.ObjectId, user_auth_id : Schema.Types.ObjectId, comment : String, date : Date}],
+    comment : [{
+    	_id : Schema.Types.ObjectId, 
+    	user_auth_id : Schema.Types.ObjectId, 
+    	comment : String, 
+    	date : Date
+    }],
     tracks : [Schema.Types.ObjectId]
 });
 

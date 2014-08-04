@@ -1,9 +1,10 @@
+var connection = require('../db/dbconnect.js');
 var Singer = require('../shemas/singer.js');
 
 function ArtistRepository(){}
 
 ArtistRepository.prototype.getById = function(first_argument) {
-
+	
 };
 ArtistRepository.prototype.getByName = function(first_argument) {
 
@@ -29,4 +30,4 @@ ArtistRepository.prototype.editName = function(first_argument) {
 ArtistRepository.prototype.deleteArtist = function(first_argument) {
 
 };
-module.exports = ArtistRepository;
+module.exports = new ArtistRepository();

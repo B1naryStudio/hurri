@@ -1,5 +1,4 @@
-var UserRepository = require('../repositories/userRepository');
-var userRepository = new UserRepository();
+
 
 module.exports = function(app){
 	app.get('/api/user/:id/like', function(req, res, next){

@@ -1,5 +1,4 @@
-var ArtistRepository = require('../repositories/artistRepository');
-var artistRepository = new ArtistRepository();
+var artistRepository = require('../repositories/artistRepository');
 
 module.exports = function(app){
 	app.get('/api/artist/:id', function(req, res, next){
