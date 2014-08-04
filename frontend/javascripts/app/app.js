@@ -1,4 +1,4 @@
-define(['underscore', 'units/SocketHandler'], function(_, socketHandler){
+define(['underscore', 'units/SocketHandler', 'marionette'], function(_, socketHandler, Marionette){
 
 	_.templateSettings = {
 		'evaluate': /\{\{(.+?)\}\}/g,
@@ -6,4 +6,15 @@ define(['underscore', 'units/SocketHandler'], function(_, socketHandler){
 		'escape': /\{\{-(.+?)\}\}/g
 	};
 
+var MyApp = Backbone.Marionette.Application();
+
+MyApp.addRegions({
+  footerRegion: '#footer',
+  headerRegion: '#header',
+  mainRegion: '#main',
+  menuRegion: '#menu',
+  playerRegion: '#player',
+  sidebarRegion: '#sidebar'
+});
+MyApp.start();
 });
