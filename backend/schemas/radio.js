@@ -17,4 +17,4 @@ var radioSchema = new Schema({
     active : Boolean
 });
 
-module.exports = mongoose.model('Radio', radioSchema);
+module.exports = radioSchema;

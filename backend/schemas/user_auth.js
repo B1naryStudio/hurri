@@ -24,4 +24,4 @@ var userAuthSchema = new Schema({
     online : Boolean
 });
 
-module.exports = mongoose.model('Userauth', userAuthSchema);
+module.exports = userAuthSchema;

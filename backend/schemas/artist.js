@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var singerSchema = new Schema({
+var artistSchema = new Schema({
     name : String,
     picture : {
         type: String, 
@@ -18,4 +18,4 @@ var singerSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('singer', singerSchema);
+module.exports = artistSchema;

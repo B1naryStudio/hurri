@@ -30,4 +30,4 @@ var trackSchema = new Schema({
     comments : [commentSchema]
 });
 
-module.exports = mongoose.model('Track', trackSchema);
+module.exports = trackSchema;

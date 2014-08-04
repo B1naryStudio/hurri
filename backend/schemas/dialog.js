@@ -14,4 +14,4 @@ var dialogSchema = new Schema({
     dialogue : [messageSchema]
 });
 
-module.exports = mongoose.model('Dialog', dialogSchema);
+module.exports = dialogSchema;
