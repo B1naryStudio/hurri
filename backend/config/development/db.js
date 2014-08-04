@@ -5,7 +5,6 @@ module.exports = {
     	server: { 
     		auto_reconnect: true
     	},
-    	user: 'root',
-    	password: '',
+    	user: 'nikita'
     }
-}
+};
