@@ -2,9 +2,9 @@ var app = require('../../backend/server');
 var request = require('supertest');
 
 describe('artist api should', function(){
-	it('have get /api/artist/id route', function(done){
+	it('have get /api/artist/:id route', function(done){
 		request(app)
-		.get('/api/artist/id')
+		.get('/api/artist/:id')
 		.expect(200)
 		.expect('Content-Type', /json/)
 		.end(function(err, res){
@@ -12,9 +12,9 @@ describe('artist api should', function(){
 		})
 	});
 
-	it('have get /api/artist/name route', function(done){
+	it('have get /api/artist/:name route', function(done){
 		request(app)
-		.get('/api/artist/name')
+		.get('/api/artist/:name')
 		.expect(200)
 		.expect('Content-Type', /json/)
 		.end(function(err, res){
@@ -31,54 +31,54 @@ describe('artist api should', function(){
 		})
 	});
 
-	it('have put /api/artist/id route', function(done){
+	it('have put /api/artist/:id route', function(done){
 		request(app)
-		.put('/api/artist/id')
+		.put('/api/artist/:id')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
 		})
 	});
 
-	it('have put /api/artist/id/bio route', function(done){
+	it('have put /api/artist/:id/bio route', function(done){
 		request(app)
-		.put('/api/artist/id/bio')
+		.put('/api/artist/:id/bio')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
 		})
 	});
 
-	it('have put /api/artist/id/genres route', function(done){
+	it('have put /api/artist/:id/genres route', function(done){
 		request(app)
-		.put('/api/artist/id/genres')
+		.put('/api/artist/:id/genres')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
 		})
 	});
 
-	it('have put /api/artist/id/picture route', function(done){
+	it('have put /api/artist/:id/picture route', function(done){
 		request(app)
-		.put('/api/artist/id/picture')
+		.put('/api/artist/:id/picture')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
 		})
 	});
 
-	it('have put /api/artist/id/name route', function(done){
+	it('have put /api/artist/:id/name route', function(done){
 		request(app)
-		.put('/api/artist/id/name')
+		.put('/api/artist/:id/name')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
 		})
 	});
 
-	it('have delete /api/artist/id route', function(done){
+	it('have delete /api/artist/:id route', function(done){
 		request(app)
-		.delete('/api/artist/id')
+		.delete('/api/artist/:id')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
