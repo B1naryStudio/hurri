@@ -8,3 +8,5 @@ var radioSchema = new Schema({
     tracks : [Schema.Types.ObjectId],
     active : Boolean
 });
+
+module.exports = mongoose.model('Radio', radioSchema);

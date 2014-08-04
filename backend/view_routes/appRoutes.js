@@ -1,5 +1,10 @@
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/hurri');
+var artist = require('./repositories/artistRepository.js');
+
+
 module.exports = function(app){
 	app.get('/', function(req, res, next){
-		res.render('index');	
+		res.send(artist.show);	
 	});
 };

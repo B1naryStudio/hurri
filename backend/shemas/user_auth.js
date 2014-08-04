@@ -13,3 +13,5 @@ var userAuthSchema = new Schema({
     alerts : [{name : String, type : String, additionalInfo : String}],
     online : Boolean
 });
+
+module.exports = mongoose.model('Userauth', userAuthSchema);

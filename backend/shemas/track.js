@@ -14,3 +14,5 @@ var trackSchema = new Schema({
     url : String,
     comment : [{user_auth_id : Schema.Types.ObjectId, comment : String, date : Date}]
 });
+
+module.exports = mongoose.model('Track', trackSchema);

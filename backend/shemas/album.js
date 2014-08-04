@@ -12,3 +12,5 @@ var albumSchema = new Schema({
     comment : [{_id : Schema.Types.ObjectId, user_auth_id : Schema.Types.ObjectId, comment : String, date : Date}],
     tracks : [Schema.Types.ObjectId]
 });
+
+module.exports = mongoose.model('Album', albumSchema);

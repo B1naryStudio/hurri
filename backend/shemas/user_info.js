@@ -10,3 +10,5 @@ var userInfoSchema = new Schema({
 	totalListened : Number,
 	group : [Schema.Types.ObjectId]
 });
+
+module.exports = mongoose.model('Userinfo', userInfoSchema);

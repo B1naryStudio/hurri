@@ -9,3 +9,5 @@ var dialogSchema = new Schema({
     	 _id : Schema.Types.ObjectId, user_auth_id : Schema.Types.ObjectId, date : Date, message : String
         }]
 });
+
+module.exports = mongoose.model('Dialog', dialogSchema);

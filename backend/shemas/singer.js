@@ -9,3 +9,5 @@ var singerSchema = new Schema({
     genres : [String],
     bio : String
 });
+
+module.exports = mongoose.model('Singer', singerSchema);
