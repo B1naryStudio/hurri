@@ -2,12 +2,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var singerSchema = new Schema({
-	_id : Schema.Types.ObjectId,
     name : String,
-    picture : String,
-    albums_id : [Schema.Types.ObjectId],
+    picture : {
+        type: String, 
+        default: '/image/defaultSinger.jpg'
+    },
+    albums_id : [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'Album' 
+	}],
     genres : [String],
-    bio : String
+    bio : {
+        type: String, 
+        default: 'No bio for this singer/group. Sorry.'
+    }
 });
 
 module.exports = mongoose.model('Singer', singerSchema);

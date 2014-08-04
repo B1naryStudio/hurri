@@ -1,6 +1,8 @@
+function db_connection_handler(){
 var mongoose = require( 'mongoose' );
 var dbURI = 'mongodb://localhost/hurri';
-mongoose.connect(dbURI);
+var opts = { server: { auto_reconnect: true} };
+mongoose.connect(dbURI,opts);
 
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open to ' + dbURI);
@@ -20,3 +22,7 @@ process.on('SIGINT', function() {
     process.exit(0);
   });
 });
+
+}
+
+module.exports = new db_connection_handler();

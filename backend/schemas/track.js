@@ -1,18 +1,33 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var commentSchema = require('./comment.js');
 
 var trackSchema = new Schema({
-	_id : Schema.Types.ObjectId,
     title : String,
     duration : Number,
-    position : Number,
+    position : {
+        type: Number, 
+        default: 0
+    },
     release_date : Date,
-    kbps : Number,
-    lyrics : String,
-    album : {_id : Schema.Types.ObjectId, title : String, cover : String},
-    singer : {_id : Schema.Types.ObjectId, name : String},
+    kbps : {
+        type: Number, 
+        default: 128
+    },
+    lyrics : {
+        type: String, 
+        default: 'No lyrics for this song. Sorry.'
+    },
+    album : {
+        type : Schema.Types.ObjectId,
+        ref : 'Album'
+    },
+    singer : {
+        type : Schema.Types.ObjectId,
+        ref : 'Singer'
+    },
     url : String,
-    comment : [{user_auth_id : Schema.Types.ObjectId, comment : String, date : Date}]
+    comments : [commentSchema]
 });
 
 module.exports = mongoose.model('Track', trackSchema);

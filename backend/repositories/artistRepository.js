@@ -1,5 +1,5 @@
 var connection = require('../db/dbconnect.js');
-var Singer = require('../shemas/singer.js');
+var Singer = require('../schemas/singer.js');
 
 function ArtistRepository(){}
 

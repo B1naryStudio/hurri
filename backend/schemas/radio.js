@@ -2,10 +2,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var radioSchema = new Schema({
-	 _id : Schema.Types.ObjectId,
-    user_auth_id : Schema.Types.ObjectId,
-    listeners : [Schema.Types.ObjectId],
-    tracks : [Schema.Types.ObjectId],
+    user_auth_id : { 
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	},
+    listeners : [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	}],
+    tracks : [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'Track' 
+	}],
     active : Boolean
 });
 

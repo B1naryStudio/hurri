@@ -1,16 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var messageSchema = require('./message.js');
 
 var dialogSchema = new Schema({
-	_id : Schema.Types.ObjectId,
-    id1 : Schema.Types.ObjectId,
-    id2 : Schema.Types.ObjectId,
-    dialogue : [{
-    	 _id : Schema.Types.ObjectId, 
-    	 user_auth_id : Schema.Types.ObjectId, 
-    	 date : Date, 
-    	 message : String
-    }]
+    user_auth_id1 : {
+        type : Schema.Types.ObjectId,
+        ref : 'Userauth'
+    },
+    user_auth_id2 : {
+        type : Schema.Types.ObjectId,
+        ref : 'Userauth'
+    },
+    dialogue : [messageSchema]
 });
 
 module.exports = mongoose.model('Dialog', dialogSchema);

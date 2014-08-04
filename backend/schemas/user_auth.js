@@ -1,25 +1,28 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var accountSchema = require('./account.js');
+var alertSchema = require('./alert.js');
 
 var userAuthSchema = new Schema({
-	_id : Schema.Types.ObjectId,
     name : String,
     avatarUrl : String,
-    country : String,
-    age : Number,
+    country : {
+        type: String, 
+        default: 'Unknown country'
+    },
+    age : {
+        type: Number, 
+        default: 'Undefined'
+    },
     email : String,
-    friends : [Schema.Types.ObjectId],
-    registrationAccounts : [{
-        name : String, 
-        email : String, 
-        accountType : String
+    friends : [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'Userauth' 
     }],
-    alerts : [{
-        name : String, 
-        type : String, 
-        additionalInfo : String
-    }],
+    registrationAccounts : [accountSchema],
+    alerts : [alertSchema],
     online : Boolean
 });
 
 module.exports = mongoose.model('Userauth', userAuthSchema);
+
