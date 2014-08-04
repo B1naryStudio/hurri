@@ -25,4 +25,3 @@ var userAuthSchema = new Schema({
 });
 
 module.exports = mongoose.model('Userauth', userAuthSchema);
-

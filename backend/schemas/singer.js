@@ -18,4 +18,4 @@ var singerSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Singer', singerSchema);
+module.exports = mongoose.model('singer', singerSchema);

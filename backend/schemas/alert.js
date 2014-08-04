@@ -8,4 +8,3 @@ var alertSchema = new Schema({
 });
 
 module.exports = alertSchema;
-

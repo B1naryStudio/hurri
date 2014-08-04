@@ -18,4 +18,3 @@ var playlistSchema = new Schema({
 });
 
 module.exports = playlistSchema;
-
