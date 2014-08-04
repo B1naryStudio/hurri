@@ -2,15 +2,15 @@ var artistRepository = require('../repositories/artistRepository');
 
 module.exports = function(app){
 	app.get('/api/artist/:id', function(req, res, next){
-		res.json(artistRepository.getById(req.param.id));
+		res.send(artistRepository.getById(req.params.id));
 	});
 
 	app.get('/api/artist/:name', function(req, res, next){
 		res.json(artistRepository.getByName(req.param.name));
 	});
 
-	app.post('/api/artist', function(req, res, next){
-		artistRepository.addArtist();
+	app.post('/api/artist/', function(req, res){
+		artistRepository.add(req.body);
 		res.end();
 	});
 

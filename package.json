@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/msemenistyi/academy-player",
   "devDependencies": {
-    "cnfg": "^0.1.1",
+    "cnfg": "^0.1.2",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-copy": "~0.5.0",
@@ -33,10 +33,11 @@
     "supertest": "^0.13.0"
   },
   "dependencies": {
+    "body-parser": "^1.5.2",
     "express": "~4.7.2",
     "jade": "^1.5.0",
-    "socket.io": "~1.0.6",
     "mongodb": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "socket.io": "~1.0.6"
   }
 }

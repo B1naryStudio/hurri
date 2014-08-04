@@ -1,23 +1,27 @@
-function db_connection_handler(){
+function dbConnectionHandler(){
 var mongoose = require( 'mongoose' );
-var dbURI = 'mongodb://localhost/hurri';
-var opts = { server: { auto_reconnect: true} };
-mongoose.connect(dbURI,opts);
+var config = require('../config/');
+console.log(config.db.opts.user);
+mongoose.connect(config.db.uri, config.db.opts);
 
 mongoose.connection.on('connected', function () {
-  console.log('Mongoose default connection open to ' + dbURI);
+	this.state = 'connected';
+  	console.log('Mongoose default connection open to ' + config.db.uri);
 });
 
 mongoose.connection.on('error',function (err) {
-  console.log('Mongoose default connection error: ' + err);
+	this.state = 'disconnected';
+ 	console.log('Mongoose default connection error: ' + err);
 });
 
 mongoose.connection.on('disconnected', function () {
-  console.log('Mongoose default connection disconnected');
+	this.state = 'disconnected';
+  	console.log('Mongoose default connection disconnected');
 });
 
 process.on('SIGINT', function() {
   mongoose.connection.close(function () {
+  	this.state = 'disconnected';
     console.log('Mongoose default connection disconnected through app termination');
     process.exit(0);
   });
@@ -25,4 +29,4 @@ process.on('SIGINT', function() {
 
 }
 
-module.exports = new db_connection_handler();
+module.exports = new dbConnectionHandler();
