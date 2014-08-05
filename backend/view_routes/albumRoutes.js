@@ -1,10 +1,11 @@
 var AlbumRepository = require('../repositories/albumRepository');
 var albumRepository = new AlbumRepository();
-
+var renderHelper = require('./renderHelper');
 module.exports = function(app){
 
   app.get('/album/:id', function(req, res, next){
-    res.render('index');
+//    res.render('index');
+    renderHelper({route: req.path, data: {some: 'data'}});
   });
 
   app.get('/album/:id/cover', function(req, res, next){
