@@ -34,5 +34,6 @@ GroupRepository.prototype.updateListeners = function(id) {
 	});
 };
 
+GroupRepository.prototype = new Repository();
 
 module.exports = new GroupRepository();

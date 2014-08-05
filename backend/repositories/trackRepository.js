@@ -40,4 +40,6 @@ TrackRepository.prototype.getComments = function(id) {
 	});
 };
 
+TrackRepository.prototype = new Repository();
+
 module.exports = new TrackRepository();
