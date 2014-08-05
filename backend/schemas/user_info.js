@@ -19,4 +19,4 @@ var userInfoSchema = new Schema({
 	}]
 });
 
-module.exports = userInfoSchema;
+module.exports =  mongoose.model('Userinfo', userInfoSchema);

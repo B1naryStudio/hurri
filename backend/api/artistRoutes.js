@@ -15,7 +15,7 @@ module.exports = function(app){
 	});
 
 	app.put('/api/artist/:id', function(req, res, next){
-		artistRepository.edit(req.param.id);
+		artistRepository.edit(req.param.id, req.body);
 		res.end();
 	});
 

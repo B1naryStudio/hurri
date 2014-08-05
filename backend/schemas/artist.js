@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var albumModel = require('./album.js');
 
 var artistSchema = new Schema({
     name : String,
@@ -9,7 +10,7 @@ var artistSchema = new Schema({
     },
     albums_id : [{ 
 		type: Schema.Types.ObjectId, 
-		ref: 'Album' 
+		ref: 'Album'
 	}],
     genres : [String],
     bio : {
@@ -18,4 +19,4 @@ var artistSchema = new Schema({
     }
 });
 
-module.exports = artistSchema;
+module.exports = mongoose.model('Artist', artistSchema);

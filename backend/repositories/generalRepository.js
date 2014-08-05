@@ -10,8 +10,8 @@ Repository.prototype.createModel = function(){
 
 Repository.prototype.getById = function(id) {
 	var model = this.createModel();
-	console.log(id);
-	var query = model.findOne({_id: id});
+	console.log(model);
+	var query = model.findOne({_id: id}).populate('albums_id');
 	query.exec(function (err, docs) {
 		console.log(docs);
 	});
@@ -35,7 +35,7 @@ Repository.prototype.getByName = function(name) {
 	});
 };
 
-Repository.prototype.edit = function(id) {
+Repository.prototype.update = function(id) {
 	var model = this.createModel();
 	console.log(id);
 	var query = model.findOne({_id: id});
