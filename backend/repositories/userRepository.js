@@ -1,5 +1,9 @@
 function UserRepository(){}
 
+UserRepository.prototype.getUserInfo = function(first_argument) {
+
+};
+
 UserRepository.prototype.getLike = function(first_argument) {
 
 };
