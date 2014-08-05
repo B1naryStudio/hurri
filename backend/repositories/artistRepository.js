@@ -5,14 +5,10 @@ var Repository = require('./generalRepository.js');
 function ArtistRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Artist;
-	this.model = 'artists';
+	this.model = 'Artist';
 };
 
 ArtistRepository.prototype = new Repository();
-
-ArtistRepository.prototype.getByName = function(name) {
-
-};
 
 ArtistRepository.prototype.editArtist = function(first_argument) {
 
