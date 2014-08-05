@@ -1,0 +1,18 @@
+extends ./layout
+
+block content
+	h1 Signin
+	p Please Sing In
+	form
+		input(name="login", type="text", placeholder="Your login or email")
+		input(name="pass", type="password", placeholder="type password")
+		input(type="submit" value="login")
+	hr
+	p or Sign Up
+	form
+		input(name="login", type="text", placeholder="Your login name")
+		input(name="email", type="email", placeholder="Your email")
+		input(name="pass", type="password", placeholder="type password")
+		input(name="pass_re", type="password", placeholder="retype password")
+		input(type="submit" value="sign up")
+
