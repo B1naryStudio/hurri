@@ -95,6 +95,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-open');
 
 	grunt.registerTask('default', ['jshint', 'stylus', 'clean', 'copy', 'open']);
-	grunt.registerTask('release', ['jshint', 'stylus', 'clean', 'requirejs', 'copy:libs']);
+	grunt.registerTask('release', ['jshint', 'stylus', 'clean', 'copy:libs', 'requirejs']);
 	grunt.registerTask('javascripts', ['jshint', 'clean', 'copy']);
 };
