@@ -1,6 +1,10 @@
-
+var userRepository = require('../repositories/userRepository');
 
 module.exports = function(app){
+	app.get('/api/user/:id', function(req, res, next){
+		res.json(userRepository.getUserInfo(req.params.id));
+	});
+
 	app.get('/api/user/:id/like', function(req, res, next){
 		res.json(userRepository.getLike(req.params.id));
 	});
@@ -18,27 +22,27 @@ module.exports = function(app){
 	});
 
 	app.post('/api/user', function(req, res, next){
-		userRepository.add();
+		userRepository.add(req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id', function(req, res, next){
-		userRepository.edit(req.params.id);
+		userRepository.edit(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id/playlist', function(req, res, next){
-		userRepository.editPlaylist(req.params.id);
+		userRepository.editPlaylist(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id/like', function(req, res, next){
-		userRepository.editLike(req.params.id);
+		userRepository.editLike(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id/group', function(req, res, next){
-		userRepository.editGroup(req.params.id);
+		userRepository.editGroup(req.params.id, req.body);
 		res.end();
 	});
 	
