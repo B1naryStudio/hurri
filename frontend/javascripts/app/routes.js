@@ -1,4 +1,6 @@
-var hurriRoutes = Backbone.Marionette.AppRouter.extend({
+define(['marionette'], function(Marionette){
+
+var HurriRoutes = Backbone.Marionette.AppRouter.extend({
     appRoutes: {
     '':'startMethod',
     'profile/add': 'registrationUser',
@@ -21,4 +23,6 @@ var hurriRoutes = Backbone.Marionette.AppRouter.extend({
   }
 });
 
-var Routes = new hurriRoutes();
+var routes = new HurriRoutes();
+
+});
