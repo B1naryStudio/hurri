@@ -19,27 +19,6 @@ module.exports = function(app){
 		res.end();
 	});
 
-	app.put('/api/artist/:id/bio', function(req, res, next){
-		artistRepository.update(req.params.id, req.body);
-		res.end();
-	});
-
-	app.put('/api/artist/:id/genres', function(req, res, next){
-		console.log(req.body);
-		artistRepository.update(req.params.id, req.body);
-		res.end();
-	});
-
-	app.put('/api/artist/:id/picture', function(req, res, next){
-		artistRepository.update(req.params.id, req.body);
-		res.end();
-	});
-
-	app.put('/api/artist/:id/name', function(req, res, next){
-		artistRepository.update(req.params.id, req.body);
-		res.end();
-	});
-
 	app.delete('/api/artist/:id', function(req, res, next){
 		artistRepository.delete(req.params.id);
 		res.end();

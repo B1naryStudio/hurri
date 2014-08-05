@@ -1,4 +1,12 @@
-function AlbumRepository(){}
+var connection = require('../db/dbconnect.js');
+var Album = require('../schemas/album.js');
+var Repository = require('./generalRepository.js');
+
+function AlbumRepository(){
+	Repository.prototype.constructor.call(this);
+	this.schema = Album;
+	this.model = 'Album';
+}
 
 AlbumRepository.prototype.getById = function(first_argument) {
 

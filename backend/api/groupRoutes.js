@@ -3,30 +3,30 @@ var groupRepository = new GroupRepository();
 
 module.exports = function(app){
 	app.get('/api/group/:id/members', function(req, res, next){
-		res.json(groupRepository.getMembers(req.param.id));
+		res.json(groupRepository.getMembers(req.params.id));
 	});
 
 	app.get('/api/group/:id/tracks', function(req, res, next){
-		res.json(groupRepository.getTracks(req.param.id));
+		res.json(groupRepository.getTracks(req.params.id));
 	});
 
 	app.post('/api/group', function(req, res, next){
-		groupRepository.addGroup();
+		groupRepository.add();
 		res.end();
 	});
 
 	app.put('/api/group/:id', function(req, res, next){
-		groupRepository.editGroup(req.param.id);
+		groupRepository.update(req.params.id);
 		res.end();
 	});
 
 	app.put('/api/group/:id/listeners', function(req, res, next){
-		groupRepository.editListeners(req.param.id);
+		groupRepository.editListeners(req.params.id);
 		res.end();
 	});
 	
 	app.delete('/api/group/:id', function(req, res, next){
-		groupRepository.deleteGroup(req.param.id);
+		groupRepository.delete(req.params.id);
 		res.end();
 	});
 };
