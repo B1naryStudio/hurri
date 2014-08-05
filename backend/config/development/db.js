@@ -6,6 +6,6 @@ module.exports = {
     		auto_reconnect: true
     	},
     	user: 'root',
-    	password: '',
+    	password: ''
     }
-}
+};

@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: 'javascripts',
+	baseUrl: '/javascripts',
 
 	paths: {
 		jquery: '../../bower_components/jquery/dist/jquery.min',
