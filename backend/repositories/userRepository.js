@@ -24,7 +24,7 @@ UserRepository.prototype.getPlaylists = function(id) {
 
 UserRepository.prototype.getPlaylistsShare = function(id, pl_id) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id, playlists._id : pl_id}).populate('playlists');
+	var query = model.findOne({_id: id, playlists : pl_id}).populate('playlists');
 	query.exec(function (err, docs) {
 		return docs;
 	});
