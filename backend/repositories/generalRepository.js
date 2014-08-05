@@ -6,41 +6,49 @@ var Repository = function(){
 
 Repository.prototype.createModel = function(){
 	return mongoose.model(this.model,this.schema);
-}
+};
 
 Repository.prototype.getById = function(id) {
 	var model = this.createModel();
-	console.log(model);
 	var query = model.findOne({_id: id}).populate('albums_id');
 	query.exec(function (err, docs) {
-		console.log(docs);
+		return docs;
 	});
 };
 
 Repository.prototype.add = function(data) {
 	var model = this.createModel();
 	var newitem = new model(data);
-	console.log(newitem);
 	newitem.save(function(err){
         if(err){ throw err; }
         console.log('saved');
-    })
+    });
 };
 
 Repository.prototype.getByName = function(name) {
 	var model = this.createModel();
-	var query = model.findOne({name: name});
+	var query = model.findOne({name: name}).populate('albums_id');
 	query.exec(function (err, docs) {
-		console.log(docs);
+		return docs;
 	});
 };
 
-Repository.prototype.update = function(id) {
-	var model = this.createModel();
+Repository.prototype.update = function(id, body) {
 	console.log(id);
-	var query = model.findOne({_id: id});
+	var model = this.createModel();
+	var query = model.findByIdAndUpdate(id, body);
 	query.exec(function (err, docs) {
-		console.log(docs);
+		if(err){ throw err; }
+        console.log('updated');
+	});
+};
+
+Repository.prototype.delete = function(id){
+	var model = this.createModel();
+	var query = model.remove({_id: id});
+	query.exec(function (err, docs) {
+		if(err){ throw err; }
+        console.log('deleted');
 	});
 };
 

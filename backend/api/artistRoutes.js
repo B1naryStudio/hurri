@@ -6,7 +6,7 @@ module.exports = function(app){
 	});
 
 	app.get('/api/artist/:name', function(req, res, next){
-		res.json(artistRepository.getByName(req.param.name));
+		res.json(artistRepository.getByName(req.params.name));
 	});
 
 	app.post('/api/artist/', function(req, res){
@@ -15,33 +15,34 @@ module.exports = function(app){
 	});
 
 	app.put('/api/artist/:id', function(req, res, next){
-		artistRepository.edit(req.param.id, req.body);
+		artistRepository.update(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/artist/:id/bio', function(req, res, next){
-		artistRepository.editBio(req.param.id);
+		artistRepository.update(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/artist/:id/genres', function(req, res, next){
-		artistRepository.editGenres(req.param.id);
+		console.log(req.body);
+		artistRepository.update(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/artist/:id/picture', function(req, res, next){
-		artistRepository.editPicture(req.param.id);
+		artistRepository.update(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/artist/:id/name', function(req, res, next){
-		artistRepository.editName(req.param.id);
+		artistRepository.update(req.params.id, req.body);
 		res.end();
 	});
 
 	app.delete('/api/artist/:id', function(req, res, next){
-		artistRepository.deleteArtist(req.param.id);
+		artistRepository.delete(req.params.id);
 		res.end();
 	});
 
-};
+}; 

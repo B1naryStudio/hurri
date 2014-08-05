@@ -6,27 +6,8 @@ function ArtistRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Artist;
 	this.model = 'Artist';
-};
+}
 
 ArtistRepository.prototype = new Repository();
-
-ArtistRepository.prototype.editArtist = function(first_argument) {
-
-};
-ArtistRepository.prototype.editBio = function(first_argument) {
-
-};
-ArtistRepository.prototype.editGenres = function(first_argument) {
-
-};
-ArtistRepository.prototype.editPicture = function(first_argument) {
-
-};
-ArtistRepository.prototype.editName = function(first_argument) {
-
-};
-ArtistRepository.prototype.deleteArtist = function(first_argument) {
-
-};
 
 module.exports = new ArtistRepository();
