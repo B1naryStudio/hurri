@@ -1,5 +1,4 @@
-var GroupRepository = require('../repositories/groupRepository');
-var groupRepository = new GroupRepository();
+var groupRepository = require('../repositories/groupRepository');
 
 module.exports = function(app){
 	app.get('/api/group/:id/members', function(req, res, next){
@@ -11,17 +10,17 @@ module.exports = function(app){
 	});
 
 	app.post('/api/group', function(req, res, next){
-		groupRepository.add();
+		groupRepository.add(req.body);
 		res.end();
 	});
 
 	app.put('/api/group/:id', function(req, res, next){
-		groupRepository.update(req.params.id);
+		groupRepository.update(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/group/:id/listeners', function(req, res, next){
-		groupRepository.editListeners(req.params.id);
+		groupRepository.updatetListeners(req.params.id, req.body);
 		res.end();
 	});
 	

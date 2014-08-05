@@ -2,7 +2,7 @@ var artistRepository = require('../repositories/artistRepository');
 
 module.exports = function(app){
 	app.get('/api/artist/:id', function(req, res, next){
-		res.send(artistRepository.getById(req.params.id));
+		res.json(artistRepository.getById(req.params.id));
 	});
 
 	app.get('/api/artist/:name', function(req, res, next){

@@ -1,40 +1,43 @@
-function TrackRepository(){}
+var connection = require('../db/dbconnect.js');
+var Track = require('../schemas/track.js');
+var Repository = require('./generalRepository.js');
 
-TrackRepository.prototype.getById = function(first_argument) {
+function TrackRepository(){
+	Repository.prototype.constructor.call(this);
+	this.schema = Track;
+	this.model = 'Track';
+}
 
-};
-TrackRepository.prototype.getTitle = function(first_argument) {
-
-};
-TrackRepository.prototype.getLirycs = function(first_argument) {
-
-};
-TrackRepository.prototype.getUrl = function(first_argument) {
-
-};
-TrackRepository.prototype.getComments = function(first_argument) {
-
-};
-TrackRepository.prototype.addTrack = function(first_argument) {
-
-};
-TrackRepository.prototype.editTrack = function(first_argument) {
-
-};
-TrackRepository.prototype.editTitle = function(first_argument) {
-
-};
-TrackRepository.prototype.editRelease = function(first_argument) {
-
-};
-TrackRepository.prototype.editLyrics = function(first_argument) {
-
-};
-TrackRepository.prototype.editUrl = function(first_argument) {
-
-};
-TrackRepository.prototype.deleteTrack = function(first_argument) {
-
+TrackRepository.prototype.getTitle = function(id) {
+	var model = this.createModel();
+	var query = model.findOne({_id: id},'title');
+	query.exec(function (err, docs) {
+		return docs;
+	});
 };
 
-module.exports = TrackRepository;
+TrackRepository.prototype.getLirycs = function(id) {
+	var model = this.createModel();
+	var query = model.findOne({_id: id},'lyrics');
+	query.exec(function (err, docs) {
+		return docs;
+	});
+};
+
+TrackRepository.prototype.getUrl = function(id) {
+	var model = this.createModel();
+	var query = model.findOne({_id: id},'url');
+	query.exec(function (err, docs) {
+		return docs;
+	});
+};
+
+TrackRepository.prototype.getComments = function(id) {
+	var model = this.createModel();
+	var query = model.findOne({_id: id},'comment');
+	query.exec(function (err, docs) {
+		return docs;
+	});
+};
+
+module.exports = new TrackRepository();

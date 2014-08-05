@@ -1,5 +1,4 @@
-var TrackRepository = require('../repositories/trackRepository');
-var trackRepository = new TrackRepository();
+var trackRepository = require('../repositories/trackRepository');
 
 module.exports = function(app){
 	app.get('/api/track/:id', function(req, res, next){
@@ -23,12 +22,12 @@ module.exports = function(app){
 	});
 
 	app.post('/api/track', function(req, res, next){
-		trackRepository.add();
+		trackRepository.add(req.body);
 		res.end();
 	});
 
 	app.put('/api/track/:id', function(req, res, next){
-		trackRepository.update(req.params.id);
+		trackRepository.update(req.params.id, req.body);
 		res.end();
 	});
 	
