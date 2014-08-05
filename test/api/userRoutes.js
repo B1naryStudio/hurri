@@ -2,6 +2,16 @@ var app = require('../../backend/server');
 var request = require('supertest');
 
 describe('user api should', function(){
+	it('have get /api/user/:id route', function(done){
+		request(app)
+		.get('/api/user/:id')
+		.expect(200)
+		.expect('Content-Type', /json/)
+		.end(function(err, res){
+			done(err);
+		})
+	});
+
 	it('have get /api/user/:id/like route', function(done){
 		request(app)
 		.get('/api/user/:id/like')
