@@ -34,7 +34,7 @@ TrackRepository.prototype.getUrl = function(id) {
 
 TrackRepository.prototype.getComments = function(id) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id},'comment');
+	var query = model.find({_id: id},'comment');
 	query.exec(function (err, docs) {
 		return docs;
 	});

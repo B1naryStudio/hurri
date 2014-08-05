@@ -36,7 +36,7 @@ AlbumRepository.prototype.getGenres = function(id) {
 
 AlbumRepository.prototype.getTracks = function(id) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id}, 'tracks').populate('tracks');
+	var query = model.find({_id: id}, 'tracks').populate('tracks');
 	query.exec(function (err, docs) {
 	return docs;
 	});
@@ -44,7 +44,7 @@ AlbumRepository.prototype.getTracks = function(id) {
 
 AlbumRepository.prototype.getComments = function(id) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id}, 'comments');
+	var query = model.find({_id: id}, 'comments');
 	query.exec(function (err, docs) {
 		return docs;
 	});
