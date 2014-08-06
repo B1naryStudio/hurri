@@ -1,15 +1,24 @@
 var ArtistRepository = require('../repositories/artistRepository');
+
 var artistRepository = new ArtistRepository();
 
-module.exports = function(app){
+var renderHelper = require('./renderHelper');
 
-  app.get('/artist/:id', function(req, res, next){
-    res.render('index');
-  });
+module.exports = function (app) {
 
-  app.get('/artist/:name', function(req, res, next){
-    res.render('index');
-  });
+	app.get('/artist/:id', function (req, res, next) {
+		var template = renderHelper({data: {some: 'data'}});
+		res.set('Content-Type', 'text/html');
+		res.send(template);
+
+	});
+
+	app.get('/artist/:name', function (req, res, next) {
+		var template = renderHelper({data: {some: 'data'}});
+		res.set('Content-Type', 'text/html');
+		res.send(template);
+
+	});
 
 
 };

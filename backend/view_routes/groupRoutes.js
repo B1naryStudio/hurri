@@ -1,15 +1,24 @@
 var GroupRepository = require('../repositories/groupRepository');
+
 var groupRepository = new GroupRepository();
 
-module.exports = function(app){
+var renderHelper = require('./renderHelper');
 
-  app.get('/group/:id/members', function(req, res, next){
-    res.render('index');
-  });
+module.exports = function (app) {
 
-  app.get('/group/:id/tracks', function(req, res, next){
-    res.render('index');
-  });
+	app.get('/group/:id/members', function (req, res, next) {
+		var template = renderHelper({data: {some: 'data'}});
+		res.set('Content-Type', 'text/html');
+		res.send(template);
+
+	});
+
+	app.get('/group/:id/tracks', function (req, res, next) {
+		var template = renderHelper({data: {some: 'data'}});
+		res.set('Content-Type', 'text/html');
+		res.send(template);
+
+	});
 
 
 };
