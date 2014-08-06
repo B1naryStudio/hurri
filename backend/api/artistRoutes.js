@@ -1,5 +1,4 @@
 var artistRepository = require('../repositories/artistRepository');
-artistRepository.update('adaadaadaada', {});
 
 module.exports = function(app){
 	app.get('/api/artist/:id', function(req, res, next){

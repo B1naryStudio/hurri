@@ -8,6 +8,8 @@ function TrackRepository(){
 	this.model = Track;
 }
 
+TrackRepository.prototype = new Repository();
+
 TrackRepository.prototype.getTitle = function(id) {
 	var model = this.createModel();
 	var query = model.findOne({_id: id},'title');
@@ -39,7 +41,5 @@ TrackRepository.prototype.getComments = function(id) {
 		return docs;
 	});
 };
-
-TrackRepository.prototype = new Repository();
 
 module.exports = new TrackRepository();

@@ -42,7 +42,7 @@ describe('group api should', function(){
 
 	it('have put /api/group/:id/listeners route', function(done){
 		request(app)
-		.put('/api/group/:id/listeners')
+		.put('/api/group/a5a5a5a5a52a/listeners')
 		.expect(200)
 		.end(function(err, res){
 			done(err);

@@ -1,12 +1,15 @@
 var connection = require('../db/dbconnect.js');
 var Userinfo = require('../schemas/user_info.js');
 var Repository = require('./generalRepository.js');
+var mongoose = require('mongoose');
 
 function UserRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Userinfo;
 	this.model = Userinfo;
 }
+
+UserRepository.prototype = new Repository();
 
 UserRepository.prototype.getUserInfo = function(id) {
 	var model = this.createModel();
@@ -48,7 +51,7 @@ UserRepository.prototype.getPlaylistsShare = function(id, pl_id) {
 
 UserRepository.prototype.editPlaylist = function(id, body) {
 	var model = this.createModel();
-	var query = model.findByIdAndUpdate(id, body);
+	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);
 	query.exec(function (err, docs) {
 		if(err){ throw err; }
         console.log('updated');
@@ -56,7 +59,7 @@ UserRepository.prototype.editPlaylist = function(id, body) {
 };
 UserRepository.prototype.editLike = function(id, body) {
 	var model = this.createModel();
-	var query = model.findByIdAndUpdate(id, body);
+	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);
 	query.exec(function (err, docs) {
 		if(err){ throw err; }
         console.log('updated');
@@ -64,13 +67,11 @@ UserRepository.prototype.editLike = function(id, body) {
 };
 UserRepository.prototype.editGroup = function(id, body) {
 	var model = this.createModel();
-	var query = model.findByIdAndUpdate(id, body);
+	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);
 	query.exec(function (err, docs) {
 		if(err){ throw err; }
         console.log('updated');
 	});
 };
-
-UserRepository.prototype = new Repository();
 
 module.exports = new UserRepository();

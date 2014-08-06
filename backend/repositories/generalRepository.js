@@ -1,7 +1,6 @@
 var connection = require('../db/dbconnect.js');
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Types.ObjectId;
-
+var ObjectID = mongoose.Types.ObjectId;
 var Repository = function(){
 
 };
@@ -38,7 +37,7 @@ Repository.prototype.getByName = function(name) {
 Repository.prototype.update = function(id, body) {
 	console.log(id);
 	var model = this.createModel();
-	var query = model.findByIdAndUpdate(new ObjectId(id), body);
+	var query = model.findOneAndUpdate({_id: id}, body);
 	query.exec(function (err, docs) {
 		//if(err){ console.log('cannot update'); }
         console.log('updated');

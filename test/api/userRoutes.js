@@ -72,7 +72,7 @@ describe('user api should', function(){
 
 	it('have put /api/user/:id/playlist route', function(done){
 		request(app)
-		.put('/api/track/:id/title')
+		.put('/api/user/a5a5a5a5a52a/playlist')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
@@ -81,7 +81,7 @@ describe('user api should', function(){
 
 	it('have put /api/user/:id/like route', function(done){
 		request(app)
-		.put('/api/track/:id/release')
+		.put('/api/user/a5a5a5a5a52a/like')
 		.expect(200)
 		.end(function(err, res){
 			done(err);
@@ -90,7 +90,7 @@ describe('user api should', function(){
 
 	it('have put /api/user/:id/group route', function(done){
 		request(app)
-		.put('/api/user/:id/group')
+		.put('/api/user/a5a5a5a5a52a/group')
 		.expect(200)
 		.end(function(err, res){
 			done(err);

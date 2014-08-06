@@ -6,7 +6,9 @@ module.exports = function(app){
 	});
 
 	app.get('/api/group/:id/tracks', function(req, res, next){
-		res.json(groupRepository.getTracks(req.params.id));
+		groupRepository.getTracks(req.params.id, function(err, data){
+			res.json(data);
+		});
 	});
 
 	app.post('/api/group', function(req, res, next){
@@ -20,7 +22,7 @@ module.exports = function(app){
 	});
 
 	app.put('/api/group/:id/listeners', function(req, res, next){
-		groupRepository.updatetListeners(req.params.id, req.body);
+		groupRepository.updateListeners(req.params.id, req.body);
 		res.end();
 	});
 	
