@@ -6,15 +6,21 @@ define(['underscore', 'units/SocketHandler', 'marionette', './AppController'], f
 		'escape': /\{\{-(.+?)\}\}/g
 	};
 
-var MyApp = Marionette.Application();
+	var MyApp = new Marionette.Application();
 
-MyApp.addRegions({
-  footerRegion: '#footer',
-  headerRegion: '#header',
-  mainRegion: '#main',
-  menuRegion: '#menu',
-  playerRegion: '#player',
-  sidebarRegion: '#sidebar'
-});
-MyApp.start();
+	MyApp.addRegions({
+		footerRegion: '#footer',
+		headerRegion: '#header',
+		mainRegion: '#main',
+		menuRegion: '#menu',
+		playerRegion: '#player',
+		sidebarRegion: '#sidebar'
+	});
+
+	MyApp.on('start', function(){
+		var appController = new AppController();
+	});
+
+	MyApp.start();
+
 });
