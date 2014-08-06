@@ -1,11 +1,12 @@
 script#player-template(type='text/template')
-	div player
-		button(type='button') previous
-		button(type='button') play
-		button(type='button') next
-		input(type='range', min='0', max='100', value='50')
-		input(type='range', min='0', max='100', value='0')
-		button(type='button') shuffle
-		button(type='button') repeat
-		button(type='button') like
-		button(type='button') comment
+	div
+		button#previousButton(type='button') previous
+		button#playButton(type='button') play
+		button#nextButton(type='button') next
+		input#volumeRange(type='range', min='0', max='100', value='50')
+		span {{title}} - {{singerName}} - {{albumTitle}} - {{release_date.getFullYear()}}
+		input#playbackRange(type='range', min='0', max='100', value='0')
+		button#shuffleButton(type='button') shuffle
+		button#repeatButton(type='button') repeat
+		button#likeButton(type='button') like
+		button#commentButton(type='button') comment
