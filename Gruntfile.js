@@ -45,7 +45,9 @@ module.exports = function (grunt) {
                     debug: true
                 },
                 files: {
-                    'public/index.html': 'frontend/views/index.jade'
+                    'public/index.html': 'frontend/views/index.jade',
+                    'public/404.html': 'frontend/views/404.jade',
+                    'public/signin.html': 'frontend/views/signin.jade'
                 }
             }
         },
