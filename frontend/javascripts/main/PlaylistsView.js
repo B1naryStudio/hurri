@@ -1,7 +1,7 @@
 define(['marionette'], function(Marionette){
-	Playlists = Marionette.ItemView.extend({
+	PlaylistsView = Marionette.ItemView.extend({
 		template: '#playlists-template'
 	});
 
-	return PlaylistsView();
+	return PlaylistsView;
 });

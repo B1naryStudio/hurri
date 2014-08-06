@@ -3,6 +3,6 @@ define(['marionette'], function(Marionette){
 		template: '#auth-template'
 	});
 
-return AuthView();
+return AuthView;
 
 });

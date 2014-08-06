@@ -1,4 +1,4 @@
-define(['backbone'], function(Backbone){
+define(['backbone', '../app/enums'], function(Backbone, enums){
 var PlayerModel = Backbone.Model.extend({
 	defaults : {
 		playback : false,

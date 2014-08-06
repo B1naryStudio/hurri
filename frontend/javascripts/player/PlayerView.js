@@ -1,9 +1,7 @@
 define(['marionette'], function(Marionette){
-	PlayerView = Marionette.ItemView.extend({
+	var PlayerView = Marionette.ItemView.extend({
 		template: '#player-template'
 	});
 
-
-	
-	return PlayerView();
+	return PlayerView;
 });

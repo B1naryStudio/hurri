@@ -1,7 +1,7 @@
 define(['marionette'], function(Marionette){
-	SidebarNavView = Marionette.ItemView.extend({
+	var SidebarNavView = Marionette.ItemView.extend({
 		template: '#sidebar-template'
 	});
 
-	return SidebarNavView();
+	return SidebarNavView;
 });

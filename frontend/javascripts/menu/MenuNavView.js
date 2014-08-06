@@ -3,5 +3,5 @@ define(['marionette'], function(Marionette){
 		template: '#menu-nav-template'
 	});
 
-	return MenuNavView();
+	return MenuNavView;
 });
