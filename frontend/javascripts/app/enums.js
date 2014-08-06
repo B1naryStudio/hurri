@@ -1,6 +1,12 @@
-{
- repeatModes:{
-   album: 'album',
-  song: 'song'
- }
-}
+define ([], function(){
+	var enums = {
+		repeatModes:{
+			none: 'none',
+			album: 'album',
+			song: 'song'
+		}
+	};
+
+return enums;
+
+});
