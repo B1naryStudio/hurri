@@ -31,6 +31,7 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-open": "~0.2.3",
     "mocha": "~1.21.3",
+    "mockgoose": "^1.10.2",
     "should": "~4.0.4",
     "supertest": "^0.13.0"
   },
