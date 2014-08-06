@@ -1,38 +1,41 @@
+var mongoose = require('mongoose');
+var ObjectID = mongoose.Types.ObjectId();
 var casual = require('casual');
+var ObjId = ObjectID;
 
 casual.define('userinfos', function() {
 	return {
-		user_auth_id: casual.integer(from = 100000000000, to = 999999999999),
+		user_auth_id: ObjId,
 		playlists: [{
 			name : casual.company_name,
 			tracks : [
-				casual.integer(from = 100000000000, to = 999999999999), 
-				casual.integer(from = 100000000000, to = 999999999999)
+				mongoose.Types.ObjectId(), 
+				mongoose.Types.ObjectId()
 			],
-			duration : casual.integer(from = 1, to = 300),
-			mood : casual.array_of_words(n = 2)
+			duration : casual.integer(1, 300),
+			mood : casual.array_of_words(2)
 		}],
 		liked: [
-			casual.integer(from = 100000000000, to = 999999999999),
-			casual.integer(from = 100000000000, to = 999999999999)
+			mongoose.Types.ObjectId(),
+			mongoose.Types.ObjectId()
 		],
-		totalListened: casual.integer(from = 0, to = 10000),
+		totalListened: casual.integer(0, 10000),
 		group: [
-			casual.integer(from = 100000000000, to = 999999999999),
-			casual.integer(from = 100000000000, to = 999999999999)
+			mongoose.Types.ObjectId(),
+			mongoose.Types.ObjectId()
 		]
 	};
 });
 
 casual.define('userauths', function() {
 	return {
-		_id: casual.integer(from = 100000000000, to = 999999999999),
+		_id: ObjId,
 		name : casual.name,
-		avatarUrl : '/image/'+casual.name+'.jpg',
+		avatarUrl : '/image/' + casual.name + '.jpg',
 		country : casual.country,
-		age : casual.integer(from = 18, to = 100),
+		age : casual.integer(18, 100),
 		email : casual.email,
-		friends : [casual.integer(from = 100000000000, to = 999999999999)],
+		friends : [mongoose.Types.ObjectId()],
 		registrationAccounts : [{
 			name : casual.name, 
 			email : casual.email, 
@@ -50,34 +53,34 @@ casual.define('userauths', function() {
 casual.define('tracks', function() {
 	return {
 		title : casual.title,
-		duration : casual.integer(from = 1, to = 500),
-		position : casual.integer(from = 1, to = 20),
-		release_date : casual.date(format = 'YYYY-MM-DD'),
-		kbps : casual.integer(from = 128, to = 1024),
+		duration : casual.integer(1, 500),
+		position : casual.integer(1, 20),
+		release_date : casual.date('YYYY-MM-DD'),
+		kbps : casual.integer(128, 1024),
 		lyrics : casual.text,
-		album : casual.integer(from = 100000000000, to = 999999999999),
-		singer : casual.integer(from = 100000000000, to = 999999999999),
+		album : mongoose.Types.ObjectId(),
+		singer : mongoose.Types.ObjectId(),
 		url : casual.url,
 		comments : [{
-			user_auth_id : casual.integer(from = 100000000000, to = 999999999999),
+			user_auth_id : mongoose.Types.ObjectId(),
 			comment : casual.description, 
-			date : casual.date(format = 'YYYY-MM-DD')
+			date : casual.date('YYYY-MM-DD')
 		}]
 	};
 });
 
 casual.define('radios', function() {
 	return {
-		user_auth_id : casual.integer(from = 100000000000, to = 999999999999),
+		user_auth_id : mongoose.Types.ObjectId(),
 		listeners : [
-			casual.integer(from = 100000000000, to = 999999999999),
-			casual.integer(from = 100000000000, to = 999999999999),
-			casual.integer(from = 100000000000, to = 999999999999)
+			mongoose.Types.ObjectId(),
+			mongoose.Types.ObjectId(),
+			mongoose.Types.ObjectId()
 		],
 		tracks : [
-			casual.integer(from = 100000000000, to = 999999999999),
-			casual.integer(from = 100000000000, to = 999999999999),
-			casual.integer(from = 100000000000, to = 999999999999)
+			mongoose.Types.ObjectId(),
+			mongoose.Types.ObjectId(),
+			mongoose.Types.ObjectId()
 		],
 		active : true
 	};
@@ -85,11 +88,11 @@ casual.define('radios', function() {
 
 casual.define('dialogs', function() {
 	return {
-		user_auth_id1 : casual.integer(from = 100000000000, to = 999999999999),
-		user_auth_id2 : casual.integer(from = 100000000000, to = 999999999999),
+		user_auth_id1 : mongoose.Types.ObjectId(),
+		user_auth_id2 : mongoose.Types.ObjectId(),
 		dialogue : [{
-			user_auth_id : casual.integer(from = 100000000000, to = 999999999999), 
-	    	date : casual.date(format = 'YYYY-MM-DD'), 
+			user_auth_id : mongoose.Types.ObjectId(), 
+	    	date : casual.date('YYYY-MM-DD'), 
 	    	message : casual.text
 	    }]
 	};
@@ -100,30 +103,31 @@ casual.define('artists', function() {
 	    name : casual.full_name,
 	    picture : casual.url,
 	    albums_id : [
-	    	casual.integer(from = 100000000000, to = 999999999999),
-	    	casual.integer(from = 100000000000, to = 999999999999)
+	    	mongoose.Types.ObjectId(),
+	    	mongoose.Types.ObjectId()
 	    ],
-	    genres : casual.array_of_words(n = 2),
+	    genres : casual.array_of_words(2),
 	    bio : casual.text
 	};
 });
 
 casual.define('albums', function() {
 	return {
+		_id: mongoose.Types.ObjectId(),
 	    title : casual.title,
 	    cover : casual.url,
-	    duration : casual.integer(from = 1, to = 500),
-	    release_date : casual.date(format = 'YYYY-MM-DD'),
-	    singer : casual.integer(from = 100000000000, to = 999999999999),
-	    genres : casual.array_of_words(n = 2),
+	    duration : casual.integer(1, 500),
+	    release_date : casual.date('YYYY-MM-DD'),
+	    singer : mongoose.Types.ObjectId(),
+	    genres : casual.array_of_words(2),
 	    comment : [{
-			user_auth_id : casual.integer(from = 100000000000, to = 999999999999),
+			user_auth_id : ObjId,
 			comment : casual.description, 
-			date : casual.date(format = 'YYYY-MM-DD')
+			date : casual.date('YYYY-MM-DD')
 		}],
 	    tracks : [
-	    	casual.integer(from = 100000000000, to = 999999999999),
-	    	casual.integer(from = 100000000000, to = 999999999999)
+	    	mongoose.Types.ObjectId(),
+	    	mongoose.Types.ObjectId()
 	    ]
 	};
 });

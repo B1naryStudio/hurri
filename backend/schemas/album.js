@@ -12,7 +12,7 @@ var albumSchema = new Schema({
     release_date : Date,
     singer : {
         type : Schema.Types.ObjectId,
-        ref : 'Singer'
+        ref : 'Artist'
     },
     genres : [{
         type: String, 
