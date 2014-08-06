@@ -1,6 +1,6 @@
-define(['marionette', './SidebarView'], function(Marionette){
+define(['marionette', './SidebarNavView'], function(Marionette){
 	var MainRegion = Marionette.Region.extend({
-		template: '#sidebar-view-template',
+		template: '#sidebar-template',
 		el: '#sidebar',
 	});
 	mainRegion = new MainRegion();

@@ -3,6 +3,8 @@ var PlayerModel = Backbone.Model.extend({
 	defaults : {
 		playback : false,
 		currentTrack: 0,
+		currentTrackName: 'Track',
+		currentArtistName: 'Artist',
 		volumeLevel : 50,
 		shuffle : false,
 		repeatTrack : '00',
@@ -10,6 +12,7 @@ var PlayerModel = Backbone.Model.extend({
 		position : 0,
 		duration : 0,
 		liked : false,
+
 	},
 
 	playbackState : function(){

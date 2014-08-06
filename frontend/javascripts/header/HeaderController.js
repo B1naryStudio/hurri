@@ -1,6 +1,6 @@
-define(['marionette', './HeaderView'], function(Marionette, AuthView){
+define(['marionette', './AuthView'], function(Marionette, AuthView){
  	var HeaderRegion = Marionette.Region.extend({
-  		template: '#header-view-template',
+  		template: '#auth-template',
   		el: '#header'
  	});
  

@@ -1,4 +1,11 @@
-html
-	body
-		script#player-template(type='text/template')
-		div#player player
+script#player-template(type='text/template')
+	div player
+		button(type='button') previous
+		button(type='button') play
+		button(type='button') next
+		input(type='range', min='0', max='100', value='50')
+		input(type='range', min='0', max='100', value='0')
+		button(type='button') shuffle
+		button(type='button') repeat
+		button(type='button') like
+		button(type='button') comment

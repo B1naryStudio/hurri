@@ -1,6 +1,6 @@
 define(['marionette', './PlayerView'], function(Marionette){
 	var PlayerRegion = Marionette.Region.extend({
-		template: '#player-view-template',
+		template: '#player-template',
 		el: '#player',
 	});
 	playerRegion = new PlayerRegion();

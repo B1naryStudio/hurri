@@ -1,6 +1,6 @@
 define(['marionette', './MainView'], function(Marionette){
 	var MainRegion = Marionette.Region.extend({
-		template: '#main-view-template',
+		template: '#playlists-template',
 		el: '#main',
 	});
 	mainRegion = new MainRegion();
