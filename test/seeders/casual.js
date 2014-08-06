@@ -51,7 +51,7 @@ casual.define('tracks', function() {
 	return {
 		title : casual.title,
 		duration : casual.integer(from = 1, to = 500),
-		position : casual.integer(from = 1, to = 20)
+		position : casual.integer(from = 1, to = 20),
 		release_date : casual.date(format = 'YYYY-MM-DD'),
 		kbps : casual.integer(from = 128, to = 1024),
 		lyrics : casual.text,
@@ -62,8 +62,8 @@ casual.define('tracks', function() {
 			user_auth_id : casual.integer(from = 100000000000, to = 999999999999),
 			comment : casual.description, 
 			date : casual.date(format = 'YYYY-MM-DD')
-		}];
-	});
+		}]
+	};
 });
 
 casual.define('radios', function() {
@@ -80,7 +80,7 @@ casual.define('radios', function() {
 			casual.integer(from = 100000000000, to = 999999999999)
 		],
 		active : true
-	});
+	};
 });
 
 casual.define('dialogs', function() {
@@ -92,7 +92,7 @@ casual.define('dialogs', function() {
 	    	date : casual.date(format = 'YYYY-MM-DD'), 
 	    	message : casual.text
 	    }]
-	});
+	};
 });
 
 casual.define('artists', function() {
@@ -105,7 +105,7 @@ casual.define('artists', function() {
 	    ],
 	    genres : casual.array_of_words(n = 2),
 	    bio : casual.text
-	});
+	};
 });
 
 casual.define('albums', function() {
@@ -115,7 +115,7 @@ casual.define('albums', function() {
 	    duration : casual.integer(from = 1, to = 500),
 	    release_date : casual.date(format = 'YYYY-MM-DD'),
 	    singer : casual.integer(from = 100000000000, to = 999999999999),
-	    genres : genres : casual.array_of_words(n = 2),,
+	    genres : casual.array_of_words(n = 2),
 	    comment : [{
 			user_auth_id : casual.integer(from = 100000000000, to = 999999999999),
 			comment : casual.description, 
@@ -125,7 +125,7 @@ casual.define('albums', function() {
 	    	casual.integer(from = 100000000000, to = 999999999999),
 	    	casual.integer(from = 100000000000, to = 999999999999)
 	    ]
-	});
+	};
 });
 
 module.exports = casual;
