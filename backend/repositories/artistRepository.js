@@ -1,30 +1,13 @@
-function ArtistRepository(){}
+var connection = require('../db/dbconnect.js');
+var Artist = require('../schemas/artist.js');
+var Repository = require('./generalRepository.js');
 
-ArtistRepository.prototype.getById = function(first_argument) {
+function ArtistRepository(){
+	Repository.prototype.constructor.call(this);
+	this.schema = Artist;
+	this.model = 'Artist';
+}
 
-};
-ArtistRepository.prototype.getByName = function(first_argument) {
+ArtistRepository.prototype = new Repository();
 
-};
-ArtistRepository.prototype.addArtist = function(first_argument) {
-
-};
-ArtistRepository.prototype.editArtist = function(first_argument) {
-
-};
-ArtistRepository.prototype.editBio = function(first_argument) {
-
-};
-ArtistRepository.prototype.editGenres = function(first_argument) {
-
-};
-ArtistRepository.prototype.editPicture = function(first_argument) {
-
-};
-ArtistRepository.prototype.editName = function(first_argument) {
-
-};
-ArtistRepository.prototype.deleteArtist = function(first_argument) {
-
-};
-module.exports = ArtistRepository;
+module.exports = new ArtistRepository();

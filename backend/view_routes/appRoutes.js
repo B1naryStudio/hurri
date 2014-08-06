@@ -1,6 +1,7 @@
+
 module.exports = function(app){
 	app.get('/', function(req, res, next){
-		res.render('index');
+		res.send('index');	
 	});
 
 	app.get('/album/:id', function(req, res, next){

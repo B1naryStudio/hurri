@@ -1,54 +1,53 @@
-var UserRepository = require('../repositories/userRepository');
-var userRepository = new UserRepository();
+var userRepository = require('../repositories/userRepository');
 
 module.exports = function(app){
 	app.get('/api/user/:id', function(req, res, next){
-		res.json(userRepository.getUserInfo(req.param.id));
+		res.json(userRepository.getUserInfo(req.params.id));
 	});
 
 	app.get('/api/user/:id/like', function(req, res, next){
-		res.json(userRepository.getLike(req.param.id));
+		res.json(userRepository.getLike(req.params.id));
 	});
 
 	app.get('/api/user/:id/groups', function(req, res, next){
-		res.json(userRepository.getGroups(req.param.id));
+		res.json(userRepository.getGroups(req.params.id));
 	});
 
 	app.get('/api/user/:id/playlists', function(req, res, next){
-		res.json(userRepository.getPlaylists(req.param.id));
+		res.json(userRepository.getPlaylists(req.params.id));
 	});
 
 	app.get('/api/user/:id/playlists/:id_pl', function(req, res, next){
-		res.json(userRepository.getPlaylistsShare(req.param.id, req.param.id_pl));
+		res.json(userRepository.getPlaylistsShare(req.params.id, req.params.id_pl));
 	});
 
 	app.post('/api/user', function(req, res, next){
-		userRepository.addUser();
+		userRepository.add(req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id', function(req, res, next){
-		userRepository.editUser(req.param.id);
+		userRepository.edit(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id/playlist', function(req, res, next){
-		userRepository.editPlaylist(req.param.id);
+		userRepository.editPlaylist(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id/like', function(req, res, next){
-		userRepository.editLike(req.param.id);
+		userRepository.editLike(req.params.id, req.body);
 		res.end();
 	});
 
 	app.put('/api/user/:id/group', function(req, res, next){
-		userRepository.editGroup(req.param.id);
+		userRepository.editGroup(req.params.id, req.body);
 		res.end();
 	});
 	
 	app.delete('/api/user/:id', function(req, res, next){
-		userRepository.deleteUser(req.param.id);
+		userRepository.delete(req.params.id);
 		res.end();
 	});
 };

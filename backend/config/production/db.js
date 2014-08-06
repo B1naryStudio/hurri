@@ -4,8 +4,6 @@ module.exports = {
     opts: {
     	server: { 
     		auto_reconnect: true
-    	},
-    	user: 'root',
-    	password: '',
+    	}
     }
 };

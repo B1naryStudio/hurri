@@ -1,59 +1,38 @@
-var TrackRepository = require('../repositories/trackRepository');
-var trackRepository = new TrackRepository();
+var trackRepository = require('../repositories/trackRepository');
 
 module.exports = function(app){
 	app.get('/api/track/:id', function(req, res, next){
-		res.json(trackRepository.getById(req.param.id));
+		res.json(trackRepository.getById(req.params.id));
 	});
 
 	app.get('/api/track/:id/title', function(req, res, next){
-		res.json(trackRepository.getTitle(req.param.id));
+		res.json(trackRepository.getTitle(req.params.id));
 	});
 
 	app.get('/api/track/:id/lyrics', function(req, res, next){
-		res.json(trackRepository.getLirycs(req.param.id));
+		res.json(trackRepository.getLirycs(req.params.id));
 	});
 
 	app.get('/api/track/:id/url', function(req, res, next){
-		res.json(trackRepository.getUrl(req.param.id));
+		res.json(trackRepository.getUrl(req.params.id));
 	});
 
 	app.get('/api/track/:id/comments', function(req, res, next){
-		res.json(trackRepository.getComments(req.param.id));
+		res.json(trackRepository.getComments(req.params.id));
 	});
 
 	app.post('/api/track', function(req, res, next){
-		trackRepository.addTrack();
+		trackRepository.add(req.body);
 		res.end();
 	});
 
 	app.put('/api/track/:id', function(req, res, next){
-		trackRepository.editTrack(req.param.id);
-		res.end();
-	});
-
-	app.put('/api/track/:id/title', function(req, res, next){
-		trackRepository.editTitle(req.param.id);
-		res.end();
-	});
-
-	app.put('/api/track/:id/release', function(req, res, next){
-		trackRepository.editRelease(req.param.id);
-		res.end();
-	});
-
-	app.put('/api/track/:id/lyrics', function(req, res, next){
-		trackRepository.editLyrics(req.param.id);
-		res.end();
-	});
-
-	app.put('/api/track/:id/url', function(req, res, next){
-		trackRepository.editUrl(req.param.id);
+		trackRepository.update(req.params.id, req.body);
 		res.end();
 	});
 	
 	app.delete('/api/track/:id', function(req, res, next){
-		trackRepository.deleteTrack(req.param.id);
+		trackRepository.delete(req.params.id);
 		res.end();
 	});
 };
