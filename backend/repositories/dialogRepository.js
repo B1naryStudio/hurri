@@ -2,15 +2,15 @@ var connection = require('../db/dbconnect.js');
 var Dialog = require('../schemas/dialog.js');
 var Repository = require('./generalRepository.js');
 
-function DialogueRepository(){
+function DialogRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Dialog;
-	this.model = 'Dialog';
+	this.model = Dialog;
 }
 
-DialogueRepository.prototype.getDialogue = function(id1,id2) {
+DialogRepository.prototype.getDialog = function(id1,id2) {
 	var model = this.createModel();
-	var query = model.findOne({id1: id1,id2 : id2});
+	var query = model.findOne({id1: id1});
 	query.exec(function (err, docs) {
 		return docs;
 	});
@@ -18,4 +18,4 @@ DialogueRepository.prototype.getDialogue = function(id1,id2) {
 
 DialogRepository.prototype = new Repository();
 
-module.exports = new DialogueRepository();
+module.exports = new DialogRepository();

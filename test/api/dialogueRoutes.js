@@ -12,15 +12,6 @@ describe('dialogue api should', function(){
 		})
 	});
 
-	it('have put /api/dialogue/:id route', function(done){
-		request(app)
-		.put('/api/dialogue/:id')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
 	it('have delete /api/dialogue/:id route', function(done){
 		request(app)
 		.delete('/api/dialogue/:id')

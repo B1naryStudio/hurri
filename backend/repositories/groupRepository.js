@@ -1,11 +1,11 @@
 var connection = require('../db/dbconnect.js');
-var Group = require('../schemas/group.js');
+var Group = require('../schemas/radio.js');
 var Repository = require('./generalRepository.js');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Group;
-	this.model = 'Group';
+	this.model = Group;
 }
 
 GroupRepository.prototype.getMembers = function(id) {

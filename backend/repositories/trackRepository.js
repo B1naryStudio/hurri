@@ -5,7 +5,7 @@ var Repository = require('./generalRepository.js');
 function TrackRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Track;
-	this.model = 'Track';
+	this.model = Track;
 }
 
 TrackRepository.prototype.getTitle = function(id) {

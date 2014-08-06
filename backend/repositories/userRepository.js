@@ -1,7 +1,11 @@
+var connection = require('../db/dbconnect.js');
+var Userinfo = require('../schemas/user_info.js');
+var Repository = require('./generalRepository.js');
+
 function UserRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Userinfo;
-	this.model = 'Userinfo';
+	this.model = Userinfo;
 }
 
 UserRepository.prototype.getUserInfo = function(id) {

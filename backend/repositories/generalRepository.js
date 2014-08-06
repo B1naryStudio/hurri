@@ -1,11 +1,13 @@
 var connection = require('../db/dbconnect.js');
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
+
 var Repository = function(){
 
 };
 
 Repository.prototype.createModel = function(){
-	return mongoose.model(this.model,this.schema);
+	return this.model;
 };
 
 Repository.prototype.getById = function(id) {
@@ -36,9 +38,9 @@ Repository.prototype.getByName = function(name) {
 Repository.prototype.update = function(id, body) {
 	console.log(id);
 	var model = this.createModel();
-	var query = model.findByIdAndUpdate(id, body);
+	var query = model.findByIdAndUpdate(new ObjectId(id), body);
 	query.exec(function (err, docs) {
-		if(err){ throw err; }
+		//if(err){ console.log('cannot update'); }
         console.log('updated');
 	});
 };
@@ -47,8 +49,8 @@ Repository.prototype.delete = function(id){
 	var model = this.createModel();
 	var query = model.remove({_id: id});
 	query.exec(function (err, docs) {
-		if(err){ throw err; }
-        console.log('deleted');
+		//if(err){ console.log('cannot delete'); }
+         console.log('deleted');
 	});
 };
 

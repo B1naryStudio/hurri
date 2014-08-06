@@ -71,59 +71,6 @@ describe('album api should', function(){
 		})
 	});
 
-	it('have put /api/album/:id route', function(done){
-		request(app)
-		.put('/api/album/:id')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/album/:id/title route', function(done){
-		request(app)
-		.put('/api/album/:id/title')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/album/:id/cover route', function(done){
-		request(app)
-		.put('/api/album/:id/cover')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/album/:id/release route', function(done){
-		request(app)
-		.put('/api/album/:id/release')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/album/:id/genre route', function(done){
-		request(app)
-		.put('/api/album/:id/genre')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/album/:id/tracks route', function(done){
-		request(app)
-		.put('/api/album/:id/tracks')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
 
 	it('have delete /api/album/:id route', function(done){
 		request(app)

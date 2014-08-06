@@ -5,7 +5,7 @@ var Repository = require('./generalRepository.js');
 function AlbumRepository(){
 	Repository.prototype.constructor.call(this);
 	this.schema = Album;
-	this.model = 'Album';
+	this.model = Album;
 }
 
 AlbumRepository.prototype = new Repository();

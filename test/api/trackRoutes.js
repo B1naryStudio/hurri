@@ -70,42 +70,6 @@ describe('track api should', function(){
 		})
 	});
 
-	it('have put /api/track/:id/title route', function(done){
-		request(app)
-		.put('/api/track/:id/title')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/track/:id/release route', function(done){
-		request(app)
-		.put('/api/track/:id/release')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/track/:id/lyrics route', function(done){
-		request(app)
-		.put('/api/track/:id/lyrics')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
-	it('have put /api/track/:id/url route', function(done){
-		request(app)
-		.put('/api/track/:id/url')
-		.expect(200)
-		.end(function(err, res){
-			done(err);
-		})
-	});
-
 	it('have delete /api/track/:id route', function(done){
 		request(app)
 		.delete('/api/track/:id')
