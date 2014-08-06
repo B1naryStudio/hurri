@@ -1,5 +1,5 @@
 define(['marionette'], function(Marionette){
-	Playlists = Backbone.Marionette.ItemView.extend({
+	Playlists = Marionette.ItemView.extend({
 		template: '#playlists-template'
 	});
 

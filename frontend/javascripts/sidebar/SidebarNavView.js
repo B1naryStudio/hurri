@@ -1,5 +1,5 @@
 define(['marionette'], function(Marionette){
-	SidebarNavView = Backbone.Marionette.ItemView.extend({
+	SidebarNavView = Marionette.ItemView.extend({
 		template: '#sidebar-template'
 	});
 
