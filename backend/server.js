@@ -8,10 +8,10 @@ var fs = require('fs');
 
 var app = express();
 
-var logger = require('./services/logger');
+var logger = require('./units/logger');
 logger.info('Server is running');
 
-var morgan = require('./services/morgan');
+var morgan = require('./middleware/morgan');
 
 var staticPath = path.normalize(__dirname + '/../public');
 app.use(express.static(staticPath));

@@ -1,25 +1,11 @@
-var DialogueRepository = require('../repositories/dialogueRepository');
+var dialogRepository = require('../repositories/dialogRepository');
 
-var dialogueRepository = new DialogueRepository();
-
-var renderHelper = require('./renderHelper');
+var injectData = require('../middleware/injectDataMiddleware');
 
 module.exports = function (app) {
 
-	app.get('/dialogue/:id1/:id2', function (req, res, next) {
-		var template = renderHelper({
-			data: {
-				dialogue: [
-					{user_auth_id: 1, date: '2014-06-22', message: 'You\'re an idiot!'},
-					{user_auth_id: 2, date: '2014-06-22', message: 'Get off!!11'},
-					{user_auth_id: 1, date: '2014-06-22', message: 'NO!!!! WQAT???'},
-					{user_auth_id: 2, date: '2014-06-22', message: 'Yore banned!'}
-				]
-			}
-		});
-		res.set('Content-Type', 'text/html');
-		res.send(template);
-
+	app.get('/dialogue/:id1/:id2', function(res, req, next) {
+		injectData(dialogRepository.getDialog(req.params.id1, req.params.id2));
 	});
 
 

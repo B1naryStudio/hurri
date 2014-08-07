@@ -6,10 +6,10 @@ var logger = new (winston.Logger)({
 		new winston.transports.File({ filename: __dirname + '/../../logs/common/development.log', json: false })
 	],
 	exceptionHandlers: [
-		new (winston.transports.Console)({ json: false, timestamp: true }),
+		new (winston.transports.Console)({ json: true, timestamp: true }),
 		new winston.transports.File({ filename: __dirname + '/../../logs/common/error.log', json: false })
 	],
-	exitOnError: false
+	exitOnError: true
 });
 
 module.exports = logger;

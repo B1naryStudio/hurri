@@ -1,4 +1,3 @@
-var renderHelper = require('./renderHelper');
 
 var fs = require('fs');
 
