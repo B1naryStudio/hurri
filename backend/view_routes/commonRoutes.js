@@ -1,7 +1,8 @@
-
+var inject404 = require('../middleware/injectData404')
 var fs = require('fs');
 
 module.exports = function (app) {
+
 	app.get('/', function (req, res, next) {
 	});
 
@@ -14,5 +15,7 @@ module.exports = function (app) {
 		res.set('Content-Type', 'text/html');
 		res.send(fs.readFileSync(__dirname + '/../../public/' + 'signin.html', 'utf8'));
 	});
+
+	app.get('*', inject404('<h1>404 error</h1><h2>Not found</h2>'));
 
 };
