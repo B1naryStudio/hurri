@@ -1,4 +1,4 @@
-var inject404 = require('../middleware/injectData404')
+var inject404 = require('../middleware/injectData404');
 var fs = require('fs');
 
 module.exports = function (app) {

@@ -1,0 +1,47 @@
+/*Colors*/
+default_bg = gray
+vk_bg = #42618b
+ok_bg = #d5702e
+tw_bg = #3b9bda
+fb_bg = #2f4885
+
+/*Font*/
+basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
+
+body
+	font-family basic_font
+
+.signin_page
+	text-align center
+.social_enter
+	margin-top 20px
+	text-align center
+	a
+		font-size 14px
+		text-decoration none
+		color #fff
+		display inline-block
+		margin-right 10px
+		padding 5px 10px
+		background default_bg
+		box-shadow 0 2px 0 darken(default_bg, 10)
+		&.vk
+			&:hover
+				background darken(vk_bg, 10)
+			background vk_bg
+			box-shadow 0 2px 0 darken(vk_bg, 10)
+		&.ok
+			&:hover
+				background darken(ok_bg, 10)
+			background ok_bg
+			box-shadow 0 2px 0 darken(ok_bg, 10)
+		&.tw
+			&:hover
+				background darken(tw_bg, 10)
+			background tw_bg
+			box-shadow 0 2px 0 darken(tw_bg, 10)
+		&.fb
+			&:hover
+				background darken(fb_bg, 10)
+			background fb_bg
+			box-shadow 0 2px 0 darken(fb_bg, 10)
