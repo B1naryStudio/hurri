@@ -1,10 +1,11 @@
 var connection = require('../db/dbconnect.js');
 var Track = require('../schemas/track.js');
 var Repository = require('./generalRepository.js');
+var mongoose = require('mongoose');
+
 
 function TrackRepository(){
 	Repository.prototype.constructor.call(this);
-	this.schema = Track;
 	this.model = Track;
 }
 
@@ -12,13 +13,15 @@ TrackRepository.prototype = new Repository();
 
 TrackRepository.prototype.getTitle = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id},'title');
+	//console.log('Title '+id)
+	var query = model.find({});
 	query.exec(callback);
 };
 
 TrackRepository.prototype.getLirycs = function(id, callback) {
+	console.log('ID '+id);
 	var model = this.createModel();
-	var query = model.findOne({_id: id},'lyrics');
+	var query = model.findOne({_id: id});
 	query.exec(callback);
 };
 
