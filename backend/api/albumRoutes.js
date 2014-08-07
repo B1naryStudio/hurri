@@ -1,41 +1,67 @@
 var albumRepository = require('../repositories/albumRepository');
+var _ = require('underscore');
 
 module.exports = function(app){
 	app.get('/api/album/:id', function(req, res, next){
-		res.json(albumRepository.getById(req.params.id));
+		albumRepository.getById(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/album/:id/cover', function(req, res, next){
-		res.json(albumRepository.getCover(req.params.id));
+		albumRepository.getCover(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/album/:id/singer', function(req, res, next){
-		res.json(albumRepository.getSinger(req.params.id));
+		albumRepository.getSinger(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/album/:id/genres', function(req, res, next){
-		res.json(albumRepository.getGenres(req.params.id));
+		albumRepository.getGenres(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/album/:id/tracks', function(req, res, next){
-		res.json(albumRepository.getTracks(req.params.id));
+		albumRepository.getTracks(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/album/:id/comments', function(req, res, next){
-		res.json(albumRepository.getComments(req.params.id));
+		albumRepository.getComments(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.put('/api/album/:id', function(req, res, next){
-		res.json(albumRepository.update(req.params.id, req.body));
+		albumRepository.update(req.params.id, req.body, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.post('/api/album', function(req, res, next){
-		albumRepository.add(req.body);
-		res.end();
+		albumRepository.add(req.body, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
 	});
 
 	app.delete('/api/album/:id', function(req, res, next){
-		albumRepository.delete(req.params.id);
-		res.end();
+		albumRepository.delete(req.params.id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 };

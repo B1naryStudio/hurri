@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 		stylesheets: ['frontend/styles/**/*.styl'],
 
 		jshint: {
-			client: ['Gruntfile.js', '<%= javascripts %>'],
+			client: ['Gruntfile.js', '<%= javascripts %>', '!frontend/javascripts/libs/**/*.js'],
 			server: ['<%= server_js %>'],
 			options: {
 				sub: true,
@@ -37,6 +37,10 @@ module.exports = function (grunt) {
 			styles: {
 				files: ['<%= stylesheets %>'],
 				tasks: ['stylus']
+			},
+			jade: {
+				files: ['<%= views %>'],
+				tasks: ['jade']
 			}
 		},
         jade: {
@@ -72,7 +76,10 @@ module.exports = function (grunt) {
 
 		copy: {			
 			libs: {files: [{expand: false, src: ['bower_components/requirejs/require.js'], dest: 'public/javascripts/libs/require.js'}]},
-			js: {files: [{expand: true, cwd: 'frontend/javascripts/', src: ['**'], dest: 'public/javascripts/'}]}
+			js: {files: [{expand: true, cwd: 'frontend/javascripts/', src: ['**'], dest: 'public/javascripts/'}]},
+			resources: {files: [{expand: true, cwd: 'frontend/resources/', src: ['**'], dest: 'public/resources/'}]},
+			images: {files: [{expand: true, cwd: 'frontend/images/', src: ['**'], dest: 'public/images/'}]}
+
 		},
 
 		clean: {	

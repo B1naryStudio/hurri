@@ -12,7 +12,7 @@ var userAuthSchema = new Schema({
     },
     age : {
         type: Number, 
-        default: 'Undefined'
+        default: 18
     },
     email : String,
     friends : [{ 

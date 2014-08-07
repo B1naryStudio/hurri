@@ -2,6 +2,7 @@ var connection = require('../db/dbconnect.js');
 var Group = require('../schemas/radio.js');
 var Repository = require('./generalRepository.js');
 var mongoose = require('mongoose');
+var _ = require('underscore');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
@@ -10,12 +11,10 @@ function GroupRepository(){
 
 GroupRepository.prototype = new Repository();
 
-GroupRepository.prototype.getMembers = function(id) {
+GroupRepository.prototype.getMembers = function(id, callback) {
 	var model = this.createModel();
 	var query = model.find({_id: id}, 'listeners').populate('listeners');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
 
 GroupRepository.prototype.getTracks = function(id, callback) {
@@ -25,13 +24,18 @@ GroupRepository.prototype.getTracks = function(id, callback) {
 
 };
 
-GroupRepository.prototype.updateListeners = function(id, body) {
-	console.log(id);
+GroupRepository.prototype.updateListeners = function(id, body, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, body);
-	query.exec(function (err, docs) {
-		if(err){ throw err; }
-        console.log('updated');
+	//console.log(id)
+	var q = model.findOne({user_auth_id : id});
+	q.exec(function(err, data){
+		if (_.isNull(data)) 
+			{
+				callback(err);
+			} else {
+		data.listeners.push(body);
+		data.save(callback);
+	}
 	});
 };
 

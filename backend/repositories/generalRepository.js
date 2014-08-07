@@ -15,40 +15,22 @@ Repository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-Repository.prototype.add = function(data) {
+Repository.prototype.add = function(data, callback) {
 	var model = this.createModel();
 	var newitem = new model(data);
-	newitem.save(function(err){
-        if(err){ throw err; }
-        console.log('saved');
-    });
+	newitem.save(callback);
 };
 
-Repository.prototype.getByName = function(name) {
-	var model = this.createModel();
-	var query = model.findOne({name: name}).populate('albums_id');
-	query.exec(function (err, docs) {
-		return docs;
-	});
-};
-
-Repository.prototype.update = function(id, body) {
-	console.log(id);
+Repository.prototype.update = function(id, body, callback) {
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({_id: id}, body);
-	query.exec(function (err, docs) {
-		//if(err){ console.log('cannot update'); }
-        console.log('updated');
-	});
+	query.exec(callback);
 };
 
-Repository.prototype.delete = function(id){
+Repository.prototype.delete = function(id, callback){
 	var model = this.createModel();
 	var query = model.remove({_id: id});
-	query.exec(function (err, docs) {
-		//if(err){ console.log('cannot delete'); }
-         console.log('deleted');
-	});
+	query.exec(callback);
 };
 
 module.exports = Repository;

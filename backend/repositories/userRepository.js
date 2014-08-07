@@ -11,67 +11,52 @@ function UserRepository(){
 
 UserRepository.prototype = new Repository();
 
-UserRepository.prototype.getUserInfo = function(id) {
+UserRepository.prototype.getUserInfo = function(id, callback) {
 	var model = this.createModel();
 	var query = model.findOne({_id: id});
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
 
-UserRepository.prototype.getLike = function(id) {
-		var model = this.createModel();
+UserRepository.prototype.getLike = function(id, callback) {
+	var model = this.createModel();
 	var query = model.find({_id: id},'liked').populate('liked');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
-UserRepository.prototype.getGroups = function(id) {
+
+UserRepository.prototype.getGroups = function(id, callback) {
 	var model = this.createModel();
 	var query = model.find({_id: id},'group').populate('group');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
-UserRepository.prototype.getPlaylists = function(id) {
+
+UserRepository.prototype.getPlaylists = function(id, callback) {
 	var model = this.createModel();
 	var query = model.find({_id: id},'playlists').populate('playlists');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
 
-UserRepository.prototype.getPlaylistsShare = function(id, pl_id) {
+UserRepository.prototype.getPlaylistsShare = function(id, pl_id, callback) {
 	var model = this.createModel();
 	var query = model.findOne({_id: id, playlists : pl_id}).populate('playlists');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
 
-UserRepository.prototype.editPlaylist = function(id, body) {
+UserRepository.prototype.editPlaylist = function(id, body, callback) {
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);
-	query.exec(function (err, docs) {
-		if(err){ throw err; }
-        console.log('updated');
-	});
+	query.exec(callback);
 };
-UserRepository.prototype.editLike = function(id, body) {
+
+UserRepository.prototype.editLike = function(id, body, callback) {
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);
-	query.exec(function (err, docs) {
-		if(err){ throw err; }
-        console.log('updated');
-	});
+	query.exec(callback);
 };
-UserRepository.prototype.editGroup = function(id, body) {
+
+UserRepository.prototype.editGroup = function(id, body, callback) {
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);
-	query.exec(function (err, docs) {
-		if(err){ throw err; }
-        console.log('updated');
-	});
+	query.exec(callback);
 };
 
 module.exports = new UserRepository();
