@@ -2,6 +2,9 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 	var PlayerView = Marionette.ItemView.extend({
 		template: '#player-template',
 		model: PlayerModel,
+		modelEvents: {
+			'change:position': 'changeValue' 
+		},
 		events : {
 			"click @ui.nextButton"		: "nextTrack",
 			"click @ui.previousButton"	: "previousTrack",
@@ -25,11 +28,16 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
    			volumeRange: "#volume-range",
    			playbackRange: "#playback-range"
   		},
+
+  		changeValue: function(model){
+  			this.ui.playbackRange.val(model.get('position'));
+  		},
+
 		nextTrack: function(){
 			this.model.nextTrack();
 		},
 		playbackState : function(){
-			this.model.playbackState();
+			this.model.playbackState.call(this.model);
 		},
 
 		previousTrack : function(){	
