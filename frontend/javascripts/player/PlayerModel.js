@@ -7,64 +7,63 @@ var PlayerModel = Backbone.Model.extend({
 		currentArtistName: 'Artist',
 		volumeLevel : 50,
 		shuffle : false,
-		repeatTrack : '00',
+		repeatTrack : 'none',
 		comments : 0,
 		position : 0,
 		duration : 0,
-		liked : false,
+		liked : false
 
 	},
 
 	playbackState : function(){
-		this.playback = !this.playback;
+		var state = this.get('playback');
+
+		this.set({playback: !state});
 	},
 
 	nextTrack : function(){
-		this.currentTrack++;
+		this.set({currentTrack: currentTrack++});
+
 	},
 
 	previousTrack : function(){
-		this.currentTrack--;
+		this.set({currentTrack: currentTrack--});
 	},
 
 	shuffleMode : function(){
-		this.shuffle = !this.shuffleMode;
+		state = this.get('shuffle');
+		this.set({shuffle: !state});
 	},
 
+
 	repeatMode : function(){
-		if (this.repeatTrack == '00') {
-			this.repeatTrack = '01';
-		} else
-		if (this.repeatTrack == '01') {
-			this.repeatTrack = '10';
-		} else
-		if (this.repeatTrack == '10') {
-			this.repeatTrack = '00';
-		} else
+		if (this.get('repeatTrack') === enums.repeatModes.album)
+			this.set({repeatTrack: enums.repeatModes.song});
+		else
+		if (this.get('repeatTrack') === enums.repeatModes.song)
+			this.set({repeatTrack: enums.repeatModes.none});
+		else
+		if (this.get('repeatTrack') === enums.repeatModes.none)
+			this.set({repeatTrack: enums.repeatModes.album});
+		else
 		console.log('wrong repeatMode!');
 	},
 
 	likeState : function(){
-		this.liked = !this.liked;
+		state = this.get('liked');
+		this.set({liked: !state});
 	},
 	
-	volumelUp : function(){
-		this.volumeLevel += 5;
+
+	volumeLevelSetup : function(){
+		var input =  document.querySelector('#volumeRange').value;
+		this.set({volumeLevel: input});
 	},
 
-	volumelDown : function(){
-		this.volumeLevel -=5;
-	},
-
-	volumeLevelSetup : function(level){
-		this.volumeLevel = level;
-	},
-
-	playbackPosition : function(newPosition){
-		this.position = newPosition;
+	playbackPosition : function(){
+		var input =  document.querySelector('#playbackRange').value;
+		this.set({position: input});
 	}
-
 });
-
-var playerModel = new PlayerModel();
+return PlayerModel;
 });

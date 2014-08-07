@@ -2,7 +2,7 @@ define(['backbone'], function(Backbone){
 	var SongModel = Backbone.Model.extend({
 		defaults:{
 			title : 'Title',
-			duration : undefined,
+			duration : 0,
 			position : 0,
 			release_date : new Date(1),
 			kbps : 128,
@@ -10,9 +10,13 @@ define(['backbone'], function(Backbone){
 			albumTitle : 'AlbumName',
 			albumCover: 'cover.jpg',
 			singerName: 'Singer',
-			url : 'demo.mp3',
+			url : '',
 			comments : ['']
 		}
 	});
+
+/*	var getUrl = function(model){
+		
+	}*/
 	return SongModel;
 });

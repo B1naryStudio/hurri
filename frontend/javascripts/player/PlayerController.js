@@ -1,15 +1,17 @@
-define(['marionette', './PlayerView', '../app/context'], function(Marionette, PlayerView, context){
+define(['marionette', './PlayerView', '../app/context', './PlayerModel'], function(Marionette, PlayerView, context, PlayerModel ){
 	
 	var PlayerController = function(){	
-	
+		
+		var playerModel = new PlayerModel();
+
 		var PlayerRegion = Marionette.Region.extend({
 			template: '#player-template',
 			el: '#player',
 		});
 
-		playerRegion = new PlayerRegion();
+		var playerRegion = new PlayerRegion();
 		var playerView = new PlayerView({
-			model: context.currentSongModel
+			model: playerModel
 		});
 		playerRegion.show(playerView);
 		
