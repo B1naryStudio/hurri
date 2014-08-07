@@ -2,6 +2,8 @@ define(['backbone', '../app/enums'], function(Backbone, enums){
 var PlayerModel = Backbone.Model.extend({
 	defaults : {
 		playback : false,
+		nextButtonState: false, //disabled - true
+		previousButtonState: true, //disabled - true
 		currentTrack: 0,
 		currentTrackName: 'Track',
 		currentArtistName: 'Artist',
@@ -12,29 +14,27 @@ var PlayerModel = Backbone.Model.extend({
 		position : 0,
 		duration : 0,
 		liked : false
-
 	},
 
 	playbackState : function(){
 		var state = this.get('playback');
-
 		this.set({playback: !state});
 	},
 
 	nextTrack : function(){
-		this.set({currentTrack: currentTrack++});
-
+		position = this.get('currentTrack');
+		this.set({currentTrack: position++});
 	},
 
 	previousTrack : function(){
-		this.set({currentTrack: currentTrack--});
+		position = this.get('currentTrack');
+		this.set({currentTrack: position--});
 	},
 
 	shuffleMode : function(){
 		state = this.get('shuffle');
 		this.set({shuffle: !state});
 	},
-
 
 	repeatMode : function(){
 		if (this.get('repeatTrack') === enums.repeatModes.album)
@@ -54,14 +54,16 @@ var PlayerModel = Backbone.Model.extend({
 		this.set({liked: !state});
 	},
 	
+	addComment : function(){
+		value = this.get('comments');
+		this.set({comments: value++});
+	},
 
-	volumeLevelSetup : function(){
-		var input =  document.querySelector('#volumeRange').value;
+	volumeLevelSetup : function(input){
 		this.set({volumeLevel: input});
 	},
 
-	playbackPosition : function(){
-		var input =  document.querySelector('#playbackRange').value;
+	playbackPosition : function(input){
 		this.set({position: input});
 	}
 });

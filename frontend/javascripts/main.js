@@ -7,6 +7,7 @@ require.config({
 		socketio: '../../bower_components/socket.io-client/socket.io',
 		backbone: '../../bower_components/backbone/backbone',
 		marionette: '../../bower_components/marionette/lib/backbone.marionette'
+		/*localStorage: '../../bower_components/backbone.localStorage/backbone.localStorage'*/
 	}
 });
 

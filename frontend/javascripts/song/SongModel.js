@@ -14,9 +14,5 @@ define(['backbone'], function(Backbone){
 			comments : ['']
 		}
 	});
-
-/*	var getUrl = function(model){
-		
-	}*/
 	return SongModel;
 });

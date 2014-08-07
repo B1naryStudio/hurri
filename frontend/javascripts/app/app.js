@@ -1,9 +1,9 @@
 define(['underscore', 'units/SocketHandler', 'marionette', './AppController'], function(_, socketHandler, Marionette, AppController){
 
 	_.templateSettings = {
-		'evaluate': /\{\{\-(.+?)\}\}/g,
+		'evaluate': /\{\{(.+?)\}\}/g,
 		'interpolate': /\{\{=(.+?)\}\}/g,
-		'escape': /\{\{(.+?)\}\}/g
+		'escape': /\{\{\-(.+?)\}\}/g
 	};
 
 	var MyApp = new Marionette.Application();

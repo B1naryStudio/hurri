@@ -1,11 +1,11 @@
 script#player-template(type='text/template')
 	div
-		button#previousButton(type='button') previous
-		button#playButton(type='button') play
-		button#nextButton(type='button') next
-		input#volumeRange(type='range', min='0', max='100', value='50')
-		input#playbackRange(type='range', min='0', max='100', value='0')
-		button#shuffleButton(type='button') shuffle
-		button#repeatButton(type='button') repeat
-		button#likeButton(type='button') like
-		button#commentButton(type='button') comment
+		button#previous-button(type='button', {{ if (previousButtonState) print('disabled')}}) previous
+		button#play-Button(type='button') play
+		button#next-button(type='button', {{ if (nextButtonState) print('disabled')}}) next
+		input#volume-range(type='range', min='0', max='100', value='50')
+		input#playback-range(type='range', min='0', max='100', value='0')
+		button#shuffle-button(type='button') shuffle
+		button#repeat-button(type='button') repeat
+		button#like-button(type='button') like
+		button#comment-button(type='button') comment
