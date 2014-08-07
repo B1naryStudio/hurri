@@ -11,7 +11,7 @@ var id = param.trackid;
 
 describe('Track API should', function () {
 
-/*	it('call method getTitle ', function(done){
+	it('call method getTitle ', function(done){
 		TrackRepository.getTitle(id, function(err, data){
 			data.should.be.object;
 			console.log('Data getAll'+data+'');
@@ -33,7 +33,7 @@ describe('Track API should', function () {
 			data.should.have.property('url');
 			done();
 		});
-	});*/
+	});
 
 	it('call method getComments and return array of objects', function(done){
 		TrackRepository.getComments(id, function(err, data){

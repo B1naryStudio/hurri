@@ -1,8 +1,10 @@
 var Mongoose = require('mongoose').Mongoose;
 var mockgoose = require('mockgoose');
 var mongoose;
+
 mongoose = new Mongoose();
 mockgoose(mongoose);
+
 var Album = require('../../backend/schemas/album.js')
 var AlbumRepository = require('../../backend/repositories/albumRepository.js');
 var param = require('./populating.js');
