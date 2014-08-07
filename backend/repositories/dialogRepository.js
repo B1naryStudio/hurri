@@ -10,15 +10,10 @@ function DialogRepository(){
 
 DialogRepository.prototype = new Repository();
 
-DialogRepository.prototype.getDialog = function(id1,id2) {
+DialogRepository.prototype.getDialog = function(id1,id2,callback) {
 	var model = this.createModel();
-	var query = model.findOne({id1: id1});
-	query.exec(function (err, docs) {
-		console.log(typeof docs);
-		return docs;
-	});
+	var query = model.findOne({user_auth_id1: id1, user_auth_id2: id2});
+	query.exec(callback);
 };
-
-
 
 module.exports = new DialogRepository();

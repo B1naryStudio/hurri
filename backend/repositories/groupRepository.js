@@ -10,12 +10,10 @@ function GroupRepository(){
 
 GroupRepository.prototype = new Repository();
 
-GroupRepository.prototype.getMembers = function(id) {
+GroupRepository.prototype.getMembers = function(id, callback) {
 	var model = this.createModel();
 	var query = model.find({_id: id}, 'listeners').populate('listeners');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	query.exec(callback);
 };
 
 GroupRepository.prototype.getTracks = function(id, callback) {
@@ -25,14 +23,10 @@ GroupRepository.prototype.getTracks = function(id, callback) {
 
 };
 
-GroupRepository.prototype.updateListeners = function(id, body) {
-	console.log(id);
+GroupRepository.prototype.updateListeners = function(id, body, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({_id : mongoose.Types.ObjectId(id)}, body);
-	query.exec(function (err, docs) {
-		if(err){ throw err; }
-        console.log('updated');
-	});
+	var query = model.findOneAndUpdate({_id : id}, body);
+	query.exec(callback);
 };
 
 module.exports = new GroupRepository();

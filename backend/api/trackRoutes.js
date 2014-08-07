@@ -1,38 +1,60 @@
 var trackRepository = require('../repositories/trackRepository');
+var _ = require('underscore');
 
 module.exports = function(app){
 	app.get('/api/track/:id', function(req, res, next){
-		res.json(trackRepository.getById(req.params.id));
+		trackRepository.getById(req.params.id, function(data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/track/:id/title', function(req, res, next){
-		res.json(trackRepository.getTitle(req.params.id));
+		trackRepository.getTitle(req.params.id, function(data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/track/:id/lyrics', function(req, res, next){
-		res.json(trackRepository.getLirycs(req.params.id));
+		trackRepository.getLirycs(req.params.id, function(data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/track/:id/url', function(req, res, next){
-		res.json(trackRepository.getUrl(req.params.id));
+		trackRepository.getUrl(req.params.id, function(data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.get('/api/track/:id/comments', function(req, res, next){
-		res.json(trackRepository.getComments(req.params.id));
+		trackRepository.getComments(req.params.id, function(data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 
 	app.post('/api/track', function(req, res, next){
-		trackRepository.add(req.body);
-		res.end();
+		trackRepository.add(req.body, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
 	});
 
 	app.put('/api/track/:id', function(req, res, next){
-		trackRepository.update(req.params.id, req.body);
-		res.end();
+		trackRepository.update(req.params.id, req.body, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 	
 	app.delete('/api/track/:id', function(req, res, next){
-		trackRepository.delete(req.params.id);
-		res.end();
+		trackRepository.delete(req.params.id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
 	});
 };

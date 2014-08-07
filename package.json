@@ -34,7 +34,8 @@
     "mockgoose": "^1.10.2",
     "mongoose": "^3.8.14",
     "should": "~4.0.4",
-    "supertest": "^0.13.0"
+    "supertest": "^0.13.0",
+    "underscore": "^1.6.0"
   },
   "dependencies": {
     "body-parser": "^1.5.2",
