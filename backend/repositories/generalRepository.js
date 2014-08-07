@@ -9,12 +9,10 @@ Repository.prototype.createModel = function(){
 	return this.model;
 };
 
-Repository.prototype.getById = function(id) {
+Repository.prototype.getById = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id}).populate('albums_id');
-	query.exec(function (err, docs) {
-		return docs;
-	});
+	var query = model.findOne({_id: id});
+	query.exec(callback);
 };
 
 Repository.prototype.add = function(data) {
