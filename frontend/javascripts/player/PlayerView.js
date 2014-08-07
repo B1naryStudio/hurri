@@ -3,16 +3,16 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		template: '#player-template',
 		model: PlayerModel,
 		events : {
-			"click @nextButton"		: "nextTrack",
-			"click @previousButton"	: "previousTrack",
-			"click @playButton"		: "playbackState",
-			"click @shuffleButton"	: "shuffleMode",
-			"click @repeatButton"	: "repeatMode",
-			"click @likeButton"		: "likeState",
-			"click @commentButton"	: "addComment",
-			"change @volumeRange"	: "volumeLevelSetup",
-			"change @playbackRange"	: "playbackPosition",
-			"keypress @volumeRange"	: "volumeKeyControl"
+			"click @ui.nextButton"		: "nextTrack",
+			"click @ui.previousButton"	: "previousTrack",
+			"click @ui.playButton"		: "playbackState",
+			"click @ui.shuffleButton"	: "shuffleMode",
+			"click @ui.repeatButton"	: "repeatMode",
+			"click @ui.likeButton"		: "likeState",
+			"click @ui.commentButton"	: "addComment",
+			"change @ui.volumeRange"	: "volumeLevelSetup",
+			"change @ui.playbackRange"	: "playbackPosition",
+			"keypress @ui.volumeRange"	: "volumeKeyControl"
 		},
 		ui: {
    			nextButton: "#next-button",
