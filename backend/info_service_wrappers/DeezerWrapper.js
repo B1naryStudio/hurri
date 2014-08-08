@@ -1,16 +1,19 @@
 var request = require('request');
 var _ = require('underscore');
+var mongoose = require('mongoose');
+var Artist = require('../schemas/artist.js');
 
 var albumRepository = require('../repositories/albumRepository.js');
 var artistRepository = require('../repositories/artistRepository.js');
 var trackRepository = require('../repositories/trackRepository.js');
 
 function DeezerWrapper(){
-
 }
 
 DeezerWrapper.prototype.albumStruct = function(obj){
-	var date = obj.release_date.replace('-', '\/');
+	var date = 00/00/00;
+	if (!_.isUndefined(obj.release_date))
+		date = obj.release_date.replace('-', '\/');
 	var album = {
 		deezer_id : obj.id,
 		title : obj.title,
@@ -70,9 +73,13 @@ DeezerWrapper.prototype.addArtist = function(obj){
 }
 
 DeezerWrapper.prototype.addTrack = function(obj){
-	trackRepository.add(obj, function(data){
-		return;
+	trackRepository.add(obj, function(err, data){
 	});
+}
+
+DeezerWrapper.prototype.isExist = function(id, callback){
+	var exist = Artist.findOne({deezer_id : id});
+	exist.exec(callback);
 }
 
 module.exports = new DeezerWrapper();
