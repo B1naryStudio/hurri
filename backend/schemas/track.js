@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 var commentSchema = require('./comment.js');
 
 var trackSchema = new Schema({
+    deezer_id: Number,
     title : String,
     duration : Number,
     position : {
@@ -18,14 +19,8 @@ var trackSchema = new Schema({
         type: String, 
         default: 'No lyrics for this song. Sorry.'
     },
-    album : {
-        type : Schema.Types.ObjectId,
-        ref : 'Album'
-    },
-    singer : {
-        type : Schema.Types.ObjectId,
-        ref : 'Singer'
-    },
+    album : Number,
+    singer : Number,
     url : String,
     comments : [commentSchema]
 });
