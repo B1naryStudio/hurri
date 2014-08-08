@@ -12,10 +12,7 @@ var albumSchema = new Schema({
     duration : Number,
     release_date : Date,
     singer : Number,
-    genres : [{
-        type: String, 
-        default: 'unknown'
-    }],
+    genres : [String],
     comment : [commentSchema],
     tracks : [Number]
 });
