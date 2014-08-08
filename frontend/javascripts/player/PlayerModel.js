@@ -1,4 +1,4 @@
-define(['backbone', '../app/enums', '../app/context'], function(Backbone, enums, context){
+define(['backbone', '../app/enums', '../app/context', 'localStorage'], function(Backbone, enums, context, LocalStorage){
 var PlayerModel = Backbone.Model.extend({
 	defaults : {
 		playback : false,
@@ -15,11 +15,18 @@ var PlayerModel = Backbone.Model.extend({
 		duration : 280,
 		liked : false
 	},
+	localStorage: new Backbone.LocalStorage("PlayerModel"),
 	initialize: function(){
 		var url = context.currentSongModel.get('url'); 
 		this.track = new Audio(url);
+		this.bindListeners();
 	},
-	playbackState : function(){
+	bindListeners: function(){
+		this.on('change:shuffle change:repeatTrack change:currentTrackName change:currentArtistName change:volumeLevel', function(){
+			this.save();
+		}); 
+	},
+	playbackState: function(){
 		var state = this.get('playback');
 		var timer;
 		if (!state){
