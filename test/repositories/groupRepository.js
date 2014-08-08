@@ -1,8 +1,4 @@
-var Mongoose = require('mongoose').Mongoose;
-var mockgoose = require('mockgoose');
-var mongoose;
-mongoose = new Mongoose();
-mockgoose(mongoose);
+var mongoose = require('../../backend/db/mongoose');
 
 var GroupRepository = require('../../backend/repositories/groupRepository.js');
 
@@ -26,10 +22,9 @@ describe('Group API should', function () {
 	});
 
 	it('call method updateListeners and return array', function(done){
-		console.log("TEST")
 		GroupRepository.updateListeners(id, "3dd332ae4f5fee220e1ab4c5", function(err, data){
 			//console.log('Group test' + data);
-			//data.should.be.object;
+			// data.should.be.object;
 			done();
 		});
 	});

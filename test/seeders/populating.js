@@ -1,10 +1,8 @@
-var casual = require('./casual.js');
-var Mongoose = require('mongoose').Mongoose;
-var mockgoose = require('mockgoose');
-var mongoose;
-mongoose = new Mongoose();
-mockgoose(mongoose);
-mockgoose.reset();
+var casual = require('./casual');
+
+var mongoose = require('../../backend/db/mongoose');
+
+mongoose.mockgoose.reset();
 
 var Album = require('../../backend/schemas/album.js');
 var Artist = require('../../backend/schemas/artist.js');
@@ -22,7 +20,7 @@ var tracks;
 var userinfos;
 var userauths;
 
-mongoose.connect('mongodb://localhost:27017/hurri');
+var connection = mongoose.connect('mongodb://localhost:27013/hurri');
 
 for (var i = 0; i <= 9; i++) {
 	albums = new Album(casual.albums); albums.save();
