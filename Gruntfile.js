@@ -30,10 +30,6 @@ module.exports = function (grunt) {
 					livereload: false
 				}
 			},
-            jade: {
-                files: ['<%= views %>'],
-        		tasks: ['jade']
-    		},
 			styles: {
 				files: ['<%= stylesheets %>'],
 				tasks: ['stylus']
