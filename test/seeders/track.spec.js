@@ -1,9 +1,4 @@
-var Mongoose = require('mongoose').Mongoose;
-var mockgoose = require('mockgoose');
-var mongoose;
-
-mongoose = new Mongoose();
-mockgoose(mongoose);
+var mongoose = require('../../backend/db/mongoose');
 
 var TrackRepository = require('../../backend/repositories/trackRepository.js');
 var param = require('./populating.js');

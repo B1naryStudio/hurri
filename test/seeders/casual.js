@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('../../backend/db/mongoose');
+
 var ObjectID = mongoose.Types.ObjectId();
 var casual = require('casual');
 var ObjId = ObjectID;

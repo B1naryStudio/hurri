@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('../db/mongoose');
+
 var Schema = mongoose.Schema;
 var albumModel = require('./album.js');
 

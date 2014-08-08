@@ -1,12 +1,6 @@
 var connection = require('../db/dbconnect.js');
 var Track = require('../schemas/track.js');
 var Repository = require('./generalRepository.js');
-var Mongoose = require('mongoose').Mongoose;
-var mockgoose = require('mockgoose');
-var mongoose;
-
-mongoose = new Mongoose();
-mockgoose(mongoose);
 
 function TrackRepository(){
 	Repository.prototype.constructor.call(this);

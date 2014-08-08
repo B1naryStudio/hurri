@@ -1,10 +1,4 @@
-var Mongoose = require('mongoose').Mongoose;
-var mockgoose = require('mockgoose');
-
-var mongoose;
-
-mongoose = new Mongoose();
-mockgoose(mongoose);
+var mongoose = require('../../backend/db/mongoose');
 
 var casual = require('casual');
 var Album = require('../../backend/schemas/album.js')
