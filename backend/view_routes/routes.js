@@ -8,12 +8,12 @@ var userRoutes = require('./userRoutes');
 
 module.exports = function(app){
   return {
-    commonRoutes: commonRoutes(app),
+    userRoutes: userRoutes(app),
     artistRoutes: artistRoutes(app),
     albumRoutes: albumRoutes(app),
     dialogueRoutes: dialogueRoutes(app),
     groupRoutes: groupRoutes(app),
     trackRoutes: trackRoutes(app),
-    userRoutes: userRoutes(app)
+    commonRoutes: commonRoutes(app)
   };
 };

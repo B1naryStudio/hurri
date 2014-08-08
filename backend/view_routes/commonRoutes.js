@@ -16,6 +16,8 @@ module.exports = function (app) {
 		res.send(fs.readFileSync(__dirname + '/../../public/' + 'signin.html', 'utf8'));
 	});
 
-	app.get('*', inject404('<h1>404 error</h1><h2>Not found</h2>'));
+	app.use(function(req, res, next) {
+		inject404('<h1>404 error</h1><h2>Not found</h2>', res);
+	});
 
 };
