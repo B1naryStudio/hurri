@@ -9,7 +9,6 @@ describe('Track API should', function () {
 	it('call method getTitle ', function(done){
 		TrackRepository.getTitle(id, function(err, data){
 			data.should.be.object;
-			console.log('Data getAll'+data+'');
 			done();
 		});
 	});
@@ -17,7 +16,6 @@ describe('Track API should', function () {
 	it('call method getLyrics', function(done){
 		TrackRepository.getLirycs(id, function(err, data){
 			data.should.be.object;
-			//console.log(data);
 			done();
 		});
 	});

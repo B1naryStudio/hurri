@@ -13,25 +13,25 @@ UserRepository.prototype = new Repository();
 
 UserRepository.prototype.getUserInfo = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id});
+	var query = model.findOne({user_auth_id: id});
 	query.exec(callback);
 };
 
 UserRepository.prototype.getLike = function(id, callback) {
 	var model = this.createModel();
-	var query = model.find({_id: id},'liked').populate('liked');
+	var query = model.findOne({user_auth_id: id},'liked').populate('liked');
 	query.exec(callback);
 };
 
 UserRepository.prototype.getGroups = function(id, callback) {
 	var model = this.createModel();
-	var query = model.find({_id: id},'group').populate('group');
+	var query = model.findOne({user_auth_id: id},'group').populate('group');
 	query.exec(callback);
 };
 
 UserRepository.prototype.getPlaylists = function(id, callback) {
 	var model = this.createModel();
-	var query = model.find({_id: id},'playlists').populate('playlists');
+	var query = model.findOne({user_auth_id: id},'playlists').populate('playlists');
 	query.exec(callback);
 };
 

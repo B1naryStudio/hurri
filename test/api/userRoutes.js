@@ -98,6 +98,9 @@ describe('user api should', function(){
 		});
 	});
 
+	//TODO: fix. this test is impacting user repo test
+	//TODO: you should remove user_info along with user_auth
+
 	it('have delete /api/user/:id route', function(done){
 		request(app)
 		.delete('/api/user/:id')

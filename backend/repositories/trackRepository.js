@@ -16,9 +16,8 @@ TrackRepository.prototype.getTitle = function(id, callback) {
 };
 
 TrackRepository.prototype.getLirycs = function(id, callback) {
-	console.log('ID '+id);
 	var model = this.createModel();
-	var query = model.findOne({_id: id});
+	var query = model.findOne({_id: id},'lyrics');
 	query.exec(callback);
 };
 

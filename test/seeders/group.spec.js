@@ -22,10 +22,9 @@ describe('Group API should', function () {
 	});
 
 	it('call method updateListeners and return array', function(done){
-		console.log("TEST")
 		GroupRepository.updateListeners(id, "3dd332ae4f5fee220e1ab4c5", function(err, data){
 			//console.log('Group test' + data);
-			//data.should.be.object;
+			// data.should.be.object;
 			done();
 		});
 	});
