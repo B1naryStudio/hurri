@@ -34,26 +34,28 @@ function DeezerWrapper(){
 
 }
 
-DeezerWrapper.prototype.albumStruct = function(obj){
+DeezerWrapper.prototype.albumStruct = function(id, obj, singId, tracks){
 	var date = '0000/00/00';
 	if (!_.isUndefined(obj.release_date))
 		date = obj.release_date.replace('-', '\/');
 	var album = {
+		_id : id,
 		deezer_id : obj.id,
 		title : obj.title,
 		cover : obj.cover,
 		duration : obj.duration,
 		release_date : date,
-		singer : obj.artist.id,
+		singer : singId,
 		genres : _.pluck(obj.genres.data, 'name'),
 		comment : [],
-		tracks : _.pluck(obj.tracks.data, 'id')
+		tracks : tracks
 	};
 	return album;
 };
 
-DeezerWrapper.prototype.artistStruct = function(obj){
+DeezerWrapper.prototype.artistStruct = function(obj, id){
 	var artist = { 
+		_id : id,
 		deezer_id: obj.id,
 		name : obj.name,
 		picture : obj.picture,
@@ -63,15 +65,16 @@ DeezerWrapper.prototype.artistStruct = function(obj){
 	return artist;
 };
 
-DeezerWrapper.prototype.trackStruct = function(obj, albumInfo){
+DeezerWrapper.prototype.trackStruct = function(obj, albumInfo, artId, albId, oid){
 	var track = {
+		_id : oid,
 		deezer_id : obj.id,
 		title : obj.title,
 		duration : obj.duration,
 		position : obj.track_position,
 		release_date : albumInfo.release_date,
-		album : albumInfo.id,
-		singer : obj.artist.id,
+		album : albId,
+		singer : artId,
 		url : obj.preview
 	};
 	return track;
@@ -86,24 +89,22 @@ DeezerWrapper.prototype.getItem = function(url, callback){
 	});
 };
 
-DeezerWrapper.prototype.addItem = function(obj, repo){
-	repositories[repo].add(obj, function(data){
-		return;
-	});
+DeezerWrapper.prototype.addItem = function(obj, repo, callback){
+	repositories[repo].add(obj, function(){});
 };
 
-DeezerWrapper.prototype.isExist = function(id, callback){
+DeezerWrapper.prototype.getArtistByDeezerId = function(id, callback){
 	var exist = Artist.findOne({deezer_id : id});
 	exist.exec(callback);
 };
 
-DeezerWrapper.prototype.importTracks = function(id, albumInfo){
-	var self = this;
-	this.getItem('/album/' + id + '/tracks', function(data){
-		for (var i = 0; i < data.data.length; i++){
-			var trackInfo = self.trackStruct(data.data[i], albumInfo);
-			self.addItem(trackInfo, 'track');
-		}
+
+DeezerWrapper.prototype.isExisting = function(id, callback){
+	this.getArtistByDeezerId(id, function(err, data){
+		if (data === null) 
+			callback(false);
+		else 
+			callback(data);
 	});
 };
 
@@ -117,35 +118,70 @@ DeezerWrapper.prototype.getGenres = function(arr, callback){
 	});
 };
 
-DeezerWrapper.prototype.importArtists = function(obj){
+DeezerWrapper.prototype.importTracks = function(album, artId, albId, callback){
+	var items = this.getItem('/album/' + album.id + '/tracks', function(data){
+		callback(data);
+	});
+};
+
+DeezerWrapper.prototype.saveTracks = function(album, artId, albId, callback){
 	var self = this;
-	var albumList;
-	var artistAlbums = this.getItem('/artist/' + obj.id + '/albums', function(data){
-		albumList = _.pluck(data.data, 'id');
-		genres_id = _.uniq(_.pluck(data.data, 'genre_id'));
-		var artistInfo = self.artistStruct(obj);
-		self.getGenres(genres_id, function(genresArr){
-			artistInfo.genres = genresArr;
-			artistInfo.albums_id = albumList;
-			var exist = self.isExist(obj.id, function(err, data){
-					if (data === null) self.addItem(artistInfo,'artist');
-			});
+	var arr = []
+	this.importTracks(album, artId, albId, function(data){
+		for (var i = 0; i < data.data.length; i++){
+			var objid = new mongoose.Types.ObjectId; arr.push(objid)
+			var trackInfo = self.trackStruct(data.data[i], album, artId, albId, objid);
+			var dd = self.addItem(trackInfo, 'track');
+		}
+		callback(arr)
 	});
+}
+
+DeezerWrapper.prototype.getAlbumInfo = function(id, callback){
+	this.getItem('/album/' + id, function(data){
+		if (!data.error && data.tracks.data.length !== 0){
+			callback(data);
+		} else callback(false);
 	});
+};
+
+DeezerWrapper.prototype.fillArtistInfo = function(obj, artId, albId, genresArr){
+	var artistInfo = this.artistStruct(obj, artId);
+	artistInfo.genres = genresArr;
+	artistInfo.albums_id.push(albId);
+	return artistInfo;
+};
+
+DeezerWrapper.prototype.fillNewInfo = function(artist, albId, genresArr){
+	artist.genres = _.uniq(_.union(artist.genres, genresArr));
+	artist.albums_id.push(albId);
+	artist.markModified('albums_id');
+	artist.save();
 };
 
 DeezerWrapper.prototype.importAlbum = function(id){
 	var self = this;
-
-	this.getItem('/album/' + id, function(data){
-		if (!data.error){
-			var albumInfo = self.albumStruct(data);
-				if (albumInfo.tracks.length !== 0){
-					self.addItem(albumInfo, 'album');
-					self.importTracks(albumInfo.deezer_id, albumInfo);
-					self.importArtists(data.artist);
+	this.getAlbumInfo(id, function(data){
+		if (data) {
+			var albumObjectId = mongoose.Types.ObjectId();			
+			var artistObjectId = mongoose.Types.ObjectId();	
+			self.isExisting(data.artist.id, function(exist){
+				if (!exist) {
+					var artistInfo = self.fillArtistInfo(data.artist, artistObjectId, albumObjectId, 
+										_.pluck(data.genres.data, 'name'));
+					self.addItem(artistInfo,'artist');
+				} else {
+					self.fillNewInfo(exist, albumObjectId, _.pluck(data.genres.data, 'name'));
+					artistObjectId = exist._id;
 				}
+			})
+			self.saveTracks(data, artistObjectId, albumObjectId, function(result){
+					console.log("Result after import: " + result)
+					var albumInfo = self.albumStruct(albumObjectId, data, artistObjectId, result);
+					self.addItem(albumInfo, 'album');
+			});
 		}
+		
 	});
 };
 
