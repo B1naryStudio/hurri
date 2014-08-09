@@ -4,12 +4,14 @@ var bodyParser = require('body-parser');
 
 var path = require('path');
 
+var fs = require('fs');
+
 var app = express();
 
-app.engine('jade', require('jade').__express);
-var viewsPath = path.normalize(__dirname + '/../frontend/views');
-app.set('views', viewsPath);
-app.set('view engine', 'jade');
+var logger = require('./units/logger');
+logger.info('Server is running');
+
+var morgan = require('./middleware/morgan');
 
 var staticPath = path.normalize(__dirname + '/../public');
 app.use(express.static(staticPath));

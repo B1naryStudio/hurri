@@ -1,7 +1,6 @@
 var connection = require('../db/dbconnect.js');
 var Group = require('../schemas/radio.js');
 var Repository = require('./generalRepository.js');
-var mongoose = require('mongoose');
 var _ = require('underscore');
 
 function GroupRepository(){

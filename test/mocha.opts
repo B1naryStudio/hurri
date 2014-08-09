@@ -1,4 +1,4 @@
 test/**/*.js
 --reporter dot
 --require should
--t 100000
+-t 5000

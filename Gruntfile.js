@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 		stylesheets: ['frontend/styles/**/*.styl'],
 
 		jshint: {
-			client: ['Gruntfile.js', '<%= javascripts %>'],
+			client: ['Gruntfile.js', '<%= javascripts %>', '!frontend/javascripts/libs/**/*.js'],
 			server: ['<%= server_js %>'],
 			options: {
 				sub: true,
@@ -33,8 +33,24 @@ module.exports = function (grunt) {
 			styles: {
 				files: ['<%= stylesheets %>'],
 				tasks: ['stylus']
+			},
+			jade: {
+				files: ['<%= views %>'],
+				tasks: ['jade']
 			}
 		},
+        jade: {
+            compile: {
+                options: {
+                    debug: true
+                },
+                files: {
+                    'public/index.html': 'frontend/views/index.jade',
+                    'public/404.html': 'frontend/views/404.jade',
+                    'public/signin.html': 'frontend/views/signin.jade'
+                }
+            }
+        },
 		stylus: {
 			compile: {
 				options: {
@@ -56,7 +72,10 @@ module.exports = function (grunt) {
 
 		copy: {			
 			libs: {files: [{expand: false, src: ['bower_components/requirejs/require.js'], dest: 'public/javascripts/libs/require.js'}]},
-			js: {files: [{expand: true, cwd: 'frontend/javascripts/', src: ['**'], dest: 'public/javascripts/'}]}
+			js: {files: [{expand: true, cwd: 'frontend/javascripts/', src: ['**'], dest: 'public/javascripts/'}]},
+			resources: {files: [{expand: true, cwd: 'frontend/resources/', src: ['**'], dest: 'public/resources/'}]},
+			images: {files: [{expand: true, cwd: 'frontend/images/', src: ['**'], dest: 'public/images/'}]}
+
 		},
 
 		clean: {	
@@ -89,12 +108,13 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-stylus');
+    grunt.loadNpmTasks('grunt-contrib-jade');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-open');
 
-	grunt.registerTask('default', ['jshint', 'stylus', 'clean', 'copy', 'open']);
-	grunt.registerTask('release', ['jshint', 'stylus', 'clean', 'copy:libs', 'requirejs']);
+	grunt.registerTask('default', ['jshint', 'jade', 'stylus', 'clean', 'copy', 'open']);
+	grunt.registerTask('release', ['jshint', 'jade', 'stylus', 'clean', 'copy:libs', 'requirejs']);
 	grunt.registerTask('javascripts', ['jshint', 'clean', 'copy']);
 };

@@ -1,0 +1,133 @@
+/*Colors*/
+default_bg = gray
+vk_bg = #42618b
+ok_bg = #d5702e
+tw_bg = #3b9bda
+fb_bg = #2f4885
+
+/*Font*/
+basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
+
+body
+	font-family basic_font
+
+*
+	margin 0
+	padding 0
+
+#header
+	width 100%
+	float left
+	height 50px
+	background red
+
+#header img
+	height 50px
+
+#auth-form 
+	list-style-type none;
+	float right
+	display inline
+	width 25%
+
+.headerButton
+	padding-left 2%
+	width 30%
+	height 50px
+	color darkgrey
+	float: right;
+
+#player
+	height 100px
+	background blue
+
+#main
+	background orange
+	float left
+	width 50%
+
+#menu
+	background green
+	width 25%
+	float left
+
+#menu li
+	height 30px
+	border 1px solid darkgrey
+	list-style-type none;
+
+#sidebar
+	background yellow
+	width 25%
+	float left
+
+#sidebar li
+	height 30px
+	border 1px solid darkgrey
+	list-style-type none;
+
+#footer
+	height 30px
+	background grey
+	border-top 1px solid darkgrey
+
+
+#song-info
+	width 25%
+	color darkgrey
+
+#footer-menu
+	list-style-type none;
+	float right
+	display inline
+	width 25%
+
+.footerButton
+	padding-left 2%
+	width 30%
+	height 30px
+	color darkgrey
+	float: right;
+
+.clear
+	clear both
+
+body
+	width 100%
+	min-width 1000px
+
+/*Sign in styles*/
+.signin_page
+	text-align center
+.social_enter
+	margin-top 20px
+	text-align center
+	a
+		font-size 14px
+		text-decoration none
+		color #fff
+		display inline-block
+		margin-right 10px
+		padding 5px 10px
+		background default_bg
+		box-shadow 0 2px 0 darken(default_bg, 10)
+		&.vk
+			&:hover
+				background darken(vk_bg, 10)
+			background vk_bg
+			box-shadow 0 2px 0 darken(vk_bg, 10)
+		&.ok
+			&:hover
+				background darken(ok_bg, 10)
+			background ok_bg
+			box-shadow 0 2px 0 darken(ok_bg, 10)
+		&.tw
+			&:hover
+				background darken(tw_bg, 10)
+			background tw_bg
+			box-shadow 0 2px 0 darken(tw_bg, 10)
+		&.fb
+			&:hover
+				background darken(fb_bg, 10)
+			background fb_bg
+			box-shadow 0 2px 0 darken(fb_bg, 10)

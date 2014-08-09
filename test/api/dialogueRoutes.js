@@ -1,6 +1,7 @@
 var app = require('../../backend/server');
 var request = require('supertest');
 var param = require('../seeders/populating.js');
+
 var id1 = param.uid1;
 var id2 = param.uid2;
 var codes = [200, 301, 400];

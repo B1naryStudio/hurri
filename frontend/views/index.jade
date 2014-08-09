@@ -1,4 +1,23 @@
 extends ./layout
 
+
 block content
 	span hello here
+	//404_placeholder
+
+	div#header
+	div#player
+	div#menu
+	div#main
+	div#sidebar
+	div.clear
+	div#footer
+	include ./header/auth-template
+	include ./player/player-template
+	include ./menu/menu-nav-template
+	include ./main/playlists-template
+	include ./sidebar/sidebar-template
+	include ./footer/song-info-template
+
+	script(type="text/template", id="main_template").
+		/** data_replace **/

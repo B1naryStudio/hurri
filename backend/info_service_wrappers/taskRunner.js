@@ -1,3 +1,6 @@
 var wrapper = require('./DeezerWrapper');
 
-wrapper.getAlbums(2);
+for (var ids = 49500; ids < 49550 ; ids++){
+	wrapper.importAlbum(ids);
+}
+
