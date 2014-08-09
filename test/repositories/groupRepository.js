@@ -2,7 +2,7 @@ var mongoose = require('../../backend/db/mongoose');
 
 var GroupRepository = require('../../backend/repositories/groupRepository.js');
 
-var param = require('./populating.js');
+var param = require('../seeders/populating.js');
 var id = param.userid;
 
 describe('Group API should', function () {
