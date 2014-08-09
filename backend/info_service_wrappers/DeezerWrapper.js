@@ -7,9 +7,9 @@ var artistRepository = require('../repositories/artistRepository.js');
 var trackRepository = require('../repositories/trackRepository.js');
 
 var repositories = {
-	album : albumRepository,
-	artist : artistRepository,
-	track : trackRepository
+	'album' : albumRepository,
+	'artist' : artistRepository,
+	'track' : trackRepository
 };
 
 var genres = {
@@ -86,22 +86,10 @@ DeezerWrapper.prototype.getItem = function(url, callback){
 	});
 };
 
-DeezerWrapper.prototype.addAlbum = function(obj){
-	albumRepository.add(obj, function(data){
+DeezerWrapper.prototype.addItem = function(obj, repo){
+	repositories[repo].add(obj, function(data){
 		return;
 	});
-}
-
-DeezerWrapper.prototype.addArtist = function(obj){
-	artistRepository.add(obj, function(data){
-		return;
-	});
-}
-
-DeezerWrapper.prototype.addTrack = function(obj){
-	trackRepository.add(obj, function(err, data){
-		return
-	});	
 }
 
 DeezerWrapper.prototype.isExist = function(id, callback){
@@ -114,7 +102,7 @@ DeezerWrapper.prototype.importTracks = function(id, albumInfo){
 	this.getItem('/album/' + id + '/tracks', function(data){
 		for (var i = 0; i < data.data.length; i++){
 			var trackInfo = self.trackStruct(data.data[i], albumInfo);
-			self.addTrack(trackInfo);
+			self.addItem(trackInfo, 'track');
 		}
 	});
 };
@@ -140,7 +128,7 @@ DeezerWrapper.prototype.importArtists = function(obj){
 			artistInfo.genres = genresArr;
 			artistInfo.albums_id = albumList;
 			var exist = self.isExist(obj.id, function(err, data){
-					if (data == null) self.addArtist(artistInfo);
+					if (data == null) self.addItem(artistInfo,'artist');
 			});
 	});
 	});
@@ -153,7 +141,7 @@ DeezerWrapper.prototype.importAlbum = function(id){
 		if (!data.error){
 			var albumInfo = self.albumStruct(data);
 				if (albumInfo.tracks.length != 0){
-					self.addAlbum(albumInfo);
+					self.addItem(albumInfo, 'album');
 					self.importTracks(albumInfo.deezer_id, albumInfo)
 					self.importArtists(data.artist);
 				}
