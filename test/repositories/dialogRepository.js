@@ -1,7 +1,7 @@
 var mongoose = require('../../backend/db/mongoose');
 
 var DialogRepository = require('../../backend/repositories/dialogRepository.js');
-var param = require('./populating.js');
+var param = require('../seeders/populating.js');
 var id1 = param.uid1;
 var id2 = param.uid2;
 

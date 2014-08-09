@@ -1,7 +1,7 @@
 var mongoose = require('../../backend/db/mongoose');
 
 var UserRepository = require('../../backend/repositories/userRepository.js');
-var param = require('./populating.js');
+var param = require('../seeders/populating.js');
 var id = param.userid;
 
 describe('User API should', function () {

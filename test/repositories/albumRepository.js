@@ -2,7 +2,7 @@ var mongoose = require('../../backend/db/mongoose');
 
 var Album = require('../../backend/schemas/album.js')
 var AlbumRepository = require('../../backend/repositories/albumRepository.js');
-var param = require('./populating.js');
+var param = require('../seeders/populating.js');
 var id = param.albumid;
 var name = param.albumname;
 
