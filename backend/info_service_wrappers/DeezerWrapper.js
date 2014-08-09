@@ -1,7 +1,7 @@
 var request = require('request');
 var _ = require('underscore');
 var mongoose = require('mongoose');
-var Artist = require('../schemas/artist.js')
+var Artist = require('../schemas/artist.js');
 var albumRepository = require('../repositories/albumRepository.js');
 var artistRepository = require('../repositories/artistRepository.js');
 var trackRepository = require('../repositories/trackRepository.js');
@@ -28,7 +28,7 @@ var genres = {
       144: "Reggae",
       152: "Rock",
       1: "World"
-}
+};
 
 function DeezerWrapper(){
 
@@ -90,12 +90,12 @@ DeezerWrapper.prototype.addItem = function(obj, repo){
 	repositories[repo].add(obj, function(data){
 		return;
 	});
-}
+};
 
 DeezerWrapper.prototype.isExist = function(id, callback){
 	var exist = Artist.findOne({deezer_id : id});
 	exist.exec(callback);
-}
+};
 
 DeezerWrapper.prototype.importTracks = function(id, albumInfo){
 	var self = this;
@@ -112,7 +112,7 @@ DeezerWrapper.prototype.getGenres = function(arr, callback){
 	request('http://api.deezer.com/genre', function(error, response, body){
 		for (var i = 0; i < arr.length; i++) {
 			userGenres.push(genres[arr[i]]);
-		};
+		}
 		callback(userGenres);
 	});
 };
@@ -128,7 +128,7 @@ DeezerWrapper.prototype.importArtists = function(obj){
 			artistInfo.genres = genresArr;
 			artistInfo.albums_id = albumList;
 			var exist = self.isExist(obj.id, function(err, data){
-					if (data == null) self.addItem(artistInfo,'artist');
+					if (data === null) self.addItem(artistInfo,'artist');
 			});
 	});
 	});
@@ -140,12 +140,12 @@ DeezerWrapper.prototype.importAlbum = function(id){
 	this.getItem('/album/' + id, function(data){
 		if (!data.error){
 			var albumInfo = self.albumStruct(data);
-				if (albumInfo.tracks.length != 0){
+				if (albumInfo.tracks.length !== 0){
 					self.addItem(albumInfo, 'album');
-					self.importTracks(albumInfo.deezer_id, albumInfo)
+					self.importTracks(albumInfo.deezer_id, albumInfo);
 					self.importArtists(data.artist);
 				}
-		};
+		}
 	});
 };
 
