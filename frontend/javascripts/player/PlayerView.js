@@ -37,7 +37,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			this.model.nextTrack();
 		},
 		playbackState : function(){
-			this.model.playbackState.call(this.model);
+			this.model.playbackState();
 		},
 
 		previousTrack : function(){	

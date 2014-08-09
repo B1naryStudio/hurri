@@ -1,4 +1,4 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage'], function(Backbone, enums, context, LocalStorage){
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler'], function(Backbone, enums, context, LocalStorage, AudioHandler){
 var PlayerModel = Backbone.Model.extend({
 	defaults : {
 		playback : false,
@@ -9,7 +9,7 @@ var PlayerModel = Backbone.Model.extend({
 		currentArtistName: 'Artist',
 		volumeLevel : 50,
 		shuffle : false,
-		repeatTrack : 'none',
+		repeatTrack : 1,
 		comments : 0,
 		position : 0,
 		duration : 280,
@@ -17,9 +17,8 @@ var PlayerModel = Backbone.Model.extend({
 	},
 	localStorage: new Backbone.LocalStorage("PlayerModel"),
 	initialize: function(){
-		var url = context.currentSongModel.get('url'); 
-		this.track = new Audio(url);
 		this.bindListeners();
+		AudioHandler.initialize(context.currentSongModel.get('url'));
 	},
 	bindListeners: function(){
 		this.on('change:shuffle change:repeatTrack change:currentTrackName change:currentArtistName change:volumeLevel', function(){
@@ -27,30 +26,23 @@ var PlayerModel = Backbone.Model.extend({
 		}); 
 	},
 	playbackState: function(){
-		var state = this.get('playback');
-		var timer;
-		if (!state){
-			this.track.play();
-			timer = setInterval(this.addSecond.bind(this), 1000);
-		} else if (state){ 
-			this.track.pause();
-			clearInterval(timer);
-		}
-		this.set({playback: !state});
-
-	},
-	addSecond : function(){
-		var newPosition = this.get('position');
-		this.set({position: ++newPosition});
+		var state = AudioHandler.playbackState(this.get('playback'),this.get('position'));
+		this.set({playback: state.state});
+		this.set({position: state.position});
 	},
 	nextTrack : function(){
-		var position = this.get('currentTrack');
-		this.set({currentTrack: ++position});
+		var next = AudioHandler.nextTrack(this.get('currentTrack'));
+		this.set({currentTrack: next});
+		if (this.get('currentTrack') > 1){
+			this.set({previousButtonState: false});
+			console.log(this.get('previousButtonState'));
+		}
+
 	},
 
 	previousTrack : function(){
-		var position = this.get('currentTrack');
-		this.set({currentTrack: --position});
+		var previous = AudioHandler.previousTrack(this.get('currentTrack'));
+		this.set({currentTrack: previous});
 	},
 
 	shuffleMode : function(){
@@ -82,13 +74,13 @@ var PlayerModel = Backbone.Model.extend({
 
 	volumeLevelSetup : function(input){
 		this.set({volumeLevel: input});
-		this.track.volume = this.get('volumeLevel')/100;
+		AudioHandler.volumeLevelSetup(input);
 
 	},
 
 	playbackPosition : function(input){
 		this.set({position: input});
-		this.track.currentTime = this.get('position');
+		AudioHandler.playbackPosition(input);
 	}
 });
 return PlayerModel;

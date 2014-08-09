@@ -1,9 +1,9 @@
 define ([], function(){
 	var enums = {
 		repeatModes:{
-			none: 'none',
-			album: 'album',
-			song: 'song'
+			none: 1,
+			album: 2,
+			song: 3
 		}
 	};
 
