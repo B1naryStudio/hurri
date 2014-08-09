@@ -8,7 +8,6 @@ if (config.db.mocked_db){
 	mongoose = new Mongoose();
 	mockgoose(mongoose);
 	mongoose.mockgoose = mockgoose;
-	// mongoose.connect('mongodb://localhost/TestingDB');
 } 
 
 module.exports = mongoose;
