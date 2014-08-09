@@ -126,16 +126,16 @@ DeezerWrapper.prototype.importTracks = function(album, artId, albId, callback){
 
 DeezerWrapper.prototype.saveTracks = function(album, artId, albId, callback){
 	var self = this;
-	var arr = []
+	var arr = [];
 	this.importTracks(album, artId, albId, function(data){
 		for (var i = 0; i < data.data.length; i++){
-			var objid = new mongoose.Types.ObjectId; arr.push(objid)
+			var objid = mongoose.Types.ObjectId(); arr.push(objid);
 			var trackInfo = self.trackStruct(data.data[i], album, artId, albId, objid);
 			var dd = self.addItem(trackInfo, 'track');
 		}
-		callback(arr)
+		callback(arr);
 	});
-}
+};
 
 DeezerWrapper.prototype.getAlbumInfo = function(id, callback){
 	this.getItem('/album/' + id, function(data){
@@ -174,9 +174,8 @@ DeezerWrapper.prototype.importAlbum = function(id){
 					self.fillNewInfo(exist, albumObjectId, _.pluck(data.genres.data, 'name'));
 					artistObjectId = exist._id;
 				}
-			})
+			});
 			self.saveTracks(data, artistObjectId, albumObjectId, function(result){
-					console.log("Result after import: " + result)
 					var albumInfo = self.albumStruct(albumObjectId, data, artistObjectId, result);
 					self.addItem(albumInfo, 'album');
 			});
