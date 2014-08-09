@@ -1,3 +1,4 @@
+var mongoose = require('../../backend/db/mongoose');
 var app = require('../../backend/server');
 var request = require('supertest');
 var codes = [200, 301, 400];
@@ -66,8 +67,8 @@ describe('album api should', function(){
 	it('have post /api/album route', function(done){
 		request(app)
 		.post('/api/album')
-		.expect(201)
 		.end(function(err, res){
+   			codes.indexOf(res.status).should.not.be.equal(-1);
    			done(err);
   		})
 	});

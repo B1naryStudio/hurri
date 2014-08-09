@@ -109,17 +109,7 @@ DeezerWrapper.prototype.isExisting = function(id, callback){
 	});
 };
 
-DeezerWrapper.prototype.getGenres = function(arr, callback){ 
-	var userGenres = [];
-	request('http://api.deezer.com/genre', function(error, response, body){
-		for (var i = 0; i < arr.length; i++) {
-			userGenres.push(genres[arr[i]]);
-		}
-		callback(userGenres);
-	});
-};
-
-DeezerWrapper.prototype.importTracks = function(album, artId, albId, callback){
+DeezerWrapper.prototype.importTracks = function(album, callback){
 	var items = this.getItem('/album/' + album.id + '/tracks', function(data){
 		callback(data);
 	});
@@ -128,7 +118,7 @@ DeezerWrapper.prototype.importTracks = function(album, artId, albId, callback){
 DeezerWrapper.prototype.saveTracks = function(album, artId, albId, callback){
 	var self = this;
 	var arr = [];
-	this.importTracks(album, artId, albId, function(data){
+	this.importTracks(album, function(data){
 		for (var i = 0; i < data.data.length; i++){
 			var objid = mongoose.Types.ObjectId(); arr.push(objid);
 			var trackInfo = self.trackStruct(data.data[i], album, artId, albId, objid);

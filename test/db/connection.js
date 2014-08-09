@@ -39,15 +39,6 @@ describe('Connection Tests', function () {
             });
         });
 
-        //how is it supposed to know that error occured
-        // it('Dispatch Error event on connect', function (done) {
-        //     var connection = mongoose.connect('mongodb://localhost:27017/hurri').connection;
-        //     connection.on('error', function (err) {
-        //         err.should.be.ok;
-        //         done();
-        //     });
-        // });
-
 	});
 
 
