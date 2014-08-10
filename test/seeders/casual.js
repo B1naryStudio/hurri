@@ -12,6 +12,7 @@ var ArtistId = mongoose.Types.ObjectId();
 var UserDialog1 = mongoose.Types.ObjectId();
 var UserDialog2 = mongoose.Types.ObjectId();
 var AlbumName = casual.title;
+
 casual.define('userinfos', function() {
 	return {
 		user_auth_id: UserId,

@@ -57,6 +57,17 @@ describe('Album API should', function () {
 			done();
 		});
 	});
+});
 
+describe('Populate', function () {
+	
+		it('should find the childs within the parent', function (done) {
+			Album.findOne({_id : id}, function (err) {
+				(err === null).should.be.ok;
+			}).populate('tracks').exec(function (err, result) {
+					result.should.have.property('tracks').with.lengthOf(1);
+					done();
+				});
+		});
 
 });
