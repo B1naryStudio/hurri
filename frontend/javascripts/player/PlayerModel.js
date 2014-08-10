@@ -13,7 +13,8 @@ var PlayerModel = Backbone.Model.extend({
 		comments : 0,
 		position : 0,
 		duration : 280,
-		liked : false
+		liked : false,
+		timerId : 0,
 	},
 	localStorage: new Backbone.LocalStorage("PlayerModel"),
 	initialize: function(){
@@ -24,16 +25,23 @@ var PlayerModel = Backbone.Model.extend({
 
 	playbackState: function(){
 		var state = this.get('playback');
-		var timer;
 		if (!state){
 			AudioHandler.playTrack();
-			timer = setInterval(this.addSecond.bind(this), 1000);
-		} else if (state){ 
+			this.startTimer();
+		} else if (state){
 			AudioHandler.pauseTrack();
-			clearInterval(timer);
+			this.stopTimer();
 		}
 		this.set({playback: !state});
 
+	},
+
+	startTimer : function(){
+		this.timerId = setInterval(this.addSecond.bind(this), 1000);
+	},
+
+	stopTimer: function(){
+		clearInterval(this.timerId); 
 	},
 
 	addSecond : function(){
@@ -54,7 +62,10 @@ var PlayerModel = Backbone.Model.extend({
 	},
 	nextTrack : function(){
 		var next = AudioHandler.nextTrack(this.get('currentTrack'));
-		PlaylistModel.playTrack(next);
+		if (this.get('repeatTrack') === enums.repeatModes.song){
+			next--;
+		}
+		PlaylistModel.playTrack(next);	
 		this.set({currentTrack: next});
 		this.set({duration: context.currentSongModel.get('duration')});
 		if (this.get('currentTrack') > 0){
@@ -70,7 +81,7 @@ var PlayerModel = Backbone.Model.extend({
 		this.set({currentTrack: previous});
 		this.set({duration: context.currentSongModel.get('duration')});
 		if (this.get('currentTrack') <= 4){
-			this.set({nextButtonState: false});
+			this.set({nextTrackButtonState: false});
 		}
 	},
 
