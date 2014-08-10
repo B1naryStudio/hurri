@@ -11,6 +11,7 @@ describe('Album API should', function () {
 	it('call method getByTitle and return Object', function(done){
 		AlbumRepository.getByTitle(name, function(err, data){
 			data.should.be.object;
+			data.should.have.property('genres');
 			done();
 		});
 	});
@@ -27,6 +28,7 @@ describe('Album API should', function () {
 	it('call method getSinger and return singer object', function(done){
 		AlbumRepository.getSinger(id, function(err, data){
 			data.should.be.object;
+			data.should.have.property('singer');
 			done();
 		});
 	});
@@ -60,7 +62,7 @@ describe('Album API should', function () {
 });
 
 describe('Populate', function () {
-	
+
 		it('should find the childs within the parent', function (done) {
 			Album.findOne({_id : id}, function (err) {
 				(err === null).should.be.ok;
