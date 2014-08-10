@@ -2,7 +2,7 @@ function dbConnectionHandler(){
 var mongoose = require('./mongoose');
 var config = require('../config/');
 //console.log(config.db.opts.user);
-// mongoose.connect(config.db.uri, config.db.opts);
+mongoose.connect(config.db.uri, config.db.opts);
 
 //mongoose.set('debug', true);
 
