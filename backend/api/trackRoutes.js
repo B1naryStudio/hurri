@@ -9,6 +9,13 @@ module.exports = function(app){
 		});
 	});
 
+	app.get('/api/track/:name', function(req, res, next){
+		albumRepository.getByTitle(req.params.name, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.get('/api/track/:id/title', function(req, res, next){
 		trackRepository.getTitle(req.params.id, function(data){
 			var status = _.isEmpty(data) ? 400 : 200;

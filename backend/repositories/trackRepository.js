@@ -9,9 +9,16 @@ function TrackRepository(){
 
 TrackRepository.prototype = new Repository();
 
+
+TrackRepository.prototype.getByTitle = function(title, callback) {
+	var model = this.createModel();
+	var query = model.findOne({title:title});
+	query.exec(callback);
+};
+
 TrackRepository.prototype.getTitle = function(id, callback) {
 	var model = this.createModel();
-	var query = model.find({});
+	var query = model.find({_id:id}, 'title');
 	query.exec(callback);
 };
 
