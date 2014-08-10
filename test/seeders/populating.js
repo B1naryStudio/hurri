@@ -2,7 +2,7 @@ var casual = require('./casual');
 var casualOrig = require('casual');
 var mongoose = require('../../backend/db/mongoose');
 
-mongoose.mockgoose.reset();
+//mongoose.mockgoose.reset();
 
 var Album = require('../../backend/schemas/album.js');
 var Artist = require('../../backend/schemas/artist.js');

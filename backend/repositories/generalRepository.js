@@ -1,5 +1,5 @@
 var connection = require('../db/dbconnect.js');
-var mongoose = require('mongoose');
+var mongoose = require('../db/mongoose');
 var ObjectID = mongoose.Types.ObjectId;
 var Repository = function(){
 
