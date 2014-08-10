@@ -7,7 +7,7 @@ function ArtistRepository(){
 	this.model = Artist;
 }
 
-TrackRepository.prototype.getByName = function(name, callback) {
+ArtistRepository.prototype.getByName = function(name, callback) {
 	var model = this.createModel();
 	var query = model.findOne({name: name});
 	query.exec(callback);

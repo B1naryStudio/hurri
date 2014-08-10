@@ -1,6 +1,6 @@
 var app = require('../../backend/server');
 var request = require('supertest');
-var codes = [200, 301, 400];
+var codes = [200, 201, 400];
 
 describe('artist api should', function(){
 	it('have get /api/artist/:id route', function(done){

@@ -8,8 +8,8 @@ var name = param.albumname;
 
 describe('Album API should', function () {
 
-	it('call method getByName and return Object', function(done){
-		AlbumRepository.getByName(name, function(err, data){
+	it('call method getByTitle and return Object', function(done){
+		AlbumRepository.getByTitle(name, function(err, data){
 			data.should.be.object;
 			done();
 		});

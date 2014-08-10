@@ -10,7 +10,7 @@ module.exports = function(app){
 	});
 
 	app.get('/api/track/:name', function(req, res, next){
-		albumRepository.getByTitle(req.params.name, function(err, data){
+		trackRepository.getByTitle(req.params.name, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
