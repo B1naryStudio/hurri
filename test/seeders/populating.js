@@ -2,7 +2,7 @@ var casual = require('./casual');
 var casualOrig = require('casual');
 var mongoose = require('../../backend/db/mongoose');
 
-//mongoose.mockgoose.reset();
+mongoose.mockgoose.reset();
 
 var Album = require('../../backend/schemas/album.js');
 var Artist = require('../../backend/schemas/artist.js');
@@ -30,7 +30,6 @@ var AlbumName = casualOrig.title;
 var ArtistName = casualOrig.full_name;
 var TrackName = casualOrig.title;
 
-//var connection = mongoose.connect('mongodb://localhost:27013/hurri');
 var id = mongoose.Types.ObjectId();
 
 albums = new Album(casual.albums); 
