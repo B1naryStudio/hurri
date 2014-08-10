@@ -10,7 +10,7 @@ define(['backbone'], function(Backbone){
 			albumTitle : 'AlbumName',
 			albumCover: 'cover.jpg',
 			singerName: 'Singer',
-			url: '../resources/1.mp3',
+			url: 'bad URL',
 			comments : ['']
 		}
 	});

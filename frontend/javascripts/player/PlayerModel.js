@@ -1,4 +1,4 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler'], function(Backbone, enums, context, LocalStorage, AudioHandler){
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel'], function(Backbone, enums, context, LocalStorage, AudioHandler, PlaylistModel){
 var PlayerModel = Backbone.Model.extend({
 	defaults : {
 		playback : false,
@@ -18,31 +18,60 @@ var PlayerModel = Backbone.Model.extend({
 	localStorage: new Backbone.LocalStorage("PlayerModel"),
 	initialize: function(){
 		this.bindListeners();
+		PlaylistModel.playTrack(this.get('currentTrack'));
 		AudioHandler.initialize(context.currentSongModel.get('url'));
 	},
+
+	playbackState: function(){
+		var state = this.get('playback');
+		var timer;
+		if (!state){
+			AudioHandler.playTrack();
+			timer = setInterval(this.addSecond.bind(this), 1000);
+		} else if (state){ 
+			AudioHandler.pauseTrack();
+			clearInterval(timer);
+		}
+		this.set({playback: !state});
+
+	},
+
+	addSecond : function(){
+		var newPosition = this.get('position');
+		this.set({position: ++newPosition});
+	},
+
 	bindListeners: function(){
 		this.on('change:shuffle change:repeatTrack change:currentTrackName change:currentArtistName change:volumeLevel', function(){
 			this.save();
-		}); 
-	},
-	playbackState: function(){
-		var state = AudioHandler.playbackState(this.get('playback'),this.get('position'));
-		this.set({playback: state.state});
-		this.set({position: state.position});
+		});
+		this.on('change:currentTrack', function(){
+			AudioHandler.stopTrack();
+			this.set({position: 0});
+			AudioHandler.initialize(context.currentSongModel.get('url'));
+			AudioHandler.playTrack();
+		});
 	},
 	nextTrack : function(){
 		var next = AudioHandler.nextTrack(this.get('currentTrack'));
+		PlaylistModel.playTrack(next);
 		this.set({currentTrack: next});
-		if (this.get('currentTrack') > 1){
+		this.set({duration: context.currentSongModel.get('duration')});
+		if (this.get('currentTrack') > 0){
 			this.set({previousButtonState: false});
-			console.log(this.get('previousButtonState'));
+		} else if (this.get('currentTrack') > 4){
+			this.set({nextButtonState: true});
 		}
-
 	},
 
 	previousTrack : function(){
 		var previous = AudioHandler.previousTrack(this.get('currentTrack'));
+		PlaylistModel.playTrack(previous);
 		this.set({currentTrack: previous});
+		this.set({duration: context.currentSongModel.get('duration')});
+		if (this.get('currentTrack') <= 4){
+			this.set({nextButtonState: false});
+		}
 	},
 
 	shuffleMode : function(){

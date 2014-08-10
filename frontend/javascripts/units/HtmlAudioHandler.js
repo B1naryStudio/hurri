@@ -1,27 +1,14 @@
-define([], function(){
+define(['../player/PlayerModel'], function(PlayerModel){
 	var audioHandler = {
 		initialize: function(url){
 			this.track = new Audio(url);
 		},
-		playbackState: function(state, position){
-			var timer;
-			var obj = {
-				state: state,
-				position: position
-			};
-			if (!obj.state){
-				this.track.play();
-				timer = setInterval(function(){
-					obj.position++;
-				}, 1000);
-				obj.state = !obj.state;
-			} else if (obj.state){ 
-				this.track.pause();
-				clearInterval(timer);
-				obj.state = !obj.state;
-			}
-			return obj;
+		playTrack: function(){
+			this.track.play(); 
+		},
 
+		pauseTrack: function(){
+			this.track.pause();
 		},
 
 		nextTrack : function(position){
@@ -38,6 +25,11 @@ define([], function(){
 
 		playbackPosition : function(input){
 			this.track.currentTime = input;
+		},
+
+		stopTrack: function(){
+			this.track.pause();
+			this.track = null;
 		}
 
 	};

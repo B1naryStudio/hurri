@@ -3,7 +3,10 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		template: '#player-template',
 		model: PlayerModel,
 		modelEvents: {
-			'change:position': 'changeValue' 
+			'change:position': 'changeValue',
+			'change:previousButtonState': 'render',
+			'change:nextButtonState': 'render',
+			'change:duration': 'render' 
 		},
 		events : {
 			"click @ui.nextButton"		: "nextTrack",
