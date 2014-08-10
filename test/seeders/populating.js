@@ -27,6 +27,8 @@ var ArtistId = mongoose.Types.ObjectId();
 var UserDialog1 = mongoose.Types.ObjectId();
 var UserDialog2 = mongoose.Types.ObjectId();
 var AlbumName = casualOrig.title;
+var ArtistName = casualOrig.full_name;
+var TrackName = casualOrig.title;
 
 var connection = mongoose.connect('mongodb://localhost:27013/hurri');
 var id = mongoose.Types.ObjectId();
@@ -40,6 +42,7 @@ albums.save();
 
 artists = new Artist(casual.artists); 
 artists._id = ArtistId;
+artists.name = ArtistName;
 artists.albums_id.push(AlbumId);
 artists.save();
 	
@@ -56,6 +59,7 @@ radios.save();
 
 tracks = new Track(casual.tracks); 
 tracks._id = TrackId;
+tracks.title = TrackName;
 tracks.album = AlbumId;
 tracks.singer = ArtistId;
 tracks.save();
@@ -76,7 +80,9 @@ var ids =  {
 		radioid: RadioId,
 		uid1: UserDialog1,
 		uid2: UserDialog2,
-		albumname: AlbumName 
+		albumname: AlbumName,
+		trackname: TrackName,
+		artistname:  ArtistName
 }
 
 for (var i = 0; i <= 9; i++) {
