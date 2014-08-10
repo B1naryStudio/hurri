@@ -30,7 +30,7 @@ var AlbumName = casualOrig.title;
 var ArtistName = casualOrig.full_name;
 var TrackName = casualOrig.title;
 
-var connection = mongoose.connect('mongodb://localhost:27013/hurri');
+//var connection = mongoose.connect('mongodb://localhost:27013/hurri');
 var id = mongoose.Types.ObjectId();
 
 albums = new Album(casual.albums); 
