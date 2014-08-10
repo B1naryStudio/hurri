@@ -7,6 +7,12 @@ function ArtistRepository(){
 	this.model = Artist;
 }
 
+ArtistRepository.prototype.getByName = function(name, callback) {
+	var model = this.createModel();
+	var query = model.findOne({name: name});
+	query.exec(callback);
+};
+
 ArtistRepository.prototype = new Repository();
 
 module.exports = new ArtistRepository();

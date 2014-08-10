@@ -1,6 +1,6 @@
 var app = require('../../backend/server');
 var request = require('supertest');
-var codes = [200, 301, 400];
+var codes = [200, 201, 400];
 
 describe('artist api should', function(){
 	it('have get /api/artist/:id route', function(done){
@@ -26,10 +26,10 @@ describe('artist api should', function(){
 	it('have post /api/artist route', function(done){
 		request(app)
 		.post('/api/artist')
-		.expect(201)
 		.end(function(err, res){
-			done(err);
-		})
+   			codes.indexOf(res.status).should.not.be.equal(-1);
+   			done(err);
+  		})
 	});
 
 	it('have put /api/artist/:id route', function(done){

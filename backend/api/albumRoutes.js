@@ -2,6 +2,13 @@ var albumRepository = require('../repositories/albumRepository');
 var _ = require('underscore');
 
 module.exports = function(app){
+	app.get('/api/album/:name', function(req, res, next){
+		albumRepository.getByTitle(req.params.name, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.get('/api/album/:id', function(req, res, next){
 		albumRepository.getById(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;

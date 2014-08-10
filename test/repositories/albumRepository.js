@@ -1,19 +1,17 @@
-var Mongoose = require('mongoose').Mongoose;
-var mockgoose = require('mockgoose');
-var mongoose;
-mongoose = new Mongoose();
-mockgoose(mongoose);
+var mongoose = require('../../backend/db/mongoose');
+
 var Album = require('../../backend/schemas/album.js')
 var AlbumRepository = require('../../backend/repositories/albumRepository.js');
-var param = require('./populating.js');
+var param = require('../seeders/populating.js');
 var id = param.albumid;
 var name = param.albumname;
 
 describe('Album API should', function () {
 
-	it('call method getByName and return Object', function(done){
-		AlbumRepository.getByName(name, function(err, data){
+	it('call method getByTitle and return Object', function(done){
+		AlbumRepository.getByTitle(name, function(err, data){
 			data.should.be.object;
+			data.should.have.property('genres');
 			done();
 		});
 	});
@@ -30,6 +28,7 @@ describe('Album API should', function () {
 	it('call method getSinger and return singer object', function(done){
 		AlbumRepository.getSinger(id, function(err, data){
 			data.should.be.object;
+			data.should.have.property('singer');
 			done();
 		});
 	});
@@ -60,6 +59,17 @@ describe('Album API should', function () {
 			done();
 		});
 	});
+});
 
+describe('Populate', function () {
+
+		it('should find the childs within the parent', function (done) {
+			Album.findOne({_id : id}, function (err) {
+				(err === null).should.be.ok;
+			}).populate('tracks').exec(function (err, result) {
+					result.should.have.property('tracks').with.lengthOf(1);
+					done();
+				});
+		});
 
 });

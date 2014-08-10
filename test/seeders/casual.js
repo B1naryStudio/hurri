@@ -1,19 +1,12 @@
-var mongoose = require('mongoose');
+var mongoose = require('../../backend/db/mongoose');
+
 var ObjectID = mongoose.Types.ObjectId();
 var casual = require('casual');
 var ObjId = ObjectID;
 
-var UserId = mongoose.Types.ObjectId();
-var TrackId = mongoose.Types.ObjectId();
-var AlbumId = mongoose.Types.ObjectId();
-var RadioId = mongoose.Types.ObjectId();
-var ArtistId = mongoose.Types.ObjectId();
-var UserDialog1 = mongoose.Types.ObjectId();
-var UserDialog2 = mongoose.Types.ObjectId();
-var AlbumName = casual.title;
 casual.define('userinfos', function() {
 	return {
-		user_auth_id: UserId,
+		user_auth_id: mongoose.Types.ObjectId(),
 		playlists: [{
 			name : casual.company_name,
 			tracks : [
@@ -37,7 +30,7 @@ casual.define('userinfos', function() {
 
 casual.define('userauths', function() {
 	return {
-		_id: UserId,
+		_id: mongoose.Types.ObjectId(),
 		name : casual.name,
 		avatarUrl : '/image/' + casual.name + '.jpg',
 		country : casual.country,
@@ -60,7 +53,7 @@ casual.define('userauths', function() {
 
 casual.define('tracks', function() {
 	return {
-		_id : TrackId,
+		_id : mongoose.Types.ObjectId(),
 		title : casual.title,
 		duration : casual.integer(1, 500),
 		position : casual.integer(1, 20),
@@ -80,7 +73,7 @@ casual.define('tracks', function() {
 
 casual.define('radios', function() {
 	return {
-		user_auth_id : UserId,
+		user_auth_id : mongoose.Types.ObjectId(),
 		listeners : [
 			mongoose.Types.ObjectId(),
 			mongoose.Types.ObjectId(),
@@ -97,10 +90,10 @@ casual.define('radios', function() {
 
 casual.define('dialogs', function() {
 	return {
-		user_auth_id1 : UserDialog1,
-		user_auth_id2 : UserDialog2,
+		user_auth_id1 : mongoose.Types.ObjectId(),
+		user_auth_id2 : mongoose.Types.ObjectId(),
 		dialogue : [{
-			user_auth_id : UserDialog1, 
+			user_auth_id : mongoose.Types.ObjectId(), 
 	    	date : casual.date('YYYY-MM-DD'), 
 	    	message : casual.text
 	    }]
@@ -109,11 +102,11 @@ casual.define('dialogs', function() {
 
 casual.define('artists', function() {
 	return {
-		_id : ArtistId,
+		_id : mongoose.Types.ObjectId(),
 	    name : casual.full_name,
 	    picture : casual.url,
 	    albums_id : [
-	    	AlbumId,
+	    	mongoose.Types.ObjectId(),
 	    	mongoose.Types.ObjectId()
 	    ],
 	    genres : casual.array_of_words(2),
@@ -123,35 +116,22 @@ casual.define('artists', function() {
 
 casual.define('albums', function() {
 	return {
-		_id: AlbumId,
-	    title : AlbumName,
+		_id: mongoose.Types.ObjectId(),
+	    title : casual.title,
 	    cover : casual.url,
 	    duration : casual.integer(1, 500),
 	    release_date : casual.date('YYYY-MM-DD'),
-	    singer : ArtistId,
+	    singer : mongoose.Types.ObjectId(),
 	    genres : casual.array_of_words(2),
 	    comment : [{
-			user_auth_id : UserId,
+			user_auth_id : mongoose.Types.ObjectId(),
 			comment : casual.description, 
 			date : casual.date('YYYY-MM-DD')
 		}],
 	    tracks : [
-	    	TrackId,
+	    	mongoose.Types.ObjectId(),
 	    	mongoose.Types.ObjectId()
 	    ]
-	};
-});
-
-casual.define('ids', function() {
-	return {
-		userid: UserId,
-		trackid: TrackId,
-		albumid: AlbumId,
-		artistid: ArtistId,
-		radioid: RadioId,
-		uid1: UserDialog1,
-		uid2: UserDialog2,
-		albumname: AlbumName
 	};
 });
 

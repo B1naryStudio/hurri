@@ -10,7 +10,7 @@ function AlbumRepository(){
 
 AlbumRepository.prototype = new Repository();
 
-Repository.prototype.getByName = function(name, callback) {
+Repository.prototype.getByTitle = function(name, callback) {
 	var model = this.createModel();
 	var query = model.findOne({title: name});
 	query.exec(callback);

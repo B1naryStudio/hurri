@@ -1,12 +1,14 @@
-describe('Connection Tests', function () {
-	var Mongoose = require('mongoose').Mongoose;
-	var mockgoose = require('mockgoose');
-	var mongoose;
+var mockgoose = require('mockgoose');
+var mongoose = require('mongoose');
 
-	beforeEach(function (done) {
+describe('Connection Tests', function () {
+
+    var Mongoose;
+
+    beforeEach(function(){
+        Mongoose = mongoose.Mongoose;
         mongoose = new Mongoose();
         mockgoose(mongoose);
-        done();
     });
 
 	describe('Connect', function () {
@@ -33,16 +35,6 @@ describe('Connection Tests', function () {
 		it('Dispatch connecting event on connect', function (done) {
             var connection = mongoose.connect('mongodb://localhost:27017/hurri').connection;
             connection.on('connecting', function () {
-                done();
-            });
-        });
-
-        it('Dispatch Error event on connect', function (done) {
-            mongoose = new Mongoose();
-            mockgoose(mongoose, true);
-            var connection = mongoose.connect('mongodb://localhost:27017/hurri').connection;
-            connection.on('error', function (err) {
-                err.should.be.ok;
                 done();
             });
         });

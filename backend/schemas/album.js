@@ -1,8 +1,10 @@
-var mongoose = require('mongoose');
+var mongoose = require('../db/mongoose');
 var Schema = mongoose.Schema;
 var commentSchema = require('./comment.js');
 
 var albumSchema = new Schema({
+    _id: Schema.Types.ObjectId,
+    deezer_id : Number,
     title : String,
     cover : {
         type: String, 
@@ -10,18 +12,15 @@ var albumSchema = new Schema({
     },
     duration : Number,
     release_date : Date,
-    singer : {
-        type : Schema.Types.ObjectId,
-        ref : 'Artist'
+    singer : { 
+        type: Schema.Types.ObjectId, 
+        ref: 'Artist'
     },
-    genres : [{
-        type: String, 
-        default: 'unknown'
-    }],
+    genres : [String],
     comment : [commentSchema],
-    tracks : [{
-        type : Schema.Types.ObjectId,
-        ref : 'Track'
+    tracks : [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'Track'
     }]
 });
 
