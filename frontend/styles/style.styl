@@ -57,14 +57,27 @@ body
 	list-style-type none;
 
 #sidebar
-	background yellow
+	background lightgrey
 	width 25%
 	float left
 
 #sidebar li
 	height 30px
-	border 1px solid darkgrey
 	list-style-type none;
+	display: inline-block
+	width:33%
+	background green
+
+	&#friendsButton
+		background: url('../images/friends.png') no-repeat;
+		background-size: 40px
+	&#musicButton
+		background: url('../images/music.png') no-repeat;
+		background-size: 32px
+	&#infoButton
+		background: url('../images/info.png') no-repeat;
+		background-size: 32px
+
 
 #footer
 	height 30px
@@ -81,6 +94,7 @@ body
 	float right
 	display inline
 	width 25%
+	background lightgreen
 
 .footerButton
 	padding-left 2%

@@ -1,17 +1,18 @@
-define(['marionette', './SidebarNavView', '../app/context'], function(Marionette, SidebarNavView, context){
+define(['marionette', 
+	'../notification/NotificationsCollectionView', 
+	'../notification/NotificationModel'], function(Marionette, NotificationsView, notificationModel){
 	
 	var SidebarController = function(){		
 	
-		var MainRegion = Marionette.Region.extend({
-			template: '#sidebar-template',
-			el: '#sidebar',
+		var SidebarRegion = Marionette.Region.extend({
+			el: '#sidebar'
 		});
 
-		mainRegion = new MainRegion();
-		sidebarNavView = new SidebarNavView({
-			model: context.currentSongModel
+		var sidebarRegion = new SidebarRegion();
+		var notificationsView = new NotificationsView({
+			model: notificationModel
 		});
-		mainRegion.show(sidebarNavView);
+		sidebarRegion.show(notificationsView);
 		
 	};
 	return SidebarController;
