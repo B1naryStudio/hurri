@@ -1,11 +1,12 @@
 define(['marionette', 
 	'../notification/NotificationsCollectionView', 
-	'../notification/NotificationsCollection'], function(Marionette, NotificationsCollectionView, NotificationsCollection){
+	'../notification/NotificationsCollection',
+	'./SidebarNavView'], function(Marionette, NotificationsCollectionView, NotificationsCollection, SidebarNavView){
 	
 	var SidebarController = function(){		
 	
 		var SidebarRegion = Marionette.Region.extend({
-			el: '#sidebar'
+			el: '#sidebar-region'
 		});
 
 		var sidebarRegion = new SidebarRegion();
@@ -16,7 +17,7 @@ define(['marionette',
 		notificationsCollection.add([
 			{name: 'All goes ok', type: 'info', additionalInfo: 'if you see this notification, then all goes ok'},
 			{name: 'New song', type: 'info', additionalInfo: 'your friend just shared one more playlist'},
-			{name: 'You are in danger', type: 'warning', additionalInfo: 'all is ok, sorry. Its just warning'}	
+			{name: 'You are in danger', type: 'request', additionalInfo: 'all is ok, sorry. Its just warning. Someone want to add you'}	
 		]);	
 
 		var notificationsView = new NotificationsCollectionView({
@@ -24,7 +25,8 @@ define(['marionette',
 		});
 
 		sidebarRegion.show(notificationsView);
-		
+		var sidebarView = new SidebarNavView();
+		sidebarView.render();
 	};
 	return SidebarController;
 });
