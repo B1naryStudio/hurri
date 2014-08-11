@@ -9,7 +9,11 @@ fb_bg = #2f4885
 basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
 
 /*Header*/
-header_background_color = #f66c00
+header_height = 50px
+header_background_color = #27709b
+
+bar_height = 36px
+searchbar_width = 300px
 
 body
 	font-family basic_font
@@ -22,47 +26,94 @@ body
 
 #header
 	width 100%
-	height 50px
+	height header_height
 	background header_background_color
 	padding 5px
 	box-sizing border-box
 
-#header img
+#hurri-logo
 	height 40px
 	cursor pointer
 
 #userbar
 	width auto
-	height 30px
+	height bar_height
 	float right
-	background #f0fff0
 	cursor pointer
-	margin 5px
-	border-style solid
-	border-width 1px
+	margin 2px
+	border-style hidden
 	border-radius 3px
-	border-color #d3d3d3
 	box-sizing border-box
 
-	&:hover
-		background #d3d3d3
-
-	.avatar-icon
+	#avatar-icon
 		width auto
 		height 100%
+		max-width 50px
 		border-style hidden
-		border-radius 3px
+		border-top-left-radius 3px
+		border-bottom-left-radius 3px
 		box-sizing border-box
 
-	.name-field
+	#name-field
 		width auto
 		height 100%
 		float right
-		line-height 30px
+		color black
+		background linear-gradient(to bottom,#00bfff, #1e90ff)
+		font-weight 700
+		line-height bar_height
 		list-style-type none
 		padding-left 10px
 		padding-right 10px
+		border-style hidden
+		border-top-right-radius 3px
+		border-bottom-right-radius 3px
 		box-sizing border-box
+
+		&:hover
+			background #00bfff
+
+#searchbar
+	width auto
+	height bar_height
+	float left
+	cursor pointer
+	margin 2px
+	margin-left 50px
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	#search-input
+		width searchbar_width
+		height 100%
+		line-height 25px
+		border-style hidden
+		border-top-left-radius 3px
+		border-bottom-left-radius 3px
+		box-sizing border-box
+
+		&:focus
+			outline none
+
+	#search-button
+		width auto
+		height 100%
+		float right
+		color black
+		background linear-gradient(to bottom,#00bfff, #1e90ff)
+		font-weight 700
+		line-height bar_height
+		list-style-type none
+		padding-left 10px
+		padding-right 10px
+		border-style hidden
+		border-top-right-radius 3px
+		border-bottom-right-radius 3px
+		box-sizing border-box
+
+		&:hover
+			background #00bfff
 
 #player
 	height 60px
