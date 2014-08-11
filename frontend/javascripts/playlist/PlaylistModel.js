@@ -4,7 +4,8 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  		defaults: {
  			genre: ['unknown'],
  			playlistName: 'myPlaylist',
- 			created: Date(1)
+ 			created: Date(1),
+ 			oldCollection: undefined 
 
  		},
  		playTrack: function(position){
@@ -13,10 +14,11 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  		},
 
  		unShuffle: function(){
- 			this.shuffledCollection = this.collection;
+ 			this.collection = this.oldCollection;
  		},
  		shuffle: function(){
- 			this.shuffledCollection = _.shufle(this.collection);
+ 			this.oldCollection = this.collection;
+ 			this.collection = _.shuffle(this.collection);
  		},
 
  		totalDuration: function(){

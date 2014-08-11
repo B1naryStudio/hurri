@@ -20,7 +20,7 @@ var PlayerModel = Backbone.Model.extend({
 	initialize: function(){
 		this.bindListeners();
 		PlaylistModel.playTrack(this.get('currentTrack'));
-		AudioHandler.initialize(context.currentSongModel.get('url'), this.get('volumeLevel'));
+		AudioHandler.initialize(context.currentSongModel.get('url'));
 	},
 
 	playbackState: function(){
@@ -63,7 +63,8 @@ var PlayerModel = Backbone.Model.extend({
 		this.set({duration: context.currentSongModel.get('duration')});
 		this.set({position: 0});
 		AudioHandler.stopTrack();
-		AudioHandler.initialize(context.currentSongModel.get('url'), this.get('volumeLevel'));
+		AudioHandler.initialize(context.currentSongModel.get('url'));
+		this.volumeLevelSetup(this.get('volumeLevel'));
 		if (this.get('playback')){	
 			AudioHandler.playTrack();
 		}
@@ -83,7 +84,7 @@ var PlayerModel = Backbone.Model.extend({
 			console.log('repeat album');
 			var current = this.get('currentTrack');
 			if (current === 4){
-				next = AudioHandler.nextTrack(0);
+				next = AudioHandler.nextTrack(-1);
 			} else {
 				next = AudioHandler.nextTrack(current);
 			}
@@ -115,7 +116,7 @@ var PlayerModel = Backbone.Model.extend({
 			console.log('repeat album');
 			var current = this.get('currentTrack');
 			if (current === 0){
-				previous = AudioHandler.previousTrack(4);
+				previous = AudioHandler.previousTrack(5);
 			} else {
 				previous = AudioHandler.previousTrack(current);
 			}
