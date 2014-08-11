@@ -1,8 +1,9 @@
 var request = require('request');
 
 var _ = require('underscore');
-var mongoose = require('mongoose');
+var mongoose = require('../db/mongoose');
 var Artist = require('../schemas/artist.js');
+
 var albumRepository = require('../repositories/albumRepository.js');
 var artistRepository = require('../repositories/artistRepository.js');
 var trackRepository = require('../repositories/trackRepository.js');
@@ -91,7 +92,9 @@ DeezerWrapper.prototype.getItem = function(url, callback){
 };
 
 DeezerWrapper.prototype.addItem = function(obj, repo, callback){
-	repositories[repo].add(obj, function(){});
+	repositories[repo].add(obj, function(err, data){
+		if(callback) callback(data);
+	});
 };
 
 DeezerWrapper.prototype.getArtistByDeezerId = function(id, callback){
