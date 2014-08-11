@@ -92,7 +92,9 @@ DeezerWrapper.prototype.getItem = function(url, callback){
 };
 
 DeezerWrapper.prototype.addItem = function(obj, repo, callback){
-	repositories[repo].add(obj, function(err, data){callback(data)});
+	repositories[repo].add(obj, function(err, data){
+		if(callback) callback(data);
+	});
 };
 
 DeezerWrapper.prototype.getArtistByDeezerId = function(id, callback){

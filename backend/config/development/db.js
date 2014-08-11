@@ -6,6 +6,6 @@ module.exports = {
     	server: { 
     		auto_reconnect: true
     	},
-    	user: 'nikita'
+    	user: 'root'
     }
 };
