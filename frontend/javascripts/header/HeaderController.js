@@ -1,5 +1,9 @@
-define(['marionette', './UserbarView', '../app/context'], function(Marionette, UserbarView, context){
-	
+define(['marionette', './HeaderView', '../user/UserbarView',
+		'../searchbar/SearchbarModel', '../searchbar/SearchbarView',
+		'../app/context'],
+	function(Marionette, HeaderView, UserbarView, SearchbarModel,
+				SearchbarView, context){
+
 	var HeaderController = function(){	
 
 	 	var HeaderRegion = Marionette.Region.extend({
@@ -7,11 +11,20 @@ define(['marionette', './UserbarView', '../app/context'], function(Marionette, U
 	 	});
 		headerRegion = new HeaderRegion();
 
-		var userbarView = new UserbarView({
+		/*var userbarView = new UserbarView({
 			model: context.currentUserModel
 		});
-		headerRegion.show(userbarView);
-		
+
+		var searchbarModel = new SearchbarModel();
+		var searchbarView = new SearchbarView({
+			model: searchbarModel
+		});*/
+
+		var headerView = new HeaderView({
+			//
+		});
+		headerRegion.show(headerView);
+
 	};
 	return HeaderController;
 });
