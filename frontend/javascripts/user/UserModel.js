@@ -3,10 +3,15 @@ define(['backbone'], function(Backbone){
 	var UserModel = Backbone.Model.extend({
 		
 		defaults: {
-			userinfo: null,
-			liked: null,
-			playlists: null,
-			group: null
+			avatarSource: undefined,
+			name: undefined,
+			age: undefined,
+			email: undefined,
+			country: undefined,
+			//
+			liked: undefined,
+			playlists: undefined,
+			group: undefined
 		},
 		
 		initialize: function(){
@@ -15,14 +20,11 @@ define(['backbone'], function(Backbone){
 			 * Remove this code after user info receiving from server
 			 * mechanism will be implemented.
 			 */
-			var userinfo = {
-				avatarSource: './images/avatar.png',
-				name: 'Vincent Vega',
-				age: 60,
-				email: 'vincent-vega@gmail.com',
-				country: 'United States'
-			};
-			this.set("userinfo", userinfo);
+			this.set('avatarSource', './images/avatar.png');
+			this.set('name', 'Vincent Vega');
+			this.set('age', 60);
+			this.set('email', 'vincent-vega@gmail.com');
+			this.set('country', 'United States');
 		},
 
 	});
