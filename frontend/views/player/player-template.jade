@@ -1,11 +1,11 @@
 script#player-template(type='text/template')
-	div
-		button#previous-button(type='button', {{ if (previousButtonState) print('disabled')}}) previous
-		button#play-button(type='button') play
-		button#next-button(type='button', {{ if (nextButtonState) print('disabled')}}) next
-		input#volume-range(type='range', min='0', max='100', value='{{- volumeLevel}}')
-		input#playback-range(type='range', min='0', max='{{- duration}}', value='{{-position}}')
-		button#shuffle-button(type='button') shuffle
-		button#repeat-button(type='button') repeat
-		button#like-button(type='button') like
-		button#comment-button(type='button') comment
+	button#previous-button.player-button(type='button', {{ if (previousButtonState) print('disabled')}})
+	button#play-button.player-button(type='button')
+	button#next-button.player-button(type='button', {{ if (nextButtonState) print('disabled')}})
+	div#volume
+	input#volume-range(type='range', min='0', max='100', value='{{- volumeLevel}}')
+	input#playback-range(type='range', min='0', max='{{- duration}}', value='{{-position}}')
+	button#shuffle-button.player-button(type='button')
+	button#repeat-button.player-button(type='button')
+	button#like-button.player-button(type='button')
+	button#comment-button.player-button(type='button')

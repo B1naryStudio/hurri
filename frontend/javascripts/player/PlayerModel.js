@@ -8,7 +8,7 @@ var PlayerModel = Backbone.Model.extend({
 		currentTrackName: 'Track',
 		currentArtistName: 'Artist',
 		volumeLevel : 50,
-		shuffle : false,
+		shuffle : true,
 		repeatTrack : 1,
 		comments : 0,
 		position : 0,
@@ -58,15 +58,18 @@ var PlayerModel = Backbone.Model.extend({
 		});
 	},
 	newTrack: function(param){
+		this.stopTimer();
 		PlaylistModel.playTrack(param);
 		this.set({currentTrack: param});
 		this.set({duration: context.currentSongModel.get('duration')});
 		this.set({position: 0});
+		console.log(this.get('position'));
 		AudioHandler.stopTrack();
 		AudioHandler.initialize(context.currentSongModel.get('url'));
 		this.volumeLevelSetup(this.get('volumeLevel'));
 		if (this.get('playback')){	
 			AudioHandler.playTrack();
+			this.startTimer();
 		}
 	},
 	nextTrack : function(){
