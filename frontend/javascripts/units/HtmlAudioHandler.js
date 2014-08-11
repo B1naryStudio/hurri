@@ -1,7 +1,8 @@
 define(['../player/PlayerModel'], function(PlayerModel){
 	var audioHandler = {
-		initialize: function(url){
+		initialize: function(url, volumeLevel){
 			this.track = new Audio(url);
+			this.track.volume = volumeLevel/100;
 		},
 		playTrack: function(){
 			this.track.play(); 

@@ -20,7 +20,7 @@ var PlayerModel = Backbone.Model.extend({
 	initialize: function(){
 		this.bindListeners();
 		PlaylistModel.playTrack(this.get('currentTrack'));
-		AudioHandler.initialize(context.currentSongModel.get('url'));
+		AudioHandler.initialize(context.currentSongModel.get('url'), this.get('volumeLevel'));
 	},
 
 	playbackState: function(){
@@ -46,6 +46,9 @@ var PlayerModel = Backbone.Model.extend({
 
 	addSecond : function(){
 		var newPosition = this.get('position');
+		if (newPosition === this.get('duration')-1){
+			this.nextTrack();
+		}
 		this.set({position: ++newPosition});
 	},
 
@@ -53,40 +56,89 @@ var PlayerModel = Backbone.Model.extend({
 		this.on('change:shuffle change:repeatTrack change:currentTrackName change:currentArtistName change:volumeLevel', function(){
 			this.save();
 		});
-		this.on('change:currentTrack', function(){
-			AudioHandler.stopTrack();
-			this.set({position: 0});
-			AudioHandler.initialize(context.currentSongModel.get('url'));
+	},
+	newTrack: function(param){
+		PlaylistModel.playTrack(param);
+		this.set({currentTrack: param});
+		this.set({duration: context.currentSongModel.get('duration')});
+		this.set({position: 0});
+		AudioHandler.stopTrack();
+		AudioHandler.initialize(context.currentSongModel.get('url'), this.get('volumeLevel'));
+		if (this.get('playback')){	
 			AudioHandler.playTrack();
-		});
+		}
 	},
 	nextTrack : function(){
-		var next = AudioHandler.nextTrack(this.get('currentTrack'));
-		if (this.get('repeatTrack') === enums.repeatModes.song){
-			next--;
+		var next;
+		if (this.get('repeatTrack') === enums.repeatModes.none){
+			console.log('repeat off');
+			next = AudioHandler.nextTrack(this.get('currentTrack'));
 		}
-		PlaylistModel.playTrack(next);	
-		this.set({currentTrack: next});
-		this.set({duration: context.currentSongModel.get('duration')});
+		if(this.get('repeatTrack') === enums.repeatModes.song){
+			console.log('repeat song');
+			next = this.get('currentTrack');
+
+		}
+		if (this.get('repeatTrack') === enums.repeatModes.album){
+			console.log('repeat album');
+			var current = this.get('currentTrack');
+			if (current === 4){
+				next = AudioHandler.nextTrack(0);
+			} else {
+				next = AudioHandler.nextTrack(current);
+			}
+		}
+
+		this.newTrack(next);
+
 		if (this.get('currentTrack') > 0){
 			this.set({previousButtonState: false});
-		} else if (this.get('currentTrack') > 4){
+		}
+		if ((this.get('currentTrack') > 3)&&(this.get('repeatTrack') === enums.repeatModes.none)){
 			this.set({nextButtonState: true});
 		}
 	},
 
 	previousTrack : function(){
-		var previous = AudioHandler.previousTrack(this.get('currentTrack'));
-		PlaylistModel.playTrack(previous);
-		this.set({currentTrack: previous});
-		this.set({duration: context.currentSongModel.get('duration')});
-		if (this.get('currentTrack') <= 4){
-			this.set({nextTrackButtonState: false});
+		var previous;
+
+		if (this.get('repeatTrack') === enums.repeatModes.none){
+			console.log('repeat off');
+			previous = AudioHandler.previousTrack(this.get('currentTrack'));
+		}
+		if(this.get('repeatTrack') === enums.repeatModes.song){
+			console.log('repeat song');
+			previous = this.get('currentTrack');
+
+		}
+		if (this.get('repeatTrack') === enums.repeatModes.album){
+			console.log('repeat album');
+			var current = this.get('currentTrack');
+			if (current === 0){
+				previous = AudioHandler.previousTrack(4);
+			} else {
+				previous = AudioHandler.previousTrack(current);
+			}
+		}
+
+		this.newTrack(previous);
+
+
+		if ((this.get('currentTrack') === 0)&&(this.get('repeatTrack') === enums.repeatModes.none)){
+			this.set({previousButtonState: true});
+		}
+		if (this.get('currentTrack') <= 3){
+			this.set({nextButtonState: false});
 		}
 	},
 
 	shuffleMode : function(){
 		var state = this.get('shuffle');
+		if (state){
+			PlaylistModel.shuffle();	
+		} else {
+			PlaylistModel.unShuffle();
+		}
 		this.set({shuffle: !state});
 	},
 
@@ -114,6 +166,7 @@ var PlayerModel = Backbone.Model.extend({
 
 	volumeLevelSetup : function(input){
 		this.set({volumeLevel: input});
+		console.log(this.get('volumeLevel'));
 		AudioHandler.volumeLevelSetup(input);
 
 	},

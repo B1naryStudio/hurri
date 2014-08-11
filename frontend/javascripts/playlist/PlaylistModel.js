@@ -1,4 +1,4 @@
-define(['backbone', '../app/context', './SongCollection'], function(Backbone,context, SongCollection){
+define(['backbone', '../app/context', './SongCollection', 'underscore'], function(Backbone,context, SongCollection, _){
 	var PlaylistModel = Backbone.Model.extend({
  		collection: SongCollection,
  		defaults: {
@@ -9,18 +9,19 @@ define(['backbone', '../app/context', './SongCollection'], function(Backbone,con
  		},
  		playTrack: function(position){
  			var track = this.collection.at(position);
- 			trackUrl = track.get('url');
- 			trackDuration = track.get('duration');
- 			context.currentSongModel.set({url: trackUrl, duration: trackDuration});
+ 			context.currentSongModel.set(track.attributes);
+ 		},
+
+ 		unShuffle: function(){
+ 			this.shuffledCollection = this.collection;
  		},
  		shuffle: function(){
- 			var shuffleCollection = Backbone.shuffle(collection);
- 			return shuffleCollection;
+ 			this.shuffledCollection = _.shufle(this.collection);
  		},
 
  		totalDuration: function(){
- 				return this.reduce(function(memo, collection) {
- 					return memo + collection.get('duration');
+ 				return _.reduce(function(memo, collection) {
+ 					return memo + this.collection.get('duration');
  				}, 0);
  		},
 	});
