@@ -1,10 +1,15 @@
 define(['marionette', './NotificationView'], function(Marionette, NotificationView){
-	var NotificationsCollectionView = Marionette.CollectionView.extend({
+	var NotificationsCompositeView = Marionette.CompositeView.extend({
 		childView: NotificationView,
-		onRender : function(){
-			console.log(this.el);
+		template: '#notifications-composite-template',
+		events : {
+			"click .deleteAll" : "deleteMessages"
+		},
+
+		deleteMessages : function(){
+			//remove items
 		}
 	});
-	return NotificationsCollectionView;
+	return NotificationsCompositeView;
 });
 

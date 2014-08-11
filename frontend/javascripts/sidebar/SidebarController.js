@@ -1,7 +1,9 @@
 define(['marionette', 
 	'../notification/NotificationsCollectionView', 
 	'../notification/NotificationsCollection',
-	'./SidebarNavView'], function(Marionette, NotificationsCollectionView, NotificationsCollection, SidebarNavView){
+	'./SidebarNavView',
+	'../notification/NotificationsModel'], 
+	function(Marionette, NotificationsCompositeView, NotificationsCollection, SidebarNavView, NotificationsModel){
 	
 	var SidebarController = function(){		
 	
@@ -20,8 +22,9 @@ define(['marionette',
 			{name: 'You are in danger', type: 'request', additionalInfo: 'all is ok, sorry. Its just warning. Someone want to add you'}	
 		]);	
 
-		var notificationsView = new NotificationsCollectionView({
-			collection: notificationsCollection
+		var notificationsView = new NotificationsCompositeView({
+			collection: notificationsCollection,
+			model : NotificationsModel
 		});
 
 		sidebarRegion.show(notificationsView);
