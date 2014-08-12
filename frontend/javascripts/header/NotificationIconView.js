@@ -2,6 +2,11 @@ define(['marionette', '../notification/NotificationsCollectionView'], function(M
 	var NotificationIconView = Marionette.ItemView.extend({
 		el: '#notification',
   		template : '#notification-icon-template',
+  		
+  		modelEvents: {
+  			'change:unread': 'render'
+  		},
+
 		events : {
 			'click #notification-icon'  : 'showNotifications'
 		},
