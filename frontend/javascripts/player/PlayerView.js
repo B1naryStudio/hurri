@@ -15,6 +15,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			"click @ui.shuffleButton"	: "shuffleMode",
 			"click @ui.repeatButton"	: "repeatMode",
 			"click @ui.likeButton"		: "likeState",
+			"click @ui.volume"			: "mute",
 			"click @ui.commentButton"	: "addComment",
 			"change @ui.volumeRange"	: "volumeLevelSetup",
 			"change @ui.playbackRange"	: "playbackPosition",
@@ -29,7 +30,8 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
    			likeButton: "#like-button",
    			commentButton: "#comment-button",
    			volumeRange: "#volume-range",
-   			playbackRange: "#playback-range"
+   			playbackRange: "#playback-range",
+   			volume: '#volume'
   		},
 
   		changeValue: function(model){
@@ -48,6 +50,13 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 
 		previousTrack : function(){	
 			this.model.previousTrack();
+		},
+
+		mute: function(){
+			var mode = this.model.mute();
+			mode = 'player-button' + ' ' + mode;
+			this.ui.volume.removeClass();
+			this.ui.volume.addClass(mode);
 		},
 
 		shuffleMode : function(){

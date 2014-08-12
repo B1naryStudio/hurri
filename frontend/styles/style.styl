@@ -77,9 +77,10 @@ body
 	border-top 1px solid darkgrey
 
 #song-info
-	width 33%
-	margin 5px 0
+	width 70%
+	margin 4px 10px
 	color #529de1
+	float left
 
 #footer-menu
 	list-style-type none;
@@ -87,9 +88,9 @@ body
 	display inline
 	width 25%
 
-.footerButton
-	padding-left 2%
-	width 30%
+.footer-button
+	padding 4px 10px
+	width 25%
 	height 30px
 	color darkgrey
 	float right
@@ -98,7 +99,7 @@ body
 	clear both
 
 button
-	margin auto 5px 
+	margin auto 3px 
 	background #2b2e31
 	border none
 
@@ -106,6 +107,8 @@ button
 	height 25px
 	width 25px
 	background-size cover
+	float left
+	margin-top 23px
 .player-button:focus
 	outline 0
 .player-button:active
@@ -114,11 +117,21 @@ button
 #play-button
 	height 64px
 	width 64px
+	margin-top 5px
+#play-button.pause
 	background-image url(../images/player/play.png)
-#play-button:hover
+#play-button.pause:hover
 	background-image url(../images/player/play_hover.png)
-#play-button:active
+#play-button.pause:active
 	background-image url(../images/player/play_active.png)
+
+#play-button.play
+	background-image url(../images/player/pause.png)
+#play-button.play:hover
+	background-image url(../images/player/pause_hover.png)
+#play-button.play:active
+	background-image url(../images/player/pause_active.png)
+
 #next-button
 	background-image url(../images/player/next.png)
 #next-button:hover
@@ -141,22 +154,49 @@ button
 	height 25px
 	width 25px
 	background-size cover
+	float left
+	margin 23px 0 0 5px
 #volume-range
 	width 10%
 #playback-range
-	width 50%
-#shuffle-button
+	width 45%
+
+#shuffle-button.shuffleoff
+	background-image url(../images/player/unshuffle.png)
+#shuffle-button.shuffleoff:hover
+	background-image url(../images/player/unshuffle_hover.png)
+#shuffle-button.shuffleoff:active
+	background-image url(../images/player/unshuffle_active.png)
+
+#shuffle-button.shuffleon
 	background-image url(../images/player/shuffle.png)
-#shuffle-button:hover
+#shuffle-button.shuffleon:hover
 	background-image url(../images/player/shuffle_hover.png)
-#shuffle-button:active
+#shuffle-button.shuffleon:active
 	background-image url(../images/player/shuffle_active.png)
-#repeat-button
+
+#repeat-button.song
+	background-image url(../images/player/repeat_track.png)
+#repeat-button.song:hover
+	background-image url(../images/player/repeat_track_hover.png)
+#repeat-button.song:active
+	background-image url(../images/player/repeat_track_active.png)
+
+#repeat-button.none
 	background-image url(../images/player/repeat.png)
-#repeat-button:hover
+#repeat-button.none:hover
 	background-image url(../images/player/repeat_hover.png)
-#repeat-button:active
+#repeat-button.none:active
 	background-image url(../images/player/repeat_active.png)
+
+#repeat-button.album
+	background-image url(../images/player/repeat_all.png)
+#repeat-button.album:hover
+	background-image url(../images/player/repeat_all_hover.png)
+#repeat-button.album:active
+	background-image url(../images/player/repeat_all_active.png)
+
+
 #like-button
 	background-image url(../images/player/like.png)
 #like-button:hover
@@ -171,8 +211,10 @@ button
 	background-image url(../images/player/comment_active.png)			
 
 input[type='range'] {
+    float left
     height 6px
     margin 10px
+    margin-top 32px
     border: none;
     padding: 1px 2px;
     border-radius: 5px;

@@ -8,6 +8,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			currentTrackName: 'Track',
 			currentArtistName: 'Artist',
 			volumeLevel : 50,
+			mute: 'unmute',
 			shuffle : 'shuffleoff',
 			repeatTrack : 'none',
 			comments : 0,
@@ -148,6 +149,18 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			if (this.get('currentTrack') <= 3){
 				this.set({nextButtonState: false});
 			}
+		},
+
+		mute: function(){
+			var state = this.get('mute');
+			if (state === enums.muteModes.mute){
+				this.volumeLevelSetup(this.get('volumeLevel'));
+				this.set({mute: enums.muteModes.unmute});	
+			} else {
+				audioHandler.volumeLevelSetup(0);
+				this.set({mute: enums.muteModes.mute});	
+			}
+			return this.get('mute');
 		},
 
 		shuffleMode : function(){

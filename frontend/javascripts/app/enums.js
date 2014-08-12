@@ -12,6 +12,10 @@ define ([], function(){
 		playModes:{
 			play: 'play',
 			pause: 'pause'
+		},
+		muteModes:{
+			mute: 'mute',
+			unmute: 'unmute'
 		}
 	};
 
