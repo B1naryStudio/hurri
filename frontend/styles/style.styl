@@ -39,7 +39,7 @@ body
 	float: right;
 
 #player
-	height 75px
+	height 60px
 	margin 0 auto
 	background #2b2e31
 #player-content
@@ -108,15 +108,15 @@ button
 	width 25px
 	background-size cover
 	float left
-	margin-top 23px
+	margin-top 15px
 .player-button:focus
 	outline 0
 .player-button:active
 	position relative
 	top 1px
 #play-button
-	height 64px
-	width 64px
+	height 48px
+	width 48px
 	margin-top 5px
 #play-button.pause
 	background-image url(../images/player/play.png)
@@ -149,13 +149,11 @@ button
 #previous-button:disabled
 	background-image url(../images/player/prev_disabled.png)
 #volume
+	margin 15px 0 0 5px
+#volume.unmute
 	background-image url(../images/player/volume.png)
-	display inline-block
-	height 25px
-	width 25px
-	background-size cover
-	float left
-	margin 23px 0 0 5px
+#volume.mute
+	background-image url(../images/player/volume_off.png)
 #volume-range
 	width 10%
 #playback-range
@@ -214,7 +212,7 @@ input[type='range'] {
     float left
     height 6px
     margin 10px
-    margin-top 32px
+    margin-top 24px
     border: none;
     padding: 1px 2px;
     border-radius: 5px;

@@ -3,7 +3,7 @@ script#player-template(type='text/template')
 		button#previous-button.player-button(type='button', {{ if (previousButtonState) print('disabled')}})
 		button#play-button.player-button(type='button', class='{{-playback}}')
 		button#next-button.player-button(type='button', {{ if (nextButtonState) print('disabled')}})
-		button#volume
+		button#volume.player-button(class='{{-mute}}')
 		input#volume-range(type='range', min='0', max='100', value='{{- volumeLevel}}')
 		input#playback-range(type='range', min='0', max='{{- duration}}', value='{{-position}}')
 		button#shuffle-button.player-button(type='button', class='{{-shuffle}}')
