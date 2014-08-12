@@ -1,9 +1,17 @@
 define ([], function(){
 	var enums = {
 		repeatModes:{
-			none: 1,
-			album: 2,
-			song: 3
+			none: 'none',
+			album: 'album',
+			song: 'song'
+		},
+		shuffleModes:{
+			shuffleon: 'shuffleon',
+			shuffleoff: 'shuffleoff'
+		},
+		playModes:{
+			play: 'play',
+			pause: 'pause'
 		}
 	};
 

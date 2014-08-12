@@ -27,9 +27,12 @@ define(['../player/PlayerModel'], function(PlayerModel){
 			this.track.currentTime = input;
 		},
 
-		stopTrack: function(){
+		stopTrack: function(url){
 			this.track.pause();
 			this.track = null;
+			if (url){
+				this.initialize(url);
+			}
 		}
 
 	};

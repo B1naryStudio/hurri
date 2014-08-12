@@ -40,7 +40,10 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			this.model.nextTrack();
 		},
 		playbackState : function(){
-			this.model.playbackState();
+			var mode = this.model.playbackState();
+			mode = 'player-button' + ' ' + mode;
+			this.ui.playButton.removeClass();
+			this.ui.playButton.addClass(mode);
 		},
 
 		previousTrack : function(){	
@@ -48,12 +51,18 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		shuffleMode : function(){
-			this.model.shuffleMode();
+			var mode = this.model.shuffleMode();
+			mode = 'player-button' + ' ' + mode;
+			this.ui.shuffleButton.removeClass();
+			this.ui.shuffleButton.addClass(mode);
 		},
 
 
 		repeatMode : function(){
-			this.model.repeatMode();
+			var mode = this.model.repeatMode();
+			mode = 'player-button' + ' ' + mode;
+			this.ui.repeatButton.removeClass();
+			this.ui.repeatButton.addClass(mode);
 		},
 
 		likeState : function(){
