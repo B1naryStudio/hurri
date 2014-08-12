@@ -2,15 +2,7 @@ script#notification-template(type='text/template')
 	h4 {{-name}}
 	span {{-additionalInfo}}
 	button.removeNotification delete
-
-script#friendrequest-template(type='text/template')
-	div.infopart
-		h4 {{-name}}
-		p {{-additionalInfo}}
-		div.messageButton.acceptFriend Accept
-		div.messageButton.declineFriend Decline
-	div.functionpart
-		div.renewMessage
+	button.renewMessage Renew
 
 script#notifications-composite-template(type='text/template')
 	button.deleteAll Delete all messages

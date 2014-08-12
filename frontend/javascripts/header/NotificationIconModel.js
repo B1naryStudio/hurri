@@ -9,7 +9,7 @@ define(['backbone','../notification/NotificationsCollection', '../app/context'],
 			this.set('unread', unread.length);
 		},
 		initialize: function(){
-			context.notificationCollection.on('add remove reset', this.countUnread, this);
+			context.notificationCollection.on('add remove reset set', this.countUnread, this);
 		}
 	});
 	return NotificationIconModel;
