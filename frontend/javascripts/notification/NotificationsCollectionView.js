@@ -1,4 +1,4 @@
-define(['marionette', './NotificationView'], function(Marionette, NotificationView){
+define(['marionette', './NotificationView', '../app/context'], function(Marionette, NotificationView, context){
 	var NotificationsCompositeView = Marionette.CompositeView.extend({
 		childView: NotificationView,
 		template: '#notifications-composite-template',
@@ -7,9 +7,7 @@ define(['marionette', './NotificationView'], function(Marionette, NotificationVi
 		},
 
 		deleteMessages : function(){
-			var total = this.collection.length;
-			for(var i=0; i < total; i++)
-				this.collection.models[0].destroy();
+			context.notificationCollection.reset();
 		}
 	});
 	return NotificationsCompositeView;

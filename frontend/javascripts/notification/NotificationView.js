@@ -1,4 +1,4 @@
-define(['marionette'], function(Marionette){
+define(['marionette', '../app/context'], function(Marionette, context){
 	var NotificationView = Marionette.ItemView.extend({
 		className: 'notification-message',
 		getTemplate: function(){
@@ -16,7 +16,7 @@ define(['marionette'], function(Marionette){
 		},
 
 		deleteNotification: function(){
-			this.model.destroy();
+			context.notificationCollection.remove(this.model);
 		},
 		acceptFriend: function(){
 			this.model.destroy();
