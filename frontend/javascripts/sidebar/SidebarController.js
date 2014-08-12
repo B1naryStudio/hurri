@@ -3,8 +3,9 @@ define(['marionette',
 	'../notification/NotificationsCollection',
 	'./SidebarNavView',
 	'../notification/NotificationModel',
-	'./defaultView'], 
-	function(Marionette, NotificationsCompositeView, NotificationsCollection, SidebarNavView, NotificationsModel, DefaultView){
+	'./defaultView',
+	 '../app/context'], 
+	function(Marionette, NotificationsCompositeView, NotificationsCollection, SidebarNavView, NotificationsModel, DefaultView, context){
 	
 	var SidebarController = function(){		
 	
@@ -14,17 +15,14 @@ define(['marionette',
 
 		var sidebarRegion = new SidebarRegion();
 
-
-
-		var notificationsCollection = new NotificationsCollection();
-		notificationsCollection.add([
+		context.notificationCollection.add([
 			{name: 'All goes ok', type: 'info', additionalInfo: 'if you see this notification, then all goes ok', active: true},
 			{name: 'New song', type: 'info', additionalInfo: 'your friend just shared one more playlist', active: false},
 			{name: 'You are in danger', type: 'request', additionalInfo: 'all is ok, sorry. Its just warning. Someone want to add you', active: true}	
 		]);	
-
+		
 		var notificationsView = new NotificationsCompositeView({
-			collection: notificationsCollection,
+			collection: context.notificationCollection,
 			model : new NotificationsModel()
 		});
 

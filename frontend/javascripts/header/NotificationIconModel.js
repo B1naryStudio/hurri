@@ -1,16 +1,15 @@
-define(['backbone','../notification/NotificationsCollection'], function(Backbone, Collection){
+define(['backbone','../notification/NotificationsCollection', '../app/context'], function(Backbone, Collection, context){
 	var NotificationIconModel = Backbone.Model.extend({
-		collection: new Collection(),
 		defaults:{
 			active : false,
 			unread: 0
 		},
 		countUnread : function(){
-			console.log(this.collection);
-			this.set('unread', _.where(this.collection.models, {active:true}).length);
+			var unread = context.notificationCollection.where({active:true});
+			this.set('unread', unread.length);
 		},
 		initialize: function(){
-			this.collection.on('add remove reset', this.countUnread());
+			context.notificationCollection.on('add remove reset', this.countUnread);
 		}
 	});
 	return NotificationIconModel;
