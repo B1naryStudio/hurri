@@ -1,6 +1,6 @@
 define(['backbone'], function(Backbone){
 	
-	var SearchbarModel = Backbone.Model.extend({
+	var SearchModel = Backbone.Model.extend({
 		
 		defaults: {
 			currentInput: undefined,
@@ -23,5 +23,5 @@ define(['backbone'], function(Backbone){
 		}
 
 	});
-	return SearchbarModel;
+	return SearchModel;
 });

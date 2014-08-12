@@ -1,7 +1,7 @@
 define(['marionette', './HeaderView', '../user/UserbarView',
-		'../searchbar/SearchbarModel', '../searchbar/SearchbarView',
+		'../search/SearchModel', '../search/SearchbarView',
 		'../app/context'],
-	function(Marionette, HeaderView, UserbarView, SearchbarModel,
+	function(Marionette, HeaderView, UserbarView, SearchModel,
 				SearchbarView, context){
 
 	var HeaderController = function(){	
@@ -15,7 +15,7 @@ define(['marionette', './HeaderView', '../user/UserbarView',
 			model: context.currentUserModel
 		});
 
-		var searchbarModel = new SearchbarModel();
+		var searchModel = new SearchModel();
 		var searchbarView = new SearchbarView({
 			model: searchbarModel
 		});*/
