@@ -7,7 +7,9 @@ define(['marionette', './NotificationView'], function(Marionette, NotificationVi
 		},
 
 		deleteMessages : function(){
-			//remove items
+			var total = this.collection.length;
+			for(var i=0; i < total; i++)
+				this.collection.models[0].destroy();
 		}
 	});
 	return NotificationsCompositeView;

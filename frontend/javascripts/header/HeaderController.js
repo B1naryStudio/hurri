@@ -1,4 +1,4 @@
-define(['marionette', './AuthView', '../app/context'], function(Marionette, AuthView, context){
+define(['marionette', './AuthView', '../app/context', './NotificationIconView', './NotificationIconModel'], function(Marionette, AuthView, context, IconView, IconModel){
 	
 	var HeaderController = function() {	
 
@@ -6,12 +6,15 @@ define(['marionette', './AuthView', '../app/context'], function(Marionette, Auth
 	  		template: '#auth-template',
 	  		el: '#header'
 	 	});
-	 
-		headerRegion = new HeaderRegion();
-		var authView = new AuthView({
-			model: context.currentSongModel
+	 	
+		var headerRegion = new HeaderRegion();
+		var iconView = new IconView({
+			model: new IconModel()
 		});
-		headerRegion.show(authView);
+		// var authView = new AuthView({
+		// 	model: context.currentSongModel
+		// });
+		headerRegion.show(iconView);
 	};
 
 	return HeaderController;

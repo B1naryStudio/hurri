@@ -19,7 +19,24 @@ body
 	width 100%
 	float left
 	height 50px
-	background red
+	background #eee
+
+#notification-icon
+	height 40px;
+	background: url('../images/notification.png') no-repeat;
+	background-size: 32px
+#unreadNumber
+		height 20px
+		width 20px
+		background orange
+		border-radius 3px
+		text-align center
+		font-size 90%
+		font-weight bold
+		color white
+		display inline
+		padding 1px 2px
+		margin-left 20px
 
 #header img
 	height 50px
@@ -60,6 +77,30 @@ body
 	background lightgrey
 	width 25%
 	float left
+	&#sidebar-nav
+		position fixed
+		margon-bottom 0
+
+.notification-message 
+		border-radius 2px
+		background #fefefe
+		margin 1%
+		padding 2%
+.infopart
+	width 90%
+	border-right 1px solid grey
+
+.messageButton
+	color white
+	border-radius 2px
+	display inline-block
+	padding 0 5% 0
+	margin 0 5% 0
+.acceptFriend
+	background green
+.declineFriend
+	background red
+
 
 #sidebar li
 	height 30px
@@ -78,8 +119,8 @@ body
 		background: url('../images/info.png') no-repeat;
 		background-size: 32px
 
-
 #footer
+	width 75%
 	height 30px
 	background grey
 	border-top 1px solid darkgrey

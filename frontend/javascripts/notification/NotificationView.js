@@ -1,10 +1,10 @@
 define(['marionette'], function(Marionette){
 	var NotificationView = Marionette.ItemView.extend({
+		className: 'notification-message',
 		getTemplate: function(){
    			if (this.model.attributes.type == 'request'){
      			return '#friendrequest-template';
     		} else {
-    			console.log(this.model);
       			return '#notification-template';
     		}
   		},

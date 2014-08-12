@@ -4,6 +4,7 @@ define(['backbone'], function(Backbone){
 			name : 'User notification',
 			type : 'info',
 			additionalInfo : 'this notification has no additional information',
+			active : false
 		}
 	});
 	return NotificationModel;
