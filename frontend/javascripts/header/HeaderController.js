@@ -1,8 +1,4 @@
-define(['marionette', './HeaderView', '../user/UserbarView',
-		'../search/SearchModel', '../search/SearchbarView',
-		'../app/context'],
-	function(Marionette, HeaderView, UserbarView, SearchModel,
-				SearchbarView, context){
+define(['marionette', './HeaderView'], function(Marionette, HeaderView){
 
 	var HeaderController = function(){	
 
@@ -10,15 +6,6 @@ define(['marionette', './HeaderView', '../user/UserbarView',
 	  		el: '#header'
 	 	});
 		headerRegion = new HeaderRegion();
-
-		/*var userbarView = new UserbarView({
-			model: context.currentUserModel
-		});
-
-		var searchModel = new SearchModel();
-		var searchbarView = new SearchbarView({
-			model: searchbarModel
-		});*/
 
 		var headerView = new HeaderView({
 			//
