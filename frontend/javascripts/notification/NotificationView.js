@@ -15,6 +15,7 @@ define(['marionette', '../app/context'], function(Marionette, context){
 			this.model.set({active : true});
 			// model.save({}, {url:'/api/v1/tags/'+model.get('id')}) //save to server
 			context.notificationCollection.set(this.model, {remove : false});
+			console.log(context.notificationCollection);
 		}
 	});
 	return NotificationView;
