@@ -4,7 +4,9 @@ define(['backbone'], function(Backbone){
 		
 		defaults: {
 			currentInput: undefined,
-			previousInputs: []
+			previousInputs: [],
+
+			searchResults: undefined
 		},
 		
 		search: function(){
@@ -13,10 +15,8 @@ define(['backbone'], function(Backbone){
 				return;
 			}
 
-			/*
-			 * Add code that performs search by currentInput
-			 * string here.
-			 */
+			// get search results from server
+			//
 
 			previousInputs.push(input);
 			this.set('currentInput', null);

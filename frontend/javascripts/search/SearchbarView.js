@@ -20,6 +20,7 @@ define(['marionette'], function(Marionette){
 
 		refreshCurrentInput: function(){
 			this.model.set('currentInput', this.ui.searchInput[0].value);
+			//_.debounce(search, 300, true);
 		}
 
 	});

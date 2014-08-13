@@ -9,10 +9,10 @@ fb_bg = #2f4885
 basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
 
 /*Header*/
-header_height = 50px
+header_height = 60px
 header_background_color = #27709b
 
-bar_height = 36px
+bar_height = 40px
 searchbar_width = 300px
 
 body
@@ -28,26 +28,26 @@ body
 	width 100%
 	height header_height
 	background header_background_color
-	padding 5px
+	padding 10px
 	box-sizing border-box
 
 #hurri-logo
 	height 40px
 	cursor pointer
+	float left
 
 #userbar
 	width auto
 	height bar_height
 	float right
 	cursor pointer
-	margin 2px
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
 
 	#avatar-icon
 		width auto
-		height 100%
+		height bar_height
 		max-width 50px
 		border-style hidden
 		border-top-left-radius 3px
@@ -58,7 +58,7 @@ body
 		width auto
 		height 100%
 		float right
-		background linear-gradient(to bottom,#00bfff, #1e90ff)
+		background linear-gradient(to bottom, #00bfff, #529de1)
 		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
@@ -77,17 +77,16 @@ body
 #searchbar
 	width auto
 	height bar_height
-	float left
+	float right
 	cursor pointer
-	margin 2px
-	margin-left 50px
+	margin-right 100px
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
 
 	#search-input
 		width searchbar_width
-		height 100%
+		height bar_height
 		line-height 25px
 		border-style hidden
 		border-top-left-radius 3px
@@ -99,9 +98,9 @@ body
 
 	#search-button
 		width auto
-		height 100%
+		height bar_height
 		float right
-		background linear-gradient(to bottom,#00bfff, #1e90ff)
+		background linear-gradient(to bottom, #00bfff, #529de1)
 		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
