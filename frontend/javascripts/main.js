@@ -12,3 +12,4 @@ require.config({
 });
 
 require(['app/app']);
+require(['./blur']);
