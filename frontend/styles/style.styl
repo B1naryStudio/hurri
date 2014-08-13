@@ -68,15 +68,15 @@ body
 	width auto
 	height bar_height
 	float right
-	cursor pointer
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
 
 	#avatar-icon
-		width auto
+		width bar_height
 		height bar_height
 		max-width 50px
+		cursor pointer
 		border-style hidden
 		border-top-left-radius 3px
 		border-bottom-left-radius 3px
@@ -86,28 +86,27 @@ body
 		width auto
 		height 100%
 		float right
-		background linear-gradient(to bottom, #00bfff, #529de1)
+		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
 		line-height bar_height
-		list-style-type none
 		padding-left 10px
 		padding-right 10px
+		cursor pointer
 		border-style hidden
 		border-top-right-radius 3px
 		border-bottom-right-radius 3px
 		box-sizing border-box
 
 		&:hover
-			background #00bfff
+			background #529de1
 
 #searchbar
 	width auto
 	height bar_height
 	float right
-	cursor pointer
-	margin-right 100px
+	margin-right 50px
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
@@ -115,7 +114,7 @@ body
 	#search-input
 		width searchbar_width
 		height bar_height
-		line-height 25px
+		font-size 18px
 		border-style hidden
 		border-top-left-radius 3px
 		border-bottom-left-radius 3px
@@ -128,12 +127,12 @@ body
 		width auto
 		height bar_height
 		float right
-		background linear-gradient(to bottom, #00bfff, #529de1)
+		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
 		line-height bar_height
-		list-style-type none
+		cursor pointer
 		padding-left 10px
 		padding-right 10px
 		border-style hidden
@@ -142,7 +141,35 @@ body
 		box-sizing border-box
 
 		&:hover
-			background #00bfff
+			background #529de1
+
+#user
+	width 100%
+	height 100%
+	box-sizing border-box
+
+	#avatar
+		width 200px
+		height auto
+		max-height 500px
+		float left
+
+	#userinfo
+		width auto
+		height auto
+		float left
+		margin 10px
+		box-sizing border-box
+
+		#name
+			width auto
+			height auto
+			margin-bottom 10px
+
+		#info
+			width auto
+			height auto
+			font-size 12px
 
 #player
 	height 60px
