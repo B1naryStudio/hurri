@@ -1,0 +1,17 @@
+script#notification-template(type='text/template')
+	div.message-wrapper
+		div.information-part
+			h4 {{-name}}
+			span {{-additionalInfo}}
+		div.functional-part
+			div.removeNotification
+			div.renewMessage
+
+script#notifications-composite-template(type='text/template')
+	div.notifHeadWrapper
+		h3.notificationsHeader NOTIFICATIONS
+		div.deleteAll
+
+script#notification-icon-template(type='text/template')
+	div#notification-icon
+		div#unreadNumber {{-unread}}
