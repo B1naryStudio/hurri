@@ -6,19 +6,21 @@ define(['backbone'], function(Backbone){
 			currentInput: undefined,
 			previousInputs: [],
 
-			searchResults: undefined
+			searchResults: []
 		},
-		
+
 		search: function(){
 			var input = this.get('currentInput');
 			if(!input){
 				return;
 			}
 
-			// get search results from server
-			//
+			// get search results from server and save
+			// albums to searchResults[albums]
+			// artists to searchResults[artists]
+			// songs to searchResults[songs]
 
-			previousInputs.push(input);
+			this.attributes.previousInputs.push(input);
 			this.set('currentInput', null);
 		}
 
