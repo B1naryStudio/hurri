@@ -40,7 +40,8 @@
     "should": "~4.0.4",
     "supertest": "^0.13.0",
     "underscore": "^1.6.0",
-    "winston": "~0.7.3"
+    "winston": "~0.7.3",
+    "grunt-mocha-phantomjs": "~0.6.0"
   },
   "dependencies": {
     "body-parser": "^1.5.2",

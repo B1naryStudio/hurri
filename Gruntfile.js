@@ -102,7 +102,12 @@ module.exports = function (grunt) {
 					dir: 'public/javascripts'
 				}
 			}
+		},
+
+		mocha_phantomjs: {
+			all: ['frontend/test/**/*html']
 		}
+
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -113,6 +118,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-open');
+	grunt.loadNpmTasks('grunt-mocha-phantomjs');
 
 	grunt.registerTask('default', ['jshint', 'jade', 'stylus', 'clean', 'copy', 'open']);
 	grunt.registerTask('release', ['jshint', 'jade', 'stylus', 'clean', 'copy:libs', 'requirejs']);
