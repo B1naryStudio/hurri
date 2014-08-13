@@ -12,9 +12,10 @@ define(['marionette', '../app/context'], function(Marionette, context){
 		},
 
 		renewNotification: function(){
-			this.model.set({active : true});
+			
+			this.model.set({active : this.model.attributes.active ? false : true});
 			// model.save({}, {url:'/api/v1/tags/'+model.get('id')}) //save to server
-			context.notificationCollection.set(this.model, {remove : false});
+			//context.notificationCollection.set(this.model, {remove : false});
 			console.log(context.notificationCollection);
 		}
 	});

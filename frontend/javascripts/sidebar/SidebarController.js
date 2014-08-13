@@ -34,6 +34,14 @@ define(['marionette',
 			sidebarRegion.show(notificationsView);
 		});
 
+		// Backbone.on('show followers', function(){
+		// 	sidebarRegion.show(followersView);
+		// });
+
+		// Backbone.on('show musiclist', function(){
+		// 	sidebarRegion.show(musicListView);
+		// });
+
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
 	};

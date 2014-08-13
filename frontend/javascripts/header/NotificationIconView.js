@@ -13,11 +13,9 @@ define(['marionette', '../notification/NotificationsCollectionView', '../app/con
 		
 		showNotifications: function(){
 			Backbone.trigger('show notifications');
-			console.log(context.notificationCollection);
-			var total = 3;
+			var total = context.notificationCollection.length;
 			for (var i = 0; i < total; i++){
 				context.notificationCollection.models[i].set({active : false});
-				context.notificationCollection.set(this.model, {remove: false});
 			}
 		}
 	});
