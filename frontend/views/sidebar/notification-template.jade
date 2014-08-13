@@ -1,13 +1,16 @@
 script#notification-template(type='text/template')
-	div.information-part
-		h4 {{-name}}
-		span {{-additionalInfo}}
-	div.functional-part
-		div.removeNotification
-		div.renewMessage
+	div.message-wrapper
+		div.information-part
+			h4 {{-name}}
+			span {{-additionalInfo}}
+		div.functional-part
+			div.removeNotification
+			div.renewMessage
 
 script#notifications-composite-template(type='text/template')
-	button.deleteAll Delete all messages
+	div.notifHeadWrapper
+		h3.notificationsHeader NOTIFICATIONS
+		div.deleteAll
 
 script#notification-icon-template(type='text/template')
 	div#notification-icon

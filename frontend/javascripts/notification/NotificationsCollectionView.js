@@ -5,6 +5,9 @@ define(['marionette', './NotificationView', '../app/context'], function(Marionet
 		events : {
 			"click .deleteAll" : "deleteMessages"
 		},
+		ui : {
+			message : '.notification-message'
+		},
 
 		deleteMessages : function(){
 			context.notificationCollection.reset();

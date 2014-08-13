@@ -30,7 +30,11 @@ define(['marionette',
 
 		sidebarRegion.show(defautView);
 
-		Backbone.on('show notifications', function(){
+		Backbone.on('show-notifications', function(){
+			var total = context.notificationCollection.length;
+			for (var i = 0; i < total; i++){
+				context.notificationCollection.models[i].set({active : false});
+			}
 			sidebarRegion.show(notificationsView);
 		});
 

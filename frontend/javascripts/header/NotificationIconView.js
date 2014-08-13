@@ -12,11 +12,7 @@ define(['marionette', '../notification/NotificationsCollectionView', '../app/con
 		},
 		
 		showNotifications: function(){
-			Backbone.trigger('show notifications');
-			var total = context.notificationCollection.length;
-			for (var i = 0; i < total; i++){
-				context.notificationCollection.models[i].set({active : false});
-			}
+			Backbone.trigger('show-notifications');
 		}
 	});
 	return NotificationIconView;

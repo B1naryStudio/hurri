@@ -91,6 +91,7 @@ body
 
 	#sidebar-region
 		display block
+		position relative
 
 .notification-message 
 	display block
@@ -103,7 +104,9 @@ body
 	box-shadow 0px 0px 5px 0px rgba(50, 50, 50, 0.5)
 	margin-bottom: 5px
 	position relative
-
+	
+	&.newNotification
+		background PeachPuff
 	&:last-child 
 		border none
 
@@ -127,7 +130,7 @@ body
 		width 16px
 		height 16px
 		position absolute
-		background: url('../images/refresh.png') no-repeat;
+		background: url('../images/notification.png') no-repeat;
 		background-size: 16px
 		right 2px
 		top 18px
@@ -156,6 +159,26 @@ body
 			&#infoButton
 				background: url('../images/info.png') no-repeat;
 				background-size: 32px
+
+.notifHeadWrapper
+	display block
+	margin 0 auto 0
+	padding 2%
+	h3
+		
+		display block
+		wigth 80%
+		
+.deleteAll
+	width 16px
+	height 16px
+	top 0
+	opacity 0.3
+	background: url('../images/bin.png') no-repeat;
+	background-size: 16px
+
+	&:hover
+		opacity 0.9
 
 #footer
 	width 75%

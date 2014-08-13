@@ -6,17 +6,20 @@ define(['marionette', '../app/context'], function(Marionette, context){
 			'click .removeNotification'  : 'deleteNotification',
 			'click .renewMessage' : 'renewNotification'
 		},
+		modelEvents : {
+			'change:active' : 'recolourMessage'
+		},
 
 		deleteNotification: function(){
 			context.notificationCollection.remove(this.model);
 		},
 
-		renewNotification: function(){
-			
+		renewNotification: function(){		
 			this.model.set({active : this.model.attributes.active ? false : true});
-			// model.save({}, {url:'/api/v1/tags/'+model.get('id')}) //save to server
-			//context.notificationCollection.set(this.model, {remove : false});
-			console.log(context.notificationCollection);
+		},
+
+		recolourMessage: function(){
+			this.$el.toggleClass('newNotification', this.model.get('active'));		
 		}
 	});
 	return NotificationView;
