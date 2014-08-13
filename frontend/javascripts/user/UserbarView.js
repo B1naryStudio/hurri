@@ -16,10 +16,7 @@ define(['marionette'], function(Marionette){
 		},
 
 		showUserView: function(){
-			/*
-			 * Code that invokes showing UserView in the main region
-			 * of page should be here.
-			 */
+			this.model.trigger('action:showUserView');
 		},
 
 	});

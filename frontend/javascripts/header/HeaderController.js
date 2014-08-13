@@ -18,7 +18,6 @@ define(['marionette', './HeaderView',  './NotificationIconView', './Notification
 		});
 
 		headerRegion.show(headerView);
-
 	};
 	return HeaderController;
 });

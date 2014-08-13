@@ -11,7 +11,7 @@ define(['backbone'], function(Backbone){
 			//
 			liked: undefined,
 			playlists: undefined,
-			group: undefined
+			group: undefined,
 		},
 		
 		initialize: function(){
