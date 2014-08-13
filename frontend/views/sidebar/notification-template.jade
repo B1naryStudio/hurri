@@ -1,8 +1,10 @@
 script#notification-template(type='text/template')
-	h4 {{-name}}
-	span {{-additionalInfo}}
-	button.removeNotification delete
-	button.renewMessage Renew
+	div.information-part
+		h4 {{-name}}
+		span {{-additionalInfo}}
+	div.functional-part
+		div.removeNotification
+		div.renewMessage
 
 script#notifications-composite-template(type='text/template')
 	button.deleteAll Delete all messages

@@ -5,6 +5,17 @@ ok_bg = #d5702e
 tw_bg = #3b9bda
 fb_bg = #2f4885
 
+/*Gradients*/
+background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval, deprecatedWebkitStartPoint = false, deprecatedWebkitEndPoint = false)
+	background-color startColor
+	if deprecatedWebkitStartPoint && deprecatedWebkitEndPoint
+		background-image -webkit-gradient(linear, deprecatedWebkitStartPoint, deprecatedWebkitEndPoint, color-stop(startInterval, startColor), color-stop(endInterval, endColor))
+	background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+
 /*Font*/
 basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
 
@@ -74,50 +85,77 @@ body
 	list-style-type none;
 
 #sidebar
-	background lightgrey
+	background #eee
 	width 25%
 	float left
-	&#sidebar-nav
-		position fixed
-		margon-bottom 0
+
+	#sidebar-region
+		display block
 
 .notification-message 
-		border-radius 2px
-		background #fefefe
-		margin 1%
-		padding 2%
-.infopart
-	width 90%
-	border-right 1px solid grey
-
-.messageButton
-	color white
+	display block
 	border-radius 2px
-	display inline-block
-	padding 0 5% 0
-	margin 0 5% 0
-.acceptFriend
-	background green
-.declineFriend
-	background red
+	background #fefefe
+	opacity 0.8
+	margin 0 auto 0
+	padding 2%
+	width 90%
+	box-shadow 0px 0px 5px 0px rgba(50, 50, 50, 0.5)
+	margin-bottom: 5px
+	position relative
 
+	&:last-child 
+		border none
 
-#sidebar li
-	height 30px
-	list-style-type none;
-	display: inline-block
-	width:33%
-	background green
+	.information-part
+		padding-right 16px
 
-	&#friendsButton
-		background: url('../images/friends.png') no-repeat;
-		background-size: 40px
-	&#musicButton
-		background: url('../images/music.png') no-repeat;
-		background-size: 32px
-	&#infoButton
-		background: url('../images/info.png') no-repeat;
-		background-size: 32px
+	.removeNotification
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/delete.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	.renewMessage
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/refresh.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 18px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+#sidebar-nav
+		display block
+		bottom 0px
+		
+		li
+			height 30px
+			list-style-type none;
+			display: inline-block
+			width:33%
+			background green
+
+			&#friendsButton
+				background: url('../images/friends.png') no-repeat;
+				background-size: 40px
+			&#musicButton
+				background: url('../images/music.png') no-repeat;
+				background-size: 32px
+			&#infoButton
+				background: url('../images/info.png') no-repeat;
+				background-size: 32px
 
 #footer
 	width 75%
