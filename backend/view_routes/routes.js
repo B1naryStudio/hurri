@@ -5,6 +5,7 @@ var dialogueRoutes = require('./dialogueRoutes');
 var groupRoutes = require('./groupRoutes');
 var trackRoutes = require('./trackRoutes');
 var userRoutes = require('./userRoutes');
+var searchRoutes = require('./searchRoutes');
 
 module.exports = function(app){
   return {
@@ -14,6 +15,7 @@ module.exports = function(app){
     dialogueRoutes: dialogueRoutes(app),
     groupRoutes: groupRoutes(app),
     trackRoutes: trackRoutes(app),
-    commonRoutes: commonRoutes(app)
+    commonRoutes: commonRoutes(app),
+    searchRoutes: searchRoutes(app)
   };
 };
