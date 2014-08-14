@@ -6,3 +6,13 @@ script#sidebar-template(type='text/template')
 
 script#sidebar-default-template(type='text/template')
 	span test bar
+
+script#song-item-template(type='text/template')
+	div.sidebar-song-wrap
+		div.sidebar-song-img-box
+			img(src="{{-cover}}")
+		.sidebar-song-header
+			h4 {{-name}}
+		div.sidebar-song-info
+			{{-artist}} - {{-albumname}}
+		.delete-song-from-list

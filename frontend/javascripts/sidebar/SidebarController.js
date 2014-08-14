@@ -1,11 +1,13 @@
 define(['marionette', 
 	'../notification/NotificationsCollectionView', 
-	'../notification/NotificationsCollection',
 	'./SidebarNavView',
 	'../notification/NotificationModel',
 	'./defaultView',
-	 '../app/context'], 
-	function(Marionette, NotificationsCompositeView, NotificationsCollection, SidebarNavView, NotificationsModel, DefaultView, context){
+	 '../app/context',
+	 '../songlist/SonglistCollectionView',
+	 '../songlist/SonglistCollection',
+	 '../songlist/SonglistModel'], 
+	function(Marionette, NotificationsCompositeView,  SidebarNavView, NotificationsModel, DefaultView, context, SonglistCollectionView, SonglistCollection, SonglistModel){
 	
 	var SidebarController = function(){		
 	
@@ -38,13 +40,28 @@ define(['marionette',
 			sidebarRegion.show(notificationsView);
 		});
 
+
+
 		// Backbone.on('show followers', function(){
 		// 	sidebarRegion.show(followersView);
 		// });
 
-		// Backbone.on('show musiclist', function(){
-		// 	sidebarRegion.show(musicListView);
-		// });
+		var songlistCollection = new SonglistCollection();
+		songlistCollection.add([
+			{name : 'Komissar rex', cover : '../images/default/cover.jpg', artist : 'Tim Rot', current : false, albumname : 'Hello I love you'},
+			{name : 'Funny Essso', cover : '../images/default/cover.jpg', artist : 'Ocean', current : true, albumname : 'Digital histoyr'},
+			{name : 'Runble be you', cover : '../images/default/cover.jpg', artist : 'T-Rex', current : false, albumname : 'Wat a flag?'},
+			{name : 'So serious', cover : '../images/default/cover.jpg', artist : 'Kirkorov', current : false, albumname : 'Fust furrry'},
+			{name : 'Defstrouk', cover : '../images/default/cover.jpg', artist : 'U2', current : false, albumname : 'Drums for you'}
+		]);
+		var musicListView = new SonglistCollectionView({
+			collection : songlistCollection,
+			model : new SonglistModel()
+		});
+
+		Backbone.on('show-musiclist', function(){
+		 	sidebarRegion.show(musicListView);
+		});
 
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();

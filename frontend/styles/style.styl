@@ -174,6 +174,7 @@ body
 
 #sidebar
 	background #eee
+	height 100%
 	width 25%
 	float left
 
@@ -228,6 +229,7 @@ body
 			opacity 1
 
 #sidebar-nav
+		clear both
 		display block
 		bottom 0px
 		
@@ -268,6 +270,46 @@ body
 	&:hover
 		opacity 0.9
 
+.sidebar-song-wrap
+	width 90%
+	margin 5px auto
+	height 45px
+	border-radius 4px
+	background white
+	position relative
+	
+	&:hover 
+		background #ccc
+
+	.sidebar-song-img-box 
+		backgroung grey
+		img
+			width 45px
+			height 45px
+			float left
+
+	.sidebar-song-header
+		margin-left 50px
+
+	.sidebar-song-info
+		margin-left 50px
+		width 100%
+
+	.delete-song-from-list
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	&.activesong
+		background PeachPuff
 #footer
 	width 75%
 	height 30px
