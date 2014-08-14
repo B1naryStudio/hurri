@@ -4,7 +4,7 @@ define(['marionette', '../app/context'], function(Marionette, context){
   		template : '#song-item-template',
 		 events : {
 		 	'click .delete-song-from-list'  : 'deleteSong',
-		// 	'rende .renewMessage' : 'renewNotification'
+			'click .add-song-to-queue' : 'addSongToQueue'
 		 },
 		
 		modelEvents : {
@@ -18,9 +18,13 @@ define(['marionette', '../app/context'], function(Marionette, context){
 		 	this.model.destroy();
 		 },
 
-		// renewNotification: function(){		
-		// 	this.model.set({active : this.model.attributes.active ? false : true});
-		// },
+		addSongToQueue: function(){		
+
+		},
+
+		addSongToCollection: function(){
+
+		},
 
 		recolourActiveSong: function(){
 		 	this.ui.song.toggleClass('activesong', this.model.get('current'));		

@@ -30,8 +30,6 @@ define(['marionette',
 
 		var defautView = new DefaultView();
 
-		sidebarRegion.show(defautView);
-
 		Backbone.on('show-notifications', function(){
 			var total = context.notificationCollection.length;
 			for (var i = 0; i < total; i++){
@@ -65,6 +63,8 @@ define(['marionette',
 
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
+
+		sidebarRegion.show(musicListView);
 	};
 	return SidebarController;
 });
