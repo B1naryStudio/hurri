@@ -1,13 +1,16 @@
-define(['backbone'], function(Backbone){
+define(['backbone', '../search/SearchResultsModel', '../song/SongModel'],
+function(Backbone, SearchResultsModel, SongModel){
 	
-	var SearchModel = Backbone.Model.extend({
+	var SearchbarModel = Backbone.Model.extend({
 		
 		defaults: {
 			currentInput: undefined,
 			previousInputs: [],
-
-			searchResults: []
 		},
+
+		searchResultsModel: new SearchResultsModel({
+			model: SongModel
+		}),
 
 		search: function(){
 			var input = this.get('currentInput');
@@ -15,15 +18,15 @@ define(['backbone'], function(Backbone){
 				return;
 			}
 
-			// get search results from server and save
-			// albums to searchResults[albums]
-			// artists to searchResults[artists]
-			// songs to searchResults[songs]
+			/*
+			 * Get search results from server and save
+			 * them into search results model.
+			 */
 
 			this.attributes.previousInputs.push(input);
 			this.set('currentInput', null);
 		}
 
 	});
-	return SearchModel;
+	return SearchbarModel;
 });
