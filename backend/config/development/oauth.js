@@ -7,22 +7,22 @@ module.exports = {
 	},
 
 	odnoklassniki: {
-		clientID: 1098039296,
-		clientPublic: "CBABMDHCEBABABABA",
-		clientSecret: "15FF8D018145D2E984636F7F",
+		clientID: 1098358272,
+		clientPublic: "CBAPJIHCEBABABABA",
+		clientSecret: "1B135E047A1520235E6FEE62",
 		callbackURL: "http://localhost:3055/auth/odnoklassniki/callback"
 	},
 
 	twitter: {
 		consumerKey: "NWRd507Z48tpuIFR1bO6OdBEB",
 		consumerSecret: "Bblp0AkXnCrNzBpD8FVcon6UwxAV02VSPkct4rXYbVlDvCtLbI",
-		callbackURL: "http://85.17.248.247:3055/auth/twitter/callback"
+		callbackURL: "http://localhost:3055/auth/twitter/callback"
 	},
 
 	vkontakte: {
 		clientID: 4500416,
 		clientSecret: "jqET7I5FvsJcg56R4Awe",
-		callbackURL: "http://85.17.248.247:3055/auth/vkontakte/callback"
+		callbackURL: "http://localhost:3055/auth/vkontakte/callback"
 	}
 
 };

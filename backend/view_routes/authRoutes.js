@@ -3,7 +3,9 @@ var passport = require('passport');
 
 module.exports = function (app) {
 
-	app.get('/auth/facebook', passport.authenticate('facebook'), function(res){
+	app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
+		console.log(req);
+		console.log('/auth/facebook');
 		res.end('asd');
 	});
 
