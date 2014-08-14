@@ -9,7 +9,7 @@ module.exports = function (app) {
 		res.end('asd');
 	});
 
-	app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
+	app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/signin' }));
 
 	app.get('/auth/vkontakte',
 		passport.authenticate('vkontakte'),
@@ -19,7 +19,7 @@ module.exports = function (app) {
 		});
 
 	app.get('/auth/vkontakte/callback',
-		passport.authenticate('vkontakte', { failureRedirect: '/login' }),
+		passport.authenticate('vkontakte', { successRedirect: '/', failureRedirect: '/signin' }),
 		function(req, res) {
 			// Successful authentication, redirect home.
 			res.redirect('/');
@@ -33,13 +33,14 @@ module.exports = function (app) {
 		});
 
 	app.get('/auth/odnoklassniki/callback',
-		passport.authenticate('odnoklassniki', { failureRedirect: '/login' }),
+		passport.authenticate('odnoklassniki'),
 		function(req, res) {
 			// Successful authentication, redirect home.
 			res.redirect('/');
-		});
+		}
+	);
 
 	app.get('/auth/twitter', passport.authenticate('twitter'));
-	app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/login' }));
+	app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/signin' }));
 
 };
