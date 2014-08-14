@@ -41,9 +41,13 @@ body
 	width auto
 	height bar_height
 	float right
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
+
+	&:hover
+		background #529de1
 
 	#avatar-icon
 		width bar_height
@@ -59,7 +63,6 @@ body
 		width auto
 		height 100%
 		float right
-		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 		font-size 15px
 		font-weight 700
 		line-height bar_height
@@ -71,15 +74,13 @@ body
 		border-bottom-right-radius 3px
 		box-sizing border-box
 
-		&:hover
-			background #529de1
-
 #notificationbar
 	width auto
 	height bar_height
 	float right
 	margin-right 10px
 	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	cursor pointer
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
@@ -97,6 +98,7 @@ body
 		height 20px
 		width 20px
 		background orange
+		cursor pointer
 		border-radius 3px
 		text-align center
 		font-size 90%
