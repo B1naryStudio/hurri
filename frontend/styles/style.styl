@@ -196,6 +196,7 @@ body
 
 #sidebar
 	background #eee
+	height 100%
 	width 25%
 	float left
 
@@ -250,6 +251,7 @@ body
 			opacity 1
 
 #sidebar-nav
+		clear both
 		display block
 		bottom 0px
 		
@@ -258,18 +260,29 @@ body
 			list-style-type none;
 			display: inline-block
 			width:33%
-			background green
+			border-right 1px solid lightgrey
 
 			&#friendsButton
 				background: url('../images/sidebar/friends.png') no-repeat;
 				background-size: 40px
+				opacity: 0.5
+				background-position: center
+				&:hover
+					opacity 1
 			&#musicButton
 				background: url('../images/sidebar/music.png') no-repeat;
 				background-size: 32px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
 			&#infoButton
 				background: url('../images/sidebar/info.png') no-repeat;
 				background-size: 32px
-
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
 .notifHeadWrapper
 	display block
 	margin 0 auto 0
@@ -289,7 +302,60 @@ body
 
 	&:hover
 		opacity 0.9
+.song-item
+	width 100%
+.sidebar-song-wrap
+	width 90%
+	margin 5px auto
+	height 45px
+	border-radius 4px
+	background white
+	position relative
+	
+	&:hover 
+		background lightgrey
 
+	.sidebar-song-img-box 
+		backgroung grey
+		img
+			width 45px
+			height 45px
+			float left
+
+	.sidebar-song-header
+		margin-left 50px
+
+	.sidebar-song-info
+		margin-left 50px
+
+	.delete-song-from-list
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	.add-song-to-queue
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/songlist/queue.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 20px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	&.activesong
+		background LightBlue
 #footer
 	width 75%
 	height 30px
