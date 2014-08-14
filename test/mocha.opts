@@ -1,4 +1,4 @@
-test/wrappers/VKWrapper.js
+test/api/searchRoutes.js
 --reporter dot
 --require should
 -t 5000
