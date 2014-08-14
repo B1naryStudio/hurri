@@ -184,6 +184,39 @@ body
 	float left
 	width 50%
 
+#main-bar-header
+	width 360px
+	height 25px
+	background lightgrey
+	margin 5px auto
+
+	#genres-select
+		display inline-block
+		height 25px
+		margin-right 20px
+	#album-select
+	#artist-select
+	#track-select
+		display inline-block
+		height 20px
+		text-align center
+		border-right 1px solid grey
+		background linear-gradient(to bottom, rgba(245,245,245,1) 0%,rgba(224,224,224,1) 100%)
+		width 80px
+		&:last-child
+			border none
+		&:hover
+			background #f6f6f6
+#album-bar-wrapper
+	margin auto
+.album-bar 
+	width 150px
+	height 150px
+	background url('../images/default/cover.jpg')
+	background-size 150px
+	float left
+	margin 10px
+
 #menu
 	background lightgrey
 	width 25%
