@@ -7,7 +7,7 @@ var async = require('async');
 module.exports = function (app) {
 
 	app.get('/getStream', function(req, res) {
-		
+
 		var options = {
 			query: req.query.query,
 			sort: 2,
@@ -16,19 +16,21 @@ module.exports = function (app) {
 			count: 1
 		};
 
-		VKWrapper.getAudioSearch(options, function(result){
-			res.json(result);
+		VKWrapper.getAudioSearch(options, function(err, results){
+			res.json(results);
 		});
+
 	});
 
 	app.get('/search', function(req, res) {
 		async.parallel([
-			albumRepository.getByTitle(req.query.query),
-			artistRepository.getByName(req.query.query),
-			trackRepository.getByTitle(req.query.query)
-		], function(result){
-			res.json(result);
+			albumRepository.getByTitle.bind(albumRepository, req.query.query),
+			artistRepository.getByName.bind(artistRepository, req.query.query),
+			trackRepository.getByTitle.bind(trackRepository, req.query.query)
+		], function(err, results){
+			res.json(results);
 		});
+
 	});
 
 };

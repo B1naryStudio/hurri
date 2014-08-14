@@ -15,42 +15,42 @@ function VKWrapper(){
 
 VKWrapper.prototype.getUserInfo = function(id, fields, callback){
 	this.vk.request('users.get', {'uids' : id, 'fields': fields});
-	this.vk.on('done:users.get', function(result) {
+	this.vk.once('done:users.get', function(result) {
 		callback(result);
 	});
 };
 
 VKWrapper.prototype.getFriends = function(id, callback){
 	this.vk.request('friends.get', {'uids' : id});
-	this.vk.on('done:friends.get', function(result) {
+	this.vk.once('done:friends.get', function(result) {
 		callback(result);
 	});
 };
 
 VKWrapper.prototype.getOnlineFriends = function(id, callback){
 	this.vk.request('friends.getOnline', {'uids' : id});
-	this.vk.on('done:friends.getOnline', function(result) {
+	this.vk.once('done:friends.getOnline', function(result) {
 		callback(result);
 	});
 };
 
 VKWrapper.prototype.getUserAudio = function(id, callback){
 	this.vk.request('audio.get', {'owner_id' : id}, 'get-user-audio');
-	this.vk.on('get-user-audio', function(result) {
+	this.vk.once('get-user-audio', function(result) {
 		callback(result);
 	});
 };
 
 VKWrapper.prototype.getAudioById = function(aid, count, callback){
 	this.vk.request('audio.get', {'audio_ids' : aid, 'count': count}, 'get-audio-by-id');
-	this.vk.on('get-audio-by-id', function(result) {
+	this.vk.once('get-audio-by-id', function(result) {
 		callback(result);
 	});
 };
 
 VKWrapper.prototype.getLyricsById = function(lid, count, callback){
 	this.vk.request('audio.getLyrics', {'lyrics_id' : lid, 'count': count});
-	this.vk.on('done:audio.getLyrics', function(result) {
+	this.vk.once('done:audio.getLyrics', function(result) {
 		callback(result);
 	});
 };
@@ -65,7 +65,7 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 		'count': options.count
 	});
 	
-	this.vk.on('done:audio.search', function(result) {
+	this.vk.once('done:audio.search', function(result) {
 		callback(result);
 	});
 
