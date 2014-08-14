@@ -32,23 +32,6 @@ body
 	padding 10px
 	box-sizing border-box
 
-#notification-icon
-	height 40px;
-	background: url('../images/notifications/notification.png') no-repeat;
-	background-size: 32px
-#unreadNumber
-		height 20px
-		width 20px
-		background orange
-		border-radius 3px
-		text-align center
-		font-size 90%
-		font-weight bold
-		color white
-		display inline
-		padding 1px 2px
-		margin-left 20px
-
 #hurri-logo
 	height 40px
 	cursor pointer
@@ -77,7 +60,6 @@ body
 		height 100%
 		float right
 		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
-		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
 		line-height bar_height
@@ -91,6 +73,37 @@ body
 
 		&:hover
 			background #529de1
+
+#notificationbar
+	width auto
+	height bar_height
+	float right
+	margin-right 10px
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	&:hover
+		background #529de1
+
+	#notification-icon
+		width bar_height
+		height bar_height
+		cursor pointer
+		box-sizing border-box
+
+	#unread-number
+		height 20px
+		width 20px
+		background orange
+		border-radius 3px
+		text-align center
+		font-size 90%
+		font-weight bold
+		color white
+		display inline
+		padding 1px 2px
 
 #searchbar
 	width auto
@@ -118,7 +131,6 @@ body
 		height bar_height
 		float right
 		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
-		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
 		line-height bar_height

@@ -1,6 +1,10 @@
-define(['marionette', '../user/UserbarView', '../search/SearchModel',
-		'../search/SearchbarView', '../app/context'],
-	function(Marionette, UserbarView, SearchModel, SearchbarView, context){
+define(['marionette', './HeaderView', './UserbarView',
+		'./SearchbarModel', './SearchbarView', './NotificationIconModel',
+		'./NotificationIconView', '../app/context'],
+
+function(Marionette, HeaderView, UserbarView, SearchbarModel,
+			SearchbarView, NotificationIconModel, NotificationIconView,
+			context){
 
 	HeaderView = Marionette.ItemView.extend({
 
@@ -10,15 +14,21 @@ define(['marionette', '../user/UserbarView', '../search/SearchModel',
 			userbar: new UserbarView({
 				model: context.currentUserModel
 			}),
+
 			searchbar: new SearchbarView({
-				model: new SearchModel()
-			})
+				model: new SearchbarModel()
+			}),
+
+			notificationIcon: new NotificationIconView({
+				model: new NotificationIconModel()
+			}),
 		},
 
 		ui: {
-			hurriLogo 		: '#hurri-logo',
-			userbar       	: '#userbar',
-			searchbar      	: '#searchbar'
+			hurriLogo 			: '#hurri-logo',
+			userbar       		: '#userbar',
+			searchbar      		: '#searchbar',
+			notificationIcon  	: '#notificationbar'
 		},
 
 		events: {
