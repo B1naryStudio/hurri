@@ -10,7 +10,7 @@ function(Marionette, NotificationView, context){
   		},
 
 		events : {
-			'click #notificationbar'  : 'showNotifications'
+			'click #notification-icon'  : 'showNotifications'
 		},
 		
 		showNotifications: function(){
