@@ -12,38 +12,74 @@ define(['marionette',
 		
 		var MainRegion = Marionette.Region.extend({
 			
-			el: '#main',
-
-			initialize: function(){
-				this.listenTo(context.currentUserModel, 'action:showUserView', 
-								function(){this.show(userView);});
-				this.listenTo(context.currentSongModel, 'action:showPlaylistsView', 
-								function(){this.show(playlistsView);});
-			}
+			el: '#main'
 
 		});
 		
-		mainRegion = new MainRegion();
+		this.mainRegion = new MainRegion();
 		
-		var playlistsView = new PlaylistsView({
-			model: context.currentSongModel
-		});
+		this.initializeUser();
 
-		var userView = new UserView({
-			model: context.currentUserModel
-		});
+		this.initializePlaylists();
 
-		var notFoundView = new NotFoundView();
+		this.initializeAlbums();
 
+		this.initializeNotFound();
+	
 		if (window._is404Error) {
-			mainRegion.show(notFoundView);
+			this.mainRegion.show(this.getNotFoundView());
 		} else {
-			mainRegion.show(playlistsView);
+			this.mainRegion.show(this.getPlaylistView());
 		}
 
+		this.mainRegion.show(this.getPlaylistView());	
 
-		var albumBarCollection = new AlbumBarCollection();
-		albumBarCollection.add([
+		this.bindListeners();	
+	};
+
+	MainController.prototype.initializeNotFound = function(){
+		this.notFoundView = this.getNotFoundView();
+	};
+
+	MainController.prototype.getNotFoundView = function(){
+		return new NotFoundView();
+	};
+
+	MainController.prototype.initializeUser = function(){
+		this.user = {
+			model: context.currentUserModel
+		};
+
+		this.user.view = this.getUserView();
+	};
+
+	MainController.prototype.getUserView = function(){
+		return new UserView({
+			model: this.user.model
+		});
+	};
+
+	MainController.prototype.initializePlaylists = function(){
+		this.playlist = {
+			model: context.currentSongModel
+		};
+
+		this.playlist.view = this.getPlaylistView();
+	};
+
+	MainController.prototype.getPlaylistView = function(){
+		return new PlaylistsView({
+			model: this.playlist.model
+		});
+	};
+
+	MainController.prototype.initializeAlbums = function(){
+		this.album = {
+			collection: new AlbumBarCollection(),
+			model: context.currentAlbumBar
+		};
+
+		this.album.collection.add([
 			{name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10},
 			{name: 'Sadfield', artist: 'New Artists', totalTracks: 5},
 			{name: 'New Yrear', artist: 'Ocean Artists', totalTracks: 12},
@@ -55,16 +91,26 @@ define(['marionette',
 			{name: 'Dgg', artist: 'Gactor Vasskez', totalTracks: 170}
 		]);
 
-		var albumBarView = new AlbumBarView({
-			model : context.currentAlbumBar,
-			collection : albumBarCollection
-		});
-
-		Backbone.on('show-albums', function(){
-			mainRegion.show(albumBarView);
-		});
-
-		mainRegion.show(playlistsView);		
+		this.album.view = this.getAlbumView();
 	};
+
+	MainController.prototype.getAlbumView = function() {
+		return new AlbumBarView({
+			model : this.album.model,
+			collection : this.album.collection
+		});
+	};
+
+	MainController.prototype.bindListeners = function(){
+		Backbone.on('show-albums', function(){
+			this.mainRegion.show(this.getAlbumView());
+		});
+
+		this.listenTo(context.currentUserModel, 'action:showUserView', 
+			function(){this.show(this.getUserView());});
+		this.listenTo(context.currentSongModel, 'action:showPlaylistsView', 
+			function(){this.show(this.getPlaylistView());});
+	};
+
 	return MainController;
 });
