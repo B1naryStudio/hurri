@@ -2,13 +2,13 @@ define(['marionette'], function(Marionette){
 	MenuNavView = Marionette.ItemView.extend({
 		template: '#menu-nav-template',
 		events: {
-			'click .favourites-image' : 'showFavorites',
-			'click .show-playlists' : 'showPlaylists',
-			'click .show-groupes' : 'showGroupes',
-			'click .show-by-genres' : 'showGenres',
-			'click .show-by-artists' : 'showArtists',
-			'click .show-by-albums' : 'showAlbums',
-			'click .show-by-charts' : 'showCharts'
+			'click #favourites-button' : 'showFavorites',
+			'click #playlists-button' : 'showPlaylists',
+			'click #radio-button' : 'showGroupes',
+			'click #genres-button' : 'showGenres',
+			'click #artists-button' : 'showArtists',
+			'click #albums-button' : 'showAlbums',
+			'click #charts-button' : 'showCharts'
 		},
 
 		showFavorites : function(){
