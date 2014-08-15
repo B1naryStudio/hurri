@@ -1,5 +1,5 @@
-define(['marionette', './PlaylistsView', '../user/UserView', '../app/context'],
-	function(Marionette, PlaylistsView, UserView, context){
+define(['marionette', './PlaylistsView', './NotFoundView', '../user/UserView', '../app/context'],
+	function(Marionette, PlaylistsView, NotFoundView, UserView, context){
 	
 	var MainController = function(){		
 		
@@ -25,7 +25,14 @@ define(['marionette', './PlaylistsView', '../user/UserView', '../app/context'],
 			model: context.currentUserModel
 		});
 
-		mainRegion.show(playlistsView);		
+		var notFoundView = new NotFoundView();
+
+		if (window._is404Error) {
+			mainRegion.show(notFoundView);
+		} else {
+			mainRegion.show(playlistsView);
+		}
+
 	};
 	return MainController;
 });

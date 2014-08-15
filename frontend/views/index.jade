@@ -25,6 +25,13 @@ block content
 	include ./sidebar/notification-template
 	include ./footer/song-info-template
 
+	script#not_found_template(type="text/template")
+		h1 Page not found
+		p
+			|Seems the page you are looking for is apsent or moved. Try to go to&nbsp;
+			a(href="/") homepage
+			|&nbsp;and look out there
+
 	script(type="text/javascript").
 		window._is404Error = false;
 		window._injectedData = JSON.parse('["data_replace"]');
