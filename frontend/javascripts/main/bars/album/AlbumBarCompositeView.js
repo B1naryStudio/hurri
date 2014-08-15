@@ -1,4 +1,4 @@
-define(['marionette', './AlbumBarView', '../app/context'], function(Marionette, AlbumBarView, context){
+define(['marionette', './AlbumBarView', 'app/context'], function(Marionette, AlbumBarView, context){
 	var AlbumBarCompositeView = Marionette.CompositeView.extend({
 		childView: AlbumBarView,
 		template: '#album-bar-composite',
