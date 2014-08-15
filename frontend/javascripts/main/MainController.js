@@ -104,12 +104,13 @@ define(['marionette',
 	MainController.prototype.bindListeners = function(){
 		Backbone.on('show-albums', function(){
 			this.mainRegion.show(this.getAlbumView());
-		});
+		},this);
 
 		this.listenTo(context.currentUserModel, 'action:showUserView', 
-			function(){this.show(this.getUserView());});
+			function(){this.show(this.getUserView());},this);
+		
 		this.listenTo(context.currentSongModel, 'action:showPlaylistsView', 
-			function(){this.show(this.getPlaylistView());});
+			function(){this.show(this.getPlaylistView());},this);
 	};
 
 	return MainController;
