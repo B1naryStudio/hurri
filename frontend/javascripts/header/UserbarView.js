@@ -16,7 +16,7 @@ define(['marionette'], function(Marionette){
 		},
 
 		showUserView: function(){
-			this.model.trigger('action:showUserView');
+			Backbone.trigger('action:showUserView');
 		},
 
 	});

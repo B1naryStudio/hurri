@@ -106,11 +106,13 @@ define(['marionette',
 			this.mainRegion.show(this.getAlbumView());
 		},this);
 
-		this.listenTo(context.currentUserModel, 'action:showUserView', 
-			function(){this.show(this.getUserView());},this);
-		
-		this.listenTo(context.currentSongModel, 'action:showPlaylistsView', 
-			function(){this.show(this.getPlaylistView());},this);
+		Backbone.on('action:showUserView', function(){
+			this.mainRegion.show(this.getUserView());
+		},this);
+
+		Backbone.on('show-playlists', function(){
+			this.mainRegion.show(this.getPlaylistView());
+		},this);
 	};
 
 	return MainController;
