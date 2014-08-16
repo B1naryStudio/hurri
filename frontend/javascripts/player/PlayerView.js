@@ -17,7 +17,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			"click @ui.likeButton"		: "likeState",
 			"click @ui.volume"			: "mute",
 			"click @ui.commentButton"	: "addComment",
-			"change @ui.volumeRange"	: "volumeLevelSetup",
+			"mousemove @ui.volumeRange"	: "volumeLevelSetup",
 			"change @ui.playbackRange"	: "playbackPosition",
 			"keypress @ui.volumeRange"	: "volumeKeyControl"
 		},
