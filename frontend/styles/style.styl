@@ -24,7 +24,9 @@ body
 *
 	margin 0
 	padding 0
-
+	
+	&:focus 
+		outline none
 #header
 	width 100%
 	height header_height
@@ -178,7 +180,7 @@ body
 #player
 	height 60px
 	margin 0 auto
-	background #2b2e31
+	background:  linear-gradient( to bottom, #232323, #444, #444, #232323)
 #player-content
 	height 70px 
 	width 80%
@@ -493,111 +495,195 @@ button
 	width 25px
 	background-size cover
 	float left
-	margin-top 15px
+	margin-top 22px
+	background-image: url(../images/player/player.png)
+    background-repeat: no-repeat
+    background-size 400px 64px
 .player-button:focus
 	outline 0
 .player-button:active
 	position relative
 	top 1px
 #play-button
-	height 48px
-	width 48px
-	margin-top 5px
+	height 30px
+	width 30px
+	margin-top 10px
 #play-button.pause
-	background-image url(../images/player/play.png)
+	background: url('../images/player/player.png') no-repeat -575px 0;
+	width: 40px;
+	height: 40px;
 #play-button.pause:hover
-	background-image url(../images/player/play_hover.png)
+	background: url('../images/player/player.png') no-repeat -575px -256px;
+	width: 40px;
+	height: 40px;
 #play-button.pause:active
-	background-image url(../images/player/play_active.png)
+	background: url('../images/player/player.png') no-repeat -575px -256px;
+	width: 40px;
+	height: 40px;
 
 #play-button.play
-	background-image url(../images/player/pause.png)
+	background: url('../images/player/player.png') no-repeat -637px 0;
+	width: 40px;
+	height: 40px;
 #play-button.play:hover
-	background-image url(../images/player/pause_hover.png)
+	background: url('../images/player/player.png') no-repeat -637px -255px;
+	width: 40px;
+	height: 40px;
 #play-button.play:active
-	background-image url(../images/player/pause_active.png)
+	background: url('../images/player/player.png') no-repeat -637px -255px;
+	width: 40px;
+	height: 40px;
 
 #next-button
-	background-image url(../images/player/next.png)
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -447px 0;
+	width: 42px;
+	height: 42px;
 #next-button:hover
-	background-image url(../images/player/next_hover.png)
+	background: url('../images/player/player.png') no-repeat -447px -256px;
+	width: 42px;
+	height: 42px;
 #next-button:active
-	background-image url(../images/player/next_active.png)
+	background: url('../images/player/player.png') no-repeat -447px -256px;
+	width: 42px;
+	height: 42px;
 #next-button:disabled
-	background-image url(../images/player/next_disabled.png)
+	background: url('../images/player/player.png') no-repeat -447px -192px;
+	width: 42px;
+	height: 42px;
 #previous-button
-	background-image url(../images/player/prev.png)
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -512px 0;
+	width: 42px;
+	height: 42px;
 #previous-button:hover
-	background-image url(../images/player/prev_hover.png)
+	background: url('../images/player/player.png') no-repeat -512px -256px;
+	width: 42px;
+	height: 42px;
 #previous-button:active
-	background-image url(../images/player/prev_active.png)
+	background: url('../images/player/player.png') no-repeat -512px -256px;
+	width: 42px;
+	height: 42px;
 #previous-button:disabled
-	background-image url(../images/player/prev_disabled.png)
+	background: url('../images/player/player.png') no-repeat -512px -192px;
+	width: 42px;
+	height: 42px;
 #volume
-	margin 15px 0 0 5px
+	margin 21px 0 0 5px
 #volume.unmute
-	background-image url(../images/player/volume.png)
+	background: url('../images/player/player.png') no-repeat -384px 0;
+	width: 25px;
+	height: 28px;
 #volume.mute
-	background-image url(../images/player/volume_off.png)
+	background: url('../images/player/player.png') no-repeat 0 0;
+	width: 25px;
+	height: 28px;
 #volume-range
 	width 10%
 #playback-range
 	width 45%
 
+#shuffle-button
+	width 32px
 #shuffle-button.shuffleoff
-	background-image url(../images/player/unshuffle.png)
+	background: url('../images/player/player.png') no-repeat -256px -65px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleoff:hover
-	background-image url(../images/player/unshuffle_hover.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleoff:active
-	background-image url(../images/player/unshuffle_active.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 
 #shuffle-button.shuffleon
-	background-image url(../images/player/shuffle.png)
+	background: url('../images/player/player.png') no-repeat -256px -129px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleon:hover
-	background-image url(../images/player/shuffle_hover.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleon:active
-	background-image url(../images/player/shuffle_active.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 
+#repeat-button
+	width 32px
+	height 25px
 #repeat-button.song
-	background-image url(../images/player/repeat_track.png)
+	background: url('../images/player/player.png') no-repeat -192px -129px;
+	width: 22px;
+	height: 15px;
 #repeat-button.song:hover
-	background-image url(../images/player/repeat_track_hover.png)
+	background: url('../images/player/player.png') no-repeat -192px -1px;
+	width: 22px;
+	height: 15px;
 #repeat-button.song:active
-	background-image url(../images/player/repeat_track_active.png)
+	background: url('../images/player/player.png') no-repeat -192px -1px;
+	width: 22px;
+	height: 15px;
 
 #repeat-button.none
-	background-image url(../images/player/repeat.png)
+	background: url('../images/player/player.png') no-repeat -320px -64px;
+	width: 22px;
+	height: 17px;
 #repeat-button.none:hover
-	background-image url(../images/player/repeat_hover.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 #repeat-button.none:active
-	background-image url(../images/player/repeat_active.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 
 #repeat-button.album
-	background-image url(../images/player/repeat_all.png)
+	background: url('../images/player/player.png') no-repeat -320px -128px;
+	width: 22px;
+	height: 17px;
 #repeat-button.album:hover
-	background-image url(../images/player/repeat_all_hover.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 #repeat-button.album:active
-	background-image url(../images/player/repeat_all_active.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 
 
 #like-button
-	background-image url(../images/player/like.png)
+	background: url('../images/player/player.png') no-repeat -64px -65px;
+	width: 22px;
+	height: 16px;
 #like-button:hover
-	background-image url(../images/player/like_hover.png)
+	background: url('../images/player/player.png') no-repeat -64px -1px;
+	width: 22px;
+	height: 16px;
 #like-button:active
-	background-image url(../images/player/like_active.png)
+	background: url('../images/player/player.png') no-repeat -64px -129px;
+	width: 22px;
+	height: 16px;
 #comment-button
-	background-image url(../images/player/comment.png)
+	background: url('../images/player/player.png') no-repeat -128px -65px;
+	width: 20px;
+	height: 18px;
 #comment-button:hover
-	background-image url(../images/player/comment_hover.png)	
+	background: url('../images/player/player.png') no-repeat -128px -1px;
+	width: 20px;
+	height: 18px;	
 #comment-button:active
-	background-image url(../images/player/comment_active.png)			
+	background: url('../images/player/player.png') no-repeat -128px -129px;
+	width: 20px;
+	height: 18px;			
 
 input[type='range'] {
     float left
     height 6px
     margin 10px
-    margin-top 24px
+    margin-top 29px
     border: none;
     padding: 1px 2px;
     border-radius: 5px;
