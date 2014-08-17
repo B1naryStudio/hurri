@@ -4,8 +4,10 @@ define(['marionette',
 	'../app/context', 
 	'./bars/album/AlbumBarCollection', 
 	'./bars/album/AlbumBarCompositeView',
-	'./NotFoundView'],
-	function(Marionette, PlaylistsView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView){
+	'./NotFoundView',
+	'./radio/RadioCollection',
+	'./radio/RadioCollectionView'],
+	function(Marionette, PlaylistsView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView){
 
 	
 	var MainController = function(){		
@@ -25,6 +27,8 @@ define(['marionette',
 		this.initializeAlbums();
 
 		this.initializeNotFound();
+
+		this.initializeRadio();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -101,6 +105,57 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeRadio = function(){
+		this.radio = {
+			collection: new RadioBarCollection(),
+			model: context.currentRadioBar
+		};
+
+		this.radio.collection.add([
+			{
+				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
+				master: {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
+			]},
+			{
+				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
+				master : {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
+			]},
+			{
+				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
+				master: {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
+			]},
+			{
+				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
+				master: {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
+						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
+			]},
+		]);
+
+		this.radio.view = this.getRadioView();
+	};
+
+	MainController.prototype.getRadioView = function() {
+		return new RadioBarView({
+			model : this.radio.model,
+			collection : this.radio.collection
+		});
+	};
+
 	MainController.prototype.bindListeners = function(){
 		Backbone.on('show-albums', function(){
 			this.mainRegion.show(this.getAlbumView());
@@ -113,6 +168,12 @@ define(['marionette',
 		Backbone.on('show-playlists', function(){
 			this.mainRegion.show(this.getPlaylistView());
 		},this);
+
+		Backbone.on('show-groupes', function(){
+			this.mainRegion.show(this.getRadioView());
+		},this);
+
+		
 	};
 
 	return MainController;
