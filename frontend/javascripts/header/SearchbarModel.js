@@ -1,5 +1,5 @@
-define(['backbone', '../search/SearchResultsModel', '../song/SongModel'],
-function(Backbone, SearchResultsModel, SongModel){
+define(['backbone', '../search/SearchResultsCollection'],
+function(Backbone, SearchResultsCollection){
 	
 	var SearchbarModel = Backbone.Model.extend({
 		
@@ -8,9 +8,7 @@ function(Backbone, SearchResultsModel, SongModel){
 			previousInputs: [],
 		},
 
-		searchResultsModel: new SearchResultsModel({
-			model: SongModel
-		}),
+		searchResultsCollection: new SearchResultsCollection(),
 
 		search: function(){
 			var input = this.get('currentInput');
@@ -20,8 +18,10 @@ function(Backbone, SearchResultsModel, SongModel){
 
 			/*
 			 * Get search results from server and save
-			 * them into search results model.
+			 * them into searchResultsData.
 			 */
+			var searchResultsData;
+			this.searchResultsCollection.parse(searchResultData);
 
 			this.attributes.previousInputs.push(input);
 			this.set('currentInput', null);
