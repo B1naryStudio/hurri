@@ -18,8 +18,12 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			"click @ui.volume"			: "mute",
 			"click @ui.commentButton"	: "addComment",
 			"mousemove @ui.volumeRange"	: "volumeLevelSetup",
-			"change @ui.playbackRange"	: "playbackPosition",
-			"keypress @ui.volumeRange"	: "volumeKeyControl"
+			"mousemove @ui.playbackRange"	: "playbackPosition",
+			"mousedown @ui.volumeRange"	: "setUpVolume",
+			"mousedown @ui.playbackRange"	: "setUpPlayback",
+			"mouseout @ui.playbackRange" : "resetPlaybackMouseUpFlag",
+			"mouseout @ui.volumeRange" : "resetVolumeMouseUpFlag",
+			"mouseup @ui.playbackRange" : "resetPlaybackMouseUpFlag",
 		},
 		ui: {
    			nextButton: "#next-button",
@@ -31,7 +35,27 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
    			commentButton: "#comment-button",
    			volumeRange: "#volume-range",
    			playbackRange: "#playback-range",
-   			volume: '#volume'
+   			volume: '#volume',
+   			player : '#player'
+  		},
+  		
+  		setUpVolume: function(){
+  			this.flag = true;
+  			this.volumeLevelSetup();
+  		},
+  		
+  		setUpPlayback: function(){
+  			this.flag = true;
+  			this.playbackPosition();
+  		},
+
+  		resetPlaybackMouseUpFlag:function(){
+  			this.playbackPosition();
+  			this.flag = false;
+  		},
+
+  		resetVolumeMouseUpFlag:function(){
+  			this.flag = false;
   		},
 
   		changeValue: function(model){
@@ -83,14 +107,18 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		volumeLevelSetup : function(){
-			var input =  document.querySelector('#volume-range').value;
-			this.model.volumeLevelSetup(input);
+			if (this.flag){
+				var input =  document.querySelector('#volume-range').value;
+				this.model.volumeLevelSetup(input);
+			}
 
 		},
 
 		playbackPosition : function(){
-			var input =  document.querySelector('#playback-range').value;
-			this.model.playbackPosition(input);
+			if (this.flag){
+				var input =  document.querySelector('#playback-range').value;
+				this.model.playbackPosition(input);
+			}
 			
 		}
 	}); 
