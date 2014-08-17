@@ -6,8 +6,9 @@ define(['marionette',
 	'./bars/album/AlbumBarCompositeView',
 	'./NotFoundView',
 	'./radio/RadioCollection',
-	'./radio/RadioCollectionView'],
-	function(Marionette, PlaylistsView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView){
+	'./radio/RadioCollectionView',
+	'./comment/CommentLayout'],
+	function(Marionette, PlaylistsView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
 
 	
 	var MainController = function(){		
@@ -156,6 +157,10 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.getLayout = function() {
+		LayoutView.render();
+	};
+
 	MainController.prototype.bindListeners = function(){
 		Backbone.on('show-albums', function(){
 			this.mainRegion.show(this.getAlbumView());
@@ -173,6 +178,10 @@ define(['marionette',
 			this.mainRegion.show(this.getRadioView());
 		},this);
 
+		Backbone.on('show-favorites', function(){
+			this.getLayout();
+		},this);
+		
 		
 	};
 
