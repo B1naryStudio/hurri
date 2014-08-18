@@ -5,8 +5,8 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  			genre: ['unknown'],
  			playlistName: 'myPlaylist',
  			created: Date(1),
- 			oldCollection: null
-
+ 			oldCollection: null,
+ 			numberOfTracks: 5
  		},
  		playTrack: function(position){
  			var track = this.collection.at(position);
