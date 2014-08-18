@@ -9,21 +9,21 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:duration': 'render'
 		},
 		events : {
-			"click @ui.nextButton"		: "nextTrack",
-			"click @ui.previousButton"	: "previousTrack",
-			"click @ui.playButton"		: "playbackState",
-			"click @ui.shuffleButton"	: "shuffleMode",
-			"click @ui.repeatButton"	: "repeatMode",
-			"click @ui.likeButton"		: "likeState",
-			"click @ui.volume"			: "mute",
-			"click @ui.commentButton"	: "addComment",
-			"mousemove @ui.volumeRange"	: "volumeLevelSetup",
+			"click @ui.nextButton"			: "nextTrack",
+			"click @ui.previousButton"		: "previousTrack",
+			"click @ui.playButton"			: "playbackState",
+			"click @ui.shuffleButton"		: "shuffleMode",
+			"click @ui.repeatButton"		: "repeatMode",
+			"click @ui.likeButton"			: "likeState",
+			"click @ui.volume"				: "mute",
+			"click @ui.commentButton"		: "addComment",
+			"mousemove @ui.volumeRange"		: "volumeLevelSetup",
 			"mousemove @ui.playbackRange"	: "playbackPosition",
-			"mousedown @ui.volumeRange"	: "setUpVolume",
+			"mousedown @ui.volumeRange"		: "setUpVolume",
 			"mousedown @ui.playbackRange"	: "setUpPlayback",
-			"mouseout @ui.playbackRange" : "resetPlaybackMouseUpFlag",
-			"mouseout @ui.volumeRange" : "resetVolumeMouseUpFlag",
-			"mouseup @ui.playbackRange" : "resetPlaybackMouseUpFlag",
+			"mouseout @ui.playbackRange" 	: "resetPlaybackMouseUpFlag",
+			"mouseout @ui.volumeRange" 		: "resetVolumeMouseUpFlag",
+			"mouseup @ui.playbackRange" 	: "resetPlaybackMouseUpFlag",
 		},
 		ui: {
    			nextButton: "#next-button",
@@ -107,13 +107,17 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		volumeLevelSetup : function(){
-			var input =  this.ui.volumeRange.val();
-			this.model.volumeLevelSetup(input);
+			if (this.flag){
+				var input =  this.ui.volumeRange.val();
+				this.model.volumeLevelSetup(input);
+			}
 		},
 
 		playbackPosition : function(){
-			var input =  this.ui.playbackRange.val();
-			this.model.playbackPosition(input);		
+			if (this.flag){
+				var input =  this.ui.playbackRange.val();
+				this.model.playbackPosition(input);	
+			}	
 		},
 	}); 
 	return PlayerView;
