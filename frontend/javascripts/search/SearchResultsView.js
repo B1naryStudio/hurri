@@ -5,13 +5,15 @@ define(['marionette'], function(Marionette){
 		template: 	'#searchresults-template',
 
 		ui: {
-			albumsResults 	: '#albums-results',
-   			artistsResults 	: '#artists-results',
-   			songsResults 	: '#songs-results'
+			resultItem 		: '#result-item'
   		},
 
 		events: {
-			//
+			'click @ui.resultItem'	: 'select',
+		},
+
+		select: function(){
+			this.el.style.display = 'none';
 		}
 
 	});

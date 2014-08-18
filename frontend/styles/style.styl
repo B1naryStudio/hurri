@@ -150,9 +150,33 @@ body
 			background #529de1
 
 #searchresults
-	width auto
+	position absolute
+	width 300px
 	height auto
-	background white
+	max-height 500px 
+	overflow hidden
+	overflow-y auto
+	background-color #fff
+	box-shadow 0 2px 40px rgba(0, 0, 0, 0.4)
+	display none
+
+	#result-item
+		width 100%
+		height 40px
+		background white
+
+		#result-cover
+			width 40px
+			height 40px
+			float left
+
+		#result-title
+			width auto
+			height 40px
+			float left
+			line-height 40px
+			font-size 15px
+			background white
 
 #user
 	width 100%
