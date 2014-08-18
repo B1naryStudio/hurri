@@ -2,21 +2,38 @@ extends ./layout
 
 
 block content
-	//404_placeholder
 
 	div#header
+		#notification
 	div#player
 	div#menu
 	div#main
 	div#sidebar
+		#sidebar-region
+		#sidebar-nav
 	div.clear
 	div#footer
-	include ./header/auth-template
+	include ./header/header-template
+	include ./header/userbar-template
+	include ./header/notificationbar-template
+	include ./header/searchbar-template
+	include ./user/user-template
 	include ./player/player-template
 	include ./menu/menu-nav-template
 	include ./main/playlists-template
 	include ./sidebar/sidebar-template
+	include ./sidebar/notification-template
 	include ./footer/song-info-template
+	include ./main/album-bar-template
+	include ./main/radio-bar-template
 
-	script(type="text/template", id="main_template").
-		var data = JSON.parse('/** data_replace **/');
+	script#not_found_template(type="text/template")
+		h1 Page not found
+		p
+			|Seems the page you are looking for is apsent or moved. Try to go to&nbsp;
+			a(href="/") homepage
+			|&nbsp;and look out there
+
+	script(type="text/javascript").
+		window._is404Error = false;
+		window._injectedData = JSON.parse('["data_replace"]');

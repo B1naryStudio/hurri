@@ -11,7 +11,18 @@ module.exports = function (app) {
 	});
 
 	app.use(function(req, res, next) {
-		injectData('<h1>404 error</h1><h2>Not found</h2>', res);
+
+		if (req.accepts('html')) {
+			injectData('<h1>404 error</h1><h2>Not found</h2>', res, true);
+			return;
+		}
+
+		if (req.accepts('json')) {
+			res.status(404);
+			res.send({ error: 'Not found' });
+			return;
+		}
+
 	});
 
 };

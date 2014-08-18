@@ -1,18 +1,17 @@
-define(['marionette', './AuthView', '../app/context'], function(Marionette, AuthView, context){
-	
-	var HeaderController = function() {	
+define(['marionette', './HeaderView'], function(Marionette, HeaderView){
+
+	var HeaderController = function(){
 
 	 	var HeaderRegion = Marionette.Region.extend({
-	  		template: '#auth-template',
 	  		el: '#header'
 	 	});
-	 
-		headerRegion = new HeaderRegion();
-		var authView = new AuthView({
-			model: context.currentSongModel
-		});
-		headerRegion.show(authView);
-	};
+		var headerRegion = new HeaderRegion();
 
+		var headerView = new HeaderView({
+			//
+		});
+
+		headerRegion.show(headerView);
+	};
 	return HeaderController;
 });

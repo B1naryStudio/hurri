@@ -1,3 +1,4 @@
+@require 'mixin.styl'
 /*Colors*/
 default_bg = gray
 vk_bg = #42618b
@@ -8,6 +9,13 @@ fb_bg = #2f4885
 /*Font*/
 basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
 
+/*Header*/
+header_height = 60px
+header_background_color = #27709b
+
+bar_height = 40px
+searchbar_width = 300px
+
 body
 	font-family basic_font
 	width 100%
@@ -16,32 +24,163 @@ body
 *
 	margin 0
 	padding 0
-
+	
+	&:focus 
+		outline none
 #header
 	width 100%
-	height 50px
-	background red
+	height header_height
+	background header_background_color
+	padding 10px
+	box-sizing border-box
 
-#header img
-	height 50px
+#hurri-logo
+	height 40px
+	cursor pointer
+	float left
 
-#auth-form 
-	list-style-type none;
+#userbar
+	width auto
+	height bar_height
 	float right
-	display inline
-	width 25%
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
 
-.headerButton
-	padding-left 2%
-	width 30%
-	height 50px
-	color darkgrey
-	float: right;
+	&:hover
+		background #529de1
+
+	#avatar-icon
+		width bar_height
+		height bar_height
+		max-width 50px
+		cursor pointer
+		border-style hidden
+		border-top-left-radius 3px
+		border-bottom-left-radius 3px
+		box-sizing border-box
+
+	#name-field
+		width auto
+		height 100%
+		float right
+		font-size 15px
+		font-weight 700
+		line-height bar_height
+		padding-left 10px
+		padding-right 10px
+		cursor pointer
+		border-style hidden
+		border-top-right-radius 3px
+		border-bottom-right-radius 3px
+		box-sizing border-box
+
+#notificationbar
+	width auto
+	height bar_height
+	float right
+	margin-right 10px
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	cursor pointer
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	&:hover
+		background #529de1
+
+	#notification-icon
+		width bar_height
+		height bar_height
+		cursor pointer
+		box-sizing border-box
+
+	#unread-number
+		height 20px
+		width 20px
+		background orange
+		cursor pointer
+		border-radius 3px
+		text-align center
+		font-size 90%
+		font-weight bold
+		color white
+		display inline
+		padding 1px 2px
+
+#searchbar
+	width auto
+	height bar_height
+	float right
+	margin-right 50px
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	#search-input
+		width searchbar_width
+		height bar_height
+		font-size 18px
+		border-style hidden
+		border-top-left-radius 3px
+		border-bottom-left-radius 3px
+		box-sizing border-box
+
+		&:focus
+			outline none
+
+	#search-button
+		width auto
+		height bar_height
+		float right
+		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+		font-size 15px
+		font-weight 700
+		line-height bar_height
+		cursor pointer
+		padding-left 10px
+		padding-right 10px
+		border-style hidden
+		border-top-right-radius 3px
+		border-bottom-right-radius 3px
+		box-sizing border-box
+
+		&:hover
+			background #529de1
+
+#user
+	width 100%
+	height 100%
+	box-sizing border-box
+
+	#avatar
+		width 200px
+		height auto
+		max-height 500px
+		float left
+
+	#userinfo
+		width auto
+		height auto
+		float left
+		margin 10px
+		box-sizing border-box
+
+		#name
+			width auto
+			height auto
+			margin-bottom 10px
+
+		#info
+			width auto
+			height auto
+			font-size 12px
 
 #player
 	height 60px
 	margin 0 auto
-	background #2b2e31
+	background:  linear-gradient( to bottom, #232323, #444, #444, #232323)
 #player-content
 	height 70px 
 	width 80%
@@ -51,27 +190,274 @@ body
 	float left
 	width 50%
 
+#main-bar-header
+	width 360px
+	height 25px
+	background lightgrey
+	margin 5px auto
+
+	#genres-select
+		display inline-block
+		height 25px
+		margin-right 20px
+	#album-select
+	#artist-select
+	#track-select
+		display inline-block
+		height 20px
+		text-align center
+		border-right 1px solid grey
+		background linear-gradient(to bottom, rgba(245,245,245,1) 0%,rgba(224,224,224,1) 100%)
+		width 80px
+		&:last-child
+			border none
+		&:hover
+			background #f6f6f6
+#album-bar-wrapper
+	margin auto
+.album-bar 
+	width 150px
+	height 150px
+	background url('../images/default/cover.jpg')
+	background-size 150px
+	float left
+	margin 10px
+	position relative
+
+	#artistAlbum
+		width 100%
+		height 15%
+		background white
+		opacity 0.8
+		text-align center
+
+	#totalTracksAlbum
+		width 100%
+		height 10%
+		background white
+		opacity 0.8
+		text-align center
+		
+	#nameAlbum
+		position absolute
+		bottom 0
+		width 100%
+		height 20%
+		background white
+		opacity 0.8
+		text-align center
+
+
+
 #menu
-	background green
+	background lightgrey
 	width 25%
 	float left
 
 #menu li
-	height 30px
-	border 1px solid darkgrey
+	height 38px
+	border-bottom 1px solid darkgrey
 	list-style-type none;
+	background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
 
+	.menu-icon
+		width 28px
+		height 28px
+		float left
+		opacity: 0.5
+		margin-top 4px
+		margin-left 4px
+		margin-right 4px
+		
+		&.favourites-image
+			background: url('../images/menu/favorites.png') no-repeat;
+			background-size: 28px
+		&.show-playlists 
+			background: url('../images/menu/playlists.png') no-repeat;
+			background-size: 28px
+		&.show-groupes
+			background: url('../images/menu/radios.png') no-repeat;
+			background-size: 28px
+		&.show-by-genres 
+			background: url('../images/menu/genres.png') no-repeat; 
+			background-size: 28px
+		&.show-by-artists
+			background: url('../images/menu/artists.png') no-repeat;
+			background-size: 28px
+		&.show-by-albums
+			background: url('../images/menu/albums.png') no-repeat;
+			background-size: 28px
+		&.show-by-charts
+			background: url('../images/menu/charts.png') no-repeat;
+			background-size: 28px
+	.name
+		padding-top 10px
+	&:hover 
+		background Snow
 #sidebar
-	background yellow
+	background #eee
+	height 100%
 	width 25%
 	float left
 
-#sidebar li
-	height 30px
-	border 1px solid darkgrey
-	list-style-type none;
+	#sidebar-region
+		display block
+		position relative
 
+.notification-message 
+	display block
+	border-radius 2px
+	background #fefefe
+	opacity 0.8
+	margin 0 auto 0
+	padding 2%
+	width 90%
+	box-shadow 0px 0px 5px 0px rgba(50, 50, 50, 0.5)
+	margin-bottom: 5px
+	position relative
+	
+	&.newNotification
+		background PeachPuff
+	&:last-child 
+		border none
+
+	.information-part
+		padding-right 16px
+
+	.removeNotification
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	.renewMessage
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/notification.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 18px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+#sidebar-nav
+		clear both
+		display block
+		bottom 0px
+		
+		li
+			height 30px
+			list-style-type none;
+			display: inline-block
+			width:33%
+			border-right 1px solid lightgrey
+
+			&#friendsButton
+				background: url('../images/sidebar/friends.png') no-repeat;
+				background-size: 40px
+				opacity: 0.5
+				background-position: center
+				&:hover
+					opacity 1
+			&#musicButton
+				background: url('../images/sidebar/music.png') no-repeat;
+				background-size: 32px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+			&#infoButton
+				background: url('../images/sidebar/info.png') no-repeat;
+				background-size: 32px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+.notifHeadWrapper
+	display block
+	margin 0 auto 0
+	padding 2%
+	h3
+		
+		display block
+		wigth 80%
+		
+.deleteAll
+	width 16px
+	height 16px
+	top 0
+	opacity 0.3
+	background: url('../images/notifications/bin.png') no-repeat;
+	background-size: 16px
+
+	&:hover
+		opacity 0.9
+.song-item
+	width 100%
+.sidebar-song-wrap
+	width 90%
+	margin 5px auto
+	height 45px
+	border-radius 4px
+	background white
+	position relative
+	
+	&:hover 
+		background lightgrey
+
+	.sidebar-song-img-box 
+		backgroung grey
+		img
+			width 45px
+			height 45px
+			float left
+
+	.sidebar-song-header
+		margin-left 50px
+
+	.sidebar-song-info
+		margin-left 50px
+
+	.delete-song-from-list
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	.add-song-to-queue
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/songlist/queue.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 20px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	&.activesong
+		background LightBlue
 #footer
+	width 75%
 	height 30px
 	background #2b2e31
 	border-top 1px solid darkgrey
@@ -87,6 +473,7 @@ body
 	float right
 	display inline
 	width 25%
+	background lightgreen
 
 .footer-button
 	padding 4px 10px
@@ -98,6 +485,69 @@ body
 .clear
 	clear both
 
+.radio-wrapper
+	width  300px
+	padding 1%
+	margin 1%
+	height 200px
+	display block
+	float left 
+	background rgba(204,204,204,1) 
+	position relative
+
+	.nameRadio
+		width 100%
+		height 20px
+		background linear-gradient(to top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		text-align center
+	
+	.left-side
+		display block
+		width 50%
+		background white
+		opacity 0.8
+		float left
+		height 90%
+		
+	.master-avatar
+		display block
+		width 50px
+		margin auto
+	.totalTracksRadio
+	.listeners
+	.masterName
+		height 20px
+		display block
+		margin auto
+		text-align center
+	.tracks-side
+		height 90%
+		width 50%
+		background white
+		opacity 0.5
+		float left
+	.playicon
+		background url(../images/main/play.gif)
+		background-size 128px
+		opacity 0.3
+		width 128px
+		height 128px
+		position absolute
+		top 22%
+		left 28%
+		z-index 10
+		
+		&:hover
+			background url(../images/main/play.gif)
+			background-size 128px
+			opacity 0.8
+		&:active 	
+			background url(../images/main/play.gif)
+			background-size 128px
+			opacity 0.5
+
+
+
 button
 	margin auto 3px 
 	background #2b2e31
@@ -108,113 +558,197 @@ button
 	width 25px
 	background-size cover
 	float left
-	margin-top 15px
 	cursor pointer
+	margin-top 22px
+	background-image: url(../images/player/player.png)
+    background-repeat: no-repeat
+    background-size 400px 64px
 .player-button:focus
 	outline 0
 .player-button:active
 	position relative
 	top 1px
 #play-button
-	height 48px
-	width 48px
-	margin-top 5px
+	height 30px
+	width 30px
+	margin-top 10px
 #play-button.pause
-	background-image url(../images/player/play.png)
+	background: url('../images/player/player.png') no-repeat -575px 0;
+	width: 40px;
+	height: 40px;
 #play-button.pause:hover
-	background-image url(../images/player/play_hover.png)
+	background: url('../images/player/player.png') no-repeat -575px -256px;
+	width: 40px;
+	height: 40px;
 #play-button.pause:active
-	background-image url(../images/player/play_active.png)
+	background: url('../images/player/player.png') no-repeat -575px -256px;
+	width: 40px;
+	height: 40px;
 
 #play-button.play
-	background-image url(../images/player/pause.png)
+	background: url('../images/player/player.png') no-repeat -637px 0;
+	width: 40px;
+	height: 40px;
 #play-button.play:hover
-	background-image url(../images/player/pause_hover.png)
+	background: url('../images/player/player.png') no-repeat -637px -255px;
+	width: 40px;
+	height: 40px;
 #play-button.play:active
-	background-image url(../images/player/pause_active.png)
+	background: url('../images/player/player.png') no-repeat -637px -255px;
+	width: 40px;
+	height: 40px;
 
 #next-button
-	background-image url(../images/player/next.png)
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -447px 0;
+	width: 42px;
+	height: 42px;
 #next-button:hover
-	background-image url(../images/player/next_hover.png)
+	background: url('../images/player/player.png') no-repeat -447px -256px;
+	width: 42px;
+	height: 42px;
 #next-button:active
-	background-image url(../images/player/next_active.png)
+	background: url('../images/player/player.png') no-repeat -447px -256px;
+	width: 42px;
+	height: 42px;
 #next-button:disabled
-	background-image url(../images/player/next_disabled.png)
+	background: url('../images/player/player.png') no-repeat -447px -192px;
+	width: 42px;
+	height: 42px;
 #previous-button
-	background-image url(../images/player/prev.png)
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -512px 0;
+	width: 42px;
+	height: 42px;
 #previous-button:hover
-	background-image url(../images/player/prev_hover.png)
+	background: url('../images/player/player.png') no-repeat -512px -256px;
+	width: 42px;
+	height: 42px;
 #previous-button:active
-	background-image url(../images/player/prev_active.png)
+	background: url('../images/player/player.png') no-repeat -512px -256px;
+	width: 42px;
+	height: 42px;
 #previous-button:disabled
-	background-image url(../images/player/prev_disabled.png)
+	background: url('../images/player/player.png') no-repeat -512px -192px;
+	width: 42px;
+	height: 42px;
 #volume
-	margin 15px 0 0 5px
+	margin 21px 0 0 5px
 #volume.unmute
-	background-image url(../images/player/volume.png)
+	background: url('../images/player/player.png') no-repeat -384px 0;
+	width: 25px;
+	height: 28px;
 #volume.mute
-	background-image url(../images/player/volume_off.png)
+	background: url('../images/player/player.png') no-repeat 0 0;
+	width: 25px;
+	height: 28px;
 #volume-range
 	width 10%
 #playback-range
 	width 45%
 
+#shuffle-button
+	width 32px
 #shuffle-button.shuffleoff
-	background-image url(../images/player/unshuffle.png)
+	background: url('../images/player/player.png') no-repeat -256px -65px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleoff:hover
-	background-image url(../images/player/unshuffle_hover.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleoff:active
-	background-image url(../images/player/unshuffle_active.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 
 #shuffle-button.shuffleon
-	background-image url(../images/player/shuffle.png)
+	background: url('../images/player/player.png') no-repeat -256px -129px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleon:hover
-	background-image url(../images/player/shuffle_hover.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 #shuffle-button.shuffleon:active
-	background-image url(../images/player/shuffle_active.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 22px;
+	height: 18px;
 
+#repeat-button
+	width 32px
+	height 25px
 #repeat-button.song
-	background-image url(../images/player/repeat_track.png)
+	background: url('../images/player/player.png') no-repeat -192px -129px;
+	width: 22px;
+	height: 15px;
 #repeat-button.song:hover
-	background-image url(../images/player/repeat_track_hover.png)
+	background: url('../images/player/player.png') no-repeat -192px -1px;
+	width: 22px;
+	height: 15px;
 #repeat-button.song:active
-	background-image url(../images/player/repeat_track_active.png)
+	background: url('../images/player/player.png') no-repeat -192px -1px;
+	width: 22px;
+	height: 15px;
 
 #repeat-button.none
-	background-image url(../images/player/repeat.png)
+	background: url('../images/player/player.png') no-repeat -320px -64px;
+	width: 22px;
+	height: 17px;
 #repeat-button.none:hover
-	background-image url(../images/player/repeat_hover.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 #repeat-button.none:active
-	background-image url(../images/player/repeat_active.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 
 #repeat-button.album
-	background-image url(../images/player/repeat_all.png)
+	background: url('../images/player/player.png') no-repeat -320px -128px;
+	width: 22px;
+	height: 17px;
 #repeat-button.album:hover
-	background-image url(../images/player/repeat_all_hover.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 #repeat-button.album:active
-	background-image url(../images/player/repeat_all_active.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 22px;
+	height: 17px;
 
 
 #like-button
-	background-image url(../images/player/like.png)
+	background: url('../images/player/player.png') no-repeat -64px -65px;
+	width: 22px;
+	height: 16px;
 #like-button:hover
-	background-image url(../images/player/like_hover.png)
+	background: url('../images/player/player.png') no-repeat -64px -1px;
+	width: 22px;
+	height: 16px;
 #like-button:active
-	background-image url(../images/player/like_active.png)
+	background: url('../images/player/player.png') no-repeat -64px -129px;
+	width: 22px;
+	height: 16px;
 #comment-button
-	background-image url(../images/player/comment.png)
+	background: url('../images/player/player.png') no-repeat -128px -65px;
+	width: 20px;
+	height: 18px;
 #comment-button:hover
-	background-image url(../images/player/comment_hover.png)	
+	background: url('../images/player/player.png') no-repeat -128px -1px;
+	width: 20px;
+	height: 18px;	
 #comment-button:active
-	background-image url(../images/player/comment_active.png)			
+	background: url('../images/player/player.png') no-repeat -128px -129px;
+	width: 20px;
+	height: 18px;			
 
 input[type='range'] {
 	cursor pointer
     float left
     height 6px
     margin 10px
-    margin-top 24px
+    margin-top 29px
     border: none;
     padding: 1px 2px;
     border-radius: 5px;
@@ -264,41 +798,9 @@ input[type='range']::-ms-thumb {
     background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 
-#shuffle-button
+/*#shuffle-button*/
 
 
 /*Sign in styles*/
-.signin_page
-	text-align center
-.social_enter
-	margin-top 20px
-	text-align center
-	a
-		font-size 14px
-		text-decoration none
-		color #fff
-		display inline-block
-		margin-right 10px
-		padding 5px 10px
-		background default_bg
-		box-shadow 0 2px 0 darken(default_bg, 10)
-		&.vk
-			&:hover
-				background darken(vk_bg, 10)
-			background vk_bg
-			box-shadow 0 2px 0 darken(vk_bg, 10)
-		&.ok
-			&:hover
-				background darken(ok_bg, 10)
-			background ok_bg
-			box-shadow 0 2px 0 darken(ok_bg, 10)
-		&.tw
-			&:hover
-				background darken(tw_bg, 10)
-			background tw_bg
-			box-shadow 0 2px 0 darken(tw_bg, 10)
-		&.fb
-			&:hover
-				background darken(fb_bg, 10)
-			background fb_bg
-			box-shadow 0 2px 0 darken(fb_bg, 10)
+@import url(signin.styl);
+@import url(not_found.styl);

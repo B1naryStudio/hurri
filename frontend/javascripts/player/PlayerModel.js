@@ -31,7 +31,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					audioHandler.initialize(context.currentSongModel.get('url'));
 				});
 			}
-			this.set({duration: 280});
+			this.set({duration: context.currentSongModel.get('duration')});
 		},
 
 		playbackState: function(){

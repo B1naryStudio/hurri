@@ -1,9 +1,23 @@
 script#menu-nav-template(type='text/template')
 	ul
-		li Избранное
-		li Плейлисты
-		li Радио
-		li Жанры
-		li Исполнители
-		li Альбомы
-		li Чарты
+		li#genres-button 
+			.menu-icon.favourites-image
+			.name Избранное
+		li#playlists-button
+			.menu-icon.show-playlists 
+			.name Плейлисты
+		li#radio-button
+			.menu-icon.show-groupes 
+			.name Радио
+		li#genres-button
+			.menu-icon.show-by-genres 
+			.name Жанры
+		li#artists-button
+			.menu-icon.show-by-artists 
+			.name Исполнители
+		li#albums-button
+			.menu-icon.show-by-albums 
+			.name Альбомы
+		li#charts-button
+			.menu-icon.show-by-charts 
+			.name Чарты
