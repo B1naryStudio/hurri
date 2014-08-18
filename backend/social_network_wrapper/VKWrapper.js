@@ -9,7 +9,7 @@ function VKWrapper(){
 		'appSecret' : 'sKTyZBHIHu17JeRLTsez',
 		'mode'      : 'oauth'
 	});
-	this.vk.setToken( { token :'07cf157b9f176abb17cfd2f25b9868d5bd8e3eaa1756d0d258ceda52f9cb6d7e817d87bc00da960440adc' });
+	this.vk.setToken( { token :'8abd963d45d9e3208f66830869ab880a86795bc96c65dbba3c81cfc264e90c6d06fdd0a7956dcfea4915c' });
 
 }
 
@@ -66,7 +66,11 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 	});
 	
 	this.vk.once('done:audio.search', function(result) {
-		callback(result);
+		 var object = {
+		 	url: result.response[1].url,
+		 	duration: result.response[1].duration
+		 };
+		callback(object);
 	});
 
 };
