@@ -2,7 +2,18 @@ define(['marionette', './CommentView', '../../app/context'], function(Marionette
 	var CommentCompositeView = Marionette.CompositeView.extend({
 		id: 'comments',
 		template : '#comments-composite',
-		childView: CommentView
+		childView: CommentView,
+		events : {
+			'click #add-comment' : 'addComment'
+		},
+
+		ui : {
+			comment : '#new-comment'
+		},
+
+		addComment: function(){
+
+		}
 	});
 	return CommentCompositeView;
 });
