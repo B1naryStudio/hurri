@@ -2,7 +2,7 @@ define(['marionette'], function(Marionette){
 	MenuNavView = Marionette.ItemView.extend({
 		template: '#menu-nav-template',
 		events: {
-			'click #favourites-button' : 'showFavorites',
+			'click #favorites-button' : 'showFavorites',
 			'click #playlists-button' : 'showPlaylists',
 			'click #radio-button' : 'showGroupes',
 			'click #genres-button' : 'showGenres',
