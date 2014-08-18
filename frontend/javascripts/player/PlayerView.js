@@ -6,7 +6,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:position': 'changeValue',
 			'change:previousButtonState': 'render',
 			'change:nextButtonState': 'render',
-			'change:duration': 'render' 
+			'change:duration': 'render'
 		},
 		events : {
 			"click @ui.nextButton"		: "nextTrack",
@@ -23,7 +23,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 		ui: {
    			nextButton: "#next-button",
-   			previousButton:	 "#previous-button",
+   			previousButton:	"#previous-button",
    			playButton: "#play-button",
    			shuffleButton: "#shuffle-button",
    			repeatButton: "#repeat-button",
@@ -83,15 +83,13 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		volumeLevelSetup : function(){
-			var input =  document.querySelector('#volume-range').value;
+			var input =  this.ui.volumeRange.val();
 			this.model.volumeLevelSetup(input);
-
 		},
 
 		playbackPosition : function(){
-			var input =  document.querySelector('#playback-range').value;
-			this.model.playbackPosition(input);
-			
+			var input =  this.ui.playbackRange.val();
+			this.model.playbackPosition(input);		
 		}
 	}); 
 	return PlayerView;

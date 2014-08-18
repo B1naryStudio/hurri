@@ -13,7 +13,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			repeatTrack : 'none',
 			comments : 0,
 			position : 0,
-			duration : 280,
+			duration : 0,
 			liked : false,
 			timerId : 0,
 		},
@@ -23,7 +23,15 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		initialize: function(){
 			this.bindListeners();
 			PlaylistModel.playTrack(this.get('currentTrack'));
-			audioHandler.initialize(context.currentSongModel.get('url'));
+			var url = context.currentSongModel.getStream();
+
+			if (url){
+				audioHandler.initialize(url);
+			} else {
+				context.currentSongModel.once('change:url', function(){
+					audioHandler.initialize(context.currentSongModel.get('url'));
+				});
+			}
 		},
 
 		playbackState: function(){
@@ -66,21 +74,28 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		newTrack: function(param){
-			
 			PlaylistModel.playTrack(param);
+			this.stopTrack();
 			this.set({
 				currentTrack: param,
 				duration: context.currentSongModel.get('duration'),
 				position: 0
 			});
-			this.stopTrack();
+			
 			this.volumeLevelSetup(this.get('volumeLevel'));
 			this.startTrack();
 		},
 
 		stopTrack: function(){
-				audioHandler.stopTrack(context.currentSongModel.get('url'));
-				this.stopTimer();
+			var url = context.currentSongModel.getStream();
+			if (url){
+				audioHandler.stopTrack(url);
+			} else {
+				context.currentSongModel.once('change:url', function(){
+					audioHandler.stopTrack(context.currentSongModel.get('url'));
+				});
+			}
+			this.stopTimer();
 		},
 
 		startTrack: function(){
@@ -178,10 +193,17 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		repeatMode : function(){
 			if (this.get('repeatTrack') === enums.repeatModes.album){
 				this.set({repeatTrack: enums.repeatModes.song});
+				this.set({nextButtonState: false, previousButtonState: false});
 			} else if (this.get('repeatTrack') === enums.repeatModes.song){
 				this.set({repeatTrack: enums.repeatModes.none});
+				if (this.get('currentTrack') === 0){
+					this.set({nextButtonState: false, previousButtonState: true});
+				} else if (this.get('currentTrack') === 4){
+					this.set({nextButtonState: true, previousButtonState: false});
+				}
 			}else if (this.get('repeatTrack') === enums.repeatModes.none){
 				this.set({repeatTrack: enums.repeatModes.album});
+				this.set({nextButtonState: false, previousButtonState: false});
 			} else {
 				console.log('wrong repeatMode!');
 			}
