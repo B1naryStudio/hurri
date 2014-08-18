@@ -1,6 +1,6 @@
 define(['backbone', '../search/SearchResultsCollection'],
 function(Backbone, SearchResultsCollection){
-	
+
 	var SearchbarModel = Backbone.Model.extend({
 		
 		defaults: {
@@ -20,8 +20,17 @@ function(Backbone, SearchResultsCollection){
 			 * Get search results from server and save
 			 * them into searchResultsData.
 			 */
-			var searchResultsData;
-			this.searchResultsCollection.parse(searchResultData);
+
+			 /*
+			  * Test search results data. Remove this code when
+			  * search request mechanism will be implemented.
+			  */
+			var searchResultsData = [
+				['album1', 'album2', 'album3'],
+				['artist1', 'artist2', 'artist3'],
+				['song1', 'song2', 'song3']
+			];
+			this.searchResultsCollection.parse(searchResultsData);
 
 			this.attributes.previousInputs.push(input);
 			this.set('currentInput', null);
