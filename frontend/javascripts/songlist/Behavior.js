@@ -1,5 +1,5 @@
-define(['marionette', './SonglistView', '../app/context'], function(Marionette, SonglistView, context){
-	var Behaviors={};
+define(['marionette'], function(Marionette){
+    var Behaviors={};
     Marionette.Behaviors.behaviorsLookup = function() {
         return Behaviors;
     };
@@ -29,15 +29,5 @@ define(['marionette', './SonglistView', '../app/context'], function(Marionette, 
             
         }
     });
-
-	var SonglistCollectionView = Marionette.CollectionView.extend({
-		childView: SonglistView,
-		behaviors: {
-	        Sortable:{
-	            containment:'parent' 
-	        }
-    	}
-	});
-	return SonglistCollectionView;
+return  Behaviors.Sortable;
 });
-
