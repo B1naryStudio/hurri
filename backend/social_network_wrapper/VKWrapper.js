@@ -75,4 +75,18 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 
 };
 
+VKWrapper.prototype.getRecommendations = function(id, count, callback){
+	this.vk.request('audio.getRecommendations', {'user_id' : id, 'count': count});
+	this.vk.once('done:audio.getRecommendations', function(result) {
+		callback(result);
+	});
+};
+
+VKWrapper.prototype.getAlbums = function(id, count, callback){
+	this.vk.request('audio.getAlbums', {'owner_id' : id, 'count': count});
+	this.vk.once('done:audio.getAlbums', function(result) {
+		callback(result);
+	});
+};
+
 module.exports = new VKWrapper();
