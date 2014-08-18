@@ -1,39 +1,29 @@
-define(['backbone'], function(Backbone){
-
-	var SearchResultItemModel = Backbone.Model.extend({
-		
-		defaults: {
-			type: undefined,
-			cover: undefined,
-			title: undefined,
-			data: undefined
-		}
-
-	});
+define(['backbone', './SearchResultsItemModel'],
+function(Backbone, SearchResultsItemModel){
 
 	var SearchResultsCollection = Backbone.Collection.extend({
 		
-		model: SearchResultItemModel,
+		model: SearchResultsItemModel,
 
 		parse: function(data){
 			var items = [];
 
 			_.each(data[0], function(data){
 				items.push({type: 'album',
-							//cover: ,
-							//title: ,
+							//cover: '',
+							//title: '',
 							data: data});
 			});
 			_.each(data[1], function(data){
 				items.push({type: 'artist',
-							//cover: ,
-							//title: ,
+							//cover: '',
+							//title: '',
 							data: data});
 			});
 			_.each(data[2], function(data){
 				items.push({type: 'song',
-							//cover: ,
-							//title: ,
+							//cover: '',
+							//title: '',
 							data: data});
 			});
 
