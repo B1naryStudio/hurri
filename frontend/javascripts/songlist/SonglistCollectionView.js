@@ -1,4 +1,4 @@
-define(['marionette', './SonglistView', '../app/context', 'sortable'], function(Marionette, SonglistView, context){
+define(['marionette', './SonglistView', '../app/context'], function(Marionette, SonglistView, context){
 	var Behaviors={};
     Marionette.Behaviors.behaviorsLookup = function() {
         return Behaviors;
