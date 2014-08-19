@@ -31,7 +31,7 @@ define(['marionette',
 
 		this.initializeRadio();
 
-		// this.initializeLayout();
+		this.initializeLayout();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -48,9 +48,9 @@ define(['marionette',
 		this.notFoundView = this.getNotFoundView();
 	};
 
-	// MainController.prototype.initializeLayout = function(){
-	// 	this.layoutView = this.getLayout();
-	// };
+	MainController.prototype.initializeLayout = function(){
+		this.layoutView = this.getLayout();
+	};
 
 	MainController.prototype.getNotFoundView = function(){
 		return new NotFoundView();
@@ -185,7 +185,7 @@ define(['marionette',
 		},this);
 
 		Backbone.on('show-favorites', function(){
-			//this.getLayout();
+			this.getLayout();
 		},this);
 		
 		
