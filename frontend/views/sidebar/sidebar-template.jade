@@ -10,10 +10,10 @@ script#sidebar-default-template(type='text/template')
 script#song-item-template(type='text/template')
 	div.sidebar-song-wrap
 		div.sidebar-song-img-box
-			img(src="{{-cover}}")
+			img(src="{{-albumCover}}")
 		.sidebar-song-header
-			h4 {{-name}}
+			h4 {{-title}}
 		div.sidebar-song-info
-			{{-artist}} - {{-albumname}}
+			{{-artist}} - {{-albumTitle}}
 		.delete-song-from-list
 		.add-song-to-queue

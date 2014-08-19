@@ -5,8 +5,8 @@ define(['marionette',
 	'./defaultView',
 	 '../app/context',
 	 '../songlist/SonglistCollectionView',
-	 '../songlist/SonglistCollection',
-	 '../songlist/SonglistModel'], 
+	 '../playlist/SongCollection',
+	 '../song/SongModel'], 
 	function(Marionette, NotificationsCompositeView,  SidebarNavView, NotificationsModel, DefaultView, context, SonglistCollectionView, SonglistCollection, SonglistModel){
 	
 	var SidebarController = function(){		
@@ -46,17 +46,17 @@ define(['marionette',
 
 	SidebarController.prototype.initializeSongs = function() {
 		this.song = {
-			collection: new SonglistCollection(),
-			model : new SonglistModel()
-		};
+			collection: SonglistCollection,
+			model : SonglistModel
+		 };
 
-		this.song.collection.add([
-			{name : 'Komissar rex', cover : '../images/default/cover.jpg', artist : 'Tim Rot', current : false, albumname : 'Hello I love you'},
-			{name : 'Funny Essso', cover : '../images/default/cover.jpg', artist : 'Ocean', current : true, albumname : 'Digital histoyr'},
-			{name : 'Runble be you', cover : '../images/default/cover.jpg', artist : 'T-Rex', current : false, albumname : 'Wat a flag?'},
-			{name : 'So serious', cover : '../images/default/cover.jpg', artist : 'Kirkorov', current : false, albumname : 'Fust furrry'},
-			{name : 'Defstrouk', cover : '../images/default/cover.jpg', artist : 'U2', current : false, albumname : 'Drums for you'}
-		]);
+		// this.song.collection.add([
+		// 	{name : 'Komissar rex', cover : '../images/default/cover.jpg', artist : 'Tim Rot', current : false, albumname : 'Hello I love you'},
+		// 	{name : 'Funny Essso', cover : '../images/default/cover.jpg', artist : 'Ocean', current : true, albumname : 'Digital histoyr'},
+		// 	{name : 'Runble be you', cover : '../images/default/cover.jpg', artist : 'T-Rex', current : false, albumname : 'Wat a flag?'},
+		// 	{name : 'So serious', cover : '../images/default/cover.jpg', artist : 'Kirkorov', current : false, albumname : 'Fust furrry'},
+		// 	{name : 'Defstrouk', cover : '../images/default/cover.jpg', artist : 'U2', current : false, albumname : 'Drums for you'}
+		// ]);
 
 		this.song.view = this.getSongView();
 	};
