@@ -36,7 +36,15 @@ define(['marionette', './SonglistView', '../app/context'], function(Marionette, 
 	        Sortable:{
 	            containment:'parent' 
 	        }
-    	}
+    	},
+        childEvents: {
+            'queue:recount': function (arg, num) {
+                for (var i = 0; i < this.collection.length; i ++){
+                    if (this.collection.models[i].attributes.queuepos > num )
+                         this.collection.models[i].set({queuepos: this.collection.models[i].attributes.queuepos-1});
+                }
+            }
+        }
 	});
 	return SonglistCollectionView;
 });

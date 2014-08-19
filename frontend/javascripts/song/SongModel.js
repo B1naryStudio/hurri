@@ -11,7 +11,9 @@ define(['backbone'], function(Backbone){
 			albumCover: '../images/default/cover.png',
 			artist: 'Singer',
 			url: undefined,
-			comments : ['']
+			comments : [''],
+			queuepos : '',
+			current : false
 		},
 
 		getStream: function(){

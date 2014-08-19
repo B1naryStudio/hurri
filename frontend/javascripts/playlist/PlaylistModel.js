@@ -6,10 +6,15 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  			playlistName: 'myPlaylist',
  			created: Date(1),
  			oldCollection: null,
- 			numberOfTracks: 1
+ 			numberOfTracks: 1,
+ 			queueNum : 0
  		},
  		playTrack: function(position){
  			var track = this.collection.at(position);
+ 			var prev = this.collection.findWhere({current : true});
+ 			if (prev)
+ 				prev.set({current: false}); 
+ 			track.set({current : true});
  			context.currentSongModel.set(track.attributes);
  		},
 
