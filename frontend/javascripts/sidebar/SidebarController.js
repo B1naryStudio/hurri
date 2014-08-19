@@ -24,6 +24,10 @@ define(['marionette',
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
 
+		/*var statisticView = new StatisticView({
+			model: context.currentUserModel
+		});*/
+
 		this.sidebarRegion.show(this.song.view);
 
 		this.bindListeners();
