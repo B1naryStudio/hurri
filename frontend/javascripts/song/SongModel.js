@@ -9,14 +9,14 @@ define(['backbone'], function(Backbone){
 			lyrics : 'No lyrics for this song. Sorry.',
 			albumTitle : 'AlbumName',
 			albumCover: 'cover.jpg',
-			singerName: 'Singer',
+			artist: 'Singer',
 			url: undefined,
 			comments : ['']
 		},
 
 		getStream: function(){
 			var self = this;
-				$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('singerName')}, function(data){
+				$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('artist')}, function(data){
 					self.set({url: data.url, duration: data.duration});
 				});
 			return self.get('url');

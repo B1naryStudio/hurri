@@ -6,7 +6,7 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  			playlistName: 'myPlaylist',
  			created: Date(1),
  			oldCollection: null,
- 			numberOfTracks: 5
+ 			numberOfTracks: 1
  		},
  		playTrack: function(position){
  			var track = this.collection.at(position);
@@ -28,8 +28,20 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  					return memo + this.collection.get('duration');
  				}, 0);
  		},
+
+ 		getVkPlaylist: function(){
+			var self = this;
+				$.getJSON('/getPlaylist',{id: 18252726}, function(data){
+					var object = data.response;
+					self.set({numberOfTracks: object[0]});
+					for (i=1; i<object[0]; i++) {
+						self.collection.add(object[i]);
+					}
+ 				});
+ 		}
 	});
 
 var playlistModel = new PlaylistModel();
+playlistModel.getVkPlaylist();
 return playlistModel;
 });

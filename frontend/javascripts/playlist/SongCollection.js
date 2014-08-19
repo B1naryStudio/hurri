@@ -8,16 +8,8 @@ songCollection = new SongCollection();
 
 
 songCollection.add([
-	{title: 'The Moment (Bootleg Edit)', singerName: 'Nick Kech feat. Madilyn Bailey'},
-	{title: 'Is it right', singerName:'Elaiza'},
-	{title: 'Beatles', singerName:'Yesterday'},
-	{title: 'Rather Be', singerName:'Clean Bandit feat. Jess Glynne'},
-	{title: 'Bravado', singerName:'Lorde'}
+	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey'}
 ]);
-
-songCollection.on("add", function(ship) {
-	alert("added" + SongCollection.get('title'));
-});
 
 return songCollection;	
 });

@@ -5,12 +5,12 @@ var trackRepository = require('../repositories/trackRepository');
 var async = require('async');
 
 module.exports = function (app) {
-	app.get('/getAccess', function(req, res){
-		app.get('http://oauth.vk.com/authorize?client_id=4504196&scope=notify,friends,audio,status,email&redirect_uri=http://localhost:3055&response_type=code&v=5.24', function(req, res){
+	app.get('/getPlaylist', function(req, res){
+		VKWrapper.getUserAudio(req.query.id, function(results){
+			res.json(results);
 		});
-
-	}
-	);
+	});
+	
 	app.get('/getStream', function(req, res) {
 
 		var options = {
