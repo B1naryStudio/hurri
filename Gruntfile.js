@@ -114,9 +114,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-open');
 
-	grunt.registerTask('common', ['jshint', 'jade', 'stylus', 'clean', 'copy']);
+	grunt.registerTask('common', ['jshint', 'jade', 'stylus', 'clean']);
 	grunt.registerTask('javascripts', ['jshint', 'clean', 'copy']);
 	
-	grunt.registerTask('default', ['common', 'open']);
-	grunt.registerTask('release', ['common', 'requirejs']);
+	grunt.registerTask('default', ['common', 'open', 'copy']);
+	grunt.registerTask('release', ['common', 'requirejs', 'copy:libs', 'copy:images', 'copy:resources']);
 };
