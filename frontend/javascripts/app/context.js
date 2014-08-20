@@ -4,7 +4,8 @@ define(['../song/SongModel','../notification/NotificationsCollection', '../user/
 		notificationCollection: new NotificationCollection(),
 		currentUserModel: new UserModel(),
 		currentAlbumBar: new AlbumBarModel(),
-		currentRadioBar: new RadioBarModel()
+		currentRadioBar: new RadioBarModel(),
+		toggled: false
 	};
 	return context;
 });

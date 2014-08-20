@@ -20,10 +20,10 @@ define(['marionette',
 		this.initializeNotifications();
 
 		this.initializeSongs();
-
+/*
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
-
+*/
 		this.sidebarRegion.show(this.song.view);
 
 		this.bindListeners();
@@ -83,12 +83,18 @@ define(['marionette',
 				this.notification.collection.models[i].set({active : false});
 			}
 			this.sidebarRegion.show(this.getNotificationView());
+			Backbone.trigger('toggle-sidebar');
 		}, this);
 
 		Backbone.on('show-musiclist', function(){
 			this.sidebarRegion.show(this.getSongView());
+			Backbone.trigger('toggle-sidebar');
 		}, this);
 
+		Backbone.on('toggle-sidebar', function(){
+			this.sidebarRegion.$el.parent().toggleClass('toggled');
+			$('#hideButton').toggleClass('toggled-button');
+		}, this);
 
 		// Backbone.on('show followers', function(){
 		// 	this.sidebarRegion.show(this.getFollowerView());

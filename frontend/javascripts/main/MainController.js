@@ -187,6 +187,10 @@ define(['marionette',
 		Backbone.on('show-favorites', function(){
 			this.getLayout();
 		},this);
+		Backbone.on('toggle-sidebar', function(){
+			/*this.sidebarRegion.el.parentNode.style.display='none';*/
+			this.mainRegion.$el.toggleClass('toggled-main');
+		}, this);
 		
 		
 	};

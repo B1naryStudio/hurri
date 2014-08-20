@@ -3,13 +3,19 @@ define(['marionette'], function(Marionette){
 		el: '#sidebar-nav',
 		template: '#sidebar-template',
 		events : {
-			'click #musicButton' : 'showMusiclist'
+			'click #musicButton': 'showMusiclist',
+			'click #hideButton'	: 'toggleSidebar' 
+		},
+		onRender: function(){
+			console.log('shoto napisal');
+		},
+		showMusiclist : function(){  
+			Backbone.trigger('show-musiclist');
 		},
 
-		showMusiclist : function(){
-			Backbone.trigger('show-musiclist');
+		toggleSidebar : function(){  
+			Backbone.trigger('toggle-sidebar');
 		}
 	});
-
 	return SidebarNavView;
 });

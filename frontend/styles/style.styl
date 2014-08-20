@@ -190,7 +190,8 @@ body
 	float left
 	width 50%
 	min-height:100%
-
+	&.toggled-main
+		width 75%
 #main-bar-header
 	width 360px
 	height 25px
@@ -320,6 +321,8 @@ body
 		padding-top 10px
 	&:hover 
 		background Snow
+.toggled
+	display none
 #sidebar
 	position absolute
 	background #eee
@@ -328,7 +331,6 @@ body
 	right 0px
 	top 120px
 	bottom 0px
-
 	#sidebar-region
 		top 0px
 		position absolute
@@ -381,19 +383,25 @@ body
 
 		&:hover 
 			opacity 1
-
+//.sidebar-clear
+//	clear both
 #sidebar-nav
 		clear both
+		float right
+		background #2b2e31
+		width 25%
+		height 30px
+		background #2b2e31
+		border-top 1px solid darkgrey
 		position absolute
-		z-index 12
 		bottom 0px
-		width 100%
-		
+		right 0px
 		li
+			float right
 			height 25px
 			list-style-type none;
 			display: inline-block
-			width:33%
+			width 24%
 			border-right 1px solid lightgrey
 
 			&:last-child
@@ -420,6 +428,15 @@ body
 				opacity: 0.5
 				&:hover
 					opacity 1
+			&#hideButton
+				background: url('../images/sidebar/hide.png') no-repeat;
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+				&.toggled-button
+					display none
 .notifHeadWrapper
 	display block
 	margin 0 auto 0
@@ -502,7 +519,8 @@ body
 	&.activesong
 		background LightBlue
 #footer
-	width 100%
+	width 75%
+	float left
 	height 30px
 	background #2b2e31
 	border-top 1px solid darkgrey
