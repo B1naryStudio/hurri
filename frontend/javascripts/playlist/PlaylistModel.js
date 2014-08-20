@@ -5,11 +5,16 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  			genre: ['unknown'],
  			playlistName: 'myPlaylist',
  			created: Date(1),
- 			oldCollection: null
-
+ 			oldCollection: null,
+ 			numberOfTracks: 1,
+ 			queueNum : 0
  		},
  		playTrack: function(position){
  			var track = this.collection.at(position);
+ 			var prev = this.collection.findWhere({current : true});
+ 			if (prev)
+ 				prev.set({current: false}); 
+ 			track.set({current : true});
  			context.currentSongModel.set(track.attributes);
  		},
 
@@ -28,8 +33,20 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
  					return memo + this.collection.get('duration');
  				}, 0);
  		},
+
+ 		getVkPlaylist: function(){
+			var self = this;
+				$.getJSON('/getPlaylist',{id: 18252726}, function(data){
+					var object = data.response;
+					self.set({numberOfTracks: object[0]});
+					for (i=1; i<object[0]; i++) {
+						self.collection.add(object[i]);
+					}
+ 				});
+ 		}
 	});
 
 var playlistModel = new PlaylistModel();
+playlistModel.getVkPlaylist();
 return playlistModel;
 });

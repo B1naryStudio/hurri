@@ -20,7 +20,7 @@ body
 	font-family basic_font
 	width 100%
 	min-width 1000px
-
+	height 100%
 *
 	margin 0
 	padding 0
@@ -189,6 +189,7 @@ body
 	background orange
 	float left
 	width 50%
+	min-height:100%
 
 #main-bar-header
 	width 360px
@@ -246,8 +247,33 @@ body
 		background white
 		opacity 0.8
 		text-align center
+#comment-buttons-wrapper
+	width 100%
+	margin auto
+	height 30px
+	#show-song
+		width 49%
+		height 30px
+		background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		float left
+		border-right 1px solid lightgrey
+		text-align center
+	#show-comments
+		width 50%
+		height 30px
+		background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		float left
+		text-align center
+#add-comment
+	width 40px
+	background lightblue
+	cursor pointer
+#comment-layout-content
+	float left
 
-
+#song-text-name
+	font-size 14px
+	font-weight bold
 
 #menu
 	background lightgrey
@@ -295,14 +321,20 @@ body
 	&:hover 
 		background Snow
 #sidebar
+	position absolute
 	background #eee
-	height 100%
 	width 25%
 	float left
+	right 0px
+	top 120px
+	bottom 0px
 
 	#sidebar-region
+		top 0px
+		position absolute
+		bottom 5px
 		display block
-		position relative
+		overflow scroll
 
 .notification-message 
 	display block
@@ -352,33 +384,38 @@ body
 
 #sidebar-nav
 		clear both
-		display block
+		position absolute
+		z-index 12
 		bottom 0px
+		width 100%
 		
 		li
-			height 30px
+			height 25px
 			list-style-type none;
 			display: inline-block
 			width:33%
 			border-right 1px solid lightgrey
 
+			&:last-child
+				border-right none
+
 			&#friendsButton
 				background: url('../images/sidebar/friends.png') no-repeat;
-				background-size: 40px
+				background-size: 25px
 				opacity: 0.5
 				background-position: center
 				&:hover
 					opacity 1
 			&#musicButton
 				background: url('../images/sidebar/music.png') no-repeat;
-				background-size: 32px
+				background-size: 25px
 				background-position: center
 				opacity: 0.5
 				&:hover
 					opacity 1
 			&#infoButton
 				background: url('../images/sidebar/info.png') no-repeat;
-				background-size: 32px
+				background-size: 25px
 				background-position: center
 				opacity: 0.5
 				&:hover
@@ -429,58 +466,54 @@ body
 		margin-left 50px
 
 	.delete-song-from-list
-		width 16px
-		height 16px
+		width 12px
+		height 12px
 		position absolute
 		background: url('../images/notifications/delete.png') no-repeat;
-		background-size: 16px
+		background-size: 12px
 		right 2px
 		top 2px
 		opacity 0.3
 
 		&:hover 
 			opacity 1
+	
+	.queuepos
+		position absolute
+		right 0
+		bottom 3px
+		font-size 10px
+		font-weight bold
+		margin-right 4px
 
 	.add-song-to-queue
-		width 16px
-		height 16px
+		width 12px
+		height 12px
 		position absolute
 		background: url('../images/songlist/queue.png') no-repeat;
-		background-size: 16px
+		background-size: 12px
 		right 2px
-		top 20px
+		top 16px
 		opacity 0.3
 
 		&:hover 
-			opacity 1
+			opacity 0.7
 
 	&.activesong
 		background LightBlue
 #footer
-	width 75%
+	width 100%
 	height 30px
 	background #2b2e31
 	border-top 1px solid darkgrey
+	position absolute
+	bottom 0px
 
 #song-info
 	width 70%
 	margin 4px 10px
 	color #529de1
 	float left
-
-#footer-menu
-	list-style-type none;
-	float right
-	display inline
-	width 25%
-	background lightgreen
-
-.footer-button
-	padding 4px 10px
-	width 25%
-	height 30px
-	color darkgrey
-	float right
 
 .clear
 	clear both
@@ -558,6 +591,7 @@ button
 	width 25px
 	background-size cover
 	float left
+	cursor pointer
 	margin-top 22px
 	background-image: url(../images/player/player.png)
     background-repeat: no-repeat
@@ -743,6 +777,7 @@ button
 	height: 18px;			
 
 input[type='range'] {
+	cursor pointer
     float left
     height 6px
     margin 10px

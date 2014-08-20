@@ -8,4 +8,6 @@ script#radio-bar(type='text/template')
 			.listeners Listeners now : {{-listeners}}
 		.tracks-side
 			.totalTracksRadio Tracks: {{-totalTracks}}
-			{{-tracks}}
+			{{for (var i = 0; i < tracks.length; i ++){}}
+			div {{-tracks[i].title}}
+			{{}}}

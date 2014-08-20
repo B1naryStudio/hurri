@@ -8,8 +8,10 @@ require.config({
 		backbone: '../../bower_components/backbone/backbone',
 		marionette: '../../bower_components/marionette/lib/backbone.marionette',
 		localStorage: './libs/backbone.localStorage'
+		// sortable: '../../bower_components/jquery-ui/ui/sortable'
 	}
 });
 
 require(['app/app']);
 require(['./blur']);
+require(['../../bower_components/jquery-ui/ui/sortable']);
