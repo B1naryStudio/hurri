@@ -39,10 +39,12 @@ define(['marionette',
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
 		} else {
-			this.mainRegion.show(this.getPlaylistView());
+		/*	this.mainRegion.show(this.getPlaylistView());*/
+			this.mainRegion.show(new LayoutView());
 		}
 
-		this.mainRegion.show(this.getPlaylistView());	
+		/*this.mainRegion.show(this.getPlaylistView());	*/
+		this.mainRegion.show(new LayoutView());
 
 		this.bindListeners();	
 	};

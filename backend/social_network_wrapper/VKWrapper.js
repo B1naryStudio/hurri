@@ -69,6 +69,7 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 		 var object = {
 		 	url: result.response[1].url,
 		 	duration: result.response[1].duration
+		 	
 		 };
 		callback(object);
 	});

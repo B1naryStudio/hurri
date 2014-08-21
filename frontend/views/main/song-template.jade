@@ -1,9 +1,6 @@
 script#song-template(type='text/template')
 	div
-		#song-text-name {{-title}} - {{-artist}}
-		div {{-albumTitle}}
+		#song-info-text {{-title}} - {{-artist}} </br> {{-albumTitle}}
 		div#song-info-image 
 			img(src='{{-albumCover}}')
 		#duration
-		button add
-		button share
