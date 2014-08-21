@@ -1,9 +1,9 @@
-define(['marionette', '../search/SearchResultsView'],
-function(Marionette, SearchResultsView){
+define(['marionette', '../search/SearchResultsView', '../search/SearchResultsItemView'],
+function(Marionette, SearchResultsView, SearchResultsItemView){
 
 	SearchbarView = Marionette.ItemView.extend({
 
-		template: 	'#searchbar-template',
+		template: '#searchbar-template',
 
 		ui: {
 			searchInput 	: '#search-input',
@@ -15,12 +15,10 @@ function(Marionette, SearchResultsView){
 			'keyup @ui.searchInput'		: 'refreshInput'
 		},
 
-		searchResultsView: new SearchResultsView({
-			el: '#searchresults'
-		}),
-
 		onRender: function(){
+			this.searchResultsView = new SearchResultsView();
 			this.searchResultsView.collection = this.model.searchResultsCollection;
+			this.searchResultsView.childView = SearchResultsItemView;
 			this.searchResultsView.render();
 		},
 
@@ -28,9 +26,7 @@ function(Marionette, SearchResultsView){
 			this.model.set('currentInput', this.ui.searchInput[0].value);
 			this.model.search();
 
-			this.searchResultsView.el.style.top = this.el.offsetTop + 
-											this.el.clientHeight + 5 + 'px';
-			this.searchResultsView.el.style.left = this.el.offsetLeft + 'px';
+			this.setResultsViewPosition();
 			this.searchResultsView.el.style.display = 'block';
 		},
 
@@ -44,6 +40,12 @@ function(Marionette, SearchResultsView){
 			}else{
 				this.backgroundSearch();
 			}
+		},
+
+		setResultsViewPosition: function(){
+			this.searchResultsView.el.style.top = this.el.offsetTop + 
+											this.el.clientHeight + 5 + 'px';
+			this.searchResultsView.el.style.left = this.el.offsetLeft + 'px';
 		}
 
 	});

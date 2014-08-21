@@ -9,22 +9,22 @@ function(Backbone, SearchResultsItemModel){
 			var items = [];
 
 			_.each(data[0], function(data){
-				items.push({type: 'album',
-							//cover: '',
-							//title: '',
-							data: data});
+				items.push({type	: 'album',
+							cover	: '../images/album.png',
+							title	: data,
+							data	: data});
 			});
 			_.each(data[1], function(data){
-				items.push({type: 'artist',
-							//cover: '',
-							//title: '',
-							data: data});
+				items.push({type	: 'artist',
+							cover	: '../images/artist.png',
+							title	: data,
+							data	: data});
 			});
 			_.each(data[2], function(data){
-				items.push({type: 'song',
-							//cover: '',
-							//title: '',
-							data: data});
+				items.push({type	: 'song',
+							cover	: '../images/song.png',
+							title	: data,
+							data	: data});
 			});
 
 			this.reset(items);
