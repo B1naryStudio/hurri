@@ -82,18 +82,36 @@ define(['marionette',
 			for (var i = 0; i < total; i++){
 				this.notification.collection.models[i].set({active : false});
 			}
-			this.sidebarRegion.show(this.getNotificationView());
-			Backbone.trigger('toggle-sidebar');
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getNotificationView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getNotificationView());
+			}
+
 		}, this);
 
 		Backbone.on('show-musiclist', function(){
-			this.sidebarRegion.show(this.getSongView());
-			Backbone.trigger('toggle-sidebar');
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getSongView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getSongView());
+			}
+
 		}, this);
 
 		Backbone.on('toggle-sidebar', function(){
-			this.sidebarRegion.$el.parent().toggleClass('toggled');
-			$('#hideButton').toggleClass('toggled-button');
+			if (!context.toggled){
+				this.sidebarRegion.$el.parent().addClass('toggled');
+				$('#hideButton').addClass('toggled-button');
+				context.toggled = true;
+			} else{
+				this.sidebarRegion.$el.parent().removeClass('toggled');
+				$('#hideButton').removeClass('toggled-button');
+				context.toggled = false;
+		
+			}
 		}, this);
 
 		// Backbone.on('show followers', function(){
