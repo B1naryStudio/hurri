@@ -5,10 +5,7 @@ define(['marionette'], function(Marionette){
 		template: 	'#statistic-template',
 		
 		ui: {
-   			listened 	: '#listened',
-   			playlists  	: '#playlists',
-   			followers  	: '#followers',
-   			liked  		: '#liked'
+   			//
   		},
 
 		events: {

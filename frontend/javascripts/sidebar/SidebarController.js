@@ -6,8 +6,11 @@ define(['marionette',
 	 '../app/context',
 	 '../songlist/SonglistCollectionView',
 	 '../playlist/SongCollection',
-	 '../song/SongModel'], 
-	function(Marionette, NotificationsCompositeView,  SidebarNavView, NotificationsModel, DefaultView, context, SonglistCollectionView, SonglistCollection, SonglistModel){
+	 '../song/SongModel',
+	 './StatisticView'], 
+	function(Marionette, NotificationsCompositeView,  SidebarNavView,
+			NotificationsModel, DefaultView, context, SonglistCollectionView,
+			SonglistCollection, SonglistModel, StatisticView){
 	
 	var SidebarController = function(){		
 	
@@ -23,10 +26,6 @@ define(['marionette',
 
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
-
-		/*var statisticView = new StatisticView({
-			model: context.currentUserModel
-		});*/
 
 		this.sidebarRegion.show(this.song.view);
 
@@ -79,6 +78,12 @@ define(['marionette',
 		});
 	};
 
+	SidebarController.prototype.getStatisticView = function() {
+		return new StatisticView({
+			model: context.currentUserModel
+		});
+	};
+
 	SidebarController.prototype.bindListeners = function() {
 
 		Backbone.on('show-notifications', function(){
@@ -93,6 +98,9 @@ define(['marionette',
 			this.sidebarRegion.show(this.getSongView());
 		}, this);
 
+		Backbone.on('show-statistic', function(){
+			this.sidebarRegion.show(this.getStatisticView());
+		}, this);
 
 		// Backbone.on('show followers', function(){
 		// 	this.sidebarRegion.show(this.getFollowerView());
