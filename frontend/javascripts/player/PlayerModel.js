@@ -21,22 +21,26 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		localStorage: new Backbone.LocalStorage("PlayerModel"),
 
 		initialize: function(){
+			window.localStorage.setItem("playback", this.get('playback'));
 			this.bindListeners();
-			PlaylistModel.playTrack(this.get('currentTrack'));
-			var url = context.currentSongModel.getStream();
-			if (url){
-				audioHandler.initialize(url);
+			if (window.localStorage.getItem('playback') !== 'play') {
+				PlaylistModel.playTrack(this.get('currentTrack'));
+				var url = context.currentSongModel.getStream();
+				if (url) {
+					audioHandler.initialize(url);
+				} else {
+					context.currentSongModel.once('change:url', function () {
+						audioHandler.initialize(context.currentSongModel.get('url'));
+					});
+				}
+				this.set({duration: context.currentSongModel.get('duration')});
 			} else {
-				context.currentSongModel.once('change:url', function(){
-					audioHandler.initialize(context.currentSongModel.get('url'));
-				});
+				console.log('There is another tab played music – go get there');
 			}
-			this.set({duration: context.currentSongModel.get('duration')});
 		},
 
 		playbackState: function(){
 			var state = this.get('playback');
-			
 			if (state === enums.playModes.pause){
 				audioHandler.playTrack();
 				this.startTimer();
@@ -46,6 +50,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				this.stopTimer();
 				this.set({playback: enums.playModes.pause});
 			}
+			window.localStorage.setItem("playback", this.get('playback'));
 			return this.get('playback');
 		},
 
@@ -54,7 +59,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		stopTimer: function(){
-			clearInterval(this.timerId); 
+			clearInterval(this.timerId);
 		},
 
 		addSecond : function(){
@@ -64,7 +69,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			}else {
 				this.set({position: ++newPosition});
 			}
-			
+
 		},
 
 		bindListeners: function(){
@@ -82,7 +87,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					duration: context.currentSongModel.get('duration'),
 					position: 0
 				});
-				
+
 				this.volumeLevelSetup(this.get('volumeLevel'));
 				this.startTrack();
 			});
@@ -104,7 +109,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		startTrack: function(){
-	 		if (this.get('playback') === enums.playModes.play){	
+	 		if (this.get('playback') === enums.playModes.play){
 	 			audioHandler.playTrack();
 	 			this.startTimer();
 	 		}
@@ -175,10 +180,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			var state = this.get('mute');
 			if (state === enums.muteModes.mute){
 				this.volumeLevelSetup(this.get('volumeLevel'));
-				this.set({mute: enums.muteModes.unmute});	
+				this.set({mute: enums.muteModes.unmute});
 			} else {
 				audioHandler.volumeLevelSetup(0);
-				this.set({mute: enums.muteModes.mute});	
+				this.set({mute: enums.muteModes.mute});
 			}
 			return this.get('mute');
 		},
@@ -187,7 +192,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			var state = this.get('shuffle');
 			if (state === enums.shuffleModes.shuffleoff){
 				PlaylistModel.shuffle();
-				this.set({shuffle: enums.shuffleModes.shuffleon});	
+				this.set({shuffle: enums.shuffleModes.shuffleon});
 			} else {
 				PlaylistModel.unShuffle();
 				this.set({shuffle: enums.shuffleModes.shuffleoff});
@@ -219,7 +224,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			var state = this.get('liked');
 			this.set({liked: !state});
 		},
-		
+
 		addComment : function(){
 			var value = this.get('comments');
 			this.set({comments: value++});
