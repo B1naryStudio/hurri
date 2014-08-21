@@ -1,5 +1,6 @@
 define(['marionette', 
-	'./PlaylistsView', 
+	'./PlaylistsView',
+	'./SongView', 
 	'../user/UserView', 
 	'../app/context', 
 	'./bars/album/AlbumBarCollection', 
@@ -8,7 +9,7 @@ define(['marionette',
 	'./radio/RadioCollection',
 	'./radio/RadioCollectionView',
 	'./comment/CommentLayout'],
-	function(Marionette, PlaylistsView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
+	function(Marionette, PlaylistsView, SongView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
 
 	
 	var MainController = function(){		
@@ -24,6 +25,8 @@ define(['marionette',
 		this.initializeUser();
 
 		this.initializePlaylists();
+
+		this.initializeSong();
 
 		this.initializeAlbums();
 
@@ -160,6 +163,20 @@ define(['marionette',
 		return new RadioBarView({
 			model : this.radio.model,
 			collection : this.radio.collection
+		});
+	};
+
+	MainController.prototype.initializeSong = function() {
+		this.song = {
+			model: context.currentSongModel
+		};
+
+		this.song.view = this.getSongView();
+	};
+
+	MainController.prototype.getSongView = function() {
+		return new SongView({
+			model : context.currentSongModel
 		});
 	};
 

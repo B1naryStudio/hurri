@@ -6,9 +6,6 @@ define(['marionette'], function(Marionette){
 			'click #musicButton': 'showMusiclist',
 			'click #hideButton'	: 'toggleSidebar' 
 		},
-		onRender: function(){
-			console.log('shoto napisal');
-		},
 		showMusiclist : function(){  
 			Backbone.trigger('show-musiclist');
 		},
