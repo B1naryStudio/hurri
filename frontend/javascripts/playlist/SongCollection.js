@@ -8,7 +8,7 @@ songCollection = new SongCollection();
 
 
 songCollection.add([
-	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey'}
+	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey', duration:280}
 ]);
 
 return songCollection;	

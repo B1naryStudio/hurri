@@ -13,9 +13,11 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			repeatTrack : 'none',
 			comments : 0,
 			position : 0,
-			duration : 0,
+			duration : 280,
+			durationFormat: undefined,
+			positionFormat: undefined,
 			liked : false,
-			timerId : 0,
+			timerId : 0
 		},
 
 		localStorage: new Backbone.LocalStorage("PlayerModel"),
@@ -31,7 +33,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					audioHandler.initialize(context.currentSongModel.get('url'));
 				});
 			}
-			this.set({duration: context.currentSongModel.get('duration')});
+			this.setTrackParams();
 		},
 
 		playbackState: function(){
@@ -63,6 +65,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				this.nextTrack();
 			}else {
 				this.set({position: ++newPosition});
+				this.setPositionFormat();
 			}
 			
 		},
@@ -77,15 +80,11 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			PlaylistModel.playTrack(param);
 			this.set({currentTrack: param});
 			this.stopTrack(function(){
-				this.set({
-
-					duration: context.currentSongModel.get('duration'),
-					position: 0
-				});
-				
-				this.volumeLevelSetup(this.get('volumeLevel'));
-				this.startTrack();
+				this.setTrackParams();	
 			});
+
+			this.volumeLevelSetup(this.get('volumeLevel'));
+			this.startTrack();
 		},
 
 		stopTrack: function(callback){
@@ -171,6 +170,17 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			}
 		},
 
+		setTrackParams: function(){
+			this.set({
+				currentTrackName: context.currentSongModel.get('title'),
+				currentArtistName: context.currentSongModel.get('artist'),
+				duration: context.currentSongModel.get('duration'),
+				position: 0
+			});
+			this.setPositionFormat();
+			this.setDurationFormat();
+		},
+
 		mute: function(){
 			var state = this.get('mute');
 			if (state === enums.muteModes.mute){
@@ -235,7 +245,23 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		playbackPosition : function(input){
 			this.set({position: input});
 			audioHandler.playbackPosition(input);
-		}
+		},
+
+		setPositionFormat: function(){
+			this.set({positionFormat:this.getTimeFormat(this.get('position'))});
+		},
+
+		setDurationFormat: function(){
+			this.set({durationFormat:this.getTimeFormat(this.get('duration'))});
+		},
+
+		getTimeFormat: function(time){
+			var minutes = Math.floor(time / 60);
+			var seconds = time - minutes * 60;
+    		if (seconds < 10) {seconds = "0"+seconds;}
+			var format = minutes + ':' +seconds;
+			return format;
+		} 
 	});
 	return PlayerModel;
 });
