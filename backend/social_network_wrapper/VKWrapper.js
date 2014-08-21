@@ -9,7 +9,7 @@ function VKWrapper(){
 		'appSecret' : 'sKTyZBHIHu17JeRLTsez',
 		'mode'      : 'oauth'
 	});
-	this.vk.setToken( { token :'b57a3413b3786c988902b7bdaf07ea3dcc43f67d34903633d5234664ac8bd6e91990d7ca9546dc0ca8a6b' });
+	this.vk.setToken( { token :'bcb85bda63bad4970cbbc988cabf7bada411ee50e6d67a19a7d26dd16ff924c0b76eb54d95b9e7c0af329' });
 
 }
 
