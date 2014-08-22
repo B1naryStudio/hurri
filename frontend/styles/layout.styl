@@ -1,0 +1,84 @@
+footer_height = 30px
+
+body, html
+	height 100%
+
+.main_wrap
+	margin-bottom -(footer_height)
+	min-height 100%
+	&:after
+		content ''
+		display block
+		height footer_height
+
+#footer
+	margin-top -(footer_height)
+	width 100%
+	height footer_height
+	background #2b2e31
+	border-top 1px solid darkgrey
+
+#main
+	float left
+	width 50%
+	min-height 100%
+	background orange
+	box-sizing border-box
+	.content
+		padding 20px
+
+
+#sidebar
+	position absolute
+	background #eee
+	width 25%
+	float left
+	right 0
+	top 120px
+	bottom footer_height
+
+	#sidebar-region
+		width 100%
+		top 0
+		position absolute
+		bottom 5px
+		display block
+		overflow auto
+
+#sidebar-nav
+	position absolute
+	z-index 12
+	bottom -(footer_height)
+	width 100%
+
+	li
+		height 25px
+		list-style-type none;
+		display: inline-block
+		width:33%
+		border-right 1px solid lightgrey
+
+		&:last-child
+			border-right none
+
+		&#friendsButton
+			background: url('../images/sidebar/friends.png') no-repeat;
+			background-size: 25px
+			opacity: 0.5
+			background-position: center
+			&:hover
+				opacity 1
+		&#musicButton
+			background: url('../images/sidebar/music.png') no-repeat;
+			background-size: 25px
+			background-position: center
+			opacity: 0.5
+			&:hover
+				opacity 1
+		&#infoButton
+			background: url('../images/sidebar/info.png') no-repeat;
+			background-size: 25px
+			background-position: center
+			opacity: 0.5
+			&:hover
+				opacity 1

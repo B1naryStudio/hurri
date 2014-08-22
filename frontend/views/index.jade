@@ -3,17 +3,19 @@ extends ./layout
 
 block content
 
-	div#header
-		#notification
-	div#player
-	div#menu
-	div#main
-	div#sidebar
-		#sidebar-region
-		#sidebar-nav
-	div.clear
-	div#footer
-	div#searchresults
+	.main_wrap
+		#header
+			#notification
+		#player
+		.clear
+		#menu
+		#main
+		#sidebar
+			#sidebar-region
+			#sidebar-nav
+		.clear
+	#footer
+	#searchresults
 	include ./header/header-template
 	include ./header/userbar-template
 	include ./header/notificationbar-template
