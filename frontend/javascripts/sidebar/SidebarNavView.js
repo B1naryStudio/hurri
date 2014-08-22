@@ -4,7 +4,7 @@ define(['marionette'], function(Marionette){
 		template: '#sidebar-template',
 		events : {
 			'click #musicButton' 	: 'showMusiclist',
-			'click #infoButton' 	: 'showStatistic'
+			'click #infoButton' 	: 'showStatistic',
 			'click #hideButton'	: 'toggleSidebar' 
 		},
 		showMusiclist : function(){  
@@ -12,6 +12,7 @@ define(['marionette'], function(Marionette){
 		},
 		showStatistic: function(){
 			Backbone.trigger('show-statistic');
+		},
 		toggleSidebar : function(){  
 			Backbone.trigger('toggle-sidebar');
 		}

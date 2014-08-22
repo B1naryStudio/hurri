@@ -112,7 +112,7 @@ define(['marionette',
 
 		Backbone.on('show-statistic', function(){
 			this.sidebarRegion.show(this.getStatisticView());
-
+		}, this);
 		Backbone.on('toggle-sidebar', function(){
 			if (!context.toggled){
 				this.sidebarRegion.$el.parent().addClass('toggled');
