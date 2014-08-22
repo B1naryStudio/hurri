@@ -39,8 +39,6 @@ define(['marionette',
 			this.mainRegion.show(this.getPlaylistView());
 		}
 
-		this.mainRegion.show(this.getPlaylistView());	
-
 		this.bindListeners();	
 	};
 
