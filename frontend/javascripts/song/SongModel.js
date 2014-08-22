@@ -8,7 +8,7 @@ define(['backbone'], function(Backbone){
 			kbps : 320,
 			lyrics : 'No lyrics for this song. Sorry.',
 			albumTitle : 'AlbumName',
-			albumCover: '../images/default/cover.png',
+			albumCover: '/images/default/cover.png',
 			artist: 'Singer',
 			url: undefined,
 			comments : [''],

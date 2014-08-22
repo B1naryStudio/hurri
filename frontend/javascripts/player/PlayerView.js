@@ -6,7 +6,8 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:position': 'changeValue',
 			'change:previousButtonState': 'render',
 			'change:nextButtonState': 'render',
-			'change:duration': 'render'
+			'change:duration': 'render',
+			'change:positionFormat': 'changedPosition'
 		},
 		events : {
 			"click @ui.nextButton"			: "nextTrack",
@@ -17,28 +18,30 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			"click @ui.likeButton"			: "likeState",
 			"click @ui.volume"				: "mute",
 			"click @ui.commentButton"		: "addComment",
+			"click @ui.songInfo"			: "countdown",
 			"mousemove @ui.volumeRange"		: "volumeLevelSetup",
 			"mousemove @ui.playbackRange"	: "playbackPosition",
 			"mousedown @ui.volumeRange"		: "setUpVolume",
 			"mousedown @ui.playbackRange"	: "setUpPlayback",
 			"mouseout @ui.playbackRange" 	: "resetPlaybackMouseUpFlag",
 			"mouseout @ui.volumeRange" 		: "resetVolumeMouseUpFlag",
-			"mouseup @ui.playbackRange" 	: "resetPlaybackMouseUpFlag",
+			"mouseup @ui.playbackRange" 	: "resetPlaybackMouseUpFlag"
 		},
 		ui: {
-   			nextButton: "#next-button",
+			nextButton: "#next-button",
    			previousButton:	"#previous-button",
    			playButton: "#play-button",
    			shuffleButton: "#shuffle-button",
    			repeatButton: "#repeat-button",
    			likeButton: "#like-button",
    			commentButton: "#comment-button",
-   			volumeRange: "#volume-range",
+   			volumeRange: '#volume-range',
    			playbackRange: "#playback-range",
    			volume: '#volume',
-   			player : '#player'
+			player : '#player',
+			songPosition: '#song-position'
   		},
-  		
+
   		setUpVolume: function(){
   			this.flag = true;
   			this.volumeLevelSetup();
@@ -119,6 +122,10 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 				this.model.playbackPosition(input);	
 			}	
 		},
+
+		changedPosition: function(){
+			this.ui.songPosition.text(this.model.get('positionFormat'));
+		}
 	}); 
 	return PlayerView;
 });

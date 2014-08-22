@@ -11,7 +11,9 @@ define(['backbone'], function(Backbone){
 			//
 			liked: undefined,
 			playlists: undefined,
-			group: undefined,
+			groups: undefined,
+			listened: undefined,
+			followers: undefined
 		},
 		
 		initialize: function(){
@@ -20,11 +22,17 @@ define(['backbone'], function(Backbone){
 			 * Remove this code after user info receiving from server
 			 * mechanism will be implemented.
 			 */
-			this.set('avatarSource', './images/avatar.png');
+			this.set('avatarSource', '/images/avatar.png');
 			this.set('name', 'Vincent Vega');
 			this.set('age', 60);
 			this.set('email', 'vincent-vega@gmail.com');
 			this.set('country', 'United States');
+			//
+			this.set('liked', ['like1', 'like2', 'like3']);
+			this.set('playlists', ['playlist1', 'playlist2', 'playlist3']);
+			this.set('groups', ['group1', 'group2', 'group3']);
+			this.set('listened', 126);
+			this.set('followers', ['follower1', 'follower2', 'follower3']);
 		},
 
 	});

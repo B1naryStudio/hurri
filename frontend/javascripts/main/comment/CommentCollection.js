@@ -1,6 +1,8 @@
 define(['backbone', './CommentModel'], function(Backbone, CommentModel){
-	var Commentollection = Backbone.Collection.extend({
+	var CommentCollection = Backbone.Collection.extend({
 		model: CommentModel
 	});
-	return CommentCollection;
+
+	commentCollection = new CommentCollection();
+	return commentCollection;
 });

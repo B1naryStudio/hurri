@@ -6,8 +6,11 @@ define(['marionette',
 	 '../app/context',
 	 '../songlist/SonglistCollectionView',
 	 '../playlist/SongCollection',
-	 '../song/SongModel'], 
-	function(Marionette, NotificationsCompositeView,  SidebarNavView, NotificationsModel, DefaultView, context, SonglistCollectionView, SonglistCollection, SonglistModel){
+	 '../song/SongModel',
+	 './StatisticView'], 
+	function(Marionette, NotificationsCompositeView,  SidebarNavView,
+			NotificationsModel, DefaultView, context, SonglistCollectionView,
+			SonglistCollection, SonglistModel, StatisticView){
 	
 	var SidebarController = function(){		
 	
@@ -20,10 +23,10 @@ define(['marionette',
 		this.initializeNotifications();
 
 		this.initializeSongs();
-
+/*
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
-
+*/
 		this.sidebarRegion.show(this.song.view);
 
 		this.bindListeners();
@@ -75,6 +78,12 @@ define(['marionette',
 		});
 	};
 
+	SidebarController.prototype.getStatisticView = function() {
+		return new StatisticView({
+			model: context.currentUserModel
+		});
+	};
+
 	SidebarController.prototype.bindListeners = function() {
 
 		Backbone.on('show-notifications', function(){
@@ -82,13 +91,40 @@ define(['marionette',
 			for (var i = 0; i < total; i++){
 				this.notification.collection.models[i].set({active : false});
 			}
-			this.sidebarRegion.show(this.getNotificationView());
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getNotificationView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getNotificationView());
+			}
+
 		}, this);
 
 		Backbone.on('show-musiclist', function(){
-			this.sidebarRegion.show(this.getSongView());
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getSongView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getSongView());
+			}
+
 		}, this);
 
+		Backbone.on('show-statistic', function(){
+			this.sidebarRegion.show(this.getStatisticView());
+		}, this);
+		Backbone.on('toggle-sidebar', function(){
+			if (!context.toggled){
+				this.sidebarRegion.$el.parent().addClass('toggled');
+				$('#hideButton').addClass('toggled-button');
+				context.toggled = true;
+			} else{
+				this.sidebarRegion.$el.parent().removeClass('toggled');
+				$('#hideButton').removeClass('toggled-button');
+				context.toggled = false;
+		
+			}
+		}, this);
 
 		// Backbone.on('show followers', function(){
 		// 	this.sidebarRegion.show(this.getFollowerView());
