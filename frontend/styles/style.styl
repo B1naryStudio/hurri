@@ -233,16 +233,36 @@ body
 	height 60px
 	margin 0 auto
 	background:  linear-gradient( to bottom, #232323, #444, #444, #232323)
+
 #player-content
 	height 70px 
 	width 80%
 	margin auto
+#song-block
+	color white
+	position relative
+.song-info
+	position absolute
+
+#song-name
+	top 5px
+	left 27%
+
+#song-duration
+	top 37px
+	left 67%
+
+#song-position
+	top 37px
+	left 27%
+
 #main
 	background orange
 	float left
 	width 50%
 	min-height:100%
-
+	&.toggled-main
+		width 75%
 #main-bar-header
 	width 360px
 	height 25px
@@ -266,6 +286,16 @@ body
 			border none
 		&:hover
 			background #f6f6f6
+
+#song-info-content
+	#song-info-text
+		width 90%
+		margin 3% auto
+	#song-info-image
+		width 170px
+		height 170px
+		margin 3% auto
+
 #album-bar-wrapper
 	margin auto
 .album-bar 
@@ -322,8 +352,18 @@ body
 	background lightblue
 	cursor pointer
 #comment-layout-content
-	float left
-
+	#song-text
+		width 90%
+		margin 2% auto
+	#new-comment
+		margin 3%
+		width 80%
+		float left
+	#add-comment
+		margin-top 3%
+		float left
+		width 5% 
+		
 #song-text-name
 	font-size 14px
 	font-weight bold
@@ -375,6 +415,8 @@ body
 		padding-top 10px
 	&:hover 
 		background Snow
+.toggled
+	display none
 #sidebar
 	position absolute
 	background #eee
@@ -383,7 +425,6 @@ body
 	right 0px
 	top 120px
 	bottom 0px
-
 	#sidebar-region
 		width 100%
 		top 0px
@@ -437,19 +478,25 @@ body
 
 		&:hover 
 			opacity 1
-
+//.sidebar-clear
+//	clear both
 #sidebar-nav
 		clear both
+		float right
+		background #2b2e31
+		width 25%
+		height 30px
+		background #2b2e31
+		border-top 1px solid darkgrey
 		position absolute
-		z-index 12
 		bottom 0px
-		width 100%
-		
+		right 0px
 		li
+			float right
 			height 25px
 			list-style-type none;
 			display: inline-block
-			width:33%
+			width 24%
 			border-right 1px solid lightgrey
 
 			&:last-child
@@ -476,6 +523,15 @@ body
 				opacity: 0.5
 				&:hover
 					opacity 1
+			&#hideButton
+				background: url('../images/sidebar/hide.png') no-repeat;
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+				&.toggled-button
+					display none
 .notifHeadWrapper
 	display block
 	margin 0 auto 0
@@ -587,7 +643,8 @@ body
 		cursor pointer
 
 #footer
-	width 100%
+	width 75%
+	float left
 	height 30px
 	background #2b2e31
 	border-top 1px solid darkgrey
@@ -722,46 +779,46 @@ button
 #next-button
 	margin-top 15px
 	background: url('../images/player/player.png') no-repeat -447px 0;
-	width: 42px;
+	width 3%
 	height: 42px;
 #next-button:hover
 	background: url('../images/player/player.png') no-repeat -447px -256px;
-	width: 42px;
+	width 3%
 	height: 42px;
 #next-button:active
 	background: url('../images/player/player.png') no-repeat -447px -256px;
-	width: 42px;
+	width 3%
 	height: 42px;
 #next-button:disabled
 	background: url('../images/player/player.png') no-repeat -447px -192px;
-	width: 42px;
+	width 3%
 	height: 42px;
 #previous-button
 	margin-top 15px
 	background: url('../images/player/player.png') no-repeat -512px 0;
-	width: 42px;
+	width 3%
 	height: 42px;
 #previous-button:hover
 	background: url('../images/player/player.png') no-repeat -512px -256px;
-	width: 42px;
+	width 3%
 	height: 42px;
 #previous-button:active
 	background: url('../images/player/player.png') no-repeat -512px -256px;
-	width: 42px;
+	width 3%
 	height: 42px;
 #previous-button:disabled
 	background: url('../images/player/player.png') no-repeat -512px -192px;
-	width: 42px;
+	width 3%
 	height: 42px;
 #volume
 	margin 21px 0 0 5px
 #volume.unmute
 	background: url('../images/player/player.png') no-repeat -384px 0;
-	width: 25px;
+	width: 2%;
 	height: 28px;
 #volume.mute
 	background: url('../images/player/player.png') no-repeat 0 0;
-	width: 25px;
+	width: 2%;
 	height: 28px;
 #volume-range
 	width 10%
@@ -772,28 +829,28 @@ button
 	width 32px
 #shuffle-button.shuffleoff
 	background: url('../images/player/player.png') no-repeat -256px -65px;
-	width: 22px;
+	width: 2%;
 	height: 18px;
 #shuffle-button.shuffleoff:hover
 	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 22px;
+	width: 2%;
 	height: 18px;
 #shuffle-button.shuffleoff:active
 	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 22px;
+	width: 2%;
 	height: 18px;
 
 #shuffle-button.shuffleon
 	background: url('../images/player/player.png') no-repeat -256px -129px;
-	width: 22px;
+	width: 2%;
 	height: 18px;
 #shuffle-button.shuffleon:hover
 	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 22px;
+	width: 2%;
 	height: 18px;
 #shuffle-button.shuffleon:active
 	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 22px;
+	width: 2%;
 	height: 18px;
 
 #repeat-button
@@ -801,55 +858,55 @@ button
 	height 25px
 #repeat-button.song
 	background: url('../images/player/player.png') no-repeat -192px -129px;
-	width: 22px;
+	width: 2%;
 	height: 15px;
 #repeat-button.song:hover
 	background: url('../images/player/player.png') no-repeat -192px -1px;
-	width: 22px;
+	width: 2%;
 	height: 15px;
 #repeat-button.song:active
 	background: url('../images/player/player.png') no-repeat -192px -1px;
-	width: 22px;
+	width: 2%;
 	height: 15px;
 
 #repeat-button.none
 	background: url('../images/player/player.png') no-repeat -320px -64px;
-	width: 22px;
+	width: 2%;
 	height: 17px;
 #repeat-button.none:hover
 	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 22px;
+	width: 2%;
 	height: 17px;
 #repeat-button.none:active
 	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 22px;
+	width: 2%;
 	height: 17px;
 
 #repeat-button.album
 	background: url('../images/player/player.png') no-repeat -320px -128px;
-	width: 22px;
+	width: 2%;
 	height: 17px;
 #repeat-button.album:hover
 	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 22px;
+	width: 2%;
 	height: 17px;
 #repeat-button.album:active
 	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 22px;
+	width: 2%;
 	height: 17px;
 
 
 #like-button
 	background: url('../images/player/player.png') no-repeat -64px -65px;
-	width: 22px;
+	width: 2%;
 	height: 16px;
 #like-button:hover
 	background: url('../images/player/player.png') no-repeat -64px -1px;
-	width: 22px;
+	width: 2%;
 	height: 16px;
 #like-button:active
 	background: url('../images/player/player.png') no-repeat -64px -129px;
-	width: 22px;
+	width: 2%;
 	height: 16px;
 #comment-button
 	background: url('../images/player/player.png') no-repeat -128px -65px;

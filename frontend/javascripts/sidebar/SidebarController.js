@@ -23,10 +23,10 @@ define(['marionette',
 		this.initializeNotifications();
 
 		this.initializeSongs();
-
+/*
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
-
+*/
 		this.sidebarRegion.show(this.song.view);
 
 		this.bindListeners();
@@ -91,15 +91,39 @@ define(['marionette',
 			for (var i = 0; i < total; i++){
 				this.notification.collection.models[i].set({active : false});
 			}
-			this.sidebarRegion.show(this.getNotificationView());
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getNotificationView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getNotificationView());
+			}
+
 		}, this);
 
 		Backbone.on('show-musiclist', function(){
-			this.sidebarRegion.show(this.getSongView());
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getSongView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getSongView());
+			}
+
 		}, this);
 
 		Backbone.on('show-statistic', function(){
 			this.sidebarRegion.show(this.getStatisticView());
+
+		Backbone.on('toggle-sidebar', function(){
+			if (!context.toggled){
+				this.sidebarRegion.$el.parent().addClass('toggled');
+				$('#hideButton').addClass('toggled-button');
+				context.toggled = true;
+			} else{
+				this.sidebarRegion.$el.parent().removeClass('toggled');
+				$('#hideButton').removeClass('toggled-button');
+				context.toggled = false;
+		
+			}
 		}, this);
 
 		// Backbone.on('show followers', function(){

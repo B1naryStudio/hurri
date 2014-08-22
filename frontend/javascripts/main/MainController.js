@@ -1,5 +1,6 @@
 define(['marionette', 
-	'./PlaylistsView', 
+	'./PlaylistsView',
+	'./SongView', 
 	'../user/UserView', 
 	'../app/context', 
 	'./bars/album/AlbumBarCollection', 
@@ -8,7 +9,7 @@ define(['marionette',
 	'./radio/RadioCollection',
 	'./radio/RadioCollectionView',
 	'./comment/CommentLayout'],
-	function(Marionette, PlaylistsView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
+	function(Marionette, PlaylistsView, SongView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
 
 	
 	var MainController = function(){		
@@ -25,6 +26,8 @@ define(['marionette',
 
 		this.initializePlaylists();
 
+		this.initializeSong();
+
 		this.initializeAlbums();
 
 		this.initializeNotFound();
@@ -36,9 +39,11 @@ define(['marionette',
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
 		} else {
-			this.mainRegion.show(this.getPlaylistView());
+		/*	this.mainRegion.show(this.getPlaylistView());*/
+			this.mainRegion.show(new LayoutView());
 		}
-
+		/*this.mainRegion.show(this.getPlaylistView());	*/
+		this.mainRegion.show(new LayoutView());
 		this.bindListeners();	
 	};
 
@@ -161,6 +166,20 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeSong = function() {
+		this.song = {
+			model: context.currentSongModel
+		};
+
+		this.song.view = this.getSongView();
+	};
+
+	MainController.prototype.getSongView = function() {
+		return new SongView({
+			model : context.currentSongModel
+		});
+	};
+
 	MainController.prototype.getLayout = function() {
 		this.mainRegion.show(new LayoutView());
 	};
@@ -185,6 +204,10 @@ define(['marionette',
 		Backbone.on('show-favorites', function(){
 			this.getLayout();
 		},this);
+		Backbone.on('toggle-sidebar', function(){
+			/*this.sidebarRegion.el.parentNode.style.display='none';*/
+			this.mainRegion.$el.toggleClass('toggled-main');
+		}, this);
 		
 		
 	};
