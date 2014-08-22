@@ -11,7 +11,8 @@ ArtistRepository.prototype = new Repository();
 
 ArtistRepository.prototype.getByName = function(name, callback) {
 	var model = this.createModel();
-	var query = model.findOne({name: name});
+	regexp = new RegExp(name, "i");
+	var query = model.find({name: regexp});
 	query.exec(callback);
 };
 

@@ -12,7 +12,8 @@ TrackRepository.prototype = new Repository();
 
 TrackRepository.prototype.getByTitle = function(title, callback) {
 	var model = this.createModel();
-	var query = model.findOne({title:title});
+	regexp = new RegExp(title, "i");
+	var query = model.find({title: regexp});
 	query.exec(callback);
 };
 
