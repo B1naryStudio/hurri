@@ -15,7 +15,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			position : 0,
 			duration : 0,
 			liked : false,
-			timerId : 0,
+			timerId : 0
 		},
 
 		localStorage: new Backbone.LocalStorage("PlayerModel"),

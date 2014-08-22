@@ -271,7 +271,7 @@ body
 .album-bar 
 	width 150px
 	height 150px
-	background url('../images/default/cover.jpg')
+	background url('../images/default/cover.png')
 	background-size 150px
 	float left
 	margin 10px
@@ -304,12 +304,13 @@ body
 	margin auto
 	height 30px
 	#show-song
-		width 49%
+		width 50%
 		height 30px
 		background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
 		float left
 		border-right 1px solid lightgrey
 		text-align center
+		box-sizing border-box
 	#show-comments
 		width 50%
 		height 30px
@@ -337,6 +338,8 @@ body
 	border-bottom 1px solid darkgrey
 	list-style-type none;
 	background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+	&:hover
+		cursor pointer
 
 	.menu-icon
 		width 28px
@@ -497,7 +500,7 @@ body
 .sidebar-song-wrap
 	width 90%
 	margin 5px auto
-	height 45px
+	min-height 45px
 	border-radius 4px
 	background white
 	position relative
@@ -506,7 +509,7 @@ body
 		background lightgrey
 
 	.sidebar-song-img-box 
-		backgroung grey
+		background grey
 		img
 			width 45px
 			height 45px
@@ -642,20 +645,23 @@ body
 		opacity 0.5
 		float left
 	.playicon
+		icon_size = 128px
 		background url(../images/main/play.gif)
-		background-size 128px
+		background-size icon_size
 		opacity 0.3
-		width 128px
-		height 128px
+		width icon_size
+		height icon_size
 		position absolute
-		top 22%
-		left 28%
+		top 50%
+		left 50%
+		margin-top -(icon_size/2)
+		margin-left -(icon_size/2)
 		z-index 10
-		
 		&:hover
 			background url(../images/main/play.gif)
 			background-size 128px
 			opacity 0.8
+			cursor pointer
 		&:active 	
 			background url(../images/main/play.gif)
 			background-size 128px

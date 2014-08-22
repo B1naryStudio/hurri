@@ -22,7 +22,7 @@ define(['backbone'], function(Backbone){
 			 * Remove this code after user info receiving from server
 			 * mechanism will be implemented.
 			 */
-			this.set('avatarSource', './images/avatar.png');
+			this.set('avatarSource', '/images/avatar.png');
 			this.set('name', 'Vincent Vega');
 			this.set('age', 60);
 			this.set('email', 'vincent-vega@gmail.com');
