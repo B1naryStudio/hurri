@@ -1,5 +1,6 @@
 define(['marionette', 
 	'./PlaylistsView',
+	'./ListenedView',
 	'./SongView', 
 	'../user/UserView', 
 	'../app/context', 
@@ -9,7 +10,9 @@ define(['marionette',
 	'./radio/RadioCollection',
 	'./radio/RadioCollectionView',
 	'./comment/CommentLayout'],
-	function(Marionette, PlaylistsView, SongView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
+	function(Marionette, PlaylistsView, ListenedView, SongView, 
+			UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, 
+			RadioBarCollection, RadioBarView, LayoutView){
 
 	
 	var MainController = function(){		
@@ -34,15 +37,15 @@ define(['marionette',
 
 		this.initializeRadio();
 
+		this.initializeListened();
+
 		this.initializeLayout();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
 		} else {
-		/*	this.mainRegion.show(this.getPlaylistView());*/
 			this.mainRegion.show(new LayoutView());
 		}
-		/*this.mainRegion.show(this.getPlaylistView());	*/
 		this.bindListeners();	
 	};
 
@@ -179,6 +182,20 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeListened = function(){
+		this.listened = {
+			model: context.currentUserModel
+		};
+
+		this.listened.view = this.getListenedView();
+	};
+
+	MainController.prototype.getListenedView = function(){
+		return new ListenedView({
+			model: this.listened.model
+		});
+	};
+
 	MainController.prototype.getLayout = function() {
 		this.mainRegion.show(new LayoutView());
 	};
@@ -192,7 +209,7 @@ define(['marionette',
 			this.mainRegion.show(this.getUserView());
 		},this);
 
-		Backbone.on('show-playlists', function(){
+		Backbone.on('show-playlists show-statistic-playlists', function(){
 			this.mainRegion.show(this.getPlaylistView());
 		},this);
 
@@ -200,11 +217,15 @@ define(['marionette',
 			this.mainRegion.show(this.getRadioView());
 		},this);
 
-		Backbone.on('show-favorites', function(){
+		Backbone.on('show-favorites show-statistic-liked', function(){
 			this.getLayout();
 		},this);
+
+		Backbone.on('show-statistic-listened', function(){
+			this.mainRegion.show(this.getListenedView());
+		},this);
+
 		Backbone.on('toggle-sidebar', function(){
-			/*this.sidebarRegion.el.parentNode.style.display='none';*/
 			this.mainRegion.$el.toggleClass('toggled-main');
 		}, this);
 		

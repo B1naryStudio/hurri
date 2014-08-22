@@ -1,6 +1,7 @@
 define(['marionette', 
 	'../notification/NotificationsCollectionView', 
 	'./SidebarNavView',
+	'./FriendsView',
 	'../notification/NotificationModel',
 	'./defaultView',
 	 '../app/context',
@@ -8,7 +9,7 @@ define(['marionette',
 	 '../playlist/SongCollection',
 	 '../song/SongModel',
 	 './StatisticView'], 
-	function(Marionette, NotificationsCompositeView,  SidebarNavView,
+	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsView,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
 			SonglistCollection, SonglistModel, StatisticView){
 	
@@ -23,6 +24,8 @@ define(['marionette',
 		this.initializeNotifications();
 
 		this.initializeSongs();
+
+		this.initializeFriends();
 /*
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
@@ -84,6 +87,23 @@ define(['marionette',
 		});
 	};
 
+	SidebarController.prototype.initializeFriends = function(){
+		this.friends = {
+			model: context.currentUserModel
+		};
+
+		this.friends.view = this.getFriendsView();
+	};
+
+	SidebarController.prototype.getFriendsView = function(){
+		return new FriendsView({
+			model: this.friends.model
+		});
+	};
+
+
+
+
 	SidebarController.prototype.bindListeners = function() {
 
 		Backbone.on('show-notifications', function(){
@@ -111,8 +131,25 @@ define(['marionette',
 		}, this);
 
 		Backbone.on('show-statistic', function(){
-			this.sidebarRegion.show(this.getStatisticView());
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getStatisticView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getStatisticView());
+			}
+
 		}, this);
+
+		Backbone.on('show-friends', function(){
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getFriendsView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getFriendsView());
+			}
+
+		}, this);
+
 		Backbone.on('toggle-sidebar', function(){
 			if (!context.toggled){
 				this.sidebarRegion.$el.parent().addClass('toggled');

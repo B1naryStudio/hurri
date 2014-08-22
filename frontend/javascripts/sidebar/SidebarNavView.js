@@ -3,17 +3,21 @@ define(['marionette'], function(Marionette){
 		el: '#sidebar-nav',
 		template: '#sidebar-template',
 		events : {
-			'click #musicButton' 	: 'showMusiclist',
+			'click #musicButton'	: 'showMusiclist',
 			'click #infoButton' 	: 'showStatistic',
-			'click #hideButton'	: 'toggleSidebar' 
+			'click #friendsButton'	: 'showFriends', 
+			'click #hideButton'		: 'toggleSidebar' 
 		},
-		showMusiclist : function(){  
+		showFriends: function(){
+			Backbone.trigger('show-friends');
+		},
+		showMusiclist: function(){  
 			Backbone.trigger('show-musiclist');
 		},
 		showStatistic: function(){
 			Backbone.trigger('show-statistic');
 		},
-		toggleSidebar : function(){  
+		toggleSidebar: function(){  
 			Backbone.trigger('toggle-sidebar');
 		}
 	});
