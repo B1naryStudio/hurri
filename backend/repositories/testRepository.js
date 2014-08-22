@@ -9,17 +9,17 @@ function TestRepository(){
 }
 
 TestRepository.prototype.getAlbums = function(callback) {
-	var query = Album.find({});
+	var query = Album.count({});
 	query.exec(callback);
 };
 
 TestRepository.prototype.getArtists = function(callback) {
-	var query = Artist.find({});
+	var query = Artist.count({});
 	query.exec(callback);
 };
 
 TestRepository.prototype.getTracks = function(callback) {
-	var query = Track.find({});
+	var query = Track.count({});
 	query.exec(callback);
 };
 
