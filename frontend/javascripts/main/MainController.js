@@ -43,7 +43,6 @@ define(['marionette',
 			this.mainRegion.show(new LayoutView());
 		}
 		/*this.mainRegion.show(this.getPlaylistView());	*/
-		this.mainRegion.show(new LayoutView());
 		this.bindListeners();	
 	};
 
