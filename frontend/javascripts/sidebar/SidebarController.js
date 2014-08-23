@@ -129,7 +129,12 @@ define(['marionette',
 		// Backbone.on('show followers', function(){
 		// 	this.sidebarRegion.show(this.getFollowerView());
 		// }, this);
-
+		
+		this.song.view.on('scroll-to-top', function(options){
+			if (this.sidebarRegion.currentView === this.song.view){
+				this.sidebarRegion.$el.scrollTop(this.sidebarRegion.$el.scrollTop() + options.top);
+			}
+		}, this);
 	};
 
 

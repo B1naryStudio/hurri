@@ -12,10 +12,11 @@ script#song-item-template(type='text/template')
 	div.sidebar-song-wrap
 		div.sidebar-song-img-box
 			img(src="{{-albumCover}}")
+			img.gif(src='../images/songlist/blue_equalizer.gif')
 		.sidebar-song-header
-			h4 {{-title}}
-		div.sidebar-song-info
-			{{-artist}} - {{-albumTitle}}
+			h4(title='{{-title}} - {{-artist}}') {{-title}}
+		.sidebar-song-info 
+			{{-artist}}
 		.delete-song-from-list
 		.add-song-to-queue
 		.queuepos {{-queuepos}}

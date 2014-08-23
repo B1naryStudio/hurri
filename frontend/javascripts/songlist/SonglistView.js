@@ -9,7 +9,7 @@ define(['marionette', '../app/context', '../playlist/PlaylistModel'], function(M
 		 },
 		
 		modelEvents : {
-		 	'change:current' : 'recolourActiveSong',
+		 	'change:current' : 'changeCurrent',
 		 	'change:queuepos' : 'render'
 		},
 
@@ -41,12 +41,16 @@ define(['marionette', '../app/context', '../playlist/PlaylistModel'], function(M
 
 		},
 
-		recolourActiveSong: function(){
-		 	this.ui.song.toggleClass('activesong', this.model.get('current'));		
+		changeCurrent: function(){
+			var current = this.model.get('current');
+		 	this.ui.song.toggleClass('activesong', current);	
+		 	if (current) {
+		 		this.trigger('change-current', {top: this.$el.position().top});
+		 	}	
 		},
 
 		onRender: function(){
-  			this.recolourActiveSong();
+  			this.changeCurrent();
   		}
 	});
 	return SonglistView;

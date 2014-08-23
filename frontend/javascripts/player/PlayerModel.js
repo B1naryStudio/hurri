@@ -77,6 +77,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		newTrack: function(param){
+			console.log(param);
 			PlaylistModel.playTrack(param);
 			this.set({currentTrack: param});
 			this.stopTrack(function(){
@@ -195,12 +196,19 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		shuffleMode : function(){
 			var state = this.get('shuffle');
+			var currentTrack;
 			if (state === enums.shuffleModes.shuffleoff){
-				PlaylistModel.shuffle();
-				this.set({shuffle: enums.shuffleModes.shuffleon});	
+				currentTrack = PlaylistModel.shuffle();
+				this.set({
+					shuffle: enums.shuffleModes.shuffleon,
+					currentTrack: currentTrack  
+				});	
 			} else {
-				PlaylistModel.unShuffle();
-				this.set({shuffle: enums.shuffleModes.shuffleoff});
+				currentTrack = PlaylistModel.unShuffle();
+				this.set({
+					shuffle: enums.shuffleModes.shuffleoff,
+					currentTrack: currentTrack
+				});
 			}
 			return this.get('shuffle');
 		},

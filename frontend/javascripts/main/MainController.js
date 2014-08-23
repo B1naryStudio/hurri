@@ -8,8 +8,26 @@ define(['marionette',
 	'./NotFoundView',
 	'./radio/RadioCollection',
 	'./radio/RadioCollectionView',
-	'./comment/CommentLayout'],
-	function(Marionette, PlaylistsView, SongView, UserView, context, AlbumBarCollection, AlbumBarView, NotFoundView, RadioBarCollection, RadioBarView, LayoutView){
+	'./comment/CommentLayout',
+	'./bars/playlist/PlaylistBarCollectionView',
+	'./bars/playlist/PlaylistBarCollection',
+	'./songlistmain/MainSongCollectionView',
+	 '../playlist/SongCollection'],
+	function(Marionette, 
+		PlaylistsView, 
+		SongView, 
+		UserView, 
+		context, 
+		AlbumBarCollection, 
+		AlbumBarView, 
+		NotFoundView, 
+		RadioBarCollection,
+		RadioBarView, 
+		LayoutView, 
+		PlaylistBarView, 
+		PlaylistBarCollection, 
+		MainSongCollectionView, 
+		MainSonglistCollection){
 
 	
 	var MainController = function(){		
@@ -24,7 +42,7 @@ define(['marionette',
 		
 		this.initializeUser();
 
-		this.initializePlaylists();
+		this.initializePlaylistBar();
 
 		this.initializeSong();
 
@@ -35,14 +53,17 @@ define(['marionette',
 		this.initializeRadio();
 
 		this.initializeLayout();
+
+		this.initializeMainSonglist();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
 		} else {
-		/*	this.mainRegion.show(this.getPlaylistView());*/
-			this.mainRegion.show(new LayoutView());
+			this.mainRegion.show(this.getPlaylistBarView());
 		}
-		/*this.mainRegion.show(this.getPlaylistView());	*/
+
+		this.mainRegion.show(this.getPlaylistBarView());	
+
 		this.bindListeners();	
 	};
 
@@ -72,17 +93,30 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializePlaylists = function(){
+	MainController.prototype.initializePlaylistBar = function(){
 		this.playlist = {
-			model: context.currentSongModel
+			model: context.currentPlaylistBar,
+			collection: new PlaylistBarCollection()
 		};
 
-		this.playlist.view = this.getPlaylistView();
+		this.playlist.collection.add([
+			{playlistName: 'Playlist1',created: Date(1),totalTracks : 12,
+			tracks: [{artist : 'Jim Morrison', title: 'Hello moto'},{artist : 'Jim Morrison', title: 'unknown'}]},
+			{playlistName: 'Playlist2',created: Date(1),totalTracks : 21,
+			tracks: [{artist : 'Pink Floyd', title: 'You are the livung'}]},
+			{playlistName: 'Playlist3',created: Date(1),totalTracks : 0,
+			tracks: [{artist : 'Yupppii', title: 'Woop woop'},{artist : 'Jim Morrison', title: 'unknown'}]},
+			{playlistName: 'Playlist4',created: Date(1),totalTracks : 21,
+			tracks: [{artist : 'Some farms', title: 'Ant farm'}]},
+		]);
+
+		this.playlist.view = this.getPlaylistBarView();
 	};
 
-	MainController.prototype.getPlaylistView = function(){
-		return new PlaylistsView({
-			model: this.playlist.model
+	MainController.prototype.getPlaylistBarView = function(){
+		return new PlaylistBarView({
+			model: this.playlist.model,
+			collection: this.playlist.collection
 		});
 	};
 
@@ -175,7 +209,23 @@ define(['marionette',
 
 	MainController.prototype.getSongView = function() {
 		return new SongView({
-			model : context.currentSongModel
+			model : this.song.model
+		});
+	};
+
+	MainController.prototype.initializeMainSonglist = function(){
+		this.mainsonglist = {
+			model: context.currentSongModel,
+			collection: MainSonglistCollection
+		};
+
+		this.mainsonglist.view = this.getMainSonglistView();
+	};
+
+	MainController.prototype.getMainSonglistView = function(){
+		return new MainSongCollectionView({
+			model: this.mainsonglist.model,
+			collection: this.mainsonglist.collection
 		});
 	};
 
@@ -193,7 +243,7 @@ define(['marionette',
 		},this);
 
 		Backbone.on('show-playlists', function(){
-			this.mainRegion.show(this.getPlaylistView());
+			this.mainRegion.show(this.getPlaylistBarView());
 		},this);
 
 		Backbone.on('show-groupes', function(){
@@ -203,6 +253,11 @@ define(['marionette',
 		Backbone.on('show-favorites', function(){
 			this.getLayout();
 		},this);
+
+		Backbone.on('playlist-play', function(){
+			this.mainRegion.show(this.getMainSonglistView());
+		},this);
+
 		Backbone.on('toggle-sidebar', function(){
 			/*this.sidebarRegion.el.parentNode.style.display='none';*/
 			this.mainRegion.$el.toggleClass('toggled-main');

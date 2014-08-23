@@ -18,6 +18,7 @@
     "socket.io-client": "~1.0.6",
     "marionette": "~2.1.0",
     "requirejs": "~2.1.14",
-    "jquery-ui": "~1.11.1"
+    "jquery-ui": "~1.11.1",
+    "zeroclipboard": "~2.1.6"
   }
 }

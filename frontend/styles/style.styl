@@ -257,12 +257,18 @@ body
 	left 27%
 
 #main
-	background orange
+	background white
 	float left
 	width 50%
-	min-height:100%
+	overflow scroll
+	position absolute
+	top 120px
+	bottom 30px
+	margin-left 25%
+
 	&.toggled-main
 		width 75%
+
 #main-bar-header
 	width 360px
 	height 25px
@@ -556,26 +562,38 @@ body
 .sidebar-song-wrap
 	width 90%
 	margin 5px auto
-	min-height 45px
+	height 50px
 	border-radius 4px
 	background white
 	position relative
 	
 	&:hover 
-		background lightgrey
+		background linear-gradient(to top, rgba(73,192,240,0.2) 0%,rgba(44,175,227,0.2) 100%)
 
 	.sidebar-song-img-box 
 		background grey
 		img
-			width 45px
-			height 45px
+			width 40px
+			height 40px
 			float left
+			padding 5px
 
 	.sidebar-song-header
-		margin-left 50px
+		padding 5px 0 5px 0
+		height 15px
+		overflow hidden
+		text-overflow ellipsis
+		display block
+		width 70%
 
 	.sidebar-song-info
 		margin-left 50px
+		height 20px
+		text-overflow ellipsis
+		overflow hidden
+		display block
+		font-size 12px
+		width 70%
 
 	.delete-song-from-list
 		width 12px
@@ -612,7 +630,13 @@ body
 			opacity 0.7
 
 	&.activesong
-		background LightBlue
+		background linear-gradient(to top, rgba(73,192,240,1) 0%,rgba(44,175,227,1) 100%)
+		.gif
+			position absolute
+			left 0
+			display block
+.gif
+	display none
 
 #statistic-title
 	width auto
@@ -724,8 +748,142 @@ body
 			background-size 128px
 			opacity 0.5
 
+.playlist-bar-wrapper
+	width 412px
+	margin auto
+	margin-top 15px
+	
 
 
+.playlist-bar
+	width 412px
+	height 200px
+	position relative
+	float left
+
+	.playlist-left
+		width 200px
+		float left
+		height 196px
+		padding 1px
+		text-align center
+		background url(../images/main/cdholder.png) no-repeat
+		background-size 94%
+		.play-without-open
+			width 30px
+			height 20px
+			background linear-gradient(to top, #eee 0%, #ddd 100%)
+			border-radius 2px
+			border 1px solid lightgray
+
+		.playlist-name 
+			margin-top 3%
+			height 15px
+			background white
+			opacity 0.5
+		.playlist-total
+			margin-top 50px
+
+		.playlist-play
+			width 50px
+			height 50px
+			background url(../images/main/play.gif) no-repeat
+			background-size 50px
+			position absolute
+			left 75px
+			top 62px
+
+			&:hover
+				background url(../images/main/play.gif) no-repeat
+				background-size 50px
+				opacity 0.8
+			&:active 	
+				background url(../images/main/play.gif) no-repeat
+				background-size 50px
+				opacity 0.5
+
+
+	.playlist-right
+		padding 1px
+		float left
+		width 200px
+		background #ddd
+		height 176px
+		text-align center
+
+
+.main-song-item
+	width 90%
+	height 40px
+	margin auto
+	border-radius 5px
+	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
+	margin-bottom 2px
+	position relative
+	&.activesong
+		background lightblue
+	.main-share-song
+		width 16px
+		height 16px
+		background url(../images/main/share.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 2px
+		top 2px
+		opacity 0
+	.main-song-cover img
+		width 30px
+		height 30px
+		padding 5px
+		float left
+
+	.main-song-info
+		float left
+		height 30px
+		overflow hidden
+		display inline
+		width 80%
+
+		.main-song-name
+			padding-top 10px
+			height 20px
+			text-overflow ellipsis
+		.main-song-album
+			display block
+			height 20px
+			font-size 12px
+	
+	.main-queue-add
+		width 16px
+		height 16px
+		background url(../images/main/queue.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 20px
+		top 2px
+		opacity 0
+	.main-like-song
+		width 16px
+		height 16px
+		background url(../images/main/like.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 38px
+		top 2px
+		opacity 0
+		
+	&:hover
+		.main-share-song
+		.main-like-song
+		.main-queue-add
+				opacity 0.5
+			
+	.queueposmain
+		position absolute	
+		right 60px
 button
 	margin auto 3px 
 	background #2b2e31
@@ -739,8 +897,8 @@ button
 	cursor pointer
 	margin-top 22px
 	background-image: url(../images/player/player.png)
-    background-repeat: no-repeat
-    background-size 400px 64px
+	background-repeat: no-repeat
+	background-size 400px 64px
 .player-button:focus
 	outline 0
 .player-button:active
@@ -923,57 +1081,57 @@ button
 
 input[type='range'] {
 	cursor pointer
-    float left
-    height 6px
-    margin 10px
-    margin-top 29px
-    border: none;
-    padding: 1px 2px;
-    border-radius: 5px;
-    background: #232528;
-    box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-    -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-    outline: none;
+	float left
+	height 6px
+	margin 10px
+	margin-top 29px
+	border: none;
+	padding: 1px 2px;
+	border-radius: 5px;
+	background: #232528;
+	box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+	-webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+	outline: none;
 }
 input[type='range']::-moz-range-track {
-    border: inherit;
-    background: transparent;
+	border: inherit;
+	background: transparent;
 }
 input[type='range']::-ms-track {
-    border: inherit;
-    color: transparent;
-    background: transparent;
+	border: inherit;
+	color: transparent;
+	background: transparent;
 }
 input[type='range']::-ms-fill-lower,
 input[type='range']::-ms-fill-upper {
-    background: transparent;
+	background: transparent;
 }
 input[type='range']::-ms-tooltip {
-    display: none;
+	display: none;
 }
 input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 15px;
-    height: 10px;
-    border: none;
-    border-radius: 5px;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f));
-    background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%);
-    background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	-webkit-appearance: none;
+	width: 15px;
+	height: 10px;
+	border: none;
+	border-radius: 5px;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f));
+	background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%);
+	background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 input[type='range']::-moz-range-thumb {
-    width: 15px;
-    height: 10px;
-    border: none;
-    border-radius: 12px;
-    background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	width: 15px;
+	height: 10px;
+	border: none;
+	border-radius: 12px;
+	background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 input[type='range']::-ms-thumb {
-    width: 15px;
-    height: 10px;
-    border-radius: 5px;
-    border: 0;
-    background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	width: 15px;
+	height: 10px;
+	border-radius: 5px;
+	border: 0;
+	background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 
 /*#shuffle-button*/

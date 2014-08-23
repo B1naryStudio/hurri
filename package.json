@@ -52,7 +52,8 @@
     "request": "^2.40.0",
     "require": "^0.5.0",
     "socket.io": "~1.0.6",
+    "stylus-lemonade": "^0.1.8",
     "vksdk": "^4.0.0",
-    "stylus-lemonade": "^0.1.8"
+    "zeroclipboard": "^2.1.6"
   }
 }

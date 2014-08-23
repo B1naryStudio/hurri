@@ -67,6 +67,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 
 		nextTrack: function(){
 			this.model.nextTrack();
+			Backbone.trigger('player:nextTrack');
 		},
 		playbackState : function(){
 			var mode = this.model.playbackState();

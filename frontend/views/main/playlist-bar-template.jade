@@ -1,0 +1,17 @@
+script#playlist-bar(type='text/template')
+	.playlist-left
+		.play-without-open play
+		.playlist-name 
+			{{-playlistName}}
+		.playlist-date 
+			{{-created}}
+		.playlist-cover
+		.playlist-total 
+			span Total tracks {{-totalTracks}}
+		.playlist-play
+	.playlist-right
+		span Tracks:
+		{{for (var i = 0; i < tracks.length; i ++){}}
+		div {{-tracks[i].artist}} {{-tracks[i].title}}
+		{{}}}
+		
