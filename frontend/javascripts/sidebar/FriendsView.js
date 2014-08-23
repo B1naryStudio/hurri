@@ -1,7 +1,12 @@
 define(['marionette'], function(Marionette){
-	FriendsView = Marionette.ItemView.extend({
-		template: '#friends-template'
+	var FriendsView = Marionette.ItemView.extend({
+		template: '#friends-template',
+		events : {
+		 	'click .delete-friend'  : 'deleteFriend'
+		},
+		deleteFriend: function(){
+	 		this.model.destroy();
+	 	},
 	});
-
 	return FriendsView;
 });

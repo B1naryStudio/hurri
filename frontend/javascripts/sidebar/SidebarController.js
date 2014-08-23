@@ -1,17 +1,19 @@
 define(['marionette', 
 	'../notification/NotificationsCollectionView', 
 	'./SidebarNavView',
-	'./FriendsView',
+	'./FriendsCollectionView',
+	'./FriendsCollection',
 	'../notification/NotificationModel',
 	'./defaultView',
 	 '../app/context',
 	 '../songlist/SonglistCollectionView',
 	 '../playlist/SongCollection',
 	 '../song/SongModel',
-	 './StatisticView'], 
-	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsView,
+	 './StatisticView',
+	 '../user/UserModel'], 
+	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsCollectionView, FriendsCollection,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
-			SonglistCollection, SonglistModel, StatisticView){
+			SonglistCollection, SonglistModel, StatisticView, UserModel){
 	
 	var SidebarController = function(){		
 	
@@ -89,15 +91,23 @@ define(['marionette',
 
 	SidebarController.prototype.initializeFriends = function(){
 		this.friends = {
-			model: context.currentUserModel
+			model: new UserModel(),
+			collection: new FriendsCollection()
 		};
+
+		this.friends.collection.add([
+			{name: 'Mia Wallace', avatarSource: '/images/avatar.png'},
+			{name: 'Marsellus Wallace', avatarSource: '/images/avatar.png'},
+			{name: 'Jules Winnfield', avatarSource: '/images/avatar.png'}	
+		]);	
 
 		this.friends.view = this.getFriendsView();
 	};
 
 	SidebarController.prototype.getFriendsView = function(){
-		return new FriendsView({
-			model: this.friends.model
+		return new FriendsCollectionView({
+			model: this.friends.model,
+			collection: this.friends.collection
 		});
 	};
 
@@ -140,7 +150,7 @@ define(['marionette',
 
 		}, this);
 
-		Backbone.on('show-friends', function(){
+		Backbone.on('show-friends show-statistic-followers', function(){
 			if(!context.toggled){
 				this.sidebarRegion.show(this.getFriendsView());
 			} else {
