@@ -9,3 +9,11 @@ script#main-song-bar(type='text/template')
 		.main-queue-add
 		.main-like-song
 		.queueposmain {{-queuepos}}
+
+script#main-header-playlist-template(type='text/template')
+	#header-playlist-wrapper
+		#playlist-avatar-header
+			img(src='./images/main/cdholder.png')
+		#header-playlist-info
+			#playlist-header-name {{-playlistName}}
+			#playlist-header-tracks-num Total tracks: {{-numberOfTracks}}

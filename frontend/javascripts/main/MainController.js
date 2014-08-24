@@ -215,7 +215,7 @@ define(['marionette',
 
 	MainController.prototype.initializeMainSonglist = function(){
 		this.mainsonglist = {
-			model: context.currentSongModel,
+			model: context.playlistModel,
 			collection: MainSonglistCollection
 		};
 
