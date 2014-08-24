@@ -12,17 +12,16 @@ module.exports = function (app) {
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/signin' }));
 
 	app.get('/auth/vkontakte',
-		passport.authenticate('vkontakte'),
+		passport.authenticate('vkontakte', {scope: ['friends', 'audio', 'status', 'email']}),
 		function(req, res){
 			// The request will be redirected to vk.com for authentication, so
 			// this function will not be called.
 		});
 
 	app.get('/auth/vkontakte/callback',
-		passport.authenticate('vkontakte', { successRedirect: '/', failureRedirect: '/signin' }),
+		passport.authenticate('vkontakte', { failureRedirect: '/signin' }),
 		function(req, res) {
-			// Successful authentication, redirect home.
-			res.redirect('/');
+			res.redirect(200, '/');
 		});
 
 	app.get('/auth/odnoklassniki',

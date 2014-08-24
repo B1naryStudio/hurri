@@ -20,8 +20,8 @@ module.exports = {
 	},
 
 	vkontakte: {
-		clientID: 4500416,
-		clientSecret: "jqET7I5FvsJcg56R4Awe",
+		clientID: 4504196,
+		clientSecret: "sKTyZBHIHu17JeRLTsez",
 		callbackURL: "http://localhost:3055/auth/vkontakte/callback"
 	}
 

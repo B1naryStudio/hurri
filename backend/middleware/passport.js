@@ -89,7 +89,7 @@ module.exports = function () {
 		},
 		function(accessToken, refreshToken, profile, done) {
 			console.log('vk login');
-			console.log(profile);
+			console.log(accessToken);
 //			u.findOrCreate(profile, function (err, user) {
 //				if (err) { return done(err); }
 //				console.log('user: ' + user);
