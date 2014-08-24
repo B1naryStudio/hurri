@@ -6,32 +6,59 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:position': 'changeValue',
 			'change:previousButtonState': 'render',
 			'change:nextButtonState': 'render',
-			'change:duration': 'render' 
+			'change:duration': 'render',
+			'change:positionFormat': 'changedPosition'
 		},
 		events : {
-			"click @ui.nextButton"		: "nextTrack",
-			"click @ui.previousButton"	: "previousTrack",
-			"click @ui.playButton"		: "playbackState",
-			"click @ui.shuffleButton"	: "shuffleMode",
-			"click @ui.repeatButton"	: "repeatMode",
-			"click @ui.likeButton"		: "likeState",
-			"click @ui.volume"			: "mute",
-			"click @ui.commentButton"	: "addComment",
-			"change @ui.volumeRange"	: "volumeLevelSetup",
-			"change @ui.playbackRange"	: "playbackPosition",
-			"keypress @ui.volumeRange"	: "volumeKeyControl"
+			"click @ui.nextButton"			: "nextTrack",
+			"click @ui.previousButton"		: "previousTrack",
+			"click @ui.playButton"			: "playbackState",
+			"click @ui.shuffleButton"		: "shuffleMode",
+			"click @ui.repeatButton"		: "repeatMode",
+			"click @ui.likeButton"			: "likeState",
+			"click @ui.volume"				: "mute",
+			"click @ui.commentButton"		: "addComment",
+			"click @ui.songInfo"			: "countdown",
+			"mousemove @ui.volumeRange"		: "volumeLevelSetup",
+			"mousemove @ui.playbackRange"	: "playbackPosition",
+			"mousedown @ui.volumeRange"		: "setUpVolume",
+			"mousedown @ui.playbackRange"	: "setUpPlayback",
+			"mouseout @ui.playbackRange" 	: "resetPlaybackMouseUpFlag",
+			"mouseout @ui.volumeRange" 		: "resetVolumeMouseUpFlag",
+			"mouseup @ui.playbackRange" 	: "resetPlaybackMouseUpFlag"
 		},
 		ui: {
-   			nextButton: "#next-button",
-   			previousButton:	 "#previous-button",
+			nextButton: "#next-button",
+   			previousButton:	"#previous-button",
    			playButton: "#play-button",
    			shuffleButton: "#shuffle-button",
    			repeatButton: "#repeat-button",
    			likeButton: "#like-button",
    			commentButton: "#comment-button",
-   			volumeRange: "#volume-range",
+   			volumeRange: '#volume-range',
    			playbackRange: "#playback-range",
-   			volume: '#volume'
+   			volume: '#volume',
+			player : '#player',
+			songPosition: '#song-position'
+  		},
+
+  		setUpVolume: function(){
+  			this.flag = true;
+  			this.volumeLevelSetup();
+  		},
+  		
+  		setUpPlayback: function(){
+  			this.flag = true;
+  			this.playbackPosition();
+  		},
+
+  		resetPlaybackMouseUpFlag:function(){
+  			this.playbackPosition();
+  			this.flag = false;
+  		},
+
+  		resetVolumeMouseUpFlag:function(){
+  			this.flag = false;
   		},
 
   		changeValue: function(model){
@@ -40,6 +67,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 
 		nextTrack: function(){
 			this.model.nextTrack();
+			Backbone.trigger('player:nextTrack');
 		},
 		playbackState : function(){
 			var mode = this.model.playbackState();
@@ -83,15 +111,21 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		volumeLevelSetup : function(){
-			var input =  document.querySelector('#volume-range').value;
-			this.model.volumeLevelSetup(input);
-
+			if (this.flag){
+				var input =  this.ui.volumeRange.val();
+				this.model.volumeLevelSetup(input);
+			}
 		},
 
 		playbackPosition : function(){
-			var input =  document.querySelector('#playback-range').value;
-			this.model.playbackPosition(input);
-			
+			if (this.flag){
+				var input =  this.ui.playbackRange.val();
+				this.model.playbackPosition(input);	
+			}	
+		},
+
+		changedPosition: function(){
+			this.ui.songPosition.text(this.model.get('positionFormat'));
 		}
 	}); 
 	return PlayerView;

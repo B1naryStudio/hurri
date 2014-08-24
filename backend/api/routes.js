@@ -4,6 +4,10 @@ var dialogueRoutes = require('./dialogueRoutes');
 var groupRoutes = require('./groupRoutes');
 var trackRoutes = require('./trackRoutes');
 var userRoutes = require('./userRoutes');
+var searchRoutes = require('./searchRoutes');
+var testRoutes = require('./testRoutes');
+
+
 
 module.exports = function(app){
 	return {
@@ -12,6 +16,8 @@ module.exports = function(app){
 		dialogueRoutes: dialogueRoutes(app),
 		groupRoutes: groupRoutes(app),
 		trackRoutes: trackRoutes(app),
-		userRoutes: userRoutes(app)
+		userRoutes: userRoutes(app),
+		searchRoutes: searchRoutes(app),
+		testRoutes: testRoutes(app)
 	};
 };

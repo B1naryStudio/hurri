@@ -1,20 +1,10 @@
+@require 'mixin.styl'
 /*Colors*/
 default_bg = gray
 vk_bg = #42618b
 ok_bg = #d5702e
 tw_bg = #3b9bda
 fb_bg = #2f4885
-
-/*Gradients*/
-background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval, deprecatedWebkitStartPoint = false, deprecatedWebkitEndPoint = false)
-	background-color startColor
-	if deprecatedWebkitStartPoint && deprecatedWebkitEndPoint
-		background-image -webkit-gradient(linear, deprecatedWebkitStartPoint, deprecatedWebkitEndPoint, color-stop(startInterval, startColor), color-stop(endInterval, endColor))
-	background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)
 
 /*Font*/
 basic_font = 'HelvetivcaNeue', 'Helvetivca Neue', sans-serif
@@ -30,35 +20,15 @@ body
 	font-family basic_font
 	width 100%
 	min-width 1000px
-
+	height 100%
 *
 	margin 0
 	padding 0
-
+	
+	&:focus 
+		outline none
 #header
 	width 100%
-	height 50px
-	background #eee
-
-#notification-icon
-	height 40px;
-	background: url('../images/notifications/notification.png') no-repeat;
-	background-size: 32px
-#unreadNumber
-		height 20px
-		width 20px
-		background orange
-		border-radius 3px
-		text-align center
-		font-size 90%
-		font-weight bold
-		color white
-		display inline
-		padding 1px 2px
-		margin-left 20px
-
-#header img
-	height 50px
 	height header_height
 	background header_background_color
 	padding 10px
@@ -73,15 +43,19 @@ body
 	width auto
 	height bar_height
 	float right
-	cursor pointer
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
 
+	&:hover
+		background #529de1
+
 	#avatar-icon
-		width auto
+		width bar_height
 		height bar_height
 		max-width 50px
+		cursor pointer
 		border-style hidden
 		border-top-left-radius 3px
 		border-bottom-left-radius 3px
@@ -91,28 +65,55 @@ body
 		width auto
 		height 100%
 		float right
-		background linear-gradient(to bottom, #00bfff, #529de1)
-		text-shadow 0px 1px 1px #808080
 		font-size 15px
 		font-weight 700
 		line-height bar_height
-		list-style-type none
 		padding-left 10px
 		padding-right 10px
+		cursor pointer
 		border-style hidden
 		border-top-right-radius 3px
 		border-bottom-right-radius 3px
 		box-sizing border-box
 
-		&:hover
-			background #00bfff
+#notificationbar
+	width auto
+	height bar_height
+	float right
+	margin-right 10px
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	cursor pointer
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	&:hover
+		background #529de1
+
+	#notification-icon
+		width bar_height
+		height bar_height
+		cursor pointer
+		box-sizing border-box
+
+	#unread-number
+		height 20px
+		width 20px
+		background orange
+		cursor pointer
+		border-radius 3px
+		text-align center
+		font-size 90%
+		font-weight bold
+		color white
+		display inline
+		padding 1px 2px
 
 #searchbar
 	width auto
 	height bar_height
 	float right
-	cursor pointer
-	margin-right 100px
+	margin-right 50px
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
@@ -120,7 +121,7 @@ body
 	#search-input
 		width searchbar_width
 		height bar_height
-		line-height 25px
+		font-size 18px
 		border-style hidden
 		border-top-left-radius 3px
 		border-bottom-left-radius 3px
@@ -133,12 +134,11 @@ body
 		width auto
 		height bar_height
 		float right
-		background linear-gradient(to bottom, #00bfff, #529de1)
-		text-shadow 0px 1px 1px #808080
+		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 		font-size 15px
 		font-weight 700
 		line-height bar_height
-		list-style-type none
+		cursor pointer
 		padding-left 10px
 		padding-right 10px
 		border-style hidden
@@ -147,39 +147,297 @@ body
 		box-sizing border-box
 
 		&:hover
-			background #00bfff
+			background #529de1
+
+#searchresults
+	position absolute
+	width 300px
+	height auto
+	max-height 500px 
+	overflow hidden
+	overflow-y auto
+	background-color #fff
+	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
+	display none
+	cursor pointer
+
+	.searchresults-region
+		width 290px
+		height auto
+		border-style hidden
+		border-radius 2px
+		background white
+		margin 5px
+		box-shadow 0px 0px 3px 0px rgba(50, 50, 50, 0.5)
+		position relative
+		cursor pointer
+
+		.result-item
+			width 290px
+			height 40px
+			background white
+			border-style solid
+			border-width 1px
+			border-color #c0c0c0
+			box-sizing border-box
+			cursor pointer
+
+			&:hover
+				background #d3d3d3
+
+			.result-cover
+				width 40px
+				height 40px
+				float left
+				border-right-style solid
+				border-right-width 1px
+				border-right-color #c0c0c0
+
+			.result-title
+				width auto
+				height 40px
+				float left
+				line-height 40px
+				font-size 15px
+				margin-left 5px
+
+#user
+	width 100%
+	height 100%
+	box-sizing border-box
+
+	#avatar
+		width 200px
+		height auto
+		max-height 500px
+		float left
+
+	#userinfo
+		width auto
+		height auto
+		float left
+		margin 10px
+		box-sizing border-box
+
+		#name
+			width auto
+			height auto
+			margin-bottom 10px
+
+		#info
+			width auto
+			height auto
+			font-size 12px
 
 #player
 	height 60px
 	margin 0 auto
-	background #2b2e31
+	background:  linear-gradient( to bottom, #232323, #444, #444, #232323)
+
 #player-content
 	height 70px 
 	width 80%
 	margin auto
+#song-block
+	color white
+	position relative
+.song-info
+	position absolute
+
+#song-name
+	top 5px
+	left 27%
+
+#song-duration
+	top 37px
+	left 67%
+
+#song-position
+	top 37px
+	left 27%
+
 #main
-	background orange
+	background white
 	float left
 	width 50%
+	overflow scroll
+	position absolute
+	top 120px
+	bottom 30px
+	margin-left 25%
+
+	&.toggled-main
+		width 75%
+
+#main-bar-header
+	width 360px
+	height 25px
+	background lightgrey
+	margin 5px auto
+
+	#genres-select
+		display inline-block
+		height 25px
+		margin-right 20px
+	#album-select
+	#artist-select
+	#track-select
+		display inline-block
+		height 20px
+		text-align center
+		border-right 1px solid grey
+		background linear-gradient(to bottom, rgba(245,245,245,1) 0%,rgba(224,224,224,1) 100%)
+		width 80px
+		&:last-child
+			border none
+		&:hover
+			background #f6f6f6
+
+#song-info-content
+	#song-info-text
+		width 90%
+		margin 3% auto
+	#song-info-image
+		width 170px
+		height 170px
+		margin 3% auto
+
+#album-bar-wrapper
+	margin auto
+.album-bar 
+	width 150px
+	height 150px
+	background url('../images/default/cover.png')
+	background-size 150px
+	float left
+	margin 10px
+	position relative
+
+	#artistAlbum
+		width 100%
+		height 15%
+		background white
+		opacity 0.8
+		text-align center
+
+	#totalTracksAlbum
+		width 100%
+		height 10%
+		background white
+		opacity 0.8
+		text-align center
+		
+	#nameAlbum
+		position absolute
+		bottom 0
+		width 100%
+		height 20%
+		background white
+		opacity 0.8
+		text-align center
+#comment-buttons-wrapper
+	width 100%
+	margin auto
+	height 30px
+	#show-song
+		width 50%
+		height 30px
+		background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		float left
+		border-right 1px solid lightgrey
+		text-align center
+		box-sizing border-box
+	#show-comments
+		width 50%
+		height 30px
+		background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		float left
+		text-align center
+#add-comment
+	width 40px
+	background lightblue
+	cursor pointer
+#comment-layout-content
+	#song-text
+		width 90%
+		margin 2% auto
+	#new-comment
+		margin 3%
+		width 80%
+		float left
+	#add-comment
+		margin-top 3%
+		float left
+		width 5% 
+		
+#song-text-name
+	font-size 14px
+	font-weight bold
 
 #menu
-	background green
+	background lightgrey
 	width 25%
 	float left
 
 #menu li
-	height 30px
-	border 1px solid darkgrey
+	height 38px
+	border-bottom 1px solid darkgrey
 	list-style-type none;
+	background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+	&:hover
+		cursor pointer
 
+	.menu-icon
+		width 28px
+		height 28px
+		float left
+		opacity: 0.5
+		margin-top 4px
+		margin-left 4px
+		margin-right 4px
+		
+		&.favourites-image
+			background: url('../images/menu/favorites.png') no-repeat;
+			background-size: 28px
+		&.show-playlists 
+			background: url('../images/menu/playlists.png') no-repeat;
+			background-size: 28px
+		&.show-groupes
+			background: url('../images/menu/radios.png') no-repeat;
+			background-size: 28px
+		&.show-by-genres 
+			background: url('../images/menu/genres.png') no-repeat; 
+			background-size: 28px
+		&.show-by-artists
+			background: url('../images/menu/artists.png') no-repeat;
+			background-size: 28px
+		&.show-by-albums
+			background: url('../images/menu/albums.png') no-repeat;
+			background-size: 28px
+		&.show-by-charts
+			background: url('../images/menu/charts.png') no-repeat;
+			background-size: 28px
+	.name
+		padding-top 10px
+	&:hover 
+		background Snow
+.toggled
+	display none
 #sidebar
+	position absolute
 	background #eee
 	width 25%
 	float left
-
+	right 0px
+	top 120px
+	bottom 0px
 	#sidebar-region
+		width 100%
+		top 0px
+		position absolute
+		bottom 5px
 		display block
-		position relative
+		overflow auto
 
 .notification-message 
 	display block
@@ -226,28 +484,60 @@ body
 
 		&:hover 
 			opacity 1
-
+//.sidebar-clear
+//	clear both
 #sidebar-nav
-		display block
+		clear both
+		float right
+		background #2b2e31
+		width 25%
+		height 30px
+		background #2b2e31
+		border-top 1px solid darkgrey
+		position absolute
 		bottom 0px
-		
+		right 0px
 		li
-			height 30px
+			float right
+			height 25px
 			list-style-type none;
 			display: inline-block
-			width:33%
-			background green
+			width 24%
+			border-right 1px solid lightgrey
+
+			&:last-child
+				border-right none
 
 			&#friendsButton
 				background: url('../images/sidebar/friends.png') no-repeat;
-				background-size: 40px
+				background-size: 25px
+				opacity: 0.5
+				background-position: center
+				&:hover
+					opacity 1
 			&#musicButton
 				background: url('../images/sidebar/music.png') no-repeat;
-				background-size: 32px
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
 			&#infoButton
 				background: url('../images/sidebar/info.png') no-repeat;
-				background-size: 32px
-
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+			&#hideButton
+				background: url('../images/sidebar/hide.png') no-repeat;
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+				&.toggled-button
+					display none
 .notifHeadWrapper
 	display block
 	margin 0 auto 0
@@ -267,12 +557,123 @@ body
 
 	&:hover
 		opacity 0.9
+.song-item
+	width 100%
+.sidebar-song-wrap
+	width 90%
+	margin 5px auto
+	height 50px
+	border-radius 4px
+	background white
+	position relative
+	
+	&:hover 
+		background linear-gradient(to top, rgba(73,192,240,0.2) 0%,rgba(44,175,227,0.2) 100%)
+
+	.sidebar-song-img-box 
+		background grey
+		img
+			width 40px
+			height 40px
+			float left
+			padding 5px
+
+	.sidebar-song-header
+		padding 5px 0 5px 0
+		height 15px
+		overflow hidden
+		text-overflow ellipsis
+		display block
+		width 70%
+
+	.sidebar-song-info
+		margin-left 50px
+		height 20px
+		text-overflow ellipsis
+		overflow hidden
+		display block
+		font-size 12px
+		width 70%
+
+	.delete-song-from-list
+		width 12px
+		height 12px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 12px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+	
+	.queuepos
+		position absolute
+		right 0
+		bottom 3px
+		font-size 10px
+		font-weight bold
+		margin-right 4px
+
+	.add-song-to-queue
+		width 12px
+		height 12px
+		position absolute
+		background: url('../images/songlist/queue.png') no-repeat;
+		background-size: 12px
+		right 2px
+		top 16px
+		opacity 0.3
+
+		&:hover 
+			opacity 0.7
+
+	&.activesong
+		background linear-gradient(to top, rgba(73,192,240,1) 0%,rgba(44,175,227,1) 100%)
+		.gif
+			position absolute
+			left 0
+			display block
+.gif
+	display none
+
+#statistic-title
+	width auto
+	height 30px
+	line-height 30px
+	margin 5px
+	font-size 20px
+	font-weight 700
+
+#statistic
+	border-radius 2px
+	background #fefefe
+	opacity 0.8
+	margin 10px
+	padding 2%
+	width 90%
+	box-shadow 0px 0px 5px 0px rgba(50, 50, 50, 0.5)
+	position relative
+	cursor pointer
+
+	.statistic-info
+		width 100%
+		height 30px
+		background white
+		font-size 15px
+		font-weight 700
+		line-height 30px 
+		cursor pointer
 
 #footer
 	width 75%
+	float left
 	height 30px
 	background #2b2e31
 	border-top 1px solid darkgrey
+	position absolute
+	bottom 0px
 
 #song-info
 	width 70%
@@ -280,23 +681,209 @@ body
 	color #529de1
 	float left
 
-#footer-menu
-	list-style-type none;
-	float right
-	display inline
-	width 25%
-	background lightgreen
-
-.footer-button
-	padding 4px 10px
-	width 25%
-	height 30px
-	color darkgrey
-	float right
-
 .clear
 	clear both
 
+.radio-wrapper
+	width  300px
+	padding 1%
+	margin 1%
+	height 200px
+	display block
+	float left 
+	background rgba(204,204,204,1) 
+	position relative
+
+	.nameRadio
+		width 100%
+		height 20px
+		background linear-gradient(to top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		text-align center
+	
+	.left-side
+		display block
+		width 50%
+		background white
+		opacity 0.8
+		float left
+		height 90%
+		
+	.master-avatar
+		display block
+		width 50px
+		margin auto
+	.totalTracksRadio
+	.listeners
+	.masterName
+		height 20px
+		display block
+		margin auto
+		text-align center
+	.tracks-side
+		height 90%
+		width 50%
+		background white
+		opacity 0.5
+		float left
+	.playicon
+		icon_size = 128px
+		background url(../images/main/play.gif)
+		background-size icon_size
+		opacity 0.3
+		width icon_size
+		height icon_size
+		position absolute
+		top 50%
+		left 50%
+		margin-top -(icon_size/2)
+		margin-left -(icon_size/2)
+		z-index 10
+		&:hover
+			background url(../images/main/play.gif)
+			background-size 128px
+			opacity 0.8
+			cursor pointer
+		&:active 	
+			background url(../images/main/play.gif)
+			background-size 128px
+			opacity 0.5
+
+.playlist-bar-wrapper
+	width 412px
+	margin auto
+	margin-top 15px
+	
+
+
+.playlist-bar
+	width 412px
+	height 200px
+	position relative
+	float left
+
+	.playlist-left
+		width 200px
+		float left
+		height 196px
+		padding 1px
+		text-align center
+		background url(../images/main/cdholder.png) no-repeat
+		background-size 94%
+		.play-without-open
+			width 30px
+			height 20px
+			background linear-gradient(to top, #eee 0%, #ddd 100%)
+			border-radius 2px
+			border 1px solid lightgray
+
+		.playlist-name 
+			margin-top 3%
+			height 15px
+			background white
+			opacity 0.5
+		.playlist-total
+			margin-top 50px
+
+		.playlist-play
+			width 50px
+			height 50px
+			background url(../images/main/play.gif) no-repeat
+			background-size 50px
+			position absolute
+			left 75px
+			top 62px
+
+			&:hover
+				background url(../images/main/play.gif) no-repeat
+				background-size 50px
+				opacity 0.8
+			&:active 	
+				background url(../images/main/play.gif) no-repeat
+				background-size 50px
+				opacity 0.5
+
+
+	.playlist-right
+		padding 1px
+		float left
+		width 200px
+		background #ddd
+		height 176px
+		text-align center
+
+
+.main-song-item
+	width 90%
+	height 40px
+	margin auto
+	border-radius 5px
+	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
+	margin-bottom 2px
+	position relative
+	&.activesong
+		background lightblue
+	.main-share-song
+		width 16px
+		height 16px
+		background url(../images/main/share.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 2px
+		top 2px
+		opacity 0
+	.main-song-cover img
+		width 30px
+		height 30px
+		padding 5px
+		float left
+
+	.main-song-info
+		float left
+		height 30px
+		overflow hidden
+		display inline
+		width 80%
+
+		.main-song-name
+			padding-top 10px
+			height 20px
+			text-overflow ellipsis
+		.main-song-album
+			display block
+			height 20px
+			font-size 12px
+	
+	.main-queue-add
+		width 16px
+		height 16px
+		background url(../images/main/queue.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 20px
+		top 2px
+		opacity 0
+	.main-like-song
+		width 16px
+		height 16px
+		background url(../images/main/like.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 38px
+		top 2px
+		opacity 0
+		
+	&:hover
+		.main-share-song
+		.main-like-song
+		.main-queue-add
+				opacity 0.5
+			
+	.queueposmain
+		position absolute	
+		right 60px
 button
 	margin auto 3px 
 	background #2b2e31
@@ -307,195 +894,249 @@ button
 	width 25px
 	background-size cover
 	float left
-	margin-top 15px
+	cursor pointer
+	margin-top 22px
+	background-image: url(../images/player/player.png)
+	background-repeat: no-repeat
+	background-size 400px 64px
 .player-button:focus
 	outline 0
 .player-button:active
 	position relative
 	top 1px
 #play-button
-	height 48px
-	width 48px
-	margin-top 5px
+	height 30px
+	width 30px
+	margin-top 10px
 #play-button.pause
-	background-image url(../images/player/play.png)
+	background: url('../images/player/player.png') no-repeat -575px 0;
+	width: 40px;
+	height: 40px;
 #play-button.pause:hover
-	background-image url(../images/player/play_hover.png)
+	background: url('../images/player/player.png') no-repeat -575px -256px;
+	width: 40px;
+	height: 40px;
 #play-button.pause:active
-	background-image url(../images/player/play_active.png)
+	background: url('../images/player/player.png') no-repeat -575px -256px;
+	width: 40px;
+	height: 40px;
 
 #play-button.play
-	background-image url(../images/player/pause.png)
+	background: url('../images/player/player.png') no-repeat -637px 0;
+	width: 40px;
+	height: 40px;
 #play-button.play:hover
-	background-image url(../images/player/pause_hover.png)
+	background: url('../images/player/player.png') no-repeat -637px -255px;
+	width: 40px;
+	height: 40px;
 #play-button.play:active
-	background-image url(../images/player/pause_active.png)
+	background: url('../images/player/player.png') no-repeat -637px -255px;
+	width: 40px;
+	height: 40px;
 
 #next-button
-	background-image url(../images/player/next.png)
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -447px 0;
+	width 3%
+	height: 42px;
 #next-button:hover
-	background-image url(../images/player/next_hover.png)
+	background: url('../images/player/player.png') no-repeat -447px -256px;
+	width 3%
+	height: 42px;
 #next-button:active
-	background-image url(../images/player/next_active.png)
+	background: url('../images/player/player.png') no-repeat -447px -256px;
+	width 3%
+	height: 42px;
 #next-button:disabled
-	background-image url(../images/player/next_disabled.png)
+	background: url('../images/player/player.png') no-repeat -447px -192px;
+	width 3%
+	height: 42px;
 #previous-button
-	background-image url(../images/player/prev.png)
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -512px 0;
+	width 3%
+	height: 42px;
 #previous-button:hover
-	background-image url(../images/player/prev_hover.png)
+	background: url('../images/player/player.png') no-repeat -512px -256px;
+	width 3%
+	height: 42px;
 #previous-button:active
-	background-image url(../images/player/prev_active.png)
+	background: url('../images/player/player.png') no-repeat -512px -256px;
+	width 3%
+	height: 42px;
 #previous-button:disabled
-	background-image url(../images/player/prev_disabled.png)
+	background: url('../images/player/player.png') no-repeat -512px -192px;
+	width 3%
+	height: 42px;
 #volume
-	margin 15px 0 0 5px
+	margin 21px 0 0 5px
 #volume.unmute
-	background-image url(../images/player/volume.png)
+	background: url('../images/player/player.png') no-repeat -384px 0;
+	width: 2%;
+	height: 28px;
 #volume.mute
-	background-image url(../images/player/volume_off.png)
+	background: url('../images/player/player.png') no-repeat 0 0;
+	width: 2%;
+	height: 28px;
 #volume-range
 	width 10%
 #playback-range
 	width 45%
 
+#shuffle-button
+	width 32px
 #shuffle-button.shuffleoff
-	background-image url(../images/player/unshuffle.png)
+	background: url('../images/player/player.png') no-repeat -256px -65px;
+	width: 2%;
+	height: 18px;
 #shuffle-button.shuffleoff:hover
-	background-image url(../images/player/unshuffle_hover.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 2%;
+	height: 18px;
 #shuffle-button.shuffleoff:active
-	background-image url(../images/player/unshuffle_active.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 2%;
+	height: 18px;
 
 #shuffle-button.shuffleon
-	background-image url(../images/player/shuffle.png)
+	background: url('../images/player/player.png') no-repeat -256px -129px;
+	width: 2%;
+	height: 18px;
 #shuffle-button.shuffleon:hover
-	background-image url(../images/player/shuffle_hover.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 2%;
+	height: 18px;
 #shuffle-button.shuffleon:active
-	background-image url(../images/player/shuffle_active.png)
+	background: url('../images/player/player.png') no-repeat -256px -1px;
+	width: 2%;
+	height: 18px;
 
+#repeat-button
+	width 32px
+	height 25px
 #repeat-button.song
-	background-image url(../images/player/repeat_track.png)
+	background: url('../images/player/player.png') no-repeat -192px -129px;
+	width: 2%;
+	height: 15px;
 #repeat-button.song:hover
-	background-image url(../images/player/repeat_track_hover.png)
+	background: url('../images/player/player.png') no-repeat -192px -1px;
+	width: 2%;
+	height: 15px;
 #repeat-button.song:active
-	background-image url(../images/player/repeat_track_active.png)
+	background: url('../images/player/player.png') no-repeat -192px -1px;
+	width: 2%;
+	height: 15px;
 
 #repeat-button.none
-	background-image url(../images/player/repeat.png)
+	background: url('../images/player/player.png') no-repeat -320px -64px;
+	width: 2%;
+	height: 17px;
 #repeat-button.none:hover
-	background-image url(../images/player/repeat_hover.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 2%;
+	height: 17px;
 #repeat-button.none:active
-	background-image url(../images/player/repeat_active.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 2%;
+	height: 17px;
 
 #repeat-button.album
-	background-image url(../images/player/repeat_all.png)
+	background: url('../images/player/player.png') no-repeat -320px -128px;
+	width: 2%;
+	height: 17px;
 #repeat-button.album:hover
-	background-image url(../images/player/repeat_all_hover.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 2%;
+	height: 17px;
 #repeat-button.album:active
-	background-image url(../images/player/repeat_all_active.png)
+	background: url('../images/player/player.png') no-repeat -320px 0;
+	width: 2%;
+	height: 17px;
 
 
 #like-button
-	background-image url(../images/player/like.png)
+	background: url('../images/player/player.png') no-repeat -64px -65px;
+	width: 2%;
+	height: 16px;
 #like-button:hover
-	background-image url(../images/player/like_hover.png)
+	background: url('../images/player/player.png') no-repeat -64px -1px;
+	width: 2%;
+	height: 16px;
 #like-button:active
-	background-image url(../images/player/like_active.png)
+	background: url('../images/player/player.png') no-repeat -64px -129px;
+	width: 2%;
+	height: 16px;
 #comment-button
-	background-image url(../images/player/comment.png)
+	background: url('../images/player/player.png') no-repeat -128px -65px;
+	width: 20px;
+	height: 18px;
 #comment-button:hover
-	background-image url(../images/player/comment_hover.png)	
+	background: url('../images/player/player.png') no-repeat -128px -1px;
+	width: 20px;
+	height: 18px;	
 #comment-button:active
-	background-image url(../images/player/comment_active.png)			
+	background: url('../images/player/player.png') no-repeat -128px -129px;
+	width: 20px;
+	height: 18px;			
 
 input[type='range'] {
-    float left
-    height 6px
-    margin 10px
-    margin-top 24px
-    border: none;
-    padding: 1px 2px;
-    border-radius: 5px;
-    background: #232528;
-    box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-    -webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
-    outline: none;
+	cursor pointer
+	float left
+	height 6px
+	margin 10px
+	margin-top 29px
+	border: none;
+	padding: 1px 2px;
+	border-radius: 5px;
+	background: #232528;
+	box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+	-webkit-box-shadow: inset 0 1px 0 0 #0d0e0f, inset 0 -1px 0 0 #3a3d42;
+	outline: none;
 }
 input[type='range']::-moz-range-track {
-    border: inherit;
-    background: transparent;
+	border: inherit;
+	background: transparent;
 }
 input[type='range']::-ms-track {
-    border: inherit;
-    color: transparent;
-    background: transparent;
+	border: inherit;
+	color: transparent;
+	background: transparent;
 }
 input[type='range']::-ms-fill-lower,
 input[type='range']::-ms-fill-upper {
-    background: transparent;
+	background: transparent;
 }
 input[type='range']::-ms-tooltip {
-    display: none;
+	display: none;
 }
 input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 15px;
-    height: 10px;
-    border: none;
-    border-radius: 5px;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f));
-    background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%);
-    background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	-webkit-appearance: none;
+	width: 15px;
+	height: 10px;
+	border: none;
+	border-radius: 5px;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #529de1), color-stop(100%, #245e8f));
+	background-image: -webkit-linear-gradient(top , #529de1 0, #245e8f 100%);
+	background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 input[type='range']::-moz-range-thumb {
-    width: 15px;
-    height: 10px;
-    border: none;
-    border-radius: 12px;
-    background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	width: 15px;
+	height: 10px;
+	border: none;
+	border-radius: 12px;
+	background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 input[type='range']::-ms-thumb {
-    width: 15px;
-    height: 10px;
-    border-radius: 5px;
-    border: 0;
-    background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	width: 15px;
+	height: 10px;
+	border-radius: 5px;
+	border: 0;
+	background-image: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
 }
 
-#shuffle-button
+/*#shuffle-button*/
 
 
 /*Sign in styles*/
-.signin_page
-	text-align center
-.social_enter
-	margin-top 20px
-	text-align center
-	a
-		font-size 14px
-		text-decoration none
-		color #fff
-		display inline-block
-		margin-right 10px
-		padding 5px 10px
-		background default_bg
-		box-shadow 0 2px 0 darken(default_bg, 10)
-		&.vk
-			&:hover
-				background darken(vk_bg, 10)
-			background vk_bg
-			box-shadow 0 2px 0 darken(vk_bg, 10)
-		&.ok
-			&:hover
-				background darken(ok_bg, 10)
-			background ok_bg
-			box-shadow 0 2px 0 darken(ok_bg, 10)
-		&.tw
-			&:hover
-				background darken(tw_bg, 10)
-			background tw_bg
-			box-shadow 0 2px 0 darken(tw_bg, 10)
-		&.fb
-			&:hover
-				background darken(fb_bg, 10)
-			background fb_bg
-			box-shadow 0 2px 0 darken(fb_bg, 10)
+@import url(signin.styl);
+@import url(not_found.styl);

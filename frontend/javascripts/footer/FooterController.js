@@ -1,4 +1,4 @@
-define(['marionette', './SongInfoView', '../app/context'], function(Marionette, SongInfoView, context){
+define(['marionette', './SongInfoView', '../app/context', '../sidebar/SidebarNavView'], function(Marionette, SongInfoView, context, SidebarNavView){
 
 	var FooterController = function(){
 
@@ -11,7 +11,11 @@ define(['marionette', './SongInfoView', '../app/context'], function(Marionette, 
 		var songInfoView = new SongInfoView({
 			model: context.currentSongModel
 		});
+
 		footerRegion.show(songInfoView);
+		var sidebarView = new SidebarNavView();
+		sidebarView.render();
+
 
 	};
 

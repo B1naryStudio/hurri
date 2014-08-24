@@ -1,11 +1,18 @@
 extends ./layout
 
 block content
+	.blurred_bg(style="-webkit-filter: blur(5px)")
+	.blurred_bg_hover
 	.signin_page
-		h1 Signin
-		p Please Sing In
-		.social_enter
-			a(href='/auth/odnoklassniki').ok Odnoklassniki
-			a(href='/auth/vkontakte').vk VKontakte
-			a(href='/auth/twitter').tw Twitter
-			a(href='/auth/facebook').fb Facebook
+		.social_enter_wrap.hid
+			img.logo(src='./images/logo.png')
+			h1 Let's ROCK
+			p.welcome
+				|Please&nbsp;
+				del Sing
+				| &nbsp;Sign In
+			.social_enter
+				a(href='#odnoklassniki' data-type="ok").ok Odnoklassniki
+				a(href='#vkontakte' data-type="vk").vk VKontakte
+				a(href='#twitter' data-type="tw").tw Twitter
+				a(href='#facebook' data-type="fb").fb Facebook

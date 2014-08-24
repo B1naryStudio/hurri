@@ -1,0 +1,13 @@
+script#radio-bar(type='text/template')
+	.radio-wrapper
+		.playicon
+		.nameRadio{{-name}}
+		.left-side
+			.masterName{{-master.name}}
+			img.master-avatar(src='{{-master.avatarUrl}}')
+			.listeners Listeners now : {{-listeners}}
+		.tracks-side
+			.totalTracksRadio Tracks: {{-totalTracks}}
+			{{for (var i = 0; i < tracks.length; i ++){}}
+			div {{-tracks[i].title}}
+			{{}}}

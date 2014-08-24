@@ -1,6 +1,13 @@
 var wrapper = require('./DeezerWrapper');
 
-for (var ids = 49515; ids < 49520 ; ids++){
-	wrapper.importAlbum(ids);
-}
 
+var runner = function(start, end, runByRoute){
+	if(runByRoute || (!runByRoute && process.env.NODE_ENV !== 'production')){
+		console.log('running...');
+		for (var ids = start; ids < end ; ids++){
+			wrapper.importAlbum(ids);
+		}
+	}
+};
+
+module.exports = runner;

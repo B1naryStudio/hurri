@@ -1,0 +1,97 @@
+@require 'mixin.styl'
+/*Colors*/
+default_bg = gray
+vk_bg = #42618b
+ok_bg = #d5702e
+tw_bg = #3b9bda
+fb_bg = #2f4885
+
+
+/*TODO: create custom album covers collage http://rateyourmusic.com/charts/top/album/all-time*/
+/*Sign in styles*/
+.logo
+	width 100%
+	height auto
+offset_position = -20px
+.blurred_bg, .blurred_bg_hover
+	position fixed
+	top offset_position
+	right offset_position
+	bottom offset_position
+	left offset_position
+	background url("../images/bg_covers.jpg")
+	background-size cover
+
+.blurred_bg
+	z-index 0
+	-webkit-filter blur(5px)
+	filter blur(5px)
+.blurred_bg_hover
+	clip rect(0 0 0 0)
+	z-index 1
+
+.signin_page
+	text-align center
+	position: relative;
+	z-index: 2;
+	/*min-height 100%*/
+	/*height 100%*/
+
+.social_enter
+	margin-top 20px
+	text-align center
+	a
+		font-size 14px
+		text-decoration none
+		color #fff
+		display inline-block
+		margin-right 10px
+		padding 5px 10px
+		background default_bg
+		box-shadow(0 2px 0 darken(default_bg, 10))
+		&.vk
+			&:hover
+				background darken(vk_bg, 10)
+			background vk_bg
+			box-shadow(0 2px 0 darken(vk_bg, 10))
+		&.ok
+			&:hover
+				background darken(ok_bg, 10)
+			background ok_bg
+			box-shadow(0 2px 0 darken(ok_bg, 10))
+		&.tw
+			&:hover
+				background darken(tw_bg, 10)
+			background tw_bg
+			box-shadow(0 2px 0 darken(tw_bg, 10))
+		&.fb
+			&:hover
+				background darken(fb_bg, 10)
+			background fb_bg
+			box-shadow(0 2px 0 darken(fb_bg, 10))
+
+.social_enter_wrap
+	&.hid
+		transform(translateY(-140%))
+	&.ok
+		box-shadow(0 10px 50px 10px transparentify(ok_bg, 0.95))
+	&.vk
+		box-shadow(0 10px 50px 10px transparentify(vk_bg, 0.95))
+	&.fb
+		box-shadow(0 10px 50px 10px transparentify(fb_bg, 0.95))
+	&.tw
+		box-shadow(0 10px 50px 10px transparentify(tw_bg, 0.95))
+	h1
+		margin-bottom 20px
+	.welcome
+		font-style italic
+	position relative
+	padding 40px 20px
+	width 420px
+	margin 0 auto
+	background  #fff
+	box-sizing(border-box)
+	box-shadow(0 10px 50px 10px rgba(100, 25, 70, 0.95))
+	animation(bounce 1s ease-out)
+	transform(translateY(100px))
+	animation-delay(400ms)

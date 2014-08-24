@@ -1,0 +1,16 @@
+script#album-bar(type='text/template')
+	#nameAlbum {{-name}}
+	#artistAlbum {{-artist}}
+	#totalTracksAlbum Tracks: {{-totalTracks}}
+
+script#album-bar-composite(type='text/template')
+	#main-bar-header
+		select#genres-select 
+			option genres
+			option rock
+			option pop
+			option alternative
+			option rap
+		#album-select album
+		#artist-select artist
+		#track-select track

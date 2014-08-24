@@ -1,0 +1,55 @@
+animation-delay()
+	-webkit-animation-delay arguments
+	-moz-animation-delay arguments
+	-o-animation-delay arguments
+	animation-delay arguments
+
+animation()
+	-webkit-animation arguments
+	-moz-animation arguments
+	-ms-animation arguments
+	-o-animation arguments
+	animation arguments
+
+box-sizing()
+	-webkit-box-sizing arguments
+	-moz-box-sizing arguments
+	box-sizing arguments
+
+box-shadow()
+	-webkit-box-shadow arguments
+	box-shadow arguments
+
+transform()
+	-webkit-transform arguments
+	-moz-transform arguments
+	-ms-transform arguments
+	-o-transform arguments
+	transform arguments
+
+
+@keyframes bounce {
+	0% {
+		transform(translateY(-140%))
+	}
+	10% {
+		transform(translateY(-140%))
+	}
+	70% {
+		transform(translateY(130px))
+	}
+	100% {
+		transform(translateY(100px))
+	}
+}
+
+/*Gradients*/
+background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval, deprecatedWebkitStartPoint = false, deprecatedWebkitEndPoint = false)
+	background-color startColor
+	if deprecatedWebkitStartPoint && deprecatedWebkitEndPoint
+		background-image -webkit-gradient(linear, deprecatedWebkitStartPoint, deprecatedWebkitEndPoint, color-stop(startInterval, startColor), color-stop(endInterval, endColor))
+	background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+	background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)

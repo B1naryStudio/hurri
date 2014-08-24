@@ -2,10 +2,15 @@ script#player-template(type='text/template')
 	div#player-content
 		button#previous-button.player-button(type='button', {{ if (previousButtonState) print('disabled')}})
 		button#play-button.player-button(type='button', class='{{-playback}}')
+			a(href='.active')
 		button#next-button.player-button(type='button', {{ if (nextButtonState) print('disabled')}})
 		button#volume.player-button(class='{{-mute}}')
 		input#volume-range(type='range', min='0', max='100', value='{{- volumeLevel}}')
-		input#playback-range(type='range', min='0', max='{{- duration}}', value='{{-position}}')
+		div#song-block
+			div#song-name.song-info {{-currentTrackName}} - {{-currentArtistName}}
+			input#playback-range(type='range', min='0', max='{{-duration}}', value='{{-position}}')
+			div#song-position.song-info {{-positionFormat}}
+			div#song-duration.song-info {{-durationFormat}}
 		button#shuffle-button.player-button(type='button', class='{{-shuffle}}')
 		button#repeat-button.player-button(type='button', class='{{-repeatTrack}}') 
 		button#like-button.player-button(type='button')

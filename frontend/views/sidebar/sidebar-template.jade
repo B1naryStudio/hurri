@@ -1,8 +1,22 @@
 script#sidebar-template(type='text/template')
 	ul
-		li#friendsButton 
-		li#musicButton
+		li#hideButton
 		li#infoButton
+		li#musicButton
+		li#friendsButton
 
 script#sidebar-default-template(type='text/template')
 	span test bar
+
+script#song-item-template(type='text/template')
+	div.sidebar-song-wrap
+		div.sidebar-song-img-box
+			img(src="{{-albumCover}}")
+			img.gif(src='../images/songlist/blue_equalizer.gif')
+		.sidebar-song-header
+			h4(title='{{-title}} - {{-artist}}') {{-title}}
+		.sidebar-song-info 
+			{{-artist}}
+		.delete-song-from-list
+		.add-song-to-queue
+		.queuepos {{-queuepos}}

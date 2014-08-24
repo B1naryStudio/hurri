@@ -4,7 +4,7 @@ define(['../player/PlayerModel'], function(PlayerModel){
 			this.track = new Audio(url);
 		},
 		playTrack: function(){
-			this.track.play(); 
+			this.track.play();
 		},
 
 		pauseTrack: function(){

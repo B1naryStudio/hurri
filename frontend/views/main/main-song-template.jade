@@ -1,0 +1,11 @@
+script#main-song-bar(type='text/template')
+	.main-song-item
+		.main-song-cover
+			img(src='{{-albumCover}}')
+		.main-song-info
+			.main-song-name
+				{{-title}} - {{-artist}}
+		.main-share-song(data-clipboard-text='hahaha')
+		.main-queue-add
+		.main-like-song
+		.queueposmain {{-queuepos}}

@@ -1,7 +1,9 @@
-define(['marionette', '../notification/NotificationsCollectionView', '../app/context'], function(Marionette, NotificationView, context){
+define(['marionette', '../notification/NotificationsCollectionView', '../app/context'], 
+function(Marionette, NotificationView, context){
+	
 	var NotificationIconView = Marionette.ItemView.extend({
-		el: '#notification',
-  		template : '#notification-icon-template',
+		
+  		template : '#notificationbar-template',
   		
   		modelEvents: {
   			'change:unread': 'render'
