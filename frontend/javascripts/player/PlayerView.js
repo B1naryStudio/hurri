@@ -107,7 +107,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		addComment: function(){
-			this.model.addComment();
+			Backbone.trigger('player:add-comment');
 		},
 
 		volumeLevelSetup : function(){

@@ -10,7 +10,7 @@ function VKWrapper(){
 		'mode'      : 'oauth'
 	});
 
-	this.vk.setToken( { token :'6dc79eb0b1620e44f9aae6659c078c61d3a3aad3f3529e01a506d0abd562a54647b04a5b00afafd2a5343' });
+	this.vk.setToken( { token :'dcbf197a17e1681101ee2f7f4132d288cde3d7e36937aa16df01ffae2a47b3ecf12c369f551199d2c6ae5' });
 
 }
 
