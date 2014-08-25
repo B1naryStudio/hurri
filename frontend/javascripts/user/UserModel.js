@@ -35,6 +35,23 @@ define(['backbone'], function(Backbone){
 			this.set('followers', ['follower1', 'follower2', 'follower3']);
 		},
 
+		editLiked: function(item, state){
+			/*
+			 * "state" argument shows current state of the "item".
+			 * If state is true then item is already liked, so we have
+			 * to remove it from "liked" attribute. Otherwise, item is
+			 * not liked and we should add it to "liked".
+			 */
+			var liked = this.get('liked');
+			if(state){
+				var index = liked.indexOf(item);
+				liked.splice(index, 1);
+			}else{
+				liked.push(item);
+			}
+			this.set('liked', liked);
+		}
+
 	});
 	return UserModel;
 });
