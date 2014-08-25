@@ -17,7 +17,7 @@ define(['marionette', './SonglistView', '../app/context', './Behavior'], functio
                 }
             },
             'change-current': function(view, options){
-                this.trigger('scroll-to-top', options);
+               Backbone.trigger('scroll-to-top', options);
             }
         }
 	});
