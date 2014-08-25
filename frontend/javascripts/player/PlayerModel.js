@@ -236,6 +236,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		likeState : function(){
 			var state = this.get('liked');
 			this.set({liked: !state});
+			return !state;
 		},
 		
 		addComment : function(){

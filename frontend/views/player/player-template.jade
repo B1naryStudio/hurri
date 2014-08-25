@@ -12,6 +12,6 @@ script#player-template(type='text/template')
 			div#song-position.song-info {{-positionFormat}}
 			div#song-duration.song-info {{-durationFormat}}
 		button#shuffle-button.player-button(type='button', class='{{-shuffle}}')
-		button#repeat-button.player-button(type='button', class='{{-repeatTrack}}') 
-		button#like-button.player-button(type='button')
+		button#repeat-button.player-button(type='button', class='{{-repeatTrack}}')
+		button#like-button.player-button(type='button', class="{{-liked ? 'liked': ''}}")
 		button#comment-button.player-button(type='button')

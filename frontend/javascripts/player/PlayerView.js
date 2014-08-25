@@ -103,7 +103,11 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		likeState : function(){
-			this.model.likeState();
+			var cl = 'player-button';
+			if(this.model.likeState())
+				cl += ' liked';
+			this.ui.likeButton.removeClass();
+			this.ui.likeButton.addClass(cl);
 		},
 
 		addComment: function(){
