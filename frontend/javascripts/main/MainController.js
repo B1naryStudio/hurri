@@ -68,8 +68,6 @@ define(['marionette',
 			this.mainRegion.show(this.getPlaylistBarView());
 		}
 
-		this.mainRegion.show(this.getPlaylistBarView());	
-
 		this.bindListeners();	
 	};
 
