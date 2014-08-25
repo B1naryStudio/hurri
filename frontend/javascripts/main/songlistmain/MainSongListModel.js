@@ -1,6 +1,7 @@
 define(['backbone'], function(Backbone){
 	var MainSongModel = Backbone.Model.extend({
 		defaults:{
+			id: 0,
 			title : 'Title',
 			duration : undefined,
 			position : 0,

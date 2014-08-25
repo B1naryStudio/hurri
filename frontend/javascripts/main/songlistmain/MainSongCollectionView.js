@@ -8,6 +8,8 @@ define(['marionette', './MainSongView', '../../app/context','clipboard'],
 	    	ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
 	                                trustedDomains: location.host } );
 	        this.client = new ZeroClipboard( $(".main-share-song"));
+	        this.client.setHandCursor( true );
+	        this.client.setCSSEffects( true );
     	}
 	});
 	return MainSongCollectionView;
