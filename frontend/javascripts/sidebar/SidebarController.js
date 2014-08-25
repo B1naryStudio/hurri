@@ -7,10 +7,11 @@ define(['marionette',
 	 '../songlist/SonglistCollectionView',
 	 '../playlist/SongCollection',
 	 '../song/SongModel',
-	 './StatisticView'], 
+	 './StatisticView',
+	 '../songlist/SonglistNavi'], 
 	function(Marionette, NotificationsCompositeView,  SidebarNavView,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
-			SonglistCollection, SonglistModel, StatisticView){
+			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView){
 	
 	var SidebarController = function(){		
 	
@@ -66,9 +67,14 @@ define(['marionette',
 
 	SidebarController.prototype.getSongView = function() {
 		return new SonglistCollectionView({
-			model: this.song.model,
+			model: new Backbone.Model(),
 			collection: this.song.collection
 		});
+	};
+
+	SidebarController.prototype.getSongNavi = function(){
+		var nav = new SonglistNaviView();
+			nav.render();
 	};
 
 	SidebarController.prototype.getNotificationView = function() {

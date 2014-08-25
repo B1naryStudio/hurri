@@ -14,7 +14,9 @@ define(['marionette',
 	'./songlistmain/MainSongCollectionView',
 	 '../playlist/SongCollection',
 	 '../playlist/PlaylistModel',
-	 './favorites/FavoritesCollection'],
+	 './favorites/FavoritesCollection',
+	 'clipboard',
+	 './listened/ListenedCollection'],
 	function(Marionette, 
 		PlaylistsView, 
 		SongView, 
@@ -31,7 +33,9 @@ define(['marionette',
 		MainSongCollectionView, 
 		MainSonglistCollection,
 		PlaylistModel,
-		FavoritesCollection){
+		FavoritesCollection, 
+		ZeroClipboard,
+		ListenedCollection){
 
 	
 	var MainController = function(){		
@@ -51,6 +55,8 @@ define(['marionette',
 		this.initializeFavoritesSonglist();
 
 		this.initializeSong();
+
+		this.initializeListened();
 
 		this.initializeAlbums();
 
@@ -242,10 +248,26 @@ define(['marionette',
 		this.favoriteslist.view = this.getFavoritesSonglistView();
 	};
 
+	MainController.prototype.initializeListened = function(){
+		this.listened = {
+			model: PlaylistModel,
+			collection: ListenedCollection
+		};
+
+		this.listened.view = this.getListenedView();
+	};
+
 	MainController.prototype.getFavoritesSonglistView = function(){
 		return new MainSongCollectionView({
 			model: this.favoriteslist.model,
 			collection: this.favoriteslist.collection
+		});
+	};
+
+	MainController.prototype.getListenedView = function(){
+		return new MainSongCollectionView({
+			model: this.listened.model,
+			collection: this.listened.collection
 		});
 	};
 
@@ -287,6 +309,9 @@ define(['marionette',
 			this.mainRegion.$el.toggleClass('toggled-main');
 		}, this);
 		
+		Backbone.on('sidebar:show-listened', function(){
+			this.mainRegion.show(this.getListenedView());
+		},this);
 		
 	};
 

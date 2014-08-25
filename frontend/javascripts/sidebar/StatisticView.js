@@ -9,7 +9,11 @@ define(['marionette'], function(Marionette){
   		},
 
 		events: {
-			//
+			'click .statistic-info' : 'showListened'
+		},
+
+		showListened: function(){
+			Backbone.trigger('sidebar:show-listened');
 		}
 
 	});
