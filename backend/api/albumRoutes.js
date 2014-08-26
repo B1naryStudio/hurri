@@ -9,7 +9,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get('/api/album/:id', function(req, res, next){
+	app.get('/api/album/id/:id', function(req, res, next){
 		albumRepository.getById(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);

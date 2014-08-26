@@ -3,11 +3,10 @@ function(Marionette, NotificationView, context){
 	
 	var NotificationIconView = Marionette.ItemView.extend({
 		
-  		template : '#notificationbar-template',
-  		
-  		modelEvents: {
-  			'change:unread': 'render'
-  		},
+		template : '#notificationbar-template',
+		modelEvents: {
+			'change:unread': 'render'
+		},
 
 		events : {
 			'click #notification-icon'  : 'showNotifications'
