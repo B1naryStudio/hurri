@@ -92,16 +92,33 @@ module.exports = function () {
 		function(accessToken, refreshToken, profile, done) {
 			console.log('vk login');
 			VKWrapper.setAccessToken(accessToken);
-			userRepository.add({
-				name : profile._json.first_name,
-				avatarUrl : profile._json.photo,
-				accountType : 'vk',
-				id: profile._json.id
-			}, function(err, user){
-				if (err) { return done(err); }
-					console.log(user);
-					done(null, user);				
+			userRepository.getUserInfo(profile._json.id, function(err, data){
+				if(!data){
+					userRepository.add({
+						name : profile._json.first_name,
+						avatarUrl : profile._json.photo,
+						accountType : 'vk',
+						id: profile._json.id
+					}, function(err, user){
+						if (err) { return done(err); }
+							console.log(user);
+							done(null, user);				
+					});
+				} else{
+					userRepository.editUser(profile._json.id, {
+						name : profile._json.first_name,
+						avatarUrl : profile._json.photo,
+						accountType : 'vk',
+						id: profile._json.id
+					}, function(err, user){
+						if (err) { return done(err); }
+							console.log(user);
+							console.log(err);
+							done(null, user);				
+					});
+				}
 			});
+
 		}
 	));
 

@@ -41,6 +41,12 @@ UserRepository.prototype.getPlaylistsShare = function(id, pl_id, callback) {
 	query.exec(callback);
 };
 
+UserRepository.prototype.editUser = function(id, body, callback) {
+	var model = this.createModel();
+	var query = model.findOneAndUpdate({id: id}, body);
+	query.exec(callback);
+};
+
 UserRepository.prototype.editPlaylist = function(id, body, callback) {
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({_id:mongoose.Types.ObjectId(id)}, body);

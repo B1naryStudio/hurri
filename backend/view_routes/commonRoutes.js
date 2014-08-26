@@ -4,6 +4,7 @@ var path = require('path');
 module.exports = function (app) {
 
 	app.get('/', function (req, res, next) {
+		injectData(req.user, res, false);
 	});
 
 	app.get('/route', function (req, res) {
