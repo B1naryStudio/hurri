@@ -51,7 +51,7 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 
 		getVkPlaylist: function(){
 			var self = this;
-				$.getJSON('/getPlaylist',{id: 18252726}, function(data){
+				$.getJSON('/getPlaylist',{id: context.currentUserModel.get('id')}, function(data){
 					var object = data.response;
 					self.set({numberOfTracks: object[0]});
 					for (i = 1; i < object[0]; i++) {

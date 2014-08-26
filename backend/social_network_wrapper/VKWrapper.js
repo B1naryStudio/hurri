@@ -10,9 +10,13 @@ function VKWrapper(){
 		'mode'      : 'oauth'
 	});
 
-	this.vk.setToken( { token :'e178cf425599835d1188a69ebf8d17adeb9e852d7a1d19472373c00ec3cbf2fb8cd8c323e4bce63be3ad3'});
+	
 
 }
+VKWrapper.prototype.setAccessToken = function(accessToken){
+	this.vk.setToken( { token : accessToken});
+};
+
 
 VKWrapper.prototype.getUserInfo = function(id, fields, callback){
 	this.vk.request('users.get', {'uids' : id, 'fields': fields});

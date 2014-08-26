@@ -21,7 +21,7 @@ module.exports = function (app) {
 	app.get('/auth/vkontakte/callback',
 		passport.authenticate('vkontakte', { failureRedirect: '/signin' }),
 		function(req, res) {
-			res.redirect(200, '/');
+			res.redirect('/');
 		});
 
 	app.get('/auth/odnoklassniki',

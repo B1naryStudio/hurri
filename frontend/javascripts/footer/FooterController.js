@@ -1,4 +1,4 @@
-define(['marionette', './SongInfoView', '../app/context', '../sidebar/SidebarNavView'], function(Marionette, SongInfoView, context, SidebarNavView){
+define(['marionette', '../app/context', './SongInfoView',  '../sidebar/SidebarNavView'], function(Marionette, context, SongInfoView, SidebarNavView){
 
 	var FooterController = function(){
 

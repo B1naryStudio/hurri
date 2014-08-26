@@ -13,7 +13,7 @@ UserRepository.prototype = new Repository();
 
 UserRepository.prototype.getUserInfo = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({user_auth_id: id});
+	var query = model.findOne({id: id});
 	query.exec(callback);
 };
 

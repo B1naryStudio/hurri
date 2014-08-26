@@ -3,8 +3,9 @@ var _ = require('underscore');
 
 module.exports = function(app){
 	app.get('/api/user/:id', function(req, res, next){
-		userRepository.getUserInfo(req.params.id, function(data){
+		userRepository.getUserInfo(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
+			console.log(data);
 			res.status(status).json(data);
 		});
 	});

@@ -1,4 +1,6 @@
 var passport = require('passport');
+var VKWrapper = require('../social_network_wrapper/VKWrapper');
+var userRepository = require ('../repositories/userRepository');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var OdnoklassnikiStrategy = require('passport-odnoklassniki').Strategy;
@@ -89,12 +91,30 @@ module.exports = function () {
 		},
 		function(accessToken, refreshToken, profile, done) {
 			console.log('vk login');
-			console.log(accessToken);
-//			u.findOrCreate(profile, function (err, user) {
-//				if (err) { return done(err); }
-//				console.log('user: ' + user);
-//				done(null, user);
-//			});
+			VKWrapper.setAccessToken(accessToken);
+			userRepository.add({
+				name : profile._json.first_name,
+				avatarUrl : profile._json.photo,
+				accountType : 'vk',
+				id: profile._json.id
+			}, function(err, user){
+				if (err) { return done(err); }
+					console.log(user);
+					done(null, user);				
+			});
 		}
 	));
+
+	passport.serializeUser(function (user, done) {
+    	done(null, JSON.stringify(user));
+	});
+ 
+ 
+	passport.deserializeUser(function (data, done) {
+		try {
+			done(null, JSON.parse(data));
+		} catch (e) {
+			done(err);
+		}
+	});
 };
