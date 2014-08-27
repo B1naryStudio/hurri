@@ -12,7 +12,7 @@ module.exports = function (app) {
 	app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/signin' }));
 
 	app.get('/auth/vkontakte',
-		passport.authenticate('vkontakte', {scope: ['friends', 'audio', 'status', 'email']}),
+		passport.authenticate('vkontakte', {scope: ['friends', 'audio', 'status', 'email', 'offline']}),
 		function(req, res){
 			// The request will be redirected to vk.com for authentication, so
 			// this function will not be called.

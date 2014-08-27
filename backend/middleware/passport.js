@@ -105,12 +105,15 @@ module.exports = function () {
 							console.log(user);
 							done(null, user);				
 					});
-				} else{
+				} else /*{
 					userRepository.editUser(profile._json.id, {
 						name : profile._json.first_name,
 						avatarUrl : profile._json.photo,
 						accountType : 'vk',
 						id: profile._json.id
+					}*/
+					{
+						userRepository.
 					}, function(err, user){
 						if (err) { return done(err); }
 							console.log(user);
