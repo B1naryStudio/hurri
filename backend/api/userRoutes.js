@@ -19,8 +19,15 @@ module.exports = function(app){
 	});
 
 
-	app.get('/api/user/:id/friend', function(req, res, next){
-		userRepository.getFriend(req.params.id, function(err, data){
+	app.get('/api/user/:id/follower', function(req, res, next){
+		userRepository.getFollower(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.get('/api/user/:id/following', function(req, res, next){
+		userRepository.getFollowing(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
@@ -90,14 +97,28 @@ module.exports = function(app){
 	});
 
 	app.put('/api/user/:id', function(req, res, next){
-		userRepository.edit(req.params.id, req.body, function(err, data){
+		userRepository.update(req.params.id, req.body, function(err, data){
 			var status = err ? 400 : 200;
 			res.status(status).json(data);
 		});
 	});
 
-	app.put('/api/user/:id/friend/:friend_id', function(req, res, next){
-		userRepository.addFriend(req.params.id, req.params.friend_id, function(err, data){
+	app.put('/api/user/info/:id', function(req, res, next){
+		userRepository.updateUserInfo(req.params.id, req.body, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.put('/api/user/:id/follower/:follower_id', function(req, res, next){
+		userRepository.addFollower(req.params.id, req.params.follower_id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.put('/api/user/:id/following/:following_id', function(req, res, next){
+		userRepository.addFollowing(req.params.id, req.params.following_id, function(err, data){
 			var status = err ? 400 : 200;
 			res.status(status).json(data);
 		});
@@ -124,8 +145,15 @@ module.exports = function(app){
 		});
 	});
 	
-	app.delete('/api/user/:id/friend/:fid', function(req, res, next){
-		userRepository.deleteFriend(req.params.id, req.params.fid, function(err, data){
+	app.delete('/api/user/:id/follower/:fid', function(req, res, next){
+		userRepository.deleteFollower(req.params.id, req.params.fid, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/following/:fid', function(req, res, next){
+		userRepository.deleteFollowing(req.params.id, req.params.fid, function(err, data){
 			var status = err ? 400 : 200;
 			res.status(status).json(data);
 		});
