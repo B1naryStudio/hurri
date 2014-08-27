@@ -10,13 +10,13 @@ function ArtistRepository(){
 //ArtistRepository.prototype = new Repository();
 
 ArtistRepository.prototype.getById = function(id, callback) {
-	var model = this.createModel();
+	var model = this.model;
 	var query = model.findOne({_id: id}).populate('albums_id');
 	query.exec(callback);
 };
 
 ArtistRepository.prototype.getByName = function(name, callback) {
-	var model = this.createModel();
+	var model = this.model;
 	regexp = new RegExp(name, "i");
 	var query = model.find({name: regexp});
 	query.exec(callback);

@@ -6,15 +6,25 @@ function(Backbone, SearchResultsCollection){
 		defaults: {
 			currentInput: undefined,
 			previousInputs: [],
+			searchResult: []
 		},
 
 		searchResultsCollection: new SearchResultsCollection(),
+		
+		getSearchResult: function(input){
+			var self = this;
+				$.getJSON('/search',{query: input}, function(data){
+					self.set({searchResult: data});	
+				});
+		},
 
 		search: function(){
 			var input = this.get('currentInput');
 			if(!input){
 				return;
 			}
+
+			this.getSearchResult(input);
 
 			/*
 			 * Get search results from server and save
@@ -25,11 +35,7 @@ function(Backbone, SearchResultsCollection){
 			  * Test search results data. Remove this code when
 			  * search request mechanism will be implemented.
 			  */
-			var searchResultsData = [
-				['album1', 'album2', 'album3'],
-				['artist1', 'artist2', 'artist3'],
-				['song1', 'song2', 'song3']
-			];
+			var searchResultsData = this.get('searchResult');
 			this.searchResultsCollection.parse(searchResultsData);
 
 			this.attributes.previousInputs.push(input);
