@@ -44,18 +44,7 @@ UserRepository.prototype.addAlert = function(id, alert, callback) {
 	query.exec(callback);
 };
 
-<<<<<<< HEAD
-UserRepository.prototype.editUser = function(id, body, callback) {
-	var model = this.createModel();
-	var query = model.findOneAndUpdate({id: id}, body);
-	query.exec(callback);
-};
-
-UserRepository.prototype.editPlaylist = function(id, body, callback) {
-=======
-
 UserRepository.prototype.getAlerts = function(id, callback) {
->>>>>>> origin/repositories-check
 	var model = this.createModel();
 	var query = model.findOne({id: id}, 'alerts').populate('alerts');
 	query.exec(callback);
