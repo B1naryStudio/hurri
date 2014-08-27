@@ -20,7 +20,7 @@ var HurriRoutes = Marionette.AppRouter.extend({
 	'playnow/queue/edit': 'editPlayerQueue',
 	'settings/main': 'mainSettings',
 	'settings/style': 'changeTemplate'
-  }
+	}
 });
 
 var routes = new HurriRoutes();

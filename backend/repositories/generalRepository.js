@@ -9,12 +9,6 @@ Repository.prototype.createModel = function(){
 	return this.model;
 };
 
-Repository.prototype.getById = function(id, callback) {
-	var model = this.createModel();
-	var query = model.findOne({_id: id});
-	query.exec(callback);
-};
-
 Repository.prototype.add = function(data, callback) {
 	var model = this.createModel();
 	var newitem = new model(data);
@@ -23,6 +17,7 @@ Repository.prototype.add = function(data, callback) {
 
 Repository.prototype.update = function(id, body, callback) {
 	var model = this.createModel();
+	console.log(body);
 	var query = model.findOneAndUpdate({_id: id}, body);
 	query.exec(callback);
 };

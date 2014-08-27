@@ -7,7 +7,7 @@ var logger = new (winston.Logger)({
 		new winston.transports.File({ filename: config.logger.transports.file.filename, json: config.logger.transports.file.json })
 	],
 	exceptionHandlers: [
-		new (winston.transports.Console)({ json: false, timestamp: true }),
+		new (winston.transports.Console)({ json: true, timestamp: true }),
 		new winston.transports.File({ filename: config.logger.exceptionHandlers.file.filename, json: config.logger.exceptionHandlers.file.json })
 	],
 	exitOnError: config.logger.exitOnError

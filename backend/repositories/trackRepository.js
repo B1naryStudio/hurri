@@ -7,12 +7,17 @@ function TrackRepository(){
 	this.model = Track;
 }
 
-TrackRepository.prototype = new Repository();
+//TrackRepository.prototype = new Repository();
 
+TrackRepository.prototype.getById = function(id, callback) {
+	var model = this.createModel();
+	var query = model.findOne({_id:id}).populate('album').populate('singer');
+	query.exec(callback);
+};
 
 TrackRepository.prototype.getByTitle = function(title, callback) {
 	var model = this.createModel();
-	var query = model.findOne({title:title});
+	var query = model.findOne({title:title}).populate('album').populate('singer');
 	query.exec(callback);
 };
 
@@ -36,7 +41,12 @@ TrackRepository.prototype.getUrl = function(id, callback) {
 
 TrackRepository.prototype.getComments = function(id, callback) {
 	var model = this.createModel();
-	var query = model.find({_id: id},'comment');
+	var query = model.findOne({_id: id}, 'comment').populate('comment.user_auth_id').exec(callback);
+};
+
+TrackRepository.prototype.addComments = function(id, body, callback) {
+	var model = this.createModel();
+	var query = model.findOneAndUpdate({_id: id},{$push: {comment:body}} );
 	query.exec(callback);
 };
 

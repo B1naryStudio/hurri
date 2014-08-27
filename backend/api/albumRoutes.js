@@ -9,7 +9,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get('/api/album/:id', function(req, res, next){
+	app.get('/api/album/id/:id', function(req, res, next){
 		albumRepository.getById(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
@@ -51,8 +51,8 @@ module.exports = function(app){
 		});
 	});
 
-	app.put('/api/album/:id', function(req, res, next){
-		albumRepository.update(req.params.id, req.body, function(err, data){
+	app.put('/api/album/:id/comments', function(req, res, next){
+		albumRepository.addComments(req.params.id, req.body, function(err, data){
 			var status = err ? 400 : 200;
 			res.status(status).json(data);
 		});

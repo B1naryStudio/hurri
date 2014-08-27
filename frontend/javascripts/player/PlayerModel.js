@@ -1,4 +1,4 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel'], function(Backbone, enums, context, LocalStorage, audioHandler, PlaylistModel){
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel', '../main/listened/ListenedCollection'], function(Backbone, enums, context, LocalStorage, audioHandler, PlaylistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
 		defaults : {
 			playback : 'pause',
@@ -111,6 +111,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 	 	},
 
 		nextTrack : function(){
+			listenedCollection.add(context.currentSongModel.attributes);
 			var next;
 			if (this.get('repeatTrack') === enums.repeatModes.none){
 				console.log('repeat off');

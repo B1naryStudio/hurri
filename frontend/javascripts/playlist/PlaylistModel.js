@@ -1,4 +1,4 @@
-define(['backbone', '../app/context', './SongCollection', 'underscore'], function(Backbone,context, SongCollection, _){
+define(['backbone', '../app/context', './SongCollection', 'underscore'], function(Backbone, context, SongCollection, _){
 	var PlaylistModel = Backbone.Model.extend({
 
 		collection: SongCollection,

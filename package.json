@@ -61,7 +61,6 @@
     "socket.io": "~1.0.6",
     "express-session": "~1.7.5",
     "stylus-lemonade": "^0.1.8",
-    "vksdk": "^4.0.0",
-    "zeroclipboard": "^2.1.6"
+    "vksdk": "^4.0.0"
   }
 }

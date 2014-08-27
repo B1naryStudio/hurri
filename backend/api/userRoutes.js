@@ -3,6 +3,14 @@ var _ = require('underscore');
 
 module.exports = function(app){
 	app.get('/api/user/:id', function(req, res, next){
+		userRepository.getUserAuth(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			console.log(data);
+			res.status(status).json(data);
+		});
+	});
+
+	app.get('/api/user/info/:id', function(req, res, next){
 		userRepository.getUserInfo(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			console.log(data);
@@ -10,29 +18,44 @@ module.exports = function(app){
 		});
 	});
 
+
+	app.get('/api/user/:id/friend', function(req, res, next){
+		userRepository.getFriend(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.get('/api/user/:id/alert', function(req, res, next){
+		userRepository.getAlerts(req.params.id, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.get('/api/user/:id/like', function(req, res, next){
-		userRepository.getLike(req.params.id, function(data){
+		userRepository.getLike(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
 	});
 
 	app.get('/api/user/:id/groups', function(req, res, next){
-		userRepository.getGroups(req.params.id, function(data){
+		userRepository.getGroups(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
 	});
 
 	app.get('/api/user/:id/playlists', function(req, res, next){
-		userRepository.getPlaylists(req.params.id, function(data){
+		userRepository.getPlaylists(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
 	});
 
 	app.get('/api/user/:id/playlists/:id_pl', function(req, res, next){
-		userRepository.getPlaylistsShare(req.params.id, req.params.id_pl, function(data){
+		userRepository.getPlaylistsShare(req.params.id, req.params.id_pl, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
@@ -45,6 +68,27 @@ module.exports = function(app){
 		});
 	});
 
+	app.post('/api/user/info', function(req, res, next){
+		userRepository.addUserInfo(req.body, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
+	});
+
+	app.put('/api/user/:id/alert', function(req, res, next){
+		userRepository.addAlert(req.params.id, req.body, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
+	});
+
+	app.put('/api/user/:id/playlist/:pid/track/:tid', function(req, res, next){
+		userRepository.addSongToPlaylist(req.params.id, req.params.pid,req.params.tid, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
+	});
+
 	app.put('/api/user/:id', function(req, res, next){
 		userRepository.edit(req.params.id, req.body, function(err, data){
 			var status = err ? 400 : 200;
@@ -52,27 +96,83 @@ module.exports = function(app){
 		});
 	});
 
+	app.put('/api/user/:id/friend/:friend_id', function(req, res, next){
+		userRepository.addFriend(req.params.id, req.params.friend_id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.put('/api/user/:id/like/:like_id', function(req, res, next){
+		userRepository.addLike(req.params.id, req.params.like_id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.put('/api/user/:id/group/:group_id', function(req, res, next){
+		userRepository.addGroups(req.params.id, req.params.group_id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.put('/api/user/:id/playlist', function(req, res, next){
-		userRepository.editPlaylist(req.params.id, req.body, function(err, data){
-			var status = err ? 400 : 200;
-			res.status(status).json(data);
-		});
-	});
-
-	app.put('/api/user/:id/like', function(req, res, next){
-		userRepository.editLike(req.params.id, req.body, function(err, data){
-			var status = err ? 400 : 200;
-			res.status(status).json(data);
-		});
-	});
-
-	app.put('/api/user/:id/group', function(req, res, next){
-		userRepository.editGroup(req.params.id, req.body, function(err, data){
-			var status = err ? 400 : 200;
+		userRepository.addPlaylists(req.params.id, req.body, function(err, data){
+			var status = err ? 400 : 201;
 			res.status(status).json(data);
 		});
 	});
 	
+	app.delete('/api/user/:id/friend/:fid', function(req, res, next){
+		userRepository.deleteFriend(req.params.id, req.params.fid, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/playlist/:pid/track/:tid', function(req, res, next){
+		userRepository.deleteSongFromPlaylist(req.params.id, req.params.pid,req.params.tid, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/alert/:aid', function(req, res, next){
+		userRepository.deleteAlert(req.params.id, req.params.aid, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/alert', function(req, res, next){
+		userRepository.deleteAllAlerts(req.params.id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/like/:lid', function(req, res, next){
+		userRepository.deleteLike(req.params.id, req.params.lid, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/group/:gid', function(req, res, next){
+		userRepository.deleteGroups(req.params.id, req.params.gid, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
+	app.delete('/api/user/:id/playlist/:pid', function(req, res, next){
+		userRepository.deletePlaylists(req.params.id, req.params.pid, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.delete('/api/user/:id', function(req, res, next){
 		userRepository.delete(req.params.id, function(err, data){
 			var status = err ? 400 : 200;

@@ -8,11 +8,17 @@ function AlbumRepository(){
 	this.model = Album;
 }
 
-AlbumRepository.prototype = new Repository();
+//AlbumRepository.prototype = new Repository();
 
-Repository.prototype.getByTitle = function(name, callback) {
+AlbumRepository.prototype.getById = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({title: name});
+	var query = model.findOne({_id: id}).populate('singer').populate('tracks');
+	query.exec(callback);
+};
+
+AlbumRepository.prototype.getByTitle = function(name, callback) {
+	var model = this.createModel();
+	var query = model.findOne({title: name}).populate('singer').populate('tracks');
 	query.exec(callback);
 };
 
@@ -24,7 +30,7 @@ AlbumRepository.prototype.getCover = function(id, callback) {
 
 AlbumRepository.prototype.getSinger = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id}).populate('tracks');
+	var query = model.findOne({_id: id}, 'singer').populate('singer');
 	query.exec(callback);
 };
 
@@ -42,7 +48,12 @@ AlbumRepository.prototype.getTracks = function(id, callback) {
 
 AlbumRepository.prototype.getComments = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({_id: id}, 'comment');
+	var query = model.findOne({_id: id}, 'comment').populate('comment.user_auth_id').exec(callback);
+};
+
+AlbumRepository.prototype.addComments = function(id, body, callback) {
+	var model = this.createModel();
+	var query = model.findOneAndUpdate({_id: id},{$push: {comment:body}} );
 	query.exec(callback);
 };
 

@@ -3,13 +3,7 @@ define(['marionette', '../../app/context', '../../playlist/PlaylistModel','clipb
 	var MainSongView = Marionette.ItemView.extend({
     className: 'main-song-bar',
     template : '#main-song-bar',
-    initialize: function(){
-    	this.clip = new ZeroClipboard($('.main-share-song'), {
-            moviePath : '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf'
-        });
-    },
     events : {
-    	'click .main-share-song' : 'shareSong',
 		'click .main-queue-add' : 'addToQueue',
 		'click .main-like-song' : 'likeSong'
     },
@@ -22,10 +16,11 @@ define(['marionette', '../../app/context', '../../playlist/PlaylistModel','clipb
 			song : '.main-song-item'
 	},
 
-    shareSong: function(){
-    
-  		this.clip.setText( 'sadasd' ); 
-    	alert('Shared!');
+    listner: function(){
+        var self = this;
+      	this.client.on('mousedown', function () {
+            self.client.setText('shalala');
+        });
     },
 
     addToQueue: function(){

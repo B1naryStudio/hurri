@@ -45,7 +45,7 @@ define(['marionette', '../app/context', '../playlist/PlaylistModel'], function(M
 			var current = this.model.get('current');
 		 	this.ui.song.toggleClass('activesong', current);	
 		 	if (current) {
-		 		this.trigger('change-current', {top: this.$el.position().top});
+		 		this.trigger('change-current', {top: this.$('.activesong').position().top});
 		 	}	
 		},
 

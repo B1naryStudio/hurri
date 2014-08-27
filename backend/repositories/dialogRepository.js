@@ -16,4 +16,10 @@ DialogRepository.prototype.getDialog = function(id1,id2,callback) {
 	query.exec(callback);
 };
 
+DialogRepository.prototype.addMessage = function(id1,id2,body, callback) {
+	var model = this.createModel();
+	var query = model.findOneAndUpdate({user_auth_id1: id1, user_auth_id2: id2}, {$push: {dialogue:body}} );
+	query.exec(callback);
+};
+
 module.exports = new DialogRepository();

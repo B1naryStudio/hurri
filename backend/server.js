@@ -33,7 +33,7 @@ var server = app.listen(3055);
 
 var ioserver = require('./io/server')(server);
 
-var runner = require('./info_service_wrappers/taskRunner');
-runner(50000, 50020, false);
+// var runner = require('./info_service_wrappers/taskRunner');
+// runner(50000, 50020, false);
 
 module.exports = app;
