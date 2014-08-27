@@ -27,10 +27,10 @@ var trackSchema = new Schema({
     },
     singer : { 
         type: Schema.Types.ObjectId, 
-        ref: 'Album'
+        ref: 'Artist'
     },
     url : String,
-    comments : [commentSchema]
+    comment : [commentSchema]
 });
 
 module.exports = mongoose.model('Track', trackSchema);

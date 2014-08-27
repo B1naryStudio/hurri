@@ -6,6 +6,10 @@ module.exports = function (app) {
 	app.get('/', function (req, res, next) {
 	});
 
+	app.get('/route', function (req, res) {
+		injectData(req.user, res, false);
+	});
+
 	app.get('/signin', function (req, res, next) {
 		res.sendfile(path.resolve(__dirname + '/../../public/' + 'signin.html'));
 	});

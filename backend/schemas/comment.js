@@ -1,5 +1,5 @@
 var mongoose = require('../db/mongoose');
-
+var userAuth = require('./user_auth.js');
 var Schema = mongoose.Schema;
 
 var commentSchema = new Schema({
@@ -13,5 +13,5 @@ var commentSchema = new Schema({
     	default: Date.now
     }
 });
-
+mongoose.model('Comment', commentSchema);
 module.exports = commentSchema;

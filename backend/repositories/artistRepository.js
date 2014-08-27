@@ -7,11 +7,17 @@ function ArtistRepository(){
 	this.model = Artist;
 }
 
-ArtistRepository.prototype = new Repository();
+//ArtistRepository.prototype = new Repository();
+
+ArtistRepository.prototype.getById = function(id, callback) {
+	var model = this.createModel();
+	var query = model.findOne({_id: id}).populate('albums_id');
+	query.exec(callback);
+};
 
 ArtistRepository.prototype.getByName = function(name, callback) {
 	var model = this.createModel();
-	var query = model.findOne({name: name});
+	var query = model.findOne({name: name}).populate('albums_id');
 	query.exec(callback);
 };
 

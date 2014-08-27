@@ -9,10 +9,11 @@ function VKWrapper(){
 		'appSecret' : 'sKTyZBHIHu17JeRLTsez',
 		'mode'      : 'oauth'
 	});
-
-	this.vk.setToken( { token :'49e3564870d30ccea2a01e22079959874b0cff11b6a6aec5a4f1af588a543b283a4fec223fdbf0a17f8dc' });
-
 }
+VKWrapper.prototype.setAccessToken = function(accessToken){
+	this.vk.setToken( { token : accessToken});
+};
+
 
 VKWrapper.prototype.getUserInfo = function(id, fields, callback){
 	this.vk.request('users.get', {'uids' : id, 'fields': fields});

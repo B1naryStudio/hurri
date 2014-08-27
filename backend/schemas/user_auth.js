@@ -5,24 +5,25 @@ var accountSchema = require('./account.js');
 var alertSchema = require('./alert.js');
 
 var userAuthSchema = new Schema({
-    name : String,
-    avatarUrl : String,
-    country : {
-        type: String, 
-        default: 'Unknown country'
-    },
-    age : {
-        type: Number, 
-        default: 18
-    },
-    email : String,
-    friends : [{ 
-        type: Schema.Types.ObjectId, 
-        ref: 'Userauth' 
-    }],
-    registrationAccounts : [accountSchema],
-    alerts : [alertSchema],
-    online : Boolean
+	accountType : String,
+	id: Number,
+	name : String,
+	email : String,
+	avatarUrl : String,
+	country : {
+		type: String, 
+		default: 'Unknown country'
+	},
+	age : {
+		type: Number, 
+		default: 18
+	},
+	friends : [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	}],
+	alerts : [alertSchema],
+	online : Boolean
 });
 
 module.exports =  mongoose.model('Userauth', userAuthSchema);

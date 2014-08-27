@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var playlistSchema = require('./playlist.js');
 
 var userInfoSchema = new Schema({
-	user_auth_id : { 
+	user_auth_id: { 
 		type: Schema.Types.ObjectId, 
 		ref: 'Userauth' 
 	},
@@ -13,10 +13,13 @@ var userInfoSchema = new Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'Track' 
 	}],
-	totalListened : Number,
+	totalListened : {
+		type: Number, 
+		default: 0
+	},
 	group : [{ 
 		type: Schema.Types.ObjectId, 
-		ref: 'Track' 
+		ref: 'Radio' 
 	}]
 });
 

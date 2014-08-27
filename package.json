@@ -40,7 +40,14 @@
     "should": "~4.0.4",
     "supertest": "^0.13.0",
     "underscore": "^1.6.0",
-    "winston": "~0.7.3"
+    "winston": "~0.7.3",
+    "passport-http-bearer": "~1.0.1",
+    "passport-vkontakte": "~0.2.1",
+    "passport-odnoklassniki": "~0.1.5",
+    "passport-facebook": "~1.0.3",
+    "passport-twitter": "~1.0.2",
+    "passport": "~0.2.0",
+    "winston-wrapper": "~1.0.1"
   },
   "dependencies": {
     "async": "^0.9.0",
@@ -52,6 +59,7 @@
     "request": "^2.40.0",
     "require": "^0.5.0",
     "socket.io": "~1.0.6",
+    "express-session": "~1.7.5",
     "stylus-lemonade": "^0.1.8",
     "vksdk": "^4.0.0"
   }
