@@ -15,7 +15,7 @@ VKWrapper.prototype.setAccessToken = function(accessToken){
 };
 
 
-VKWrapper.prototype.getUserInfo = function(id, fields, callback){
+VKWrapper.prototype.getUserAuth = function(id, fields, callback){
 	this.vk.request('users.get', {'uids' : id, 'fields': fields});
 	this.vk.once('done:users.get', function(result) {
 		callback(result);
