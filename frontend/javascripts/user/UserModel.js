@@ -4,17 +4,17 @@ define(['backbone'], function(Backbone){
 		
 		defaults: {
 			id : undefined,
-			avatarSource: undefined,
+			avatarSource: '/images/avatar.png',
 			name: undefined,
-			age: undefined,
-			email: undefined,
-			country: undefined,
+			age: 18,
+			email: '1@1.com',
+			country: 'Unknown',
 			//
-			liked: undefined,
-			playlists: undefined,
-			groups: undefined,
-			listened: undefined,
-			followers: undefined
+			liked: [],
+			playlists: [],
+			groups: [],
+			listened: 0,
+			followers: []
 		},
 	});
 	return UserModel;

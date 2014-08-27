@@ -101,10 +101,16 @@ define(['marionette',
 		this.user.view = this.getUserView();
 	};
 
-	MainController.prototype.getUserView = function(){
-		return new UserView({
-			model: this.user.model
-		});
+	MainController.prototype.getUserView = function(object){
+		if (object === undefined){
+			return new UserView({
+				model: this.user.model
+			});
+		} else{
+			return new UserView({
+				model: object
+			});
+		}
 	};
 
 	MainController.prototype.initializePlaylistBar = function(){
@@ -334,6 +340,9 @@ define(['marionette',
 			this.mainRegion.show(this.getListenedView());
 		},this);
 		
+		Backbone.on('show-friends-details', function(model){
+			this.mainRegion.show(this.getUserView(model));
+		},this);
 	};
 
 	return MainController;

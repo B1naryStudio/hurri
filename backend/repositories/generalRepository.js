@@ -17,8 +17,7 @@ Repository.prototype.add = function(data, callback) {
 
 Repository.prototype.update = function(id, body, callback) {
 	var model = this.createModel();
-	console.log(body);
-	var query = model.findOneAndUpdate({_id: id}, body);
+	var query = model.findOneAndUpdate({id: id}, body);
 	query.exec(callback);
 };
 

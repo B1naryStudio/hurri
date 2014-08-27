@@ -2,6 +2,7 @@ var VKWrapper = require('../social_network_wrapper/VKWrapper');
 var albumRepository = require('../repositories/albumRepository');
 var artistRepository = require('../repositories/artistRepository');
 var trackRepository = require('../repositories/trackRepository');
+var userRepository = require('../repositories/userRepository');
 var async = require('async');
 
 module.exports = function (app) {
@@ -10,7 +11,13 @@ module.exports = function (app) {
 			res.json(results);
 		});
 	});
-	
+
+	app.get('/getFriends', function(req, res){
+		VKWrapper.getFriends(req.query.id, function(results){
+			res.json(results);
+		});
+	});
+
 	app.get('/getStream', function(req, res) {
 
 		var options = {

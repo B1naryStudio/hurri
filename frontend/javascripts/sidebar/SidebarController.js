@@ -103,7 +103,7 @@ define(['marionette',
 		};
 
 		this.friends.collection.add([
-			{name: 'Mia Wallace', avatarSource: '/images/avatar.png'},
+			{name: 'Mia Wallace', avatarSource: '/images/avatar.png', },
 			{name: 'Marsellus Wallace', avatarSource: '/images/avatar.png'},
 			{name: 'Jules Winnfield', avatarSource: '/images/avatar.png'}	
 		]);	

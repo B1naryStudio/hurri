@@ -24,11 +24,6 @@ define(['../song/SongModel',
 												age: window._injectedData.age,
 												email: window._injectedData.email,
 												country: window._injectedData.country,
-												liked: window._injectedData.liked,
-												playlists: window._injectedData.playlists,
-												groups: window._injectedData.group,
-												listened: window._injectedData.totalListened,
-												followers: window._injectedData.friends
 											}
 				),
 			currentAlbumBar: new AlbumBarModel(),
