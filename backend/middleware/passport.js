@@ -91,6 +91,7 @@ module.exports = function () {
 		},
 		function(accessToken, refreshToken, profile, done) {
 			console.log('vk login');
+			console.log(refreshToken);
 			VKWrapper.setAccessToken(accessToken);
 			userRepository.getUserInfo(profile._json.id, function(err, data){
 				if(!data){

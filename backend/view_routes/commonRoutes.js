@@ -4,11 +4,11 @@ var path = require('path');
 module.exports = function (app) {
 
 	app.get('/', function (req, res, next) {
-		injectData(req.user, res, false);
-	});
-
-	app.get('/route', function (req, res) {
-		injectData(req.user, res, false);
+		if(!req.user){
+			res.redirect('/signin');
+		} else {
+			injectData(req.user, res, false);
+		}
 	});
 
 	app.get('/signin', function (req, res, next) {

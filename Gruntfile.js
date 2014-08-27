@@ -39,18 +39,18 @@ module.exports = function (grunt) {
 				tasks: ['jade']
 			}
 		},
-				jade: {
-						compile: {
-								options: {
-										debug: true
-								},
-								files: {
-										'public/index.html': 'frontend/views/index.jade',
-										'public/404.html': 'frontend/views/404.jade',
-										'public/signin.html': 'frontend/views/signin.jade'
-								}
+		jade: {
+				compile: {
+						options: {
+								debug: true
+						},
+						files: {
+								'public/_index.html': 'frontend/views/index.jade',
+								'public/404.html': 'frontend/views/404.jade',
+								'public/signin.html': 'frontend/views/signin.jade'
 						}
-				},
+				}
+		},
 		stylus: {
 			compile: {
 				options: {

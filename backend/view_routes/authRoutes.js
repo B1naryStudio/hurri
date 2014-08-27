@@ -19,11 +19,11 @@ module.exports = function (app) {
 		});
 
 	app.get('/auth/vkontakte/callback',
-		passport.authenticate('vkontakte', { failureRedirect: '/signin' }),
-		function(req, res) {
+		passport.authenticate('vkontakte', { failureRedirect: '/signin', successRedirect: '/' }));
+		/*function(req, res) {
 			res.redirect('/route');
 		});
-
+*/
 	app.get('/auth/odnoklassniki',
 		passport.authenticate('odnoklassniki'),
 		function(req, res){
