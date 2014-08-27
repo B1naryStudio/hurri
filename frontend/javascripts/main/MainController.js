@@ -1,5 +1,6 @@
 define(['marionette', 
 	'./PlaylistsView',
+	'./ListenedView',
 	'./SongView', 
 	'../user/UserView', 
 	'../app/context', 
@@ -12,13 +13,15 @@ define(['marionette',
 	'./bars/playlist/PlaylistBarCollectionView',
 	'./bars/playlist/PlaylistBarCollection',
 	'./songlistmain/MainSongCollectionView',
+
 	 '../playlist/SongCollection',
 	 '../playlist/PlaylistModel',
 	 './favorites/FavoritesCollection',
 	 'clipboard',
 	 './listened/ListenedCollection'],
 	function(Marionette, 
-		PlaylistsView, 
+		PlaylistsView,
+		ListenedView, 
 		SongView, 
 		UserView, 
 		context, 
@@ -30,13 +33,13 @@ define(['marionette',
 		LayoutView, 
 		PlaylistBarView, 
 		PlaylistBarCollection, 
-		MainSongCollectionView, 
+		MainSongCollectionView,
+		 
 		MainSonglistCollection,
 		PlaylistModel,
 		FavoritesCollection, 
 		ZeroClipboard,
 		ListenedCollection){
-
 	
 	var MainController = function(){		
 		
@@ -64,6 +67,8 @@ define(['marionette',
 
 		this.initializeRadio();
 
+		this.initializeListened();
+
 		this.initializeLayout();
 
 		this.initializeMainSonglist();
@@ -73,7 +78,6 @@ define(['marionette',
 		} else {
 			this.mainRegion.show(this.getPlaylistBarView());
 		}
-
 		this.bindListeners();	
 	};
 
@@ -271,6 +275,20 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeListened = function(){
+		this.listened = {
+			model: context.currentUserModel
+		};
+
+		this.listened.view = this.getListenedView();
+	};
+
+	MainController.prototype.getListenedView = function(){
+		return new ListenedView({
+			model: this.listened.model
+		});
+	};
+
 	MainController.prototype.getLayout = function() {
 		this.mainRegion.show(new LayoutView());
 	};
@@ -284,7 +302,7 @@ define(['marionette',
 			this.mainRegion.show(this.getUserView());
 		},this);
 
-		Backbone.on('show-playlists', function(){
+		Backbone.on('show-playlists show-statistic-playlists', function(){
 			this.mainRegion.show(this.getPlaylistBarView());
 		},this);
 
@@ -292,7 +310,7 @@ define(['marionette',
 			this.mainRegion.show(this.getRadioView());
 		},this);
 
-		Backbone.on('show-favorites', function(){
+		Backbone.on('show-favorites show-statistic-liked', function(){
 			this.mainRegion.show(this.getFavoritesSonglistView());
 		},this);
 
@@ -304,8 +322,11 @@ define(['marionette',
 			this.mainRegion.show(this.getMainSonglistView());
 		},this);
 
+		Backbone.on('show-statistic-listened', function(){
+			this.mainRegion.show(this.getListenedView());
+		},this);
+
 		Backbone.on('toggle-sidebar', function(){
-			/*this.sidebarRegion.el.parentNode.style.display='none';*/
 			this.mainRegion.$el.toggleClass('toggled-main');
 		}, this);
 		

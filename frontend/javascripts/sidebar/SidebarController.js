@@ -1,6 +1,8 @@
 define(['marionette', 
 	'../notification/NotificationsCollectionView', 
 	'./SidebarNavView',
+	'./FriendsCollectionView',
+	'./FriendsCollection',
 	'../notification/NotificationModel',
 	'./defaultView',
 	 '../app/context',
@@ -8,10 +10,12 @@ define(['marionette',
 	 '../playlist/SongCollection',
 	 '../song/SongModel',
 	 './StatisticView',
-	 '../songlist/SonglistNavi'], 
-	function(Marionette, NotificationsCompositeView,  SidebarNavView,
+	 '../songlist/SonglistNavi',
+	 '../user/UserModel'], 
+
+	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsCollectionView, FriendsCollection,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
-			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView){
+			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel){
 	
 	var SidebarController = function(){		
 	
@@ -24,6 +28,8 @@ define(['marionette',
 		this.initializeNotifications();
 
 		this.initializeSongs();
+
+		this.initializeFriends();
 /*
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
@@ -90,6 +96,31 @@ define(['marionette',
 		});
 	};
 
+	SidebarController.prototype.initializeFriends = function(){
+		this.friends = {
+			model: new UserModel(),
+			collection: new FriendsCollection()
+		};
+
+		this.friends.collection.add([
+			{name: 'Mia Wallace', avatarSource: '/images/avatar.png'},
+			{name: 'Marsellus Wallace', avatarSource: '/images/avatar.png'},
+			{name: 'Jules Winnfield', avatarSource: '/images/avatar.png'}	
+		]);	
+
+		this.friends.view = this.getFriendsView();
+	};
+
+	SidebarController.prototype.getFriendsView = function(){
+		return new FriendsCollectionView({
+			model: this.friends.model,
+			collection: this.friends.collection
+		});
+	};
+
+
+
+
 	SidebarController.prototype.bindListeners = function() {
 
 		Backbone.on('show-notifications', function(){
@@ -117,8 +148,25 @@ define(['marionette',
 		}, this);
 
 		Backbone.on('show-statistic', function(){
-			this.sidebarRegion.show(this.getStatisticView());
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getStatisticView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getStatisticView());
+			}
+
 		}, this);
+
+		Backbone.on('show-friends show-statistic-followers', function(){
+			if(!context.toggled){
+				this.sidebarRegion.show(this.getFriendsView());
+			} else {
+				Backbone.trigger('toggle-sidebar');
+				this.sidebarRegion.show(this.getFriendsView());
+			}
+
+		}, this);
+
 		Backbone.on('toggle-sidebar', function(){
 			if (!context.toggled){
 				this.sidebarRegion.$el.parent().addClass('toggled');

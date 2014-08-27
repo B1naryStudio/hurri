@@ -17,7 +17,8 @@ ArtistRepository.prototype.getById = function(id, callback) {
 
 ArtistRepository.prototype.getByName = function(name, callback) {
 	var model = this.createModel();
-	var query = model.findOne({name: name}).populate('albums_id');
+	regexp = new RegExp(name, "i");
+	var query = model.find({name: regexp});
 	query.exec(callback);
 };
 

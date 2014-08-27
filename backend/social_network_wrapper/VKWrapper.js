@@ -1,7 +1,5 @@
 var request = require('request');
 var VK = require('vksdk');
-
-
 function VKWrapper(){
 
 	this.vk = new VK({
@@ -10,6 +8,7 @@ function VKWrapper(){
 		'mode'      : 'oauth'
 	});
 }
+
 VKWrapper.prototype.setAccessToken = function(accessToken){
 	this.vk.setToken( { token : accessToken});
 };

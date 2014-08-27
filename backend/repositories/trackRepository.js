@@ -17,7 +17,8 @@ TrackRepository.prototype.getById = function(id, callback) {
 
 TrackRepository.prototype.getByTitle = function(title, callback) {
 	var model = this.createModel();
-	var query = model.findOne({title:title}).populate('album').populate('singer');
+	regexp = new RegExp(title, "i");
+	var query = model.find({title: regexp});
 	query.exec(callback);
 };
 
