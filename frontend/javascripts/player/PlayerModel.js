@@ -1,23 +1,23 @@
 define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel', '../main/listened/ListenedCollection'], function(Backbone, enums, context, LocalStorage, audioHandler, PlaylistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
-		defaults : {
-			playback : 'pause',
+		defaults: {
+			playback: 'pause',
 			nextButtonState: false, //disabled - true
 			previousButtonState: true, //disabled - true
 			currentTrack: 0,
 			currentTrackName: 'Track',
 			currentArtistName: 'Artist',
-			volumeLevel : 50,
+			volumeLevel: 50,
 			mute: 'unmute',
-			shuffle : 'shuffleoff',
-			repeatTrack : 'none',
-			comments : 0,
-			position : 0,
-			duration : 280,
+			shuffle: 'shuffleoff',
+			repeatTrack: 'none',
+			comments: 0,
+			position: 0,
+			duration: 280,
 			durationFormat: undefined,
 			positionFormat: undefined,
-			liked : false,
-			timerId : 0
+			liked: false,
+			timerId: 0
 		},
 
 		localStorage: new Backbone.LocalStorage("PlayerModel"),
@@ -115,7 +115,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			var next;
 			if (this.get('repeatTrack') === enums.repeatModes.none){
 				console.log('repeat off');
-				next = audioHandler.nextTrack(this.get('currentTrack'));
+				next = this.get('currentTrack') + 1;
 			} else if(this.get('repeatTrack') === enums.repeatModes.song){
 				console.log('repeat song');
 				next = this.get('currentTrack');
@@ -123,9 +123,9 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				console.log('repeat album');
 				var current = this.get('currentTrack');
 				if (current === PlaylistModel.get('numberOfTracks')-1){
-					next = audioHandler.nextTrack(-1);
+					next = 0;
 				} else {
-					next = audioHandler.nextTrack(current);
+					next = current + 1;
 				}
 			}
 
@@ -144,7 +144,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 			if (this.get('repeatTrack') === enums.repeatModes.none){
 				console.log('repeat off');
-				previous = audioHandler.previousTrack(this.get('currentTrack'));
+				previous = this.get('currentTrack') - 1;
 			}
 			if(this.get('repeatTrack') === enums.repeatModes.song){
 				console.log('repeat song');
@@ -155,9 +155,9 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				console.log('repeat album');
 				var current = this.get('currentTrack');
 				if (current === 0){
-					previous = audioHandler.previousTrack(PlaylistModel.get('numberOfTracks'));
+					previous = PlaylistModel.get('numberOfTracks') - 1;
 				} else {
-					previous = audioHandler.previousTrack(current);
+					previous = current - 1;
 				}
 			}
 
@@ -236,7 +236,13 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		likeState : function(){
 			var state = this.get('liked');
-			this.set({liked: !state});
+			if (state){
+				this.set({liked: true});
+				$.post('/addLike', {id:  ObjectId("53ff298db14da5482980be7f"), like: ObjectId("53ff298db14da5482980be78")});
+			} else {
+				this.set({liked: false});
+				$.post('/deleteLike', {id: ObjectId("53ff298db14da5482980be7f"), like: ObjectId("53ff298db14da5482980be78")});
+			}
 		},
 		
 		addComment : function(){

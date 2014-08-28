@@ -2,6 +2,7 @@ define(['../player/PlayerModel'], function(PlayerModel){
 	var audioHandler = {
 		initialize: function(url){
 			this.track = new Audio(url);
+			this.track.addEventListener('oncanplaythrough', console.log('playtrough'));
 		},
 		playTrack: function(){
 			this.track.play();
@@ -9,14 +10,6 @@ define(['../player/PlayerModel'], function(PlayerModel){
 
 		pauseTrack: function(){
 			this.track.pause();
-		},
-
-		nextTrack : function(position){
-			return ++position;
-		},
-
-		previousTrack : function(position){
-			return --position;
 		},
 
 		volumeLevelSetup : function(input){
