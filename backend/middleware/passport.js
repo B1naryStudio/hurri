@@ -93,10 +93,7 @@ module.exports = function () {
 			console.log('vk login');
 			VKWrapper.setAccessToken(accessToken);
 			userRepository.getUserAuth(profile._json.id, function(err, data){
-				console.log('json id');
-				console.log(err);
-				console.log('json id end');
-				if(err){ console.log('add');
+				if(!data){ console.log('add');
 					userRepository.add({
 						name : profile._json.first_name,
 						avatarUrl : profile._json.photo,

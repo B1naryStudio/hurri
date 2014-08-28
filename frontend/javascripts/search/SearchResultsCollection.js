@@ -10,20 +10,20 @@ function(Backbone, SearchResultsItemModel){
 
 			_.each(data[0], function(data){
 				items.push({type	: 'album',
-							cover	: '../images/album.png',
-							title	: data,
+							cover	: data.cover,
+							title	: data.title,
 							data	: data});
 			});
 			_.each(data[1], function(data){
 				items.push({type	: 'artist',
-							cover	: '../images/artist.png',
-							title	: data,
+							cover	: data.picture,
+							title	: data.name,
 							data	: data});
 			});
 			_.each(data[2], function(data){
 				items.push({type	: 'song',
 							cover	: '../images/song.png',
-							title	: data,
+							title	: data.title,
 							data	: data});
 			});
 

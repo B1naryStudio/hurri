@@ -14,7 +14,8 @@ function(Backbone, SearchResultsCollection){
 		getSearchResult: function(input){
 			var self = this;
 				$.getJSON('/search',{query: input}, function(data){
-					self.set({searchResult: data});	
+					self.set({searchResult: data});
+					console.log(data);	
 				});
 		},
 
@@ -36,6 +37,9 @@ function(Backbone, SearchResultsCollection){
 			  * search request mechanism will be implemented.
 			  */
 			var searchResultsData = this.get('searchResult');
+			for (i= 0; i < 3; i++){
+				searchResultsData[i] = searchResultsData[i].slice(0,3);
+			}
 			this.searchResultsCollection.parse(searchResultsData);
 
 			this.attributes.previousInputs.push(input);
