@@ -18,22 +18,42 @@ UserRepository.prototype.getUserAuth = function(id, callback) {
 	query.exec(callback);
 };
 
-UserRepository.prototype.addFriend = function(id, fid, callback) {
+UserRepository.prototype.addFollower = function(id, fid, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({id: id},{$push: {friends:fid}} );
+	var query = model.findOneAndUpdate({id: id},{$push: {followers:fid}} );
 	query.exec(callback);
 };
 
-UserRepository.prototype.getFriend = function(id, callback) {
+UserRepository.prototype.getFollower = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({id: id}, 'friends').populate('friends');
+	var query = model.findOne({id: id}, 'followers').populate('followers');
 	query.exec(callback);
 };
 
-UserRepository.prototype.deleteFriend = function(id, userid, callback) {
+UserRepository.prototype.deleteFollower = function(id, userid, callback) {
 	var model = this.createModel();
 	model.findOne({id: id}, function(err, res){
-           	 	res.friends.remove(userid);
+           	 	res.followers.remove(userid);
+				res.save(callback);                          
+    });
+};
+
+UserRepository.prototype.addFollowing = function(id, fid, callback) {
+	var model = this.createModel();
+	var query = model.findOneAndUpdate({id: id},{$push: {following:fid}} );
+	query.exec(callback);
+};
+
+UserRepository.prototype.getFollowing = function(id, callback) {
+	var model = this.createModel();
+	var query = model.findOne({id: id}, 'following').populate('following');
+	query.exec(callback);
+};
+
+UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
+	var model = this.createModel();
+	model.findOne({id: id}, function(err, res){
+           	 	res.following.remove(userid);
 				res.save(callback);                          
     });
 };
@@ -73,6 +93,12 @@ UserRepository.prototype.addUserInfo = function(user, callback){
 UserRepository.prototype.getUserInfo = function(id, callback) {
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id});
+	query.exec(callback);
+};
+
+Repository.prototype.updateUserInfo = function(id, body, callback) {
+	var model = this.infoModel;
+	var query = model.findOneAndUpdate({_id: id}, body);
 	query.exec(callback);
 };
 
