@@ -8,6 +8,7 @@ define(['marionette'], function(Marionette){
 			listened	: "#listened",
 			playlists	: "#playlists",
 			followers	: "#followers",
+			followings	: '#followings',
 			liked		: "#liked"
 		},
 
@@ -16,6 +17,7 @@ define(['marionette'], function(Marionette){
 			'click @ui.listened' 	: 'getListened',
 			'click @ui.playlists'	: 'getPlaylists',
 			'click @ui.followers'	: 'getFollowers',
+			'click @ui.followings'	: 'getFollowings',
 			'click @ui.liked' 		: 'getLiked'
 		},
 		
@@ -30,7 +32,10 @@ define(['marionette'], function(Marionette){
 		},
 		getFollowers : function(){  
 			Backbone.trigger('show-statistic-followers');
-		},		
+		},
+		getFollowings : function(){  
+			Backbone.trigger('show-statistic-followings');
+		},			
 		getLiked : function(){  
 			Backbone.trigger('show-statistic-liked');
 		}

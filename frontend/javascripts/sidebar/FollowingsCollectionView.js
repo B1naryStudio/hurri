@@ -1,7 +1,7 @@
 define(['marionette', './FriendsView', '../app/context', './Behavior', '../playlist/PlaylistModel','../main/bars/playlist/PlaylistBarCollection'],
  function(Marionette, FriendsView, context, behavior, playlistModel,PlaylistBarCollection){
 
-var FriendsCollectionView = Marionette.CompositeView.extend({
+var FollowingsCollectionView = Marionette.CompositeView.extend({
 		childView: FriendsView,
   		template : '#sidebar-friends-navi',
 		events : {
@@ -16,6 +16,6 @@ var FriendsCollectionView = Marionette.CompositeView.extend({
 		 	Backbone.trigger('show-statistic-followers');
 		 }
 	});
-	return FriendsCollectionView;
+	return FollowingsCollectionView;
 });
 

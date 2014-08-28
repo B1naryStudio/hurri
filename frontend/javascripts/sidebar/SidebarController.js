@@ -5,17 +5,19 @@ define(['marionette',
 	'./FriendsCollection',
 	'../notification/NotificationModel',
 	'./defaultView',
-	 '../app/context',
-	 '../songlist/SonglistCollectionView',
-	 '../playlist/SongCollection',
-	 '../song/SongModel',
-	 './StatisticView',
-	 '../songlist/SonglistNavi',
-	 '../user/UserModel'], 
+	'../app/context',
+	'../songlist/SonglistCollectionView',
+	'../playlist/SongCollection',
+	'../song/SongModel',
+	'./StatisticView',
+	'../songlist/SonglistNavi',
+	'../user/UserModel',
+	'./FollowingsCollectionView',
+	'./FollowingsCollection',], 
 
 	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsCollectionView, FriendsCollection,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
-			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel){
+			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel, FollowingsCollectionView, FollowingsCollection){
 	
 	var SidebarController = function(){		
 	
@@ -30,6 +32,8 @@ define(['marionette',
 		this.initializeSongs();
 
 		this.initializeFriends();
+
+		this.initializeFollowings();
 /*
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
@@ -118,7 +122,27 @@ define(['marionette',
 		});
 	};
 
+	SidebarController.prototype.initializeFollowings = function(){
+		this.followings = {
+			model: new UserModel(),
+			collection: new FollowingsCollection()
+		};
 
+		this.followings.collection.add([
+			{name: 'Mia Wallace f', avatarSource: '/images/avatar.png', },
+			{name: 'Marsellus Wallace f', avatarSource: '/images/avatar.png'},
+			{name: 'Jules Winnfield f', avatarSource: '/images/avatar.png'}	
+		]);	
+
+		this.followings.view = this.getFollowingsView();
+	};
+
+	SidebarController.prototype.getFollowingsView = function(){
+		return new FollowingsCollectionView({
+			model: this.followings.model,
+			collection: this.followings.collection
+		});
+	};
 
 
 	SidebarController.prototype.bindListeners = function() {
@@ -166,6 +190,11 @@ define(['marionette',
 			}
 
 		}, this);
+
+		Backbone.on('show-statistic-followings', function(){
+				this.sidebarRegion.show(this.getFollowingsView());
+		}, this);
+
 
 		Backbone.on('toggle-sidebar', function(){
 			if (!context.toggled){

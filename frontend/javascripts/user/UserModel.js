@@ -14,7 +14,8 @@ define(['backbone'], function(Backbone){
 			playlists: [],
 			groups: [],
 			listened: 0,
-			followers: []
+			followers: [],
+			followings: []
 		},
 	});
 	return UserModel;
