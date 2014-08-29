@@ -4,7 +4,6 @@ define(['../song/SongModel',
 	'../main/bars/album/AlbumBarModel',
 	'../main/radio/RadioModel', 
 	'../main/bars/playlist/PlaylistBarModel',  
-	'../main/bars/playlist/PlaylistBarCollection',
 	//'../playlist/PlaylistModel'
 	], 
 	function(SongModel, 
@@ -13,12 +12,12 @@ define(['../song/SongModel',
 		AlbumBarModel, 
 		RadioBarModel, 
 		PlaylistBarModel, 
-		PlaylistBarCollection, 
 		PlaylistModel){
 	var context = {
 			currentSongModel: new SongModel(),
 			notificationCollection: new NotificationCollection(),
-			currentUserModel: new UserModel({avatarSource: window._injectedData.avatarUrl,
+			currentUserModel: new UserModel({ 	_id: window._injectedData._id,
+												avatarSource: window._injectedData.avatarUrl,
 												name: window._injectedData.name,
 												id: window._injectedData.id,
 												age: window._injectedData.age,
@@ -29,7 +28,6 @@ define(['../song/SongModel',
 			currentAlbumBar: new AlbumBarModel(),
 			currentRadioBar: new RadioBarModel(),
 			currentPlaylistBar: new PlaylistBarModel(),
-			playlistBarCollection: new PlaylistBarCollection(),
 			toggled: false
 	};
 	console.log(context);

@@ -185,7 +185,7 @@ UserRepository.prototype.deleteSongFromPlaylist = function(id, pid, tid, callbac
 UserRepository.prototype.getPlaylists = function(id, callback) {
 	var model = this.infoModel;
 	console.log(id);
-	var query = model.findOne({user_auth_id: id},'playlists', { lean: true });
+	var query = model.findOne({user_auth_id: id},'playlists', { lean: true }).populate('playlists.tracks');
 	query.exec(callback);
 };
 

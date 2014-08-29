@@ -116,7 +116,7 @@ define(['marionette',
 	MainController.prototype.initializePlaylistBar = function(){
 		this.playlist = {
 			model: context.currentPlaylistBar,
-			collection: context.playlistBarCollection
+			collection: new PlaylistBarCollection()
 		};
 
 		this.playlist.collection.fetch();
