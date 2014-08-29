@@ -57,7 +57,7 @@ module.exports = function(app){
 	app.get('/api/user/:id/playlists', function(req, res, next){
 		userRepository.getPlaylists(req.params.id, function(err, data){
 			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.status(status).json(data.playlists);
 		});
 	});
 

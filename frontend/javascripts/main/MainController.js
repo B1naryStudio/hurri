@@ -119,16 +119,7 @@ define(['marionette',
 			collection: context.playlistBarCollection
 		};
 
-		this.playlist.collection.add([
-			{playlistName: 'Playlist1',created: Date(1),totalTracks : 12,
-			tracks: [{artist : 'Jim Morrison', title: 'Hello moto'},{artist : 'Jim Morrison', title: 'unknown'}]},
-			{playlistName: 'Playlist2',created: Date(1),totalTracks : 21,
-			tracks: [{artist : 'Pink Floyd', title: 'You are the livung'}]},
-			{playlistName: 'Playlist3',created: Date(1),totalTracks : 0,
-			tracks: [{artist : 'Yupppii', title: 'Woop woop'},{artist : 'Jim Morrison', title: 'unknown'}]},
-			{playlistName: 'Playlist4',created: Date(1),totalTracks : 21,
-			tracks: [{artist : 'Some farms', title: 'Ant farm'}]},
-		]);
+		this.playlist.collection.fetch();
 
 		this.playlist.view = this.getPlaylistBarView();
 	};
