@@ -49,20 +49,20 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 				}, 0);
 		},
 
-		getVkPlaylist: function(){
-			var self = this;
-				$.getJSON('/getPlaylist',{id: context.currentUserModel.get('id')}, function(data){
-					var object = data.response;
-					self.set({numberOfTracks: object[0]});
-					for (i = 1; i < object[0]; i++) {
-						self.collection.add(object[i]);
-					}
-				});
-		}
+		// getVkPlaylist: function(){
+		// 	var self = this;
+		// 		$.getJSON('/getPlaylist',{id: context.currentUserModel.get('id')}, function(data){
+		// 			var object = data.response;
+		// 			self.set({numberOfTracks: object[0]});
+		// 			for (i = 1; i < object[0]; i++) {
+		// 				self.collection.add(object[i]);
+		// 			}
+		// 		});
+		// }
 	});
 
 	var playlistModel = new PlaylistModel();
 
-	playlistModel.getVkPlaylist();
+	//playlistModel.getVkPlaylist();
 	return playlistModel;
 });

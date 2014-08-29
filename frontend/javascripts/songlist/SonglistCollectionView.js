@@ -34,7 +34,18 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
         },
 
         savePlaylist: function(){
-            //saving playlist to server
+            var playlist = {
+                name: "My playlist",
+                tracks : [],
+                duration : 0,
+                mood : 'I like it!'
+            };
+            console.log(this.collection);
+            for (var i = 0; i < this.collection.length; i ++){
+               console.log( this.collection.models[i].get('_id') );
+                playlist.tracks.push(this.collection.models[i].get('_id'));
+            }
+            Backbone.trigger('songlist:save-playlist', playlist);
         }
 	});
 	return SonglistCollectionView;

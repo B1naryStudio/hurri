@@ -281,19 +281,19 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeListened = function(){
-		this.listened = {
-			model: context.currentUserModel
-		};
+	// MainController.prototype.initializeListened = function(){
+	// 	this.listened = {
+	// 		model: context.currentUserModel
+	// 	};
 
-		this.listened.view = this.getListenedView();
-	};
+	// 	this.listened.view = this.getListenedView();
+	// };
 
-	MainController.prototype.getListenedView = function(){
-		return new ListenedView({
-			model: this.listened.model
-		});
-	};
+	// MainController.prototype.getListenedView = function(){
+	// 	return new ListenedView({
+	// 		model: this.listened.model
+	// 	});
+	// };
 
 	MainController.prototype.getLayout = function() {
 		this.mainRegion.show(new LayoutView());
@@ -336,9 +336,9 @@ define(['marionette',
 			this.mainRegion.$el.toggleClass('toggled-main');
 		}, this);
 		
-		Backbone.on('sidebar:show-listened', function(){
-			this.mainRegion.show(this.getListenedView());
-		},this);
+		// Backbone.on('sidebar:show-listened', function(){
+		// 	this.mainRegion.show(this.getListenedView());
+		// },this);
 		
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));

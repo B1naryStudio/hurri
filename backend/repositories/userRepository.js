@@ -145,6 +145,7 @@ UserRepository.prototype.deleteGroups = function(id, groupid, callback) {
 
 UserRepository.prototype.addPlaylists = function(id, playlist, callback) {
 	var model = this.infoModel;
+	console.log('addPlaylist called');
 	var query = model.findOneAndUpdate({user_auth_id: id},{$push: {playlists:playlist}} );
 	query.exec(callback);
 };
