@@ -1,5 +1,5 @@
-define(['marionette', './FriendsView', '../app/context', './Behavior', '../playlist/PlaylistModel','../main/bars/playlist/PlaylistBarCollection'],
- function(Marionette, FriendsView, context, behavior, playlistModel,PlaylistBarCollection){
+define(['marionette', './FriendsView', '../app/context'],
+ function(Marionette, FriendsView, context){
 
 var FriendsCollectionView = Marionette.CompositeView.extend({
 		childView: FriendsView,
