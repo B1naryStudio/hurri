@@ -12,6 +12,7 @@ define(['marionette',
 	'./comment/CommentLayout',
 	'./bars/playlist/PlaylistBarCollectionView',
 	'./bars/playlist/PlaylistBarCollection',
+	'./bars/playlist/PlaylistBarModel',
 	'./songlistmain/MainSongCollectionView',
 
 	 '../playlist/SongCollection',
@@ -33,6 +34,7 @@ define(['marionette',
 		LayoutView, 
 		PlaylistBarView, 
 		PlaylistBarCollection, 
+		PlaylistBarModel,
 		MainSongCollectionView,
 		 
 		MainSonglistCollection,
@@ -226,16 +228,16 @@ define(['marionette',
 
 	MainController.prototype.initializeMainSonglist = function(){
 		this.mainsonglist = {
-			model: PlaylistModel,
+			model: new PlaylistBarModel(),
 			collection: MainSonglistCollection
 		};
 
 		this.mainsonglist.view = this.getMainSonglistView();
 	};
 
-	MainController.prototype.getMainSonglistView = function(){
+	MainController.prototype.getMainSonglistView = function(model){
 		return new MainSongCollectionView({
-			model: this.mainsonglist.model,
+			model: model || this.mainsonglist.model,
 			collection: this.mainsonglist.collection
 		});
 	};
@@ -315,8 +317,8 @@ define(['marionette',
 			this.getLayout();
 		},this);
 
-		Backbone.on('playlist-play', function(){
-			this.mainRegion.show(this.getMainSonglistView());
+		Backbone.on('playlist-play', function(model){
+			this.mainRegion.show(this.getMainSonglistView(model));
 		},this);
 
 		Backbone.on('show-statistic-listened', function(){

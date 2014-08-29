@@ -7,7 +7,7 @@ define(['marionette', '../../app/context'], function(Marionette, context){
 		},
 
 		showPlaylist: function(){
-			Backbone.trigger('playlist-play');
+			Backbone.trigger('playlist-play', this.model);
 		}
 	});
 	return MenuPlaylistView;

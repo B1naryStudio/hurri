@@ -7,7 +7,7 @@ define(['marionette', '../../../app/context', '../../../playlist/PlaylistModel']
 			'click .play-without-open' : 'playlistPlayNotOpen'
 		},
 		playlistPlay : function(){
-			Backbone.trigger('playlist-play');
+			Backbone.trigger('playlist-play', this.model);
 		},
 		playlistPlayNotOpen:function(){
 			PlaylistModel.playTrack(1);
