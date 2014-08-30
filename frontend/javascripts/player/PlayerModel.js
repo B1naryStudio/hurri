@@ -17,8 +17,9 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			duration: 280,
 			durationFormat: undefined,
 			positionFormat: undefined,
-			liked: false,
-			timerId: 0
+			liked : false,
+			timerId : 0,
+			guid: undefined
 		},
 
 		localStorage: new Backbone.LocalStorage("PlayerModel"),
@@ -34,9 +35,20 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					audioHandler.initialize(context.currentSongModel.get('url'));
 				});
 			}
-			
+
+			this.setTrackParams();
+
+			this.set('guid', this.generateGUID());
+			window.addEventListener('storage', $.proxy(this.checkCurrentPlay, this), false);
 		},
 
+		/*
+		 * This function should be reworked completely to avoid
+		 * using bare audioHandler methods playTrack() and pauseTrack().
+		 * We have to implement and use methods of this object to incapsulate
+		 * audioHandler members calls. Remove localStorage accessing calls from
+		 * this function after described reworking.
+		 */
 		playbackState: function(){
 
 			var state = this.get('playback');
@@ -45,10 +57,12 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				audioHandler.playTrack();
 				this.startTimer();
 				this.set({playback: enums.playModes.play});
+				window.localStorage.setItem("currentPlay", this.get('guid'));
 			} else if (state === enums.playModes.play){
 				audioHandler.pauseTrack();
 				this.stopTimer();
 				this.set({playback: enums.playModes.pause});
+				window.localStorage.removeItem("currentPlay");
 			}
 			return this.get('playback');
 		},
@@ -103,12 +117,14 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				});
 			}
 			this.stopTimer();
+			window.localStorage.removeItem("currentPlay");
 		},
 
 		startTrack: function(){
 	 		if (this.get('playback') === enums.playModes.play){	
 	 			audioHandler.playTrack();
 	 			this.startTimer();
+				window.localStorage.setItem("currentPlay", this.get('guid'));
 	 		}
 	 	},
 
@@ -246,7 +262,31 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
     		if (seconds < 10) {seconds = "0"+seconds;}
 			var format = minutes + ':' +seconds;
 			return format;
-		} 
+		},
+
+		checkCurrentPlay: function(){
+			var currentPlay = window.localStorage.getItem('currentPlay');
+			if(currentPlay != this.get('guid') && this.get('playback') == enums.playModes.play){
+				/*
+				 * We need to implement pauseTrack() method of this object
+				 * and replace code below into it.
+				 */
+				audioHandler.pauseTrack();
+				this.stopTimer();
+				this.set({playback: enums.playModes.pause});
+			}
+		},
+
+		generateGUID: function(){
+			function s4() {
+				return Math.floor((1 + Math.random()) * 0x10000)
+						.toString(16)
+						.substring(1);
+			}
+			return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+					s4() + '-' + s4() + s4() + s4();
+		}
+
 	});
 	return PlayerModel;
 });
