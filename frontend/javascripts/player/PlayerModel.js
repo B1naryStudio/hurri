@@ -236,12 +236,14 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		likeState : function(){
 			var state = this.get('liked');
-			if (state){
+			if (!state){
 				this.set({liked: true});
-				$.post('/addLike', {id:  ObjectId("53ff298db14da5482980be7f"), like: ObjectId("53ff298db14da5482980be78")});
+				console.log(context.currentUserModel.get('_id'));
+				console.log(context.currentSongModel.get('songid'));
+				$.ajax({type:'PUT', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('songid')});
 			} else {
 				this.set({liked: false});
-				$.post('/deleteLike', {id: ObjectId("53ff298db14da5482980be7f"), like: ObjectId("53ff298db14da5482980be78")});
+				$.ajax({type:'DELETE', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('songid')});
 			}
 		},
 		

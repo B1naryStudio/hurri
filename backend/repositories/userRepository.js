@@ -103,6 +103,8 @@ UserRepository.prototype.addGroups = function(id, groupid, callback) {
 
 UserRepository.prototype.deleteLike = function(id, likedid, callback) {
 	var model = this.infoModel;
+	console.log(id);
+	console.log(likedid);
 	model.findOne({user_auth_id: id}, function(err, res){
            	 	res.liked.remove(likedid);
 				res.save(callback);                          

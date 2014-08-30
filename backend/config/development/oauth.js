@@ -14,8 +14,8 @@ module.exports = {
 	},
 
 	twitter: {
-		consumerKey: "NWRd507Z48tpuIFR1bO6OdBEB",
-		consumerSecret: "Bblp0AkXnCrNzBpD8FVcon6UwxAV02VSPkct4rXYbVlDvCtLbI",
+		consumerKey: "91JJjzJNYamUT99cNl0Tyr244",
+		consumerSecret: "6Dm9p4Q7Neh20z7wJWK3m6OaoCqr2e2p4DVoyaaA8mgDAXgjjk",
 		callbackURL: "http://localhost:3055/auth/twitter/callback"
 	},
 

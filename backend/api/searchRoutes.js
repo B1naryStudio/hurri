@@ -17,7 +17,7 @@ module.exports = function (app) {
 			res.json(results);
 		});
 	});
-
+	
 	app.get('/getStream', function(req, res) {
 
 		var options = {

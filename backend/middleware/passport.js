@@ -101,7 +101,10 @@ module.exports = function () {
 						id: profile._json.id
 					}, function(err, user){
 						if (err) { return done(err); }
-							done(null, user);				
+						userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
+							console.log(data);
+						});
+						done(null, user);				
 					});
 				} else {console.log('update');
 					userRepository.update(profile._json.id, {
