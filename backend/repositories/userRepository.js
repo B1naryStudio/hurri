@@ -3,6 +3,7 @@ var Userinfo = require('../schemas/user_info.js');
 var Userauth = require('../schemas/user_auth.js');
 var Repository = require('./generalRepository.js');
 var mongoose = require('mongoose');
+var _ = require('underscore');
 
 function UserRepository(){
 	Repository.prototype.constructor.call(this);
@@ -187,6 +188,22 @@ UserRepository.prototype.getPlaylists = function(id, callback) {
 	console.log(id);
 	var query = model.findOne({user_auth_id: id},'playlists', { lean: true }).populate('playlists.tracks');
 	query.exec(callback);
+};
+
+UserRepository.prototype.getTracks = function(id, pid, callback) {
+	var model = this.infoModel;
+	var query = model.findOne({user_auth_id: id},'playlists', function(err, data){
+		var  res = _.filter(data.playlists, function(it){
+			//console.log(it.toString(), pid);
+			return it._id.toString() === pid;
+		});
+		// console.log(data, pid);
+		// console.log(res);
+		var tracks = res[0].populate('tracks', function(err, data){
+			console.log(data);
+		});
+		
+	});
 };
 
 UserRepository.prototype.getPlaylistsShare = function(id, pl_id, callback) {

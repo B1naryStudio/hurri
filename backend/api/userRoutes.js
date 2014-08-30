@@ -68,6 +68,13 @@ module.exports = function(app){
 		});
 	});
 
+	app.get('/api/user/:id/playlists/:id_pl/tracks', function(req, res, next){
+		userRepository.getTracks(req.params.id, req.params.id_pl, function(err, data){
+			var status = _.isEmpty(data) ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.post('/api/user', function(req, res, next){
 		userRepository.add(req.body, function(err, data){
 			var status = err ? 400 : 201;
