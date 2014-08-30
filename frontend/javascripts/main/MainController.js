@@ -12,6 +12,7 @@ define(['marionette',
 	'./comment/CommentLayout',
 	'./bars/playlist/PlaylistBarCollectionView',
 	'./bars/playlist/PlaylistBarCollection',
+	'./bars/playlist/PlaylistBarModel',
 	'./songlistmain/MainSongCollectionView',
 
 	 '../playlist/SongCollection',
@@ -33,6 +34,7 @@ define(['marionette',
 		LayoutView, 
 		PlaylistBarView, 
 		PlaylistBarCollection, 
+		PlaylistBarModel,
 		MainSongCollectionView,
 		 
 		MainSonglistCollection,
@@ -116,19 +118,10 @@ define(['marionette',
 	MainController.prototype.initializePlaylistBar = function(){
 		this.playlist = {
 			model: context.currentPlaylistBar,
-			collection: context.playlistBarCollection
+			collection: new PlaylistBarCollection()
 		};
 
-		this.playlist.collection.add([
-			{playlistName: 'Playlist1',created: Date(1),totalTracks : 12,
-			tracks: [{artist : 'Jim Morrison', title: 'Hello moto'},{artist : 'Jim Morrison', title: 'unknown'}]},
-			{playlistName: 'Playlist2',created: Date(1),totalTracks : 21,
-			tracks: [{artist : 'Pink Floyd', title: 'You are the livung'}]},
-			{playlistName: 'Playlist3',created: Date(1),totalTracks : 0,
-			tracks: [{artist : 'Yupppii', title: 'Woop woop'},{artist : 'Jim Morrison', title: 'unknown'}]},
-			{playlistName: 'Playlist4',created: Date(1),totalTracks : 21,
-			tracks: [{artist : 'Some farms', title: 'Ant farm'}]},
-		]);
+		this.playlist.collection.fetch();
 
 		this.playlist.view = this.getPlaylistBarView();
 	};
@@ -235,16 +228,16 @@ define(['marionette',
 
 	MainController.prototype.initializeMainSonglist = function(){
 		this.mainsonglist = {
-			model: PlaylistModel,
+			model: new PlaylistBarModel(),
 			collection: MainSonglistCollection
 		};
 
 		this.mainsonglist.view = this.getMainSonglistView();
 	};
 
-	MainController.prototype.getMainSonglistView = function(){
+	MainController.prototype.getMainSonglistView = function(model){
 		return new MainSongCollectionView({
-			model: this.mainsonglist.model,
+			model: model || this.mainsonglist.model,
 			collection: this.mainsonglist.collection
 		});
 	};
@@ -281,19 +274,19 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeListened = function(){
-		this.listened = {
-			model: context.currentUserModel
-		};
+	// MainController.prototype.initializeListened = function(){
+	// 	this.listened = {
+	// 		model: context.currentUserModel
+	// 	};
 
-		this.listened.view = this.getListenedView();
-	};
+	// 	this.listened.view = this.getListenedView();
+	// };
 
-	MainController.prototype.getListenedView = function(){
-		return new ListenedView({
-			model: this.listened.model
-		});
-	};
+	// MainController.prototype.getListenedView = function(){
+	// 	return new ListenedView({
+	// 		model: this.listened.model
+	// 	});
+	// };
 
 	MainController.prototype.getLayout = function() {
 		this.mainRegion.show(new LayoutView());
@@ -324,8 +317,8 @@ define(['marionette',
 			this.getLayout();
 		},this);
 
-		Backbone.on('playlist-play', function(){
-			this.mainRegion.show(this.getMainSonglistView());
+		Backbone.on('playlist-play', function(model){
+			this.mainRegion.show(this.getMainSonglistView(model));
 		},this);
 
 		Backbone.on('show-statistic-listened', function(){
@@ -336,9 +329,9 @@ define(['marionette',
 			this.mainRegion.$el.toggleClass('toggled-main');
 		}, this);
 		
-		Backbone.on('sidebar:show-listened', function(){
-			this.mainRegion.show(this.getListenedView());
-		},this);
+		// Backbone.on('sidebar:show-listened', function(){
+		// 	this.mainRegion.show(this.getListenedView());
+		// },this);
 		
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));

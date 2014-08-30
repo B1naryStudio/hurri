@@ -7,7 +7,7 @@ function TrackRepository(){
 	this.model = Track;
 }
 
-//TrackRepository.prototype = new Repository();
+TrackRepository.prototype = new Repository();
 
 TrackRepository.prototype.getById = function(id, callback) {
 	var model = this.model;

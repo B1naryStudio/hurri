@@ -5,7 +5,7 @@ var injectData = require('../middleware/injectDataMiddleware');
 module.exports = function(app){
 
   app.get('/user/:id', function(req, res, next) {
-	  injectData(userRepository.getUserInfo(req.params.id), res);
+	  injectData(userRepository.getUserAuth(req.params.id), res);
   });
 
   app.get('/user/:id/like', function(req, res, next) {

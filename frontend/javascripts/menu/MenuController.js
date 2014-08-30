@@ -1,5 +1,5 @@
-define(['marionette', './MenuNavView', '../app/context', './menu-playlist/MenuPlaylistCollectionView', '../playlist/PlaylistModel', '../main/bars/playlist/PlaylistBarCollection'], 
-	function(Marionette, MenuNavView, context, PlaylistCompositeView, PlaylistModel, PlaylistCollection){
+define(['marionette', './MenuNavView', './menu-playlist/MenuPlaylistCollectionView', '../playlist/PlaylistModel', '../main/bars/playlist/PlaylistBarCollection'], 
+	function(Marionette, MenuNavView, PlaylistCompositeView, PlaylistModel, PlaylistCollection){
 	
 	var MenuController = function(){
 	
@@ -14,8 +14,9 @@ define(['marionette', './MenuNavView', '../app/context', './menu-playlist/MenuPl
 		
 		var playlistView = new PlaylistCompositeView({
 			model: PlaylistModel,
-			collection: context.playlistBarCollection
+			collection: new PlaylistCollection()
 		});
+		playlistView.collection.fetch();
 		playlistView.render();
 
 	};

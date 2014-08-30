@@ -18,7 +18,11 @@ var userAuthSchema = new Schema({
 		type: Number, 
 		default: 18
 	},
-	friends : [{ 
+	followers : [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	}],
+	following : [{ 
 		type: Schema.Types.ObjectId, 
 		ref: 'Userauth' 
 	}],

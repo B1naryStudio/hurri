@@ -29,6 +29,14 @@ var trackSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'Artist'
     },
+    genre: {
+        type: String, 
+        default: ''
+    },
+    type:{
+        type: String, 
+        default: 'deezer'
+    },
     url : String,
     comment : [commentSchema]
 });

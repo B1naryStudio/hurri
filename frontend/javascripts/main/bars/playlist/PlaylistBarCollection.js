@@ -1,6 +1,7 @@
-define(['backbone', './PlaylistBarModel'], function(Backbone, PlaylistBarModel){
+define(['backbone', './PlaylistBarModel','../../../app/context'], function(Backbone, PlaylistBarModel, context){
 	var PlaylistBarCollection = Backbone.Collection.extend({
-		model: PlaylistBarModel
+		model: PlaylistBarModel,
+		url: '/api/user/'+context.currentUserModel.attributes._id+'/playlists'
 	});
 	return PlaylistBarCollection;
 });

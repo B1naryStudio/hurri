@@ -216,6 +216,15 @@ define(['marionette',
 		Backbone.on('scroll-to-top', function(options){
 			this.sidebarRegion.$el.scrollTop(this.sidebarRegion.$el.scrollTop() + options.top - 200);
 		}, this);
+
+		Backbone.on('songlist:save-playlist', function(data){
+			$.ajax({
+				url:"/api/user/53fe1b3724579bd0306accff/playlist" , 
+				data: data,
+				method: "PUT"
+			});
+		}, this);
+
 	};
 
 

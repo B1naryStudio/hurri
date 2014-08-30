@@ -1,12 +1,12 @@
 var passport = require('passport');
 var VKWrapper = require('../social_network_wrapper/VKWrapper');
-var userRepository = require ('../repositories/userRepository');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var OdnoklassnikiStrategy = require('passport-odnoklassniki').Strategy;
 var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var cnfg = require('../config/');
 var log = require('winston-wrapper')(module);
+var getUser = require('../social_network_wrapper/getUser.js');
 
 //FIXME: this should be replaced with corresponding user repository methods
 //var User = function () {
@@ -92,33 +92,7 @@ module.exports = function () {
 		function(accessToken, refreshToken, profile, done) {
 			console.log('vk login');
 			VKWrapper.setAccessToken(accessToken);
-			userRepository.getUserAuth(profile._json.id, function(err, data){
-				if(!data){ console.log('add');
-					userRepository.add({
-						name : profile._json.first_name,
-						avatarUrl : profile._json.photo,
-						accountType : 'vk',
-						id: profile._json.id
-					}, function(err, user){
-						if (err) { return done(err); }
-						userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
-							console.log(data);
-						});
-						done(null, user);				
-					});
-				} else {console.log('update');
-					userRepository.update(profile._json.id, {
-						name : profile._json.first_name,
-						avatarUrl : profile._json.photo,
-						accountType : 'vk',
-						id: profile._json.id
-					}, function(err, user){
-						if (err) { return done(err); }
-							done(null, user);				
-					});
-				}
-			});
-
+			getUser(profile, done);
 		}
 	));
 

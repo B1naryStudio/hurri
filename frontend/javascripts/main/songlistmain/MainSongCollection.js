@@ -1,4 +1,4 @@
-define(['backbone', './MainSongModel'], function(Backbone, MainSongModel){
+define(['backbone', './MainSongModel','../../../app/context'], function(Backbone, MainSongModel, context){
 	var MainSongCollection = Backbone.Collection.extend({
 		model: MainSongModel
 	});
