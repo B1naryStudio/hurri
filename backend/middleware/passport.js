@@ -7,6 +7,7 @@ var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var cnfg = require('../config/');
 var log = require('winston-wrapper')(module);
 var getUser = require('../social_network_wrapper/getUser.js');
+var userRepository = require ('../repositories/userRepository');
 
 //FIXME: this should be replaced with corresponding user repository methods
 //var User = function () {
@@ -40,8 +41,7 @@ module.exports = function () {
 		},
 		function (accessToken, refreshToken, profile, done) {
 			console.log('facebook login');
-			console.log(profile);
-			done(null, profile);
+			getUser(profile, 'fb', done);
 		}
 	));
 
@@ -52,8 +52,7 @@ module.exports = function () {
 		},
 		function(token, tokenSecret, profile, done) {
 			console.log('Twitter login');
-			console.log(profile);
-			done(null, profile)
+			getUser(profile, 'tw', done);
 		}
 	));
 
@@ -82,7 +81,7 @@ module.exports = function () {
 		function(accessToken, refreshToken, profile, done) {
 			console.log('vk login');
 			VKWrapper.setAccessToken(accessToken);
-			getUser(profile, done);
+			getUser(profile, 'vk', done);
 		}
 	));
 
