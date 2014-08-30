@@ -41,13 +41,7 @@ module.exports = function () {
 		function (accessToken, refreshToken, profile, done) {
 			console.log('facebook login');
 			console.log(profile);
-//			u.findOrCreate(profile, function (err, user) {
-//				if (err) {
-//					return done(err);
-//				}
-//				console.log('user: ' + user);
-//				done(null, user);
-//			});
+			done(null, profile);
 		}
 	));
 
@@ -59,11 +53,7 @@ module.exports = function () {
 		function(token, tokenSecret, profile, done) {
 			console.log('Twitter login');
 			console.log(profile);
-//			u.findOrCreate(profile, function(err, user) {
-//				if (err) { return done(err); }
-//				log('user: ' + user);
-//				done(null, user);
-//			});
+			done(null, profile)
 		}
 	));
 
