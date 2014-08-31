@@ -56,7 +56,12 @@ function getUser(profile, done){
 							playlistObject.duration += playlist.response[i].duration;
 						}
 						userRepository.addPlaylists(user._id, playlistObject, function(err, res){});
-						});
+					});
+					VK.getFriends(user.id, function(friends){
+						for(var j = 0; j < friends.response.length; j++){
+							checkUser(friends.response[j]);
+						}
+					});
 				});		
 				done(null, user);	
 				function setTrack(playlist, id){
@@ -70,6 +75,13 @@ function getUser(profile, done){
 					};
 					trackRepository.add(track, function(error, track){
 						console.log(playlistObject.duration);
+					});
+				}
+
+				function checkUser(id){
+					userRepository.getUserAuth(id, function(err, res){
+						if (res)
+							console.log('registered: ', res.name);
 					});
 				}
 		});

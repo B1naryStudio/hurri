@@ -3,9 +3,12 @@ define(['backbone', '../song/SongModel','../app/context'],
 var SongCollection = Backbone.Collection.extend({
 	model: SongModel,
 	comparator: 'order',
-	url: function(){
-    	var experimentId = this.at(0).get("playlistId");
-    	return '/api/user/'+context.currentUserModel.attributes._id+'/playlists/'+experimentId+'/tracks';
+	initialize: function(models, options) {
+		this.playlistId = options.playlistId;
+	},
+	url: function(){	
+    	return 	'/api/user/' + context.currentUserModel.attributes._id + 
+    			'/playlists/' + this.playlistId + '/tracks';
 	}
 });
 

@@ -232,7 +232,7 @@ define(['marionette',
 		console.log(model.attributes._id);
 		this.mainsonglist = {
 			model: model,
-			collection: new MainSonglistCollection({
+			collection: new MainSonglistCollection([], {
 				playlistId : model.attributes._id
 			})
 		};
