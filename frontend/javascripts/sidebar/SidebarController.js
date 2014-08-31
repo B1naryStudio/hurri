@@ -56,7 +56,7 @@ define(['marionette',
 
 	SidebarController.prototype.initializeSongs = function() {
 		this.song = {
-			collection: SonglistCollection,
+			collection: context.currentSongCollection,
 			model : SonglistModel
 		 };
 
@@ -190,7 +190,7 @@ define(['marionette',
 
 		Backbone.on('songlist:save-playlist', function(data){
 			$.ajax({
-				url:"/api/user/53fe1b3724579bd0306accff/playlist" , 
+				url:'/api/user/'+context.currentUserModel.attributes._id+'/playlist' , 
 				data: data,
 				method: "PUT"
 			});

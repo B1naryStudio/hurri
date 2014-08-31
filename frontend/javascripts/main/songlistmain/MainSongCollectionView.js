@@ -3,7 +3,13 @@ define(['marionette', './MainSongView', '../../app/context','clipboard'],
 	var MainSongCollectionView = Marionette.CompositeView.extend({
 		id: 'main-songlist-composite',
 		template: '#main-header-playlist-template',
+		events: {
+			'click #playlist-avatar-header':'playSongs'
+		},
 		childView: MainSongView,
+		playSongs: function(){
+			Backbone.trigger('main-view:play-songs');
+		},
 		onShow: function(){
 	    	ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
 	                                trustedDomains: location.host } );

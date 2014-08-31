@@ -5,10 +5,10 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 		template: '#menu-playlist-composite-template',
 		events : {
 			"click .add-playlist-button" : "openEditField",
-			"keypress .edit"		: "createPlaylist"
+			"keypress .edit2"		: "createPlaylist"
 		},
 		ui : {
-			text : ".edit" 
+			text : ".edit2" 
 		},
 
 		openEditField : function(){
@@ -22,16 +22,23 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 
 		close: function(){
 			var value = this.ui.text.val();
-			if(value)
-				this.collection.add({
+			var data = {
 				genre: [],
-				playlistName: value,
+				name: value,
 				created: Date(1),
 				oldCollection: null,
 				numberOfTracks: 0,
 				queueNum : 0,
-				position: undefined
-			});
+				position: undefined,
+				duration:0
+			};
+			console.log(data);
+			if(value)
+				$.ajax({
+					url:'/api/user/'+context.currentUserModel.attributes._id+'/playlist' , 
+					data: data,
+					method: "PUT"
+				});
 			this.$el.removeClass("editing");
 		}
 	});

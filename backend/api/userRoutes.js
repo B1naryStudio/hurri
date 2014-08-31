@@ -69,7 +69,7 @@ module.exports = function(app){
 	});
 
 	app.get('/api/user/:id/playlists/:id_pl/tracks', function(req, res, next){
-		userRepository.getTracks(req.params.id, req.params.id_pl, function(err, data){
+		userRepository.getTracks(req.params.id, req.params.id_pl, function(data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});

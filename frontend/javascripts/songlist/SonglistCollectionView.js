@@ -23,7 +23,17 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
         },
         events : {
             'click #unqueue' : 'unqueueSong',
-            'click #save-playlist-from-queue' : 'savePlaylist'
+            'click #save-playlist-from-queue' : 'setClass',
+            "keypress .edit2" : "createPlaylist"
+        },
+
+        ui : {
+            text : ".edit2" 
+        },
+        
+        setClass: function(){
+            this.$el.addClass("editing");
+            this.ui.text.focus();
         },
 
         unqueueSong: function(){
@@ -33,9 +43,14 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
             }
         },
 
+        createPlaylist: function(evt){
+            if (evt.keyCode == 13) this.savePlaylist();
+        },
+
         savePlaylist: function(){
+            var value = this.ui.text.val();
             var playlist = {
-                name: "My playlist",
+                name: value || "My playlist",
                 tracks : [],
                 duration : 0,
                 mood : 'I like it!'

@@ -19,7 +19,9 @@ define(['marionette',
 	 '../playlist/PlaylistModel',
 	 './favorites/FavoritesCollection',
 	 'clipboard',
-	 './listened/ListenedCollection'],
+	 './listened/ListenedCollection',
+	 '../player/PlayerModel',
+	 '../units/HtmlAudioHandler'],
 	function(Marionette, 
 		PlaylistsView,
 		ListenedView, 
@@ -41,7 +43,9 @@ define(['marionette',
 		PlaylistModel,
 		FavoritesCollection, 
 		ZeroClipboard,
-		ListenedCollection){
+		ListenedCollection,
+		PlayerModel,
+		audioHandler){
 	
 	var MainController = function(){		
 		
@@ -72,8 +76,6 @@ define(['marionette',
 		this.initializeListened();
 
 		this.initializeLayout();
-
-		this.initializeMainSonglist();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -226,18 +228,22 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeMainSonglist = function(){
+	MainController.prototype.initializeMainSonglist = function(model){
+		console.log(model.attributes._id);
 		this.mainsonglist = {
-			model: new PlaylistBarModel(),
-			collection: MainSonglistCollection
+			model: model,
+			collection: new MainSonglistCollection({
+				playlistId : model.attributes._id
+			})
 		};
-
+		this.mainsonglist.collection.fetch();
 		this.mainsonglist.view = this.getMainSonglistView();
 	};
 
-	MainController.prototype.getMainSonglistView = function(model){
+	MainController.prototype.getMainSonglistView = function(){
+
 		return new MainSongCollectionView({
-			model: model || this.mainsonglist.model,
+			model: this.mainsonglist.model,
 			collection: this.mainsonglist.collection
 		});
 	};
@@ -318,7 +324,8 @@ define(['marionette',
 		},this);
 
 		Backbone.on('playlist-play', function(model){
-			this.mainRegion.show(this.getMainSonglistView(model));
+			this.initializeMainSonglist(model);
+			this.mainRegion.show(this.getMainSonglistView());
 		},this);
 
 		Backbone.on('show-statistic-listened', function(){
@@ -335,6 +342,13 @@ define(['marionette',
 		
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));
+		},this);
+
+		Backbone.on('main-view:play-songs', function(model){
+			context.currentSongCollection.reset(this.mainsonglist.collection.models);
+			PlaylistModel.playTrack(0);
+			$("#play-button").click();
+			Backbone.trigger('play-first');
 		},this);
 	};
 

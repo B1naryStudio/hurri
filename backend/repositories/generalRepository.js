@@ -10,6 +10,7 @@ Repository.prototype.createModel = function(){
 };
 
 Repository.prototype.add = function(data, callback) {
+	console.log(data);
 	var model = this.createModel();
 	var newitem = new model(data);
 	newitem.save(callback);

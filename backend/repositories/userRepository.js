@@ -2,6 +2,7 @@ var connection = require('../db/dbconnect.js');
 var Userinfo = require('../schemas/user_info.js');
 var Userauth = require('../schemas/user_auth.js');
 var Repository = require('./generalRepository.js');
+var PlayList = require('../schemas/playlist.js');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 
@@ -193,15 +194,18 @@ UserRepository.prototype.getPlaylists = function(id, callback) {
 UserRepository.prototype.getTracks = function(id, pid, callback) {
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id},'playlists', function(err, data){
+		console.log(data);
 		var  res = _.filter(data.playlists, function(it){
 			//console.log(it.toString(), pid);
 			return it._id.toString() === pid;
 		});
+		var playlist = mongoose.model('Playlist', PlayList);
+		var list = new playlist(res[0]);
 		// console.log(data, pid);
-		// console.log(res);
-		var tracks = res[0].populate('tracks', function(err, data){
-			console.log(data);
-		});
+		 console.log(list);
+		 var tracks = list.populate('tracks', function(err, data){
+			callback(tracks.tracks);
+		 });
 		
 	});
 };

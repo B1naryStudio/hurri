@@ -64,7 +64,7 @@ function getUser(profile, done){
 						_id: id,
 						title : playlist.title + ' - ' + playlist.artist,
 						duration : playlist.duration,
-						url : playlist.uri,
+						url : playlist.url,
 						genre: genres[playlist.genre],
 						type: 'vk'
 					};
