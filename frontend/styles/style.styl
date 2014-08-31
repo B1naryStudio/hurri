@@ -438,8 +438,24 @@ body
 			background #eee
 			color black
 			cursor pointer
+			position relative
 			&:hover
 				background lightblue
+				.delete-menu-playlist
+					opacity 0.5
+			.delete-menu-playlist
+				width 16px
+				height 16px
+				background url('../images/notifications/bin.png')
+				background-size 16px
+				position absolute
+				right 8px
+				top 7px
+				opacity 0
+				&:hover
+					opacity 1
+					
+				
 		.add-playlist-button
 			width 100%
 			background #c0c0c0
@@ -468,7 +484,7 @@ body
 	&:hover 
 		opacity 0.8
 	#unqueue
-		width 49%
+		width 33%
 		margin-right 1%
 		margin-top 5px
 		float left
@@ -480,7 +496,21 @@ body
 		&:hover 
 			opacity 0.8
 	#save-playlist-from-queue
-		width 50%
+		width 33%
+		margin-top 5px
+		margin-right 1%
+		float left
+		text-align center
+		background lightblue
+		border-radius 5px
+		padding 2px 0 2px
+		cursor pointer
+		&:hover 
+			opacity 0.8
+		.can-save-playlist
+			opacity 1
+	#save-playlist-as
+		width 32%
 		margin-top 5px
 		float left
 		text-align center
@@ -496,7 +526,7 @@ body
 	display none
 
 	
- .editing .edit2
+ .editing2 .edit2
 		display block
 		position absolute
 		z-index 20

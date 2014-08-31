@@ -10,7 +10,8 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 			oldCollection: null,
 			numberOfTracks: 1,
 			queueNum : 0,
-			position: undefined
+			position: undefined,
+			type: 'default'
 		},
 
 		playTrack: function(position){

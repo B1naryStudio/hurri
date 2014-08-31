@@ -23,8 +23,9 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
         },
         events : {
             'click #unqueue' : 'unqueueSong',
-            'click #save-playlist-from-queue' : 'setClass',
-            "keypress .edit2" : "createPlaylist"
+            'click #save-playlist-as' : 'setClass',
+            "keypress .edit2" : "createPlaylist",
+            'click #save-playlist-from-queue':'saveExisting'
         },
 
         ui : {
@@ -32,7 +33,7 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
         },
         
         setClass: function(){
-            this.$el.addClass("editing");
+            this.$el.addClass("editing2");
             this.ui.text.focus();
         },
 
@@ -42,7 +43,9 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
                 this.collection.models[i].set({queuepos: ''});
             }
         },
-
+        saveExisting:function(){
+            this.collection.model.find();
+        },
         createPlaylist: function(evt){
             if (evt.keyCode == 13) this.savePlaylist();
         },
@@ -53,7 +56,8 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
                 name: value || "My playlist",
                 tracks : [],
                 duration : 0,
-                mood : 'I like it!'
+                mood : 'I like it!',
+                type: 'playlist'
             };
             console.log(this.collection);
             for (var i = 0; i < this.collection.length; i ++){
@@ -61,6 +65,7 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
                 playlist.tracks.push(this.collection.models[i].get('_id'));
             }
             Backbone.trigger('songlist:save-playlist', playlist);
+            this.$el.removeClass("editing2");
         }
 	});
 	return SonglistCollectionView;
