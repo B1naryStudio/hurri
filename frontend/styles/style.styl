@@ -430,32 +430,31 @@ body
 		width 98%
 		margin-left 0px
 		margin-top 160px
-		.playlist-name-menu
-			padding-top 7px
-			padding-left 5px
-			height 30px
+		.menu-playlist-item
 			width 100%
-			background #eee
-			color black
-			cursor pointer
-			position relative
-			&:hover
-				background lightblue
-				.delete-menu-playlist
-					opacity 0.5
-			.delete-menu-playlist
-				width 16px
-				height 16px
-				background url('../images/notifications/bin.png')
-				background-size 16px
-				position absolute
-				right 8px
-				top 7px
-				opacity 0
+			height 30px
+			.playlist-name-menu
+				height 30px
+				width 90%
+				background #eee
+				color black
+				cursor pointer
+				float left
 				&:hover
-					opacity 1
+					background lightblue
+					.delete-menu-playlist
+						opacity 0.5
+			.delete-menu-playlist
+				width 10%
+				height 30px
+				background url('../images/notifications/bin.png') no-repeat
+				background-size 16px
+				float left
+				opacity 1
+				&:hover
+					opacity 0.8
+						
 					
-				
 		.add-playlist-button
 			width 100%
 			background #c0c0c0

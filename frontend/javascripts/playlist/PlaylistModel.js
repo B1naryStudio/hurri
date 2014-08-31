@@ -2,7 +2,7 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 	var PlaylistModel = Backbone.Model.extend({
 
 		collection: context.currentSongCollection,
-
+		
 		defaults: {
 			genre: ['unknown'],
 			playlistName: 'myPlaylist',

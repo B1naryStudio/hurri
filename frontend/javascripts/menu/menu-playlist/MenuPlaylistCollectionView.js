@@ -5,8 +5,7 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 		template: '#menu-playlist-composite-template',
 		events : {
 			"click .add-playlist-button" : "openEditField",
-			"keypress .edit"		: "createPlaylist",
-			'click .delete-menu-playlist' : 'deletePlaylist'
+			"keypress .edit"		: "createPlaylist"
 		},
 		ui : {
 			text : ".edit" 
@@ -19,13 +18,6 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 
 		createPlaylist: function(evt){
 			if (evt.keyCode == 13) this.close();
-		},
-
-		deletePlaylist: function(){
-				$.ajax({
-					url:'/api/user/'+context.currentUserModel.attributes._id+'/playlist/'+this.model.attributes._id , 
-					method: "DELETE"
-			});
 		},
 
 		close: function(){
