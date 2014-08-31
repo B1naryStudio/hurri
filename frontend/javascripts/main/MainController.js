@@ -14,6 +14,8 @@ define(['marionette',
 	'./bars/playlist/PlaylistBarCollection',
 	'./bars/playlist/PlaylistBarModel',
 	'./songlistmain/MainSongCollectionView',
+	'./charts/ChartsCollection',
+	'./charts/ChartsView',
 
 	 '../playlist/SongCollection',
 	 '../playlist/PlaylistModel',
@@ -42,6 +44,8 @@ define(['marionette',
 		PlaylistBarCollection, 
 		PlaylistBarModel,
 		MainSongCollectionView,
+		ChartsCollection,
+		ChartsView,
 		 
 		MainSonglistCollection,
 		PlaylistModel,
@@ -86,6 +90,8 @@ define(['marionette',
 		//this.initializeResults();
 
 		this.initializeLayout();
+
+		this.initializeCharts();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -256,6 +262,36 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeCharts = function(){
+		this.charts = {
+			collection: new ChartsCollection()
+		};
+		this.charts.collection.add([
+			{artist: 'The Beatles',  	title: 'Yesterday'},
+			{artist: 'John Lennon',  	title: 'Imagine'},
+			{artist: 'The Beatles',  	title: 'Let It Be'},
+			{artist: 'Pink Floyd',  	title: 'Time'},
+			{artist: 'Queen',  			title: 'The Show Must Go On'},
+			{artist: 'Queen',  			title: 'Bohemian Rhapsody'},
+			{artist: 'Led Zeppelin',  	title: 'Stairway To Heaven'},
+			{artist: 'Queen',  			title: 'We Are The Champions'},
+			{artist: 'The Beatles',  	title: 'Come Together'},
+			{artist: 'Pink Floyd',  	title: 'Shine On You Crazy Diamond'},
+			{artist: 'Pink Floyd',  	title: 'Another Brick In The Wall'},
+			{artist: 'Queen',  			title: 'We Will Rock You'},
+			{artist: 'Louis Armstrong', title: 'What A Wonderful World'},
+			{artist: 'Elvis Presley',  	title: 'Love Me Tender'},
+			{artist: 'Eagles',  		title: 'Hotel California'},
+		]);
+		this.charts.view = this.getChartsView();
+	};
+
+	MainController.prototype.getChartsView = function(model){
+		return new ChartsView({
+			collection: this.charts.collection
+		});
+	};
+
 	MainController.prototype.initializeFavoritesSonglist = function(){
 		this.favoriteslist = {
 			model: PlaylistModel,
@@ -358,6 +394,10 @@ define(['marionette',
 
 		Backbone.on('show-favorites show-statistic-liked', function(){
 			this.mainRegion.show(this.getFavoritesSonglistView());
+		},this);
+
+		Backbone.on('show-charts', function(){
+			this.mainRegion.show(this.getChartsView());
 		},this);
 
 		Backbone.on('player:add-comment', function(){
