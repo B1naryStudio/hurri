@@ -53,11 +53,9 @@ define(['marionette',
 			collection: context.notificationCollection
 		};
 
-		this.notification.collection.add([
-			{name: 'All goes ok', type: 'info', additionalInfo: 'if you see this notification, then all goes ok', active: true},
-			{name: 'New song', type: 'info', additionalInfo: 'your friend just shared one more playlist', active: false},
-			{name: 'You are in danger', type: 'request', additionalInfo: 'all is ok, sorry. Its just warning. Someone want to add you', active: true}	
-		]);	
+		this.notification.collection.add(
+			window._injectedData.alerts	
+		);	
 		
 		this.notification.view = this.getNotificationView();
 	};
