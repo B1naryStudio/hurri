@@ -68,13 +68,13 @@ UserRepository.prototype.addAlert = function(id, alert, callback) {
 
 UserRepository.prototype.getAlerts = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({id: id}, 'alerts').populate('alerts');
+	var query = model.findOne({_id: id}, 'alerts').populate('alerts');
 	query.exec(callback);
 };
 
 UserRepository.prototype.deleteAlert = function(id, alertid, callback) {
 	var model = this.createModel();
-	model.findOne({id: id}, function(err, res){
+	model.findOne({_id: id}, function(err, res){
            	 	res.alerts.remove(alertid);
 				res.save(callback);                          
     });
@@ -82,7 +82,7 @@ UserRepository.prototype.deleteAlert = function(id, alertid, callback) {
 
 UserRepository.prototype.deleteAllAlerts = function(id, callback) {
 	var model = this.createModel();
-	model.update({id: id},{ $set: { alerts: [] }}).exec(callback);
+	model.update({_id: id},{ $set: { alerts: [] }}).exec(callback);
 };
 
 //========USER-INFO==========================================//

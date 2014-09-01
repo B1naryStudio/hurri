@@ -10,7 +10,9 @@ define(['marionette', './NotificationView', '../app/context'], function(Marionet
 		},
 
 		deleteMessages : function(){
-			context.notificationCollection.reset();
+			while(context.notificationCollection.length>0)
+				context.notificationCollection.models[0].destroy({url:'/api/user/' + context.currentUserModel.attributes._id +
+																 '/alert'});
 		}
 	});
 	return NotificationsCompositeView;

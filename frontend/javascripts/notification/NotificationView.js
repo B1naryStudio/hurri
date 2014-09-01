@@ -11,7 +11,7 @@ define(['marionette', '../app/context'], function(Marionette, context){
 		},
 
 		deleteNotification: function(){
-			context.notificationCollection.remove(this.model);
+			this.model.destroy({url:'/api/user/' + context.currentUserModel.attributes._id + '/alert/' + this.model.attributes._id});
 		},
 
 		renewNotification: function(){		
