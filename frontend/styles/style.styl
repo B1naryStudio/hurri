@@ -19,7 +19,7 @@ searchbar_width = 300px
 body
 	font-family basic_font
 	width 100%
-	min-width 1000px
+	min-width 1280px
 	height 100%
 *
 	margin 0
@@ -29,6 +29,7 @@ body
 		outline none
 #header
 	width 100%
+	min-width 1280px
 	height header_height
 	background header_background_color
 	padding 10px
@@ -230,6 +231,7 @@ body
 
 #player
 	height 60px
+	min-width 1280px
 	margin 0 auto
 	background:  linear-gradient( to bottom, #232323, #444, #444, #232323)
 
@@ -264,7 +266,8 @@ body
 	top 120px
 	bottom 30px
 	margin-left 25%
-
+	&::-webkit-scrollbar
+		display none
 	&.toggled-main
 		width 75%
 
@@ -378,6 +381,8 @@ body
 	top 120px
 	bottom 30px
 	overflow-y scroll
+	&::-webkit-scrollbar
+		display none
 	#menu
 		background lightgrey
 		width 100%
@@ -509,6 +514,8 @@ body
 		bottom 5px
 		display block
 		overflow auto
+		&::-webkit-scrollbar
+			display none
 .friend
 	padding 2%
 	width 90%
