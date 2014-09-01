@@ -151,6 +151,13 @@ module.exports = function(app){
 			res.status(status).json(data);
 		});
 	});
+
+	app.put('/api/user/:id/playlist/:pl_id', function(req, res, next){
+		userRepository.updatePlaylist(req.params.id, req.params.pl_id, req.body, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
+	});
 	
 	app.delete('/api/user/:id/follower/:fid', function(req, res, next){
 		userRepository.deleteFollower(req.params.id, req.params.fid, function(err, data){

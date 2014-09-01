@@ -27,7 +27,7 @@ define(['marionette', './PlayerView', '../app/context', './PlayerModel', '../pla
 				self.playerModel.setTrackParams();
 			});
 			playlistModel.playTrack(0);
-			$('#play-button').click();
+			this.playerModel.startTrack();
 		}, this);
 	};
 	return PlayerController;

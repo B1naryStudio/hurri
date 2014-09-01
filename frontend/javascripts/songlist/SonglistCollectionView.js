@@ -44,7 +44,7 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
             }
         },
         saveExisting:function(){
-            this.collection.model.find();
+            Backbone.trigger('songlist:save-to-existing-playlist', this.model._id, this.collection);
         },
         createPlaylist: function(evt){
             if (evt.keyCode == 13) this.savePlaylist();

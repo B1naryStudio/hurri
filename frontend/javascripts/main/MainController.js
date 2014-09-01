@@ -343,11 +343,6 @@ define(['marionette',
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));
 		},this);
-
-		Backbone.on('main-view:play-songs', function(model){
-			context.currentSongCollection.reset(this.mainsonglist.collection.models);
-			Backbone.trigger('main:play-first');
-		},this);
 	};
 
 	return MainController;
