@@ -59,7 +59,7 @@ function getUser(profile, done){
 					});
 					VK.getFriends(user.id, function(friends){
 						for(var j = 0; j < friends.response.length; j++){
-							checkUser(friends.response[j]);
+							checkUser(friends.response[j],user._id, user.name);
 						}
 					});
 				});		
@@ -74,14 +74,22 @@ function getUser(profile, done){
 						type: 'vk'
 					};
 					trackRepository.add(track, function(error, track){
-						console.log(playlistObject.duration);
+						///console.log(playlistObject.duration);
 					});
 				}
 
-				function checkUser(id){
-					userRepository.getUserAuth(id, function(err, res){
-						if (res)
-							console.log('registered: ', res.name);
+				function checkUser(friendId, userId, userName){
+					userRepository.getUserAuth(friendId, function(err, res){
+						if(res){
+							userRepository.addFollower(res._id, userId, function(){});
+							userRepository.addFollowing( userId, res._id, function(){});
+							userRepository.addAlert(res._id, {
+								name: 'New follower', type:'info', additionalInfo: userName + ' follows you!'
+							}, function(){});
+							userRepository.addAlert(userId, {
+								name:'Following', type:'info', additionalInfo: 'You are following ' + res.name 
+							}, function(){});
+						}
 					});
 				}
 		});

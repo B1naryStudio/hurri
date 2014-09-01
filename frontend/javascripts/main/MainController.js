@@ -346,9 +346,7 @@ define(['marionette',
 
 		Backbone.on('main-view:play-songs', function(model){
 			context.currentSongCollection.reset(this.mainsonglist.collection.models);
-			PlaylistModel.playTrack(0);
-			$("#play-button").click();
-			Backbone.trigger('play-first');
+			Backbone.trigger('main:play-first');
 		},this);
 	};
 

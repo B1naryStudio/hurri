@@ -22,7 +22,7 @@ UserRepository.prototype.getUserAuth = function(id, callback) {
 
 UserRepository.prototype.addFollower = function(id, fid, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({id: id},{$push: {followers:fid}} );
+	var query = model.findOneAndUpdate({_id: id},{$push: {followers:fid}} );
 	query.exec(callback);
 };
 
@@ -42,7 +42,7 @@ UserRepository.prototype.deleteFollower = function(id, userid, callback) {
 
 UserRepository.prototype.addFollowing = function(id, fid, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({id: id},{$push: {following:fid}} );
+	var query = model.findOneAndUpdate({_id: id},{$push: {following:fid}} );
 	query.exec(callback);
 };
 
@@ -62,7 +62,7 @@ UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
 
 UserRepository.prototype.addAlert = function(id, alert, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({id: id},{$push: {alerts:alert}} );
+	var query = model.findOneAndUpdate({_id: id},{$push: {alerts:alert}} );
 	query.exec(callback);
 };
 

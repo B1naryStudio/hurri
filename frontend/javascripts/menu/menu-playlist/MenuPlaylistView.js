@@ -4,6 +4,7 @@ define(['marionette', '../../app/context'], function(Marionette, context){
   		template : '#menu-playlist-template',
 		events : {
 			'click .playlist-name-menu'  : 'showPlaylist',
+			'click .delete-menu-playlist'  : 'deletePlaylist',
 		},
 
 		showPlaylist: function(){
@@ -11,7 +12,7 @@ define(['marionette', '../../app/context'], function(Marionette, context){
 		},
 
 		deletePlaylist: function(){
-			this.model.destroy({url: '/api/user/' + context.currentUserModel.attributes._id + 
+			this.model.destroy(this.model,{url: '/api/user/' + context.currentUserModel.attributes._id + 
 									'/playlist/' + this.model.attributes._id});
 		},
 	});

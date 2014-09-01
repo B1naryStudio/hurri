@@ -25,9 +25,6 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		initialize: function(){
 			this.bindListeners();
-			Backbone.on('play-first',function(){
-				this.setTrackParams();
-			},this);
 			//PlaylistModel.playTrack(this.get('currentTrack'));
 			var url = context.currentSongModel.getStream();
 			if (url){
