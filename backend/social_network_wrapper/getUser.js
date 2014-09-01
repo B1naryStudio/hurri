@@ -56,7 +56,12 @@ function getUser(profile, done){
 							playlistObject.duration += playlist.response[i].duration;
 						}
 						userRepository.addPlaylists(user._id, playlistObject, function(err, res){});
-						});
+					});
+					VK.getFriends(user.id, function(friends){
+						for(var j = 0; j < friends.response.length; j++){
+							checkUser(friends.response[j],user._id, user.name);
+						}
+					});
 				});		
 				done(null, user);	
 				function setTrack(playlist, id){
@@ -64,12 +69,27 @@ function getUser(profile, done){
 						_id: id,
 						title : playlist.title + ' - ' + playlist.artist,
 						duration : playlist.duration,
-						url : playlist.uri,
+						url : playlist.url,
 						genre: genres[playlist.genre],
 						type: 'vk'
 					};
 					trackRepository.add(track, function(error, track){
-						console.log(playlistObject.duration);
+						///console.log(playlistObject.duration);
+					});
+				}
+
+				function checkUser(friendId, userId, userName){
+					userRepository.getUserAuth(friendId, function(err, res){
+						if(res){
+							userRepository.addFollower(res._id, userId, function(){});
+							userRepository.addFollowing( userId, res._id, function(){});
+							userRepository.addAlert(res._id, {
+								name: 'New follower', type:'info', additionalInfo: userName + ' follows you!'
+							}, function(){});
+							userRepository.addAlert(userId, {
+								name:'Following', type:'info', additionalInfo: 'You are following ' + res.name 
+							}, function(){});
+						}
 					});
 				}
 		});

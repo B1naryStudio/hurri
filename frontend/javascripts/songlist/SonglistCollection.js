@@ -1,6 +1,6 @@
-define(['backbone', './SonglistModel'], function(Backbone, SonglistModel){
+define(['backbone', '../song/SongModel'], function(Backbone, SongModel){
 	var SonglistCollection = Backbone.Collection.extend({
-		model: SonglistModel
+		model: SongModel
 	});
 	return SonglistCollection;
 });
