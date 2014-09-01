@@ -21,6 +21,12 @@ Repository.prototype.update = function(id, body, callback) {
 	query.exec(callback);
 };
 
+Repository.prototype.updateByObjectId = function(id, body, callback) {
+	var model = this.createModel();
+	var query = model.findOneAndUpdate({_id: id}, body);
+	query.exec(callback);
+};
+
 Repository.prototype.delete = function(id, callback){
 	var model = this.createModel();
 	var query = model.remove({_id: id});

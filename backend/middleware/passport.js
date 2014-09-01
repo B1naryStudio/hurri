@@ -7,29 +7,8 @@ var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var cnfg = require('../config/');
 var log = require('winston-wrapper')(module);
 var getUser = require('../social_network_wrapper/getUser.js');
+var addUser = require('../social_network_wrapper/addUser.js');
 var userRepository = require ('../repositories/userRepository');
-
-//FIXME: this should be replaced with corresponding user repository methods
-//var User = function () {
-//	this.users = [];
-//	this.familyName = 'Poup';
-//	this.givenName = 'Vasily';
-//	this.id = 1;
-//	this.findOrCreate = function (args) {
-//		if (this.users.length) {
-//			log('It has users onboard');
-//		} else {
-//
-//			this.users.push({
-//				"familyName": args.name.familyName,
-//				"givenName": args.name.givenName,
-//				"id": args.id
-//			});
-//		}
-//	};
-//};
-//
-//var u = new User();
 
 module.exports = function () {
 	log.info('someone trying to login');
@@ -37,22 +16,36 @@ module.exports = function () {
 	passport.use(new FacebookStrategy({
 			clientID: cnfg.oauth.facebook.clientID,
 			clientSecret: cnfg.oauth.facebook.clientSecret,
-			callbackURL: cnfg.oauth.facebook.callbackURL
+			callbackURL: cnfg.oauth.facebook.callbackURL,
+			passReqToCallback: true
 		},
-		function (accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 			console.log('facebook login');
-			getUser(profile, 'fb', done);
+			if (!req.user) {
+				getUser(profile, accessToken, 'fb', done);
+			} else {
+				console.log('profile');
+				console.log(profile);
+				addUser(req.user._id, profile.id, accessToken, 'fb', done);
+			}	
 		}
 	));
 
 	passport.use(new TwitterStrategy({
 			consumerKey: cnfg.oauth.twitter.consumerKey,
 			consumerSecret: cnfg.oauth.twitter.consumerSecret,
-			callbackURL: cnfg.oauth.twitter.callbackURL
+			callbackURL: cnfg.oauth.twitter.callbackURL,
+			passReqToCallback: true
 		},
-		function(token, tokenSecret, profile, done) {
+		function (req, token, tokenSecret, profile, done) {
 			console.log('Twitter login');
-			getUser(profile, 'tw', done);
+			if (!req.user) {			
+				getUser(profile, tokenSecret, 'tw', done);
+			} else {
+				console.log('profile');
+				console.log(profile);
+				addUser(req.user._id, profile.id, tokenSecret, 'tw', done);
+			}
 		}
 	));
 
@@ -60,9 +53,10 @@ module.exports = function () {
 			clientID: cnfg.oauth.odnoklassniki.clientID,
 			clientPublic: cnfg.oauth.odnoklassniki.clientPublic,
 			clientSecret: cnfg.oauth.odnoklassniki.clientSecret,
-			callbackURL: cnfg.oauth.odnoklassniki.callbackURL
+			callbackURL: cnfg.oauth.odnoklassniki.callbackURL,
+			passReqToCallback: true
 		},
-		function(accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 			console.log('Odnoklassniki login');
 			console.log(profile);
 //			u.findOrCreate(profile, function (err, user) {
@@ -76,17 +70,24 @@ module.exports = function () {
 	passport.use(new VKontakteStrategy({
 			clientID:     cnfg.oauth.vkontakte.clientID,
 			clientSecret: cnfg.oauth.vkontakte.clientSecret,
-			callbackURL:  cnfg.oauth.vkontakte.callbackURL
+			callbackURL:  cnfg.oauth.vkontakte.callbackURL,
+			passReqToCallback: true
 		},
-		function(accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 			console.log('vk login');
 			VKWrapper.setAccessToken(accessToken);
-			getUser(profile, 'vk', done);
+			if (!req.user) {
+				getUser(profile, accessToken, 'vk', done);
+			} else {
+				console.log('profile');
+				console.log(profile);
+				addUser(req.user._id, profile.id, accessToken, 'vk', done);
+			}
 		}
 	));
 
 	passport.serializeUser(function (user, done) {
-    	done(null, JSON.stringify(user));
+		done(null, JSON.stringify(user));
 	});
  
  

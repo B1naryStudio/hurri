@@ -67,11 +67,10 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 	});
 	
 	this.vk.once('done:audio.search', function(result) {
-		 var object = {
-		 	url: result.response[1].url,
-		 	duration: result.response[1].duration
-		 	
-		 };
+		var object = {
+			url: result.response[1].url,
+			duration: result.response[1].duration
+		};
 		callback(object);
 	});
 

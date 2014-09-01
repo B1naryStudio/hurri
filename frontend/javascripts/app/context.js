@@ -11,8 +11,9 @@ define(['../song/SongModel',
 		UserModel, 
 		AlbumBarModel, 
 		RadioBarModel, 
-		PlaylistBarModel, 
-		PlaylistModel){
+		PlaylistBarModel 
+		//PlaylistModel
+		){
 	var context = {
 			currentSongModel: new SongModel(),
 			notificationCollection: new NotificationCollection(),

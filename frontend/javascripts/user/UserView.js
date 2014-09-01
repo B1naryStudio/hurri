@@ -5,17 +5,32 @@ define(['marionette'], function(Marionette){
 		template: 	'#user-template',
 		
 		ui: {
-   			avatar 		: '#avatar',
-   			name    	: '#name',
-   			age    		: '#age',
-   			email    	: '#email',
-   			country    	: '#country'
+   			avatar	: '#avatar',
+   			name	: '#name',
+   			age		: '#age',
+   			email	: '#email',
+   			country	: '#country',
+   			addVk	: '#addVk',
+   			addTw	: '#addTw',
+   			addFb	: '#addFb'
+
   		},
 
 		events: {
-			//
+			'click @ui.addVk': 'addVkUser',
+			'click @ui.addTw': 'addTwUser',
+			'click @ui.addFb': 'addFbUser'
 		},
 
+		addVkUser: function(){
+			addUser();
+		},
+		addTwUser: function(){
+			addUser();
+		},
+		addFbUser: function(){
+			addUser();
+		}
 	});
 	return UserView;
 });

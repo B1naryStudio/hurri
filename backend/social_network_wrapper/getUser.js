@@ -33,7 +33,7 @@ var playlistObject = {
 	duration : 0,
 	mood : 'unknown'
 };
-function getUser (profile, auth, done){
+function getUser (profile, token, auth, done){
 	userRepository.getUserAuth(profile._json.id, function(err, data){
 			console.log('err');
 			console.log(err);
@@ -44,7 +44,8 @@ function getUser (profile, auth, done){
 						name : profile._json.name,
 						avatarUrl : profile._json.profile_image_url,
 						accountType : auth,
-						id: profile._json.id
+						idTw: profile._json.id,
+						twToken: token
 					}, function(err, user){
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){});		
@@ -54,8 +55,9 @@ function getUser (profile, auth, done){
 				if (auth === 'fb'){
 					userRepository.add({
 						name : profile._json.first_name,
-						accountType : 'facebook',
-						id: profile._json.id
+						accountType : auth,
+						idFb: profile._json.id,
+						fbToken: token
 					}, function(err, user){
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){});		
@@ -66,21 +68,22 @@ function getUser (profile, auth, done){
 					userRepository.add({
 						name : profile._json.first_name,
 						avatarUrl : profile._json.photo,
-						accountType : 'vk',
-						id: profile._json.id
+						accountType : auth,
+						idVk: profile._json.id,
+						vkToken: token
 					}, function(err, user){
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
 								VK.getUserAudio(user.id, function(playlist){
 									for (var i = 1; i < playlist.response[0]; i ++){
 										var id = mongoose.Types.ObjectId();
-										setTrack(playlist.response[i], id);
+										setTrack(playlist.response[i], idVk);
 										playlistObject.tracks.push(id);
 										playlistObject.duration += playlist.response[i].duration;
 									}
 									userRepository.addPlaylists(user._id, playlistObject, function(err, res){
 									});
-									});
+								});
 							});		
 							done(null, user);	
 							function setTrack(playlist, id){
@@ -90,7 +93,7 @@ function getUser (profile, auth, done){
 									duration : playlist.duration,
 									url : playlist.uri,
 									genre: genres[playlist.genre],
-									type: 'vk'
+									type: auth
 								};
 								trackRepository.add(track, function(error, track){});
 							}
@@ -102,8 +105,9 @@ function getUser (profile, auth, done){
 					userRepository.update(profile._json.id, {
 						name : profile._json.first_name,
 						avatarUrl : profile._json.photo,
-						accountType : 'vk',
-						id: profile._json.id
+						accountType : auth,
+						idVk: profile._json.id,
+						vkToken: token
 					}, function(err, user){
 						if (err) { return done(err); }
 							done(null, user);				
@@ -113,7 +117,8 @@ function getUser (profile, auth, done){
 					console.log('update fb');
 					userRepository.update(profile._json.id, {
 						name : profile._json.first_name,
-						id: profile._json.id
+						idFb: profile._json.id,
+						fbToken: token
 					}, function(err, user){
 						if (err) { return done(err); }
 							done(null, user);				
@@ -124,7 +129,8 @@ function getUser (profile, auth, done){
 					userRepository.update(profile._json.id, {
 						name : profile._json.name,
 						avatarUrl : profile._json.profile_image_url,
-						id: profile._json.id
+						idTw: profile._json.id,
+						twToken: token
 					}, function(err, user){
 						if (err) { return done(err); }
 							done(null, user);				
@@ -133,6 +139,5 @@ function getUser (profile, auth, done){
 			}
 	});
 }
-
 
 module.exports = getUser;

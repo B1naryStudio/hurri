@@ -15,7 +15,7 @@ UserRepository.prototype = new Repository();
 //======USER-AUTH=================================================//
 UserRepository.prototype.getUserAuth = function(id, callback) {
 	var model = this.createModel();
-	var query = model.findOne({id: id});
+	var query = model.findOne({$or:[{idVk: id},{idTw: id},{idFb: id}]});
 	query.exec(callback);
 };
 

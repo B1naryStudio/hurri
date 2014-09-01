@@ -6,7 +6,9 @@ var alertSchema = require('./alert.js');
 
 var userAuthSchema = new Schema({
 	accountType : String,
-	id: Number,
+	idVk: Number,
+	idTw: Number,
+	idFb: Number,
 	name : String,
 	email : String,
 	avatarUrl : String,
@@ -14,6 +16,9 @@ var userAuthSchema = new Schema({
 		type: String, 
 		default: 'Unknown country'
 	},
+	vkToken: String,
+	twToken: String,
+	fbToken: String,
 	age : {
 		type: Number, 
 		default: 18
