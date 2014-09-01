@@ -12,8 +12,7 @@ define(['marionette', '../../app/context'], function(Marionette, context){
 		},
 
 		deletePlaylist: function(){
-			this.model.destroy(this.model,{url: '/api/user/' + context.currentUserModel.attributes._id + 
-									'/playlist/' + this.model.attributes._id});
+			this.model.destroy();
 		},
 	});
 	return MenuPlaylistView;
