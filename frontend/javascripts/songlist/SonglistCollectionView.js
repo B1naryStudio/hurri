@@ -52,19 +52,21 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
 
         savePlaylist: function(){
             var value = this.ui.text.val();
-            var playlist = {
-                name: value || "My playlist",
-                tracks : [],
-                duration : 0,
-                mood : 'I like it!',
-                type: 'playlist'
-            };
-            console.log(this.collection);
-            for (var i = 0; i < this.collection.length; i ++){
-               console.log( this.collection.models[i].get('_id') );
-                playlist.tracks.push(this.collection.models[i].get('_id'));
+            if (value){
+                var playlist = {
+                    name: value || "My playlist",
+                    tracks : [],
+                    duration : 0,
+                    mood : 'I like it!',
+                    type: 'playlist'
+                };
+                console.log(this.collection);
+                for (var i = 0; i < this.collection.length; i ++){
+                   console.log( this.collection.models[i].get('_id') );
+                    playlist.tracks.push(this.collection.models[i].get('_id'));
+                }
+                Backbone.trigger('songlist:save-playlist', playlist);
             }
-            Backbone.trigger('songlist:save-playlist', playlist);
             this.$el.removeClass("editing2");
         }
 	});
