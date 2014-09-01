@@ -1,5 +1,6 @@
 define(['backbone'], function(Backbone){
 	var PlaylistBarModel = Backbone.Model.extend({
+	idAttribute: '_id',
 		defaults:{
 			_id: undefined,
 			name: 'myPlaylist',
