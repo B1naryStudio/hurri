@@ -10,6 +10,7 @@ Repository.prototype.createModel = function(){
 };
 
 Repository.prototype.add = function(data, callback) {
+	console.log(data);
 	var model = this.createModel();
 	var newitem = new model(data);
 	newitem.save(callback);
@@ -17,7 +18,7 @@ Repository.prototype.add = function(data, callback) {
 
 Repository.prototype.update = function(id, body, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({id: id}, body);
+	var query = model.findOneAndUpdate({$or:[{idVk: id},{idTw: id},{idFb: id}]}, body);
 	query.exec(callback);
 };
 

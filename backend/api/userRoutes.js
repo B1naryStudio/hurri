@@ -69,7 +69,7 @@ module.exports = function(app){
 	});
 
 	app.get('/api/user/:id/playlists/:id_pl/tracks', function(req, res, next){
-		userRepository.getTracks(req.params.id, req.params.id_pl, function(err, data){
+		userRepository.getTracks(req.params.id, req.params.id_pl, function(data){
 			var status = _.isEmpty(data) ? 400 : 200;
 			res.status(status).json(data);
 		});
@@ -151,6 +151,13 @@ module.exports = function(app){
 			res.status(status).json(data);
 		});
 	});
+
+	app.put('/api/user/:id/playlist/:pl_id', function(req, res, next){
+		userRepository.updatePlaylist(req.params.id, req.params.pl_id, req.body, function(err, data){
+			var status = err ? 400 : 201;
+			res.status(status).json(data);
+		});
+	});
 	
 	app.delete('/api/user/:id/follower/:fid', function(req, res, next){
 		userRepository.deleteFollower(req.params.id, req.params.fid, function(err, data){
@@ -201,7 +208,8 @@ module.exports = function(app){
 		});
 	});
 
-	app.delete('/api/user/:id/playlist/:pid', function(req, res, next){
+	app.delete('/api/user/:id/playlists/:pid', function(req, res, next){
+		console.log('DELETE PLAYLIST');
 		userRepository.deletePlaylists(req.params.id, req.params.pid, function(err, data){
 			var status = err ? 400 : 200;
 			res.status(status).json(data);

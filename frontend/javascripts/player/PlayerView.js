@@ -7,7 +7,8 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:previousButtonState': 'render',
 			'change:nextButtonState': 'render',
 			'change:duration': 'render',
-			'change:positionFormat': 'changedPosition'
+			'change:positionFormat': 'changedPosition',
+			'change:durationFormat':'render'
 		},
 		events : {
 			"click @ui.nextButton"			: "nextTrack",

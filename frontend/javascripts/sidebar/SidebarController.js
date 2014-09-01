@@ -13,17 +13,21 @@ define(['marionette',
 	'../songlist/SonglistNavi',
 	'../user/UserModel',
 	'./FollowingsCollectionView',
-	'./FollowingsCollection',], 
+	'./FollowingsCollection',
+	 '../main/bars/playlist/PlaylistBarModel'], 
 
 	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsCollectionView, FriendsCollection,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
-			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel, FollowingsCollectionView, FollowingsCollection){
+			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel,
+			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel){
 	
 	var SidebarController = function(){		
 	
 		var SidebarRegion = Marionette.Region.extend({
 			el: '#sidebar-region'
 		});
+
+		this.playlistBarModel = new PlaylistBarModel();
 
 		this.sidebarRegion = new SidebarRegion();
 
@@ -60,10 +64,9 @@ define(['marionette',
 
 	SidebarController.prototype.initializeSongs = function() {
 		this.song = {
-			collection: SonglistCollection,
+			collection: context.currentSongCollection,
 			model : SonglistModel
-		 };
-
+		};
 		// this.song.collection.add([
 		// 	{name : 'Komissar rex', cover : '../images/default/cover.jpg', artist : 'Tim Rot', current : false, albumname : 'Hello I love you'},
 		// 	{name : 'Funny Essso', cover : '../images/default/cover.jpg', artist : 'Ocean', current : true, albumname : 'Digital histoyr'},
@@ -77,7 +80,7 @@ define(['marionette',
 
 	SidebarController.prototype.getSongView = function() {
 		return new SonglistCollectionView({
-			model: new Backbone.Model(),
+			model: this.playlistBarModel,
 			collection: this.song.collection
 		});
 	};
@@ -219,9 +222,27 @@ define(['marionette',
 
 		Backbone.on('songlist:save-playlist', function(data){
 			$.ajax({
-				url:"/api/user/53fe1b3724579bd0306accff/playlist" , 
+				url:'/api/user/'+context.currentUserModel.attributes._id+'/playlist' , 
 				data: data,
 				method: "PUT"
+			});
+		}, this);
+
+		Backbone.on('main-view:play-songs', function(model_id, collection){
+			this.playlistBarModel._id = model_id;
+			context.currentSongCollection.reset(collection.models);
+			Backbone.trigger('main:play-first');
+		},this);
+
+		Backbone.on('songlist:save-to-existing-playlist', function(model_id, collection){
+			var tracks = [];
+			for(var i = 0; i < collection.models.length; i++)
+				tracks.push(collection.models[i].attributes._id);
+			console.log(tracks);
+			$.ajax({ 
+				url:'/api/user/' + context.currentUserModel.attributes._id + '/playlist/' + model_id,
+				method: "PUT",
+				data: {tracks : tracks} 
 			});
 		}, this);
 

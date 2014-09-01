@@ -1,8 +1,8 @@
 define(['backbone', '../app/context', './SongCollection', 'underscore'], function(Backbone, context, SongCollection, _){
 	var PlaylistModel = Backbone.Model.extend({
 
-		collection: SongCollection,
-
+		collection: context.currentSongCollection,
+		
 		defaults: {
 			genre: ['unknown'],
 			playlistName: 'myPlaylist',
@@ -10,10 +10,12 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 			oldCollection: null,
 			numberOfTracks: 1,
 			queueNum : 0,
-			position: undefined
+			position: undefined,
+			type: 'default'
 		},
 
 		playTrack: function(position){
+			console.log(position);
 			this.set('position', position);
 			var track = this.collection.at(position);
 			var prev = this.collection.findWhere({current : true});

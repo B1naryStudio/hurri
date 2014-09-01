@@ -10,7 +10,7 @@ define(['marionette', '../../../app/context', '../../../playlist/PlaylistModel']
 			Backbone.trigger('playlist-play', this.model);
 		},
 		playlistPlayNotOpen:function(){
-			PlaylistModel.playTrack(1);
+			PlaylistModel.playTrack(0);
 		}
 	});
 	return PlaylistBarView;

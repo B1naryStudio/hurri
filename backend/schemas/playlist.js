@@ -15,6 +15,10 @@ var playlistSchema = new Schema({
 	mood : {
         type: String, 
         default: 'unknown'
+    },
+    type: {
+        type: String, 
+        default: 'default'
     }
 });
 

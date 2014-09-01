@@ -18,7 +18,7 @@ define(['marionette', '../app/context', '../playlist/PlaylistModel'], function(M
 		},
 
 		deleteSong: function(){
-		 	this.model.destroy();
+		 	context.currentSongCollection.remove(this.model);
 		 },
 
 		addSongToQueue: function(){		

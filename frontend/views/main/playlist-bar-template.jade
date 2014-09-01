@@ -12,6 +12,6 @@ script#playlist-bar(type='text/template')
 	.playlist-right
 		span Tracks:
 		{{for (var i = 0; i < tracks.length; i ++){}}
-		div {{-tracks[i].artist}} {{-tracks[i].title}}
+		div.songname-playlist {{-tracks[i].artist}} {{-tracks[i].title}}
 		{{}}}
 		

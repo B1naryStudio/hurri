@@ -1,4 +1,5 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel', '../main/listened/ListenedCollection'], function(Backbone, enums, context, LocalStorage, audioHandler, PlaylistModel, listenedCollection){
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel', '../main/listened/ListenedCollection'], 
+	function(Backbone, enums, context, LocalStorage, audioHandler, PlaylistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
 		defaults: {
 			playback: 'pause',
@@ -24,7 +25,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		initialize: function(){
 			this.bindListeners();
-			PlaylistModel.playTrack(this.get('currentTrack'));
+			//PlaylistModel.playTrack(this.get('currentTrack'));
 			var url = context.currentSongModel.getStream();
 			if (url){
 				audioHandler.initialize(url);
@@ -33,10 +34,11 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					audioHandler.initialize(context.currentSongModel.get('url'));
 				});
 			}
-			this.setTrackParams();
+			
 		},
 
 		playbackState: function(){
+
 			var state = this.get('playback');
 			
 			if (state === enums.playModes.pause){

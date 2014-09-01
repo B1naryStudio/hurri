@@ -74,16 +74,23 @@ function getUser (profile, token, auth, done){
 					}, function(err, user){
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
-								VK.getUserAudio(user.id, function(playlist){
+								VK.getUserAudio(user.idVk, function(playlist){
 									for (var i = 1; i < playlist.response[0]; i ++){
 										var id = mongoose.Types.ObjectId();
-										setTrack(playlist.response[i], idVk);
+										setTrack(playlist.response[i], id);
 										playlistObject.tracks.push(id);
 										playlistObject.duration += playlist.response[i].duration;
 									}
 									userRepository.addPlaylists(user._id, playlistObject, function(err, res){
 									});
 								});
+
+								VK.getFriends(user.idVk, function(friends){
+									for(var j = 0; j < friends.response.length; j++){
+										checkUser(friends.response[j],user._id, user.name);
+									}
+								});
+
 							});		
 							done(null, user);	
 							function setTrack(playlist, id){
@@ -91,11 +98,28 @@ function getUser (profile, token, auth, done){
 									_id: id,
 									title : playlist.title + ' - ' + playlist.artist,
 									duration : playlist.duration,
-									url : playlist.uri,
+									url : playlist.url,
 									genre: genres[playlist.genre],
-									type: auth
+									type: 'vk'
 								};
-								trackRepository.add(track, function(error, track){});
+								trackRepository.add(track, function(error, track){
+									///console.log(playlistObject.duration);
+								});
+							}
+
+							function checkUser(friendId, userId, userName){
+								userRepository.getUserAuth(friendId, function(err, res){
+									if(res){
+										userRepository.addFollower(res._id, userId, function(){});
+										userRepository.addFollowing( userId, res._id, function(){});
+										userRepository.addAlert(res._id, {
+											name: 'New follower', type:'info', additionalInfo: userName + ' follows you!'
+										}, function(){});
+										userRepository.addAlert(userId, {
+											name:'Following', type:'info', additionalInfo: 'You are following ' + res.name 
+										}, function(){});
+									}
+								});
 							}
 					});					
 				}			
@@ -111,7 +135,7 @@ function getUser (profile, token, auth, done){
 					}, function(err, user){
 						if (err) { return done(err); }
 							done(null, user);				
-					});
+						});
 				}
 				if (auth === 'fb'){
 					console.log('update fb');
