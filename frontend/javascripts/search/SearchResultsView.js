@@ -10,7 +10,8 @@ define(['marionette'], function(Marionette){
   		},
 
 		events: {
-			'click @ui.resultsRegion': 'select'
+			'click @ui.resultsRegion': 'select',
+			'blur @ui.resultsRegion' : 'select'
 		},
 
 		attachHtml: function(compositeView, childView, index){
