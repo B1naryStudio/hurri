@@ -21,30 +21,30 @@ module.exports = function (req, res, obj, error) {
 };
 
 function populateInjectData(user, callback_main){
-	console.log('USER: ',user);
 	async.series({
 		alerts : function(callback){
 			userRepository.getAlerts(user._id, function(err, data){
-				callback(err, data);
+				callback(err, data.alerts);
 			});
 		},
 		playlists : function(callback){
-			userRepository.getFollower(user._id, function(err, data){
-				callback(err, data);
+			userRepository.getPlaylists(user._id, function(err, data){
+				callback(err, data.playlists);
 			});
 		},
 		followers : function(callback){
-			userRepository.getFollowing(user._id, function(err, data){
-				callback(err, data);
+			userRepository.getFollower(user._id, function(err, data){
+				console.log(data);
+				callback(err, data.followers);
 			});
 		},
 		following : function(callback){
-			userRepository.getPlaylists(user._id, function(err, data){
-				callback(err, data);
+			userRepository.getFollowing(user._id, function(err, data){
+				callback(err, data.following);
 			});
 		}
 	}, function(err, results){
-		console.log('RESULTS:\n', err);
+		console.log(results);
 		callback_main(results);
 	});
 }

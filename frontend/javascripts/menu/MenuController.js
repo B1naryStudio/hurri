@@ -14,9 +14,8 @@ define(['marionette', './MenuNavView', './menu-playlist/MenuPlaylistCollectionVi
 		
 		var playlistView = new PlaylistCompositeView({
 			model: PlaylistModel,
-			collection: new PlaylistCollection()
+			collection: new PlaylistCollection(window._injectedData.playlists)
 		});
-		playlistView.collection.fetch();
 		playlistView.render();
 
 	};

@@ -120,10 +120,8 @@ define(['marionette',
 	MainController.prototype.initializePlaylistBar = function(){
 		this.playlist = {
 			model: context.currentPlaylistBar,
-			collection: new PlaylistBarCollection()
+			collection: new PlaylistBarCollection(window._injectedData.playlists)
 		};
-
-		this.playlist.collection.fetch();
 
 		this.playlist.view = this.getPlaylistBarView();
 	};

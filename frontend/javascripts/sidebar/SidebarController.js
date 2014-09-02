@@ -100,14 +100,8 @@ define(['marionette',
 	SidebarController.prototype.initializeFriends = function(){
 		this.friends = {
 			model: new UserModel(),
-			collection: new FriendsCollection()
+			collection: new FriendsCollection(window._injectedData.followers)
 		};
-
-		this.friends.collection.add([
-			{name: 'Mia Wallace', avatarSource: '/images/avatar.png', },
-			{name: 'Marsellus Wallace', avatarSource: '/images/avatar.png'},
-			{name: 'Jules Winnfield', avatarSource: '/images/avatar.png'}	
-		]);	
 
 		this.friends.view = this.getFriendsView();
 	};
@@ -122,14 +116,8 @@ define(['marionette',
 	SidebarController.prototype.initializeFollowings = function(){
 		this.followings = {
 			model: new UserModel(),
-			collection: new FollowingsCollection()
-		};
-
-		this.followings.collection.add([
-			{name: 'Mia Wallace f', avatarSource: '/images/avatar.png', },
-			{name: 'Marsellus Wallace f', avatarSource: '/images/avatar.png'},
-			{name: 'Jules Winnfield f', avatarSource: '/images/avatar.png'}	
-		]);	
+			collection: new FollowingsCollection(window._injectedData.following)
+		};	
 
 		this.followings.view = this.getFollowingsView();
 	};
