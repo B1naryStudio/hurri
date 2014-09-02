@@ -144,8 +144,9 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				currentTrackName: context.currentSongModel.get('title'),
 				currentArtistName: context.currentSongModel.get('artist'),
 				duration: context.currentSongModel.get('duration'),
-				position: 0
+				position: 0,
 			});
+			this.volumeLevelSetup(this.get('volumeLevel'));
 			this.setPositionFormat();
 			this.setDurationFormat();
 		},

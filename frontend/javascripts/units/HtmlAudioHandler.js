@@ -2,7 +2,9 @@ define(['../player/PlayerModel'], function(PlayerModel){
 	var audioHandler = {
 		initialize: function(url){
 			this.track = new Audio(url);
-			this.track.addEventListener('oncanplaythrough', console.log('playtrough'));
+			this.track.addEventListener('oncanplaythrough', function(){
+				console.log('playtrough');
+			});
 		},
 		playTrack: function(){
 			this.track.play();
