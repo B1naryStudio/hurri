@@ -5,7 +5,7 @@ var async = require('async');
 
 module.exports = function (req, res, obj, error) {
 	error = error || false;
-	
+
 	populateInjectData(req.user, function(data){
 		obj.alerts = data.alerts;
 		obj.user = req.user;
@@ -21,29 +21,30 @@ module.exports = function (req, res, obj, error) {
 };
 
 function populateInjectData(user, callback_main){
-	async.parallel({
+	console.log('USER: ',user);
+	async.series({
 		alerts : function(callback){
 			userRepository.getAlerts(user._id, function(err, data){
-				callback(data);
+				callback(err, data);
 			});
 		},
 		playlists : function(callback){
 			userRepository.getFollower(user._id, function(err, data){
-				callback(data);
+				callback(err, data);
 			});
 		},
 		followers : function(callback){
 			userRepository.getFollowing(user._id, function(err, data){
-				callback(data);
+				callback(err, data);
 			});
 		},
 		following : function(callback){
 			userRepository.getPlaylists(user._id, function(err, data){
-				callback(data);
+				callback(err, data);
 			});
 		}
 	}, function(err, results){
-		console.log(results);
+		console.log('RESULTS:\n', err);
 		callback_main(results);
 	});
 }

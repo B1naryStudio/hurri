@@ -5,11 +5,7 @@ var path = require('path');
 module.exports = function (app) {
 
 	app.get('/', isLoggedIn, function (req, res, next) {
-		if(!req.user){
-			res.redirect('/signin');
-		} else {
 			injectData(req, res, {}, false);
-		}
 	});
 
 	app.get('/signin', function (req, res, next) {
