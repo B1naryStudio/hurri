@@ -14,7 +14,7 @@ module.exports = function (req, res, obj, error) {
 		obj.following = data.following;
 		res.header('Content-Type', 'text/html');
 		fs.createReadStream(__dirname + '/../../public/' + '_index.html')
-			.pipe(replaceStream("[\"data_replace\"]", JSON.stringify(obj)))
+			.pipe(replaceStream("[\"data_replace\"]", JSON.stringify(obj).replace("'", "\\'")))
 			.pipe(replaceStream("window._is404Error = false;", "window._is404Error = " + error + ";"))
 			.pipe(res);
 	});
