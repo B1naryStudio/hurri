@@ -1,9 +1,10 @@
 var injectData = require('../middleware/injectDataMiddleware');
+var isLoggedIn = require('../middleware/isLoggedIn');
 var path = require('path');
 
 module.exports = function (app) {
 
-	app.get('/', function (req, res, next) {
+	app.get('/', isLoggedIn, function (req, res, next) {
 		if(!req.user){
 			res.redirect('/signin');
 		} else {
@@ -15,10 +16,10 @@ module.exports = function (app) {
 		res.sendfile(path.resolve(__dirname + '/../../public/' + 'signin.html'));
 	});
 
-	app.use(function(req, res, next) {
+	app.use(isLoggedIn, function(req, res, next) {
 
 		if (req.accepts('html')) {
-			injectData('<h1>404 error</h1><h2>Not found</h2>', res, true);
+			injectData(req, res, '<h1>404 error</h1><h2>Not found</h2>', true);
 			return;
 		}
 
