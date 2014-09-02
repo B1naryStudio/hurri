@@ -1,4 +1,4 @@
-define(['backbone', '../app/context', './SongCollection', 'underscore'], function(Backbone, context, SongCollection, _){
+define(['backbone', '../app/context', '../app/enums', './SongCollection', 'underscore'], function(Backbone, context, enums, SongCollection, _){
 	var PlaylistModel = Backbone.Model.extend({
 
 		collection: context.currentSongCollection,
@@ -14,7 +14,7 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 			type: 'default'
 		},
 
-		playTrack: function(position){
+		setTrackFromCollection: function(position){
 			console.log(position);
 			this.set('position', position);
 			var track = this.collection.at(position);
@@ -27,20 +27,16 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 
 		unShuffle: function(){
 			var playingTrack = this.collection.at(this.get('position'));
-
 			this.collection.reset(this.oldCollection);
-			
 			var currentPos = _.indexOf(this.collection.models, playingTrack);
 			return currentPos;
 		},
 
 		shuffle: function(){
 			var playingTrack = this.collection.at(this.get('position'));
-
 			this.oldCollection = _.clone(this.collection.models);
 			var newCollection = _.shuffle(this.collection.models);
 			this.collection.reset(newCollection);
-
 			var currentPos = _.indexOf(this.collection.models, playingTrack);
 			return currentPos;
 		},
@@ -51,16 +47,49 @@ define(['backbone', '../app/context', './SongCollection', 'underscore'], functio
 				}, 0);
 		},
 
-		// getVkPlaylist: function(){
-		// 	var self = this;
-		// 		$.getJSON('/getPlaylist',{id: context.currentUserModel.get('id')}, function(data){
-		// 			var object = data.response;
-		// 			self.set({numberOfTracks: object[0]});
-		// 			for (i = 1; i < object[0]; i++) {
-		// 				self.collection.add(object[i]);
-		// 			}
-		// 		});
-		// }
+		nextPlayedTrack: function(direction, repeatMode, currentTrack){
+			var next;
+			var current;
+			if (direction === 'direct'){
+				if (repeatMode === enums.repeatModes.none){
+					console.log('repeat off');
+					next = currentTrack + 1;
+				} else if(repeatMode === enums.repeatModes.song){
+					console.log('repeat song');
+					next = currentTrack;
+				} else if (repeatMode === enums.repeatModes.album){
+					console.log('repeat album');
+					current = currentTrack;
+					if (current === this.collection.length-1){
+						next = 0;
+					} else {
+						next = current + 1;
+					}
+				}
+			} else if (direction === 'reverse') {
+				if (repeatMode === enums.repeatModes.none){
+					console.log('repeat off');
+					next = currentTrack - 1;
+				}
+				if(repeatMode === enums.repeatModes.song){
+					console.log('repeat song');
+					next = currentTrack;
+
+				}
+				if (repeatMode === enums.repeatModes.album){
+					console.log('repeat album');
+					current = currentTrack;
+					if (current === 0){
+						next = this.collection.length - 1;
+					} else {
+						next = current - 1;
+					}
+				}
+			} else {
+				console.log('error');
+			}
+			return next;
+		}
 	});
 
 	var playlistModel = new PlaylistModel();
