@@ -1,5 +1,5 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/PlaylistModel', '../main/listened/ListenedCollection'], 
-	function(Backbone, enums, context, LocalStorage, audioHandler, PlaylistModel, listenedCollection){
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/playlistModel', '../main/listened/ListenedCollection'], 
+	function(Backbone, enums, context, LocalStorage, audioHandler, playlistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
 		defaults: {
 			playback: 'pause',
@@ -25,7 +25,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		initialize: function(){
 			this.bindListeners();
-			//PlaylistModel.playTrack(this.get('currentTrack'));
+			//playlistModel.playTrack(this.get('currentTrack'));
 			var url = context.currentSongModel.getStream();
 			if (url){
 				audioHandler.initialize(url);
@@ -80,7 +80,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		newTrack: function(param){
 			console.log(param);
-			PlaylistModel.setTrackFromCollection(param);
+			playlistModel.setTrackFromCollection(param);
 			this.set({currentTrack: param});
 			this.stopTrack(function(){
 				this.setTrackInfoParams();	
@@ -114,19 +114,19 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		nextTrack : function(){
 			listenedCollection.add(context.currentSongModel.attributes);
-			var next = PlaylistModel.nextPlayedTrack('direct', this.get('repeatTrack'), this.get('currentTrack'));
+			var next = playlistModel.nextPlayedTrack('direct', this.get('repeatTrack'), this.get('currentTrack'));
 			this.newTrack(next);
 			if (this.get('currentTrack') > 0){
 				this.set({previousButtonState: false});
 			}
-			if ((this.get('currentTrack') === PlaylistModel.get('numberOfTracks')-1)&&(this.get('repeatTrack') === enums.repeatModes.none)){
+			if ((this.get('currentTrack') === playlistModel.get('numberOfTracks')-1)&&(this.get('repeatTrack') === enums.repeatModes.none)){
 				this.set({nextButtonState: true});
 			}
 		},
 
 		previousTrack : function(){
 
-			var previous = PlaylistModel.nextPlayedTrack('reverse', this.get('repeatTrack'), this.get('currentTrack'));
+			var previous = playlistModel.nextPlayedTrack('reverse', this.get('repeatTrack'), this.get('currentTrack'));
 
 			this.newTrack(previous);
 
@@ -134,7 +134,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			if ((this.get('currentTrack') === 0)&&(this.get('repeatTrack') === enums.repeatModes.none)){
 				this.set({previousButtonState: true});
 			}
-			if (this.get('currentTrack') <= PlaylistModel.get('numberOfTracks')-1){
+			if (this.get('currentTrack') <= playlistModel.get('numberOfTracks')-1){
 				this.set({nextButtonState: false});
 			}
 		},
@@ -166,13 +166,13 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			var state = this.get('shuffle');
 			var currentTrack;
 			if (state === enums.shuffleModes.shuffleoff){
-				currentTrack = PlaylistModel.shuffle();
+				currentTrack = playlistModel.shuffle();
 				this.set({
 					shuffle: enums.shuffleModes.shuffleon,
 					currentTrack: currentTrack  
 				});	
 			} else {
-				currentTrack = PlaylistModel.unShuffle();
+				currentTrack = playlistModel.unShuffle();
 				this.set({
 					shuffle: enums.shuffleModes.shuffleoff,
 					currentTrack: currentTrack
@@ -189,7 +189,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				this.set({repeatTrack: enums.repeatModes.none});
 				if (this.get('currentTrack') === 0){
 					this.set({nextButtonState: false, previousButtonState: true});
-				} else if (this.get('currentTrack') === PlaylistModel.get('numberOfTracks')-1){
+				} else if (this.get('currentTrack') === playlistModel.get('numberOfTracks')-1){
 					this.set({nextButtonState: true, previousButtonState: false});
 				}
 			}else if (this.get('repeatTrack') === enums.repeatModes.none){
