@@ -24,8 +24,8 @@ module.exports = function () {
 			if (!req.user) {
 				getUser(profile, accessToken, 'fb', done);
 			} else {
-				console.log('profile');
-				console.log(profile);
+				//console.log('profile');
+				//console.log(profile);
 				addUser(req.user._id, profile.id, accessToken, 'fb', done);
 			}	
 		}
@@ -42,8 +42,8 @@ module.exports = function () {
 			if (!req.user) {			
 				getUser(profile, tokenSecret, 'tw', done);
 			} else {
-				console.log('profile');
-				console.log(profile);
+				//console.log('profile');
+				//console.log(profile);
 				addUser(req.user._id, profile.id, tokenSecret, 'tw', done);
 			}
 		}
@@ -58,7 +58,7 @@ module.exports = function () {
 		},
 		function (req, accessToken, refreshToken, profile, done) {
 			console.log('Odnoklassniki login');
-			console.log(profile);
+			//console.log(profile);
 //			u.findOrCreate(profile, function (err, user) {
 //				if (err) { return done(err); }
 //				log('user: ' + user);
@@ -79,8 +79,8 @@ module.exports = function () {
 			if (!req.user) {
 				getUser(profile, accessToken, 'vk', done);
 			} else {
-				console.log('profile');
-				console.log(profile);
+				//console.log('profile');
+				//console.log(profile);
 				addUser(req.user._id, profile.id, accessToken, 'vk', done);
 			}
 		}

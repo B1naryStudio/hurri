@@ -35,9 +35,9 @@ var playlistObject = {
 };
 function getUser (profile, token, auth, done){
 	userRepository.getUserAuth(profile._json.id, function(err, data){
-			console.log('err');
-			console.log(err);
-			console.log('err end');
+			//console.log('err');
+			//console.log(err);
+			//console.log('err end');
 			if(!data){ console.log('add');
 				if(auth === 'tw'){
 					userRepository.add({
@@ -149,7 +149,7 @@ function getUser (profile, token, auth, done){
 					});
 				}
 				if (auth === 'tw'){
-					console.log('update');
+					console.log('update tw');
 					userRepository.update(profile._json.id, {
 						name : profile._json.name,
 						avatarUrl : profile._json.profile_image_url,

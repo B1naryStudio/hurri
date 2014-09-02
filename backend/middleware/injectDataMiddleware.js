@@ -34,7 +34,6 @@ function populateInjectData(user, callback_main){
 		},
 		followers : function(callback){
 			userRepository.getFollower(user._id, function(err, data){
-				console.log(data);
 				callback(err, data.followers);
 			});
 		},
@@ -44,7 +43,7 @@ function populateInjectData(user, callback_main){
 			});
 		}
 	}, function(err, results){
-		console.log(results);
+		//console.log(results);
 		callback_main(results);
 	});
 }

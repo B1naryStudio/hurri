@@ -7,26 +7,46 @@ define(['../player/PlayerModel'], function(PlayerModel){
 			});
 		},
 		playTrack: function(){
-			this.track.play();
+			if (this.track){
+				this.track.play();
+			} else {
+				console.log('track is undefined');
+			}
 		},
 
 		pauseTrack: function(){
-			this.track.pause();
+			if (this.track){
+				this.track.pause();
+			} else {
+				console.log('track is undefined');
+			}
 		},
 
 		volumeLevelSetup : function(input){
-			this.track.volume = input/100;
+			if (this.track){
+				this.track.volume = input/100;
+			} else {
+				console.log('track is undefined');
+			}
 		},
 
 		playbackPosition : function(input){
-			this.track.currentTime = input;
+			if (this.track){
+				this.track.currentTime = input;
+			} else {
+				console.log('track is undefined');
+			}
 		},
 
 		stopTrack: function(url){
-			this.track.pause();
-			this.track = null;
-			if (url){
-				this.initialize(url);
+			if (this.track){
+				this.track.pause();
+				this.track = null;
+				if (url){
+					this.initialize(url);
+				}
+			} else {
+				console.log('track is undefined');
 			}
 		}
 
