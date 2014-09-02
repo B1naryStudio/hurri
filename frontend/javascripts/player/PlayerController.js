@@ -23,10 +23,10 @@ define(['marionette', './PlayerView', '../app/context', './PlayerModel', '../pla
 	PlayerController.prototype.bindListeners = function(){
 		Backbone.on('main:play-first', function(){
 			var self = this;
+			playlistModel.setTrackFromCollection(0);
 			this.playerModel.stopTrack(function(){
-				self.playerModel.setTrackParams();
+				self.playerModel.setTrackInfoParams();
 			});
-			playlistModel.playTrack(0);
 			this.playerModel.startTrack();
 		}, this);
 	};
