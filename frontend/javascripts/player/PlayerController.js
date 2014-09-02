@@ -24,9 +24,9 @@ define(['marionette', './PlayerView', '../app/context', './PlayerModel', '../pla
 		Backbone.on('main:play-first', function(){
 			var self = this;
 			this.playerModel.stopTrack(function(){
-				self.playerModel.setTrackParams();
+				self.playerModel.setTrackInfoParams();
 			});
-			playlistModel.playTrack(0);
+			playlistModel.setTrackFromCollection(0);
 			this.playerModel.startTrack();
 		}, this);
 	};
