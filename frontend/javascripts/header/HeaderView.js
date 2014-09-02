@@ -33,6 +33,7 @@ function(Marionette, HeaderView, UserbarView, SearchbarModel,
 
 		events: {
 			//'click @ui.hurriLogo'		: ''
+			'blur @ui.searchbar' : 'alert'
 		},
 
 		onRender: function(){

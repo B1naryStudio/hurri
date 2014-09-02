@@ -37,9 +37,10 @@ function(Backbone, SearchResultsCollection){
 			  * search request mechanism will be implemented.
 			  */
 			var searchResultsData = this.get('searchResult');
-			for (i= 0; i < 3; i++){
-				searchResultsData[i] = searchResultsData[i].slice(0,3);
-			}
+			if (searchResultsData.length !== 0)
+				for (i= 0; i < 3; i++){
+					searchResultsData[i] = searchResultsData[i].slice(0,3);
+				}
 			this.searchResultsCollection.parse(searchResultsData);
 
 			this.attributes.previousInputs.push(input);
