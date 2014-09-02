@@ -5,7 +5,7 @@ define(['backbone'], function(Backbone){
 		defaults: {
 			_id: undefined,
 			id : undefined,
-			avatarSource: '/images/avatar.png',
+			avatarUrl: '/images/avatar.png',
 			name: undefined,
 			age: 18,
 			email: '1@1.com',

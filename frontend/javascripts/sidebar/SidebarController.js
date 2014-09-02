@@ -52,10 +52,6 @@ define(['marionette',
 			model: new NotificationsModel(),
 			collection: context.notificationCollection
 		};
-
-		this.notification.collection.add(
-			window._injectedData.alerts	
-		);	
 		
 		this.notification.view = this.getNotificationView();
 	};

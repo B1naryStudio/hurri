@@ -3,19 +3,19 @@ var mongoose = require('../db/mongoose');
 var Schema = mongoose.Schema;
 
 var radioSchema = new Schema({
-    user_auth_id : { 
+	user_auth_id : { 
 		type: Schema.Types.ObjectId, 
 		ref: 'Userauth' 
 	},
-    listeners : [{ 
+	listeners : [{ 
 		type: Schema.Types.ObjectId, 
 		ref: 'Userauth' 
 	}],
-    tracks : [{ 
+	tracks : [{ 
 		type: Schema.Types.ObjectId, 
 		ref: 'Track' 
 	}],
-    active : Boolean
+	active : Boolean
 });
 
 module.exports =  mongoose.model('Radio', radioSchema);

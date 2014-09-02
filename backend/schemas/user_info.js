@@ -13,6 +13,10 @@ var userInfoSchema = new Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'Track' 
 	}],
+	listened : [{ 
+		type: Schema.Types.ObjectId, 
+		ref: 'Track' 
+	}],
 	totalListened : {
 		type: Number, 
 		default: 0

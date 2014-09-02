@@ -8,25 +8,25 @@ mongoose.set('debug', true);
 
 mongoose.connection.on('connected', function () {
 	this.state = 'connected';
-  	console.log('Mongoose default connection open to ' + config.db.uri);
+		console.log('Mongoose default connection open to ' + config.db.uri);
 });
 
 mongoose.connection.on('error',function (err) {
 	this.state = 'disconnected';
- 	console.log('Mongoose default connection error: ' + err);
+	console.log('Mongoose default connection error: ' + err);
 });
 
 mongoose.connection.on('disconnected', function () {
 	this.state = 'disconnected';
-  	console.log('Mongoose default connection disconnected');
+	console.log('Mongoose default connection disconnected');
 });
 
 process.on('SIGINT', function() {
-  mongoose.connection.close(function () {
-  	this.state = 'disconnected';
-    console.log('Mongoose default connection disconnected through app termination');
-    process.exit(0);
-  });
+	mongoose.connection.close(function () {
+		this.state = 'disconnected';
+		console.log('Mongoose default connection disconnected through app termination');
+		process.exit(0);
+	});
 });
 
 }

@@ -145,6 +145,13 @@ module.exports = function(app){
 		});
 	});
 
+	app.put('/api/user/:id/listened/:listened_id', function(req, res, next){
+		userRepository.addListened(req.params.id, req.params.listened_id, function(err, data){
+			var status = err ? 400 : 200;
+			res.status(status).json(data);
+		});
+	});
+
 	app.put('/api/user/:id/playlist', function(req, res, next){
 		userRepository.addPlaylists(req.params.id, req.body, function(err, data){
 			var status = err ? 400 : 201;

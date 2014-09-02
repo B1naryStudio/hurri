@@ -17,15 +17,16 @@ define(['../song/SongModel',
 		){
 	var context = {
 			currentSongModel: new SongModel(),
-			notificationCollection: new NotificationCollection(),
-			currentUserModel: new UserModel({ 	_id: window._injectedData._id,
-												avatarSource: window._injectedData.avatarUrl,
-												name: window._injectedData.name,
-												id: window._injectedData.id,
-												age: window._injectedData.age,
-												email: window._injectedData.email,
-												country: window._injectedData.country,
-											}
+			notificationCollection: new NotificationCollection(window._injectedData.alerts),
+			currentUserModel: new UserModel(//{ 	//_id: window._injectedData._id,
+												// avatarSource: window._injectedData.avatarUrl,
+												// name: window._injectedData.name,
+												// id: window._injectedData.id,
+												// age: window._injectedData.age,
+												// email: window._injectedData.email,
+												// country: window._injectedData.country,
+												window._injectedData.user
+											///}
 				),
 			currentAlbumBar: new AlbumBarModel(),
 			currentRadioBar: new RadioBarModel(),

@@ -15,21 +15,21 @@ var repositories = {
 };
 
 var genres = {
-      0: "All",
-      85: "Alternative",
-      95: "Children’s Music",
-      98: "Classical",
-      113: "Dance",
-      106: "Electro",
-      32: "Europe",
-      173: "Films/Games",
-      116: "Hip Hop",
-      129: "Jazz",
-      132: "Pop",
-      165: "R&B/Soul/Funk",
-      144: "Reggae",
-      152: "Rock",
-      1: "World"
+	0: "All",
+	85: "Alternative",
+	95: "Children’s Music",
+	98: "Classical",
+	113: "Dance",
+	106: "Electro",
+	32: "Europe",
+	173: "Films/Games",
+	116: "Hip Hop",
+	129: "Jazz",
+	132: "Pop",
+	165: "R&B/Soul/Funk",
+	144: "Reggae",
+	152: "Rock",
+	1: "World"
 };
 
 function DeezerWrapper(){

@@ -7,7 +7,7 @@ module.exports = function (app) {
 		if(!req.user){
 			res.redirect('/signin');
 		} else {
-			injectData(req.user, res, false);
+			injectData(req, res, {}, false);
 		}
 	});
 

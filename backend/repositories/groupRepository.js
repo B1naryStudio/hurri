@@ -38,18 +38,18 @@ GroupRepository.prototype.addListeners = function(id, body, callback) {
 GroupRepository.prototype.deleteTrack = function(id, trackid, callback) {
 	var model = this.createModel();
 	model.findOne({_id: id}, function(err, res){
-           	 	res.tracks.remove(trackid);
+				res.tracks.remove(trackid);
 				res.save(callback);                          
-    });
+	});
 };
 
 
 GroupRepository.prototype.deleteListener = function(id, listenerid, callback) {
 	var model = this.createModel();
 	model.findOne({_id: id}, function(err, res){
-           	 	res.listeners.remove(listenerid);
+				res.listeners.remove(listenerid);
 				res.save(callback);                          
-    });
+	});
 };
 
 GroupRepository.prototype.addTracks = function(id, body, callback) {
