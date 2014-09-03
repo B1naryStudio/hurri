@@ -3,6 +3,6 @@ define(['backbone', './CommentModel'], function(Backbone, CommentModel){
 		model: CommentModel
 	});
 
-	commentCollection = new CommentCollection();
-	return commentCollection;
+	//commentCollection = new CommentCollection();
+	return CommentCollection;
 });

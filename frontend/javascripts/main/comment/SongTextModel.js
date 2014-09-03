@@ -6,10 +6,5 @@ define(['backbone'], function(Backbone){
 			songtext : 'No text'
 		}
 	});
-	var text = new SongTextModel({
-		songname : 'You And Me',
-		songartist : 'Radio Killer',
-		songtext : "Even if the rain falls down on you, \nEven if the sky is not so blue \nI will be there \nI will be there for you!"
-	});
-	return text;
+	return SongTextModel;
 });
