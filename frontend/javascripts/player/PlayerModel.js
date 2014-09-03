@@ -36,7 +36,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				});
 			}
 
-			this.setTrackParams();
+			this.setTrackInfoParams();
 
 			this.set('guid', this.generateGUID());
 			window.addEventListener('storage', $.proxy(this.checkCurrentPlay, this), false);
