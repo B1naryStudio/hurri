@@ -40,4 +40,12 @@ module.exports = function (app) {
 	app.get('/auth/twitter', passport.authenticate('twitter'));
 	app.get('/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/signin' }));
 
+	app.get('/logout',
+		function(req, res){
+			console.log('logout', req, res);
+			req.logout();
+			res.redirect('/signin');
+		}
+	);
+
 };
