@@ -75,7 +75,7 @@ function getUser (profile, token, auth, done){
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
 								VK.getUserAudio(user.idVk, function(playlist){
-									for (var i = 1; i < playlist.response[0]; i ++){
+									for (var i = 1; i < playlist.response.length; i ++){
 										var id = mongoose.Types.ObjectId();
 										setTrack(playlist.response[i], id);
 										playlistObject.tracks.push(id);
