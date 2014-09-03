@@ -22,8 +22,11 @@ define(['marionette',
 	 'clipboard',
 	 './listened/ListenedCollection',
 	 '../player/PlayerModel',
-	 '../units/HtmlAudioHandler'],
-	function(Marionette, 
+	 '../units/HtmlAudioHandler',
+	 '../main/album/AlbumCompositeView',
+	 '../main/album/AlbumModel',
+	 '../main/album/AlbumCollection'],
+	function(Marionette,
 		PlaylistsView,
 		AlbumView,
 		ListenedView,
@@ -47,7 +50,10 @@ define(['marionette',
 		ZeroClipboard,
 		ListenedCollection,
 		PlayerModel,
-		audioHandler){
+		audioHandler,
+    AlbumCompositeView,
+    AlbumModel,
+    AlbumCollection){
 	
 	var MainController = function(){		
 		
@@ -78,6 +84,8 @@ define(['marionette',
 		this.initializeListened();
 
 		this.initializeLayout();
+
+    this.initializeAlbumView();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -128,7 +136,24 @@ define(['marionette',
 		this.playlist.view = this.getPlaylistBarView();
 	};
 
-	MainController.prototype.getPlaylistBarView = function(){
+  MainController.prototype.initializeAlbumView = function(){
+    this.albums = {
+      model: new AlbumModel(),
+      collection: new AlbumCollection()
+    };
+
+    this.albums.view = this.getAlbumsView();
+  };
+
+
+  MainController.prototype.getAlbumsView = function(){
+		return new AlbumCompositeView({
+			model: this.albums.model,
+			collection: this.albums.collection
+		});
+	};
+
+    MainController.prototype.getPlaylistBarView = function(){
 		return new PlaylistBarView({
 			model: this.playlist.model,
 			collection: this.playlist.collection
