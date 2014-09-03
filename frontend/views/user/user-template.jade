@@ -6,6 +6,7 @@ script#user-template(type='text/template')
 			div#info Age: {{-age}}
 			div#info e-mail: {{-email}}
 			div#info Country: {{-country}}
-			div#addVk.socialButton addVk
-			div#addFb.socialButton addFb
-			div#addTw.socialButton addTw
+			div#add-social-profile 
+				a(href='/auth/vkontakte', data-type="vk").socialButton#addVk add VK
+				a(href='/auth/twitter', data-type="tw").socialButton#addTw add Twitter
+				a(href='/auth/facebook', data-type="fb").socialButton#addFb add Facebook

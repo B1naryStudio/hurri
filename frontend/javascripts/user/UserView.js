@@ -21,15 +21,25 @@ define(['marionette'], function(Marionette){
 			'click @ui.addTw': 'addTwUser',
 			'click @ui.addFb': 'addFbUser'
 		},
-
+		onRender: function(){
+			if (window._injectedData.user.fbToken) {
+				this.ui.addFb.addClass('disabled');
+			}
+			if (window._injectedData.user.vkToken) {
+				this.ui.addVk.addClass('disabled');
+			}
+			if (window._injectedData.user.twToken) {
+				this.ui.addTw.addClass('disabled');
+			}
+		},
 		addVkUser: function(){
-			addUser();
+			this.render();
 		},
 		addTwUser: function(){
-			addUser();
+			this.render();
 		},
 		addFbUser: function(){
-			addUser();
+			this.render();
 		}
 	});
 	return UserView;
