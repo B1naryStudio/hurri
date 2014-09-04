@@ -12,6 +12,6 @@ define(['backbone','./CommentCollection', 'underscore'], function(Backbone, Comm
 			this.collection.add({text: text, date: date});
 		}
 	});
-	commentModel = new CommentModel();
-	return commentModel;
+//	commentModel = new CommentModel();
+	return CommentModel;
 });
