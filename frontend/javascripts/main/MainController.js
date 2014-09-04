@@ -23,9 +23,7 @@ define(['marionette',
 	 '../player/PlayerModel',
 	 '../units/HtmlAudioHandler',
 	 './searchresults/FullSearchResults',
-	 './searchresults/SongResultCompositeView',
-	 './searchresults/ArtistCompositeView',
-	  './searchresults/AlbumCompositeView',
+
 	  './searchresults/NoResultsView',
 	  './searchresults/ResultView'],
 	function(Marionette, 
@@ -53,9 +51,7 @@ define(['marionette',
 		PlayerModel,
 		audioHandler,
 		FullSearchResults,
-		SongResultCompositeView,
-		ArtistCompositeView,
-		AlbumCompositeView,
+
 		NoResultsView,
 		ResultView){
 	
@@ -282,12 +278,6 @@ define(['marionette',
 		var res = FullSearchResults;
 		var self = this;
 		res.getData(input, function(obj){
-			self.results = {
-				model: new Backbone.Model(),
-				collection: obj.song,
-				artist_collection: obj.artist,
-				album_collection: obj.album
-			};
 			callback(obj);
 		});
 		
@@ -296,26 +286,26 @@ define(['marionette',
 	};
 
 	
-	MainController.prototype.getSearchResultView = function(){
-		return new SongResultCompositeView({
-			model: this.results.model,
-			collection: this.results.collection
-		});
-	};
+	// MainController.prototype.getSearchResultView = function(){
+	// 	return new SongResultCompositeView({
+	// 		model: this.results.model,
+	// 		collection: this.results.collection
+	// 	});
+	// };
 
-	MainController.prototype.getArtistResultView = function(){
-		return new ArtistCompositeView({
-			model: this.results.model,
-			collection: this.results.artist_collection
-		});
-	};
+	// MainController.prototype.getArtistResultView = function(){
+	// 	return new ArtistCompositeView({
+	// 		model: this.results.model,
+	// 		collection: this.results.artist_collection
+	// 	});
+	// };
 
-	MainController.prototype.getAlbumResultView = function(){
-		return new AlbumCompositeView({
-			model: this.results.model,
-			collection: this.results.album_collection
-		});
-	};
+	// MainController.prototype.getAlbumResultView = function(){
+	// 	return new AlbumCompositeView({
+	// 		model: this.results.model,
+	// 		collection: this.results.album_collection
+	// 	});
+	// };
 
 	MainController.prototype.getFavoritesSonglistView = function(){
 		return new MainSongCollectionView({
@@ -401,11 +391,11 @@ define(['marionette',
 				if ((obj.song.length === 0) && (obj.artist.length === 0) && (obj.album.length === 0)){
 					self.mainRegion.show(new NoResultsView());	
 				} else {
-					self.mainRegion.show(new ResultView());
+					self.mainRegion.show(new ResultView(obj));
 				}
 
-				self.getArtistResultView();
-				self.getAlbumResultView().render();
+			//	self.getArtistResultView();
+				//self.getAlbumResultView().render();
 				//self.getArtistResultView().render();
 			});
 			
