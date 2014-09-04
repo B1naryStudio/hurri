@@ -11,7 +11,7 @@ var playlistSchema = new Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'Track' 
 	}],
-	duration : Number,
+	duration : { type: Number, min: 0 },
 	mood : {
 		type: String, 
 		default: 'unknown'

@@ -21,7 +21,9 @@ var userAuthSchema = new Schema({
 	fbToken: String,
 	age : {
 		type: Number, 
-		default: 18
+		default: 18,
+		min: 0,
+		max: 130
 	},
 	followers : [{ 
 		type: Schema.Types.ObjectId, 

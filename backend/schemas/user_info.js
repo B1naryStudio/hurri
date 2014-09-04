@@ -19,7 +19,8 @@ var userInfoSchema = new Schema({
 	}],
 	totalListened : {
 		type: Number, 
-		default: 0
+		default: 0,
+		min: 0
 	},
 	group : [{ 
 		type: Schema.Types.ObjectId, 
