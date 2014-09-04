@@ -14,7 +14,8 @@ define(['backbone'], function(Backbone){
 			url: undefined,
 			comments : [''],
 			queuepos : '',
-			current : false
+			current : false,
+			modelType : 'song'
 		},
 
 		getStream: function(){

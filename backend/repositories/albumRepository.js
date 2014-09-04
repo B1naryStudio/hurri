@@ -18,7 +18,7 @@ AlbumRepository.prototype.getById = function(id, callback) {
 
 AlbumRepository.prototype.getByTitle = function(name, callback) {
 	var model = this.model;
-	regexp = new RegExp(name, "i");
+	regexp = new RegExp('^' + name, "i");
 	var query = model.find({title: regexp});
 	query.exec(callback);
 };

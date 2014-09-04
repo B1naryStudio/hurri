@@ -8,11 +8,17 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 		ui: {
 			searchInput 	: '#search-input',
    			searchButton 	: '#search-button',
+   			results 		: '#searchresults',
+   			more 			: '.show-more-results'
+
   		},
 
 		events: {
-			'click @ui.searchButton'	: 'search',
-			'keyup @ui.searchInput'		: 'refreshInput'
+			'click @ui.searchButton'	: 'showMore',
+			'keyup @ui.searchInput'		: 'refreshInput',
+			'blur @ui.searchInput' 		: 'closeSearch',
+			'click @ui.searchInput' 	: 'refreshInput',
+			'click @ui.more' 			: 'showMore'
 		},
 
 		onRender: function(){
@@ -22,21 +28,41 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 			this.searchResultsView.render();
 		},
 
+		showMore: function(){
+			Backbone.trigger('searchbar:show-more', this.ui.searchInput[0].value);
+		},
+
+		closeSearch: function(){
+			this.searchResultsView.el.style.display = 'none';
+		},
 		search: function(){
 			this.model.set('currentInput', this.ui.searchInput[0].value);
-			this.model.search();
-
+			var self = this;
+			//console.log(this.model.get('currentInput'));
+			this.model.search(function(collection){
+				console.log(collection);
+				if (collection.length === 0 || self.ui.searchInput[0].value === '')
+					self.searchResultsView.el.style.display = 'none';
+				else
+					self.searchResultsView.el.style.display = 'block';
+			});
 			this.setResultsViewPosition();
-			this.searchResultsView.el.style.display = 'block';
 		},
 
 		backgroundSearch: _.debounce(function(){
-			this.search();
+			var self = this;
+			this.search(function(collection){
+				console.log(collection.length);
+				if (collection.length === 0 || self.ui.searchInput[0].value === '')
+					self.searchResultsView.el.style.display = 'none';
+				else
+					self.searchResultsView.el.style.display = 'block';
+			});
 		}, 800, false),
 
 		refreshInput: function(event){
 			if(event.which === 13){	// enter key
-				this.search();
+				this.showMore();
 			}else{
 				this.backgroundSearch();
 			}

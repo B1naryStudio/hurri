@@ -21,7 +21,11 @@ define(['marionette',
 	 'clipboard',
 	 './listened/ListenedCollection',
 	 '../player/PlayerModel',
-	 '../units/HtmlAudioHandler'],
+	 '../units/HtmlAudioHandler',
+	 './searchresults/FullSearchResults',
+	 './searchresults/SongResultCompositeView',
+	 './searchresults/ArtistCompositeView',
+	  './searchresults/AlbumCompositeView'],
 	function(Marionette, 
 		PlaylistsView,
 		ListenedView, 
@@ -45,7 +49,11 @@ define(['marionette',
 		ZeroClipboard,
 		ListenedCollection,
 		PlayerModel,
-		audioHandler){
+		audioHandler,
+		FullSearchResults,
+		SongResultCompositeView,
+		ArtistCompositeView,
+		AlbumCompositeView){
 	
 	var MainController = function(){		
 		
@@ -74,6 +82,8 @@ define(['marionette',
 		this.initializeRadio();
 
 		this.initializeListened();
+
+		//this.initializeResults();
 
 		this.initializeLayout();
 	
@@ -264,6 +274,41 @@ define(['marionette',
 		this.listened.view = this.getListenedView();
 	};
 
+	MainController.prototype.initializeResults = function(input){
+		var res = FullSearchResults;
+		res.setData(input);
+		this.results = {
+			model: new Backbone.Model(),
+			collection: res.getSongCollection(),
+			artist_collection: res.getArtistCollection(),
+			album_collection: res.getAlbumCollection()
+		};
+
+		this.results.view = this.getSearchResultView();
+	};
+
+	
+	MainController.prototype.getSearchResultView = function(){
+		return new SongResultCompositeView({
+			model: this.results.model,
+			collection: this.results.collection
+		});
+	};
+
+	MainController.prototype.getArtistResultView = function(){
+		return new ArtistCompositeView({
+			model: this.results.model,
+			collection: this.results.artist_collection
+		});
+	};
+
+	MainController.prototype.getAlbumResultView = function(){
+		return new AlbumCompositeView({
+			model: this.results.model,
+			collection: this.results.album_collection
+		});
+	};
+
 	MainController.prototype.getFavoritesSonglistView = function(){
 		return new MainSongCollectionView({
 			model: this.favoriteslist.model,
@@ -340,6 +385,13 @@ define(['marionette',
 		
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));
+		},this);
+
+		Backbone.on('searchbar:show-more', function(input){
+			this.initializeResults(input);
+			this.mainRegion.show(this.getSearchResultView());
+			this.getArtistResultView().render();
+			this.getAlbumResultView().render();
 		},this);
 	};
 
