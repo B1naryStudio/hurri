@@ -10,11 +10,10 @@ define(['backbone'], function(Backbone){
 			age: 18,
 			email: '1@1.com',
 			country: 'Unknown',
-			//
 			liked: [],
 			playlists: [],
 			groups: [],
-			listened: 0,
+			listened: [],
 			followers: [],
 			followings: []
 		},

@@ -10,7 +10,6 @@ module.exports = function(app){
 
 	app.get('/user/:id/like', function(req, res, next) {
 		injectData(userRepository.getLike(req.params.id), res);
-
 	});
 
 	app.get('/user/:id/groups', function(req, res, next) {

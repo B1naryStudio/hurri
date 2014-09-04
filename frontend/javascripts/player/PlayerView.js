@@ -8,7 +8,8 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:nextButtonState': 'render',
 			'change:duration': 'render',
 			'change:positionFormat': 'changedPosition',
-			'change:durationFormat':'render'
+			'change:durationFormat':'render',
+			'change:liked': 'render'
 		},
 		events : {
 			"click @ui.nextButton"			: "nextTrack",
@@ -41,6 +42,12 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
    			volume: '#volume',
 			player : '#player',
 			songPosition: '#song-position'
+  		},
+  		onRender: function () {
+			var mode = this.model.get('liked');
+			mode = 'player-button' + ' ' + mode;
+			this.ui.likeButton.removeClass();
+			this.ui.likeButton.addClass(mode);  			
   		},
 
   		setUpVolume: function(){
@@ -104,7 +111,10 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 		},
 
 		likeState : function(){
-			this.model.likeState();
+			var mode = this.model.likeState();
+			mode = 'player-button' + ' ' + mode;
+			this.ui.likeButton.removeClass();
+			this.ui.likeButton.addClass(mode);
 		},
 
 		addComment: function(){

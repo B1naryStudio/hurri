@@ -15,25 +15,24 @@ define(['../song/SongModel',
 		PlaylistBarModel, 
 		SonglistCollection
 		){
+	var user = JSON.stringify(window._injectedData.user) + JSON.stringify(window._injectedData.alerts);
+
 	var context = {
 			currentSongModel: new SongModel(),
 			notificationCollection: new NotificationCollection(window._injectedData.alerts),
-			currentUserModel: new UserModel(//{ 	//_id: window._injectedData._id,
-												// avatarSource: window._injectedData.avatarUrl,
-												// name: window._injectedData.name,
-												// id: window._injectedData.id,
-												// age: window._injectedData.age,
-												// email: window._injectedData.email,
-												// country: window._injectedData.country,
-												window._injectedData.user
-											///}
-				),
+			currentUserModel: new UserModel(window._injectedData.user),
 			currentAlbumBar: new AlbumBarModel(),
 			currentRadioBar: new RadioBarModel(),
 			currentPlaylistBar: new PlaylistBarModel(),
 			currentSongCollection: new SonglistCollection(),
 			toggled: false
 	};
+	context.currentUserModel.set({
+		liked: 		window._injectedData.liked.length,
+		followers:  window._injectedData.followers.length,
+		followings: window._injectedData.following.length,
+		playlists:  window._injectedData.playlists.length
+	});
 	console.log(context);
 	return context;
 });

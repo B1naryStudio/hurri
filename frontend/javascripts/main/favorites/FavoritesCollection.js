@@ -3,17 +3,8 @@ var FavoritesCollection = Backbone.Collection.extend({
 	model: SongModel
 });
 
-favoritesCollection = new FavoritesCollection();
+favoritesCollection = new FavoritesCollection(window._injectedData.liked);
 
-
-
-favoritesCollection.add([
-	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey', duration:280},
-	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey', duration:280},
-	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey', duration:280},
-	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey', duration:280},
-	{title: 'The Moment (Bootleg Edit)', artist: 'Nick Kech feat. Madilyn Bailey', duration:280}
-]);
 
 return favoritesCollection;	
 });

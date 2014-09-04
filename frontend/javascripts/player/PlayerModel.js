@@ -98,6 +98,13 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 			this.volumeLevelSetup(this.get('volumeLevel'));
 			this.startTrack();
+			for(var i=0; i < window._injectedData.liked.length; i++) {
+				if (window._injectedData.liked[i]._id === context.currentSongModel.get('_id')) {
+					this.set({liked: true});
+				} else {
+					this.set({liked: false});
+				}
+			}
 		},
 
 		stopTrack: function(callback){
@@ -215,16 +222,17 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		likeState : function(){
-			var state = this.get('liked');
-			if (!state){
+
+			if (!this.get('liked')){
 				this.set({liked: true});
 				console.log(context.currentUserModel.get('_id'));
-				console.log(context.currentSongModel.get('songid'));
-				$.ajax({type:'PUT', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('songid')});
+				console.log(context.currentSongModel.get('_id'));
+				$.ajax({type:'PUT', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('_id')});
 			} else {
 				this.set({liked: false});
-				$.ajax({type:'DELETE', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('songid')});
+				$.ajax({type:'DELETE', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('_id')});
 			}
+			return this.get('liked');
 		},
 		
 		addComment : function(){

@@ -110,6 +110,12 @@ UserRepository.prototype.getLike = function(id, callback) {
 	query.exec(callback);
 };
 
+UserRepository.prototype.getListened = function(id, callback) {
+	var model = this.infoModel;
+	var query = model.findOne({user_auth_id: id},'listened').populate('listened');
+	query.exec(callback);
+};
+
 UserRepository.prototype.getGroups = function(id, callback) {
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id},'group').populate('group');

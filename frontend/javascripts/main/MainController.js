@@ -38,7 +38,6 @@ define(['marionette',
 		PlaylistBarCollection, 
 		PlaylistBarModel,
 		MainSongCollectionView,
-		 
 		MainSonglistCollection,
 		PlaylistModel,
 		FavoritesCollection, 

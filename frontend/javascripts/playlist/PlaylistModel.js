@@ -50,43 +50,52 @@ define(['backbone', '../app/context', '../app/enums', './SongCollection', 'under
 		nextPlayedTrack: function(direction, repeatMode, currentTrack){
 			var next;
 			var current;
-			if (direction === 'direct'){
-				if (repeatMode === enums.repeatModes.none){
-					console.log('repeat off');
-					next = currentTrack + 1;
-				} else if(repeatMode === enums.repeatModes.song){
-					console.log('repeat song');
-					next = currentTrack;
-				} else if (repeatMode === enums.repeatModes.album){
-					console.log('repeat album');
-					current = currentTrack;
-					if (current === this.collection.length-1){
-						next = 0;
-					} else {
-						next = current + 1;
-					}
-				}
-			} else if (direction === 'reverse') {
-				if (repeatMode === enums.repeatModes.none){
-					console.log('repeat off');
-					next = currentTrack - 1;
-				}
-				if(repeatMode === enums.repeatModes.song){
-					console.log('repeat song');
-					next = currentTrack;
-
-				}
-				if (repeatMode === enums.repeatModes.album){
-					console.log('repeat album');
-					current = currentTrack;
-					if (current === 0){
-						next = this.collection.length - 1;
-					} else {
-						next = current - 1;
+			if (this.get('queueNum') > 0){
+				for (var i = 0; i < this.collection.length; i++){
+					if (this.collection.models[1].get('queuepos') === 1){
+						next = i;
 					}
 				}
 			} else {
-				console.log('error');
+				if (direction === 'direct'){
+					if (repeatMode === enums.repeatModes.none){
+						console.log('repeat off');
+						next = currentTrack + 1;
+					} else if(repeatMode === enums.repeatModes.song){
+						console.log('repeat song');
+						next = currentTrack;
+					} else if (repeatMode === enums.repeatModes.album){
+						console.log('repeat album');
+						current = currentTrack;
+						if (current === this.collection.length-1){
+							next = 0;
+						} else {
+							next = current + 1;
+						}
+					}
+				} else if (direction === 'reverse') {
+					if (repeatMode === enums.repeatModes.none){
+						console.log('repeat off');
+						next = currentTrack - 1;
+					}
+					if(repeatMode === enums.repeatModes.song){
+						console.log('repeat song');
+						next = currentTrack;
+
+					}
+					if (repeatMode === enums.repeatModes.album){
+						console.log('repeat album');
+						current = currentTrack;
+						if (current === 0){
+							next = this.collection.length - 1;
+						} else {
+							next = current - 1;
+						}
+					}
+				} else {
+					console.log('error');
+				}
+
 			}
 			return next;
 		}
