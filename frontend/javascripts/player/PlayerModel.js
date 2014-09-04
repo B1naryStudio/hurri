@@ -19,7 +19,8 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			positionFormat: undefined,
 			liked : false,
 			timerId : 0,
-			guid: undefined
+			guid: undefined,
+			canPlay: undefined
 		},
 
 		localStorage: new Backbone.LocalStorage("PlayerModel"),
@@ -55,14 +56,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			
 			if (state === enums.playModes.pause){
 				audioHandler.playTrack();
-				this.startTimer();
-				this.set({playback: enums.playModes.play});
-				window.localStorage.setItem("currentPlay", this.get('guid'));
+				this.set({playback: enums.playModes.play});	
 			} else if (state === enums.playModes.play){
 				audioHandler.pauseTrack();
-				this.stopTimer();
-				this.set({playback: enums.playModes.pause});
-				window.localStorage.removeItem("currentPlay");
+				this.set({playback: enums.playModes.pause});	
 			}
 			return this.get('playback');
 		},
@@ -87,13 +84,21 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		bindListeners: function(){
+			var self = this;
 			this.on('change:shuffle change:repeatTrack change:currentTrackName change:currentArtistName change:volumeLevel', function(){
 				this.save();
+			});
+			audioHandler.on('playing', function(){
+				self.startTimer();
+				window.localStorage.setItem("currentPlay", self.get('guid'));
+			});
+			audioHandler.on('pause', function(){
+				self.stopTimer();
+				window.localStorage.removeItem("currentPlay");
 			});
 		},
 
 		newTrack: function(param){
-			console.log(param);
 			playlistModel.setTrackFromCollection(param);
 			this.set({currentTrack: param});
 			this.stopTrack(function(){
@@ -123,8 +128,8 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		startTrack: function(){
 	 		if (this.get('playback') === enums.playModes.play){	
 	 			audioHandler.playTrack();
-	 			this.startTimer();
-				window.localStorage.setItem("currentPlay", this.get('guid'));
+	 //			this.startTimer();
+	//			window.localStorage.setItem("currentPlay", this.get('guid'));
 	 		}
 	 	},
 
@@ -238,7 +243,6 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		volumeLevelSetup : function(input){
 			this.set({volumeLevel: input});
-			console.log(this.get('volumeLevel'));
 			audioHandler.volumeLevelSetup(input);
 
 		},

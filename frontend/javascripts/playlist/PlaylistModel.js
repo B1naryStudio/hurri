@@ -15,7 +15,6 @@ define(['backbone', '../app/context', '../app/enums', './SongCollection', 'under
 		},
 
 		setTrackFromCollection: function(position){
-			console.log(position);
 			this.set('position', position);
 			var track = this.collection.at(position);
 			var prev = this.collection.findWhere({current : true});

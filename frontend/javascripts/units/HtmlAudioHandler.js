@@ -1,14 +1,35 @@
-define(['../player/PlayerModel'], function(PlayerModel){
+define(['underscore', 'backbone'], function(_, Backbone){
 	var audioHandler = {
+		canPlay: undefined,
 		initialize: function(url){
+			var self = this;
+			this.canPlay = false;
 			this.track = new Audio(url);
 			this.track.addEventListener('canplaythrough', function(){
+				self.canPlay = true;
+				console.log('pending=', self.pending);
+				if (self.pending){
+					self.trigger('playing');
+					self.track.play();
+					self.pending = false;
+				}
 				console.log('playtrough');
 			});
 		},
-		playTrack: function(){
+		playTrack: function(){ 
+			var self = this;
 			if (this.track){
-				this.track.play();
+				console.log('canplay=', this.canPlay);
+				if (this.canPlay){
+					setTimeout(function(){
+						self.playing = true;
+						self.trigger('playing');
+						self.track.play();							
+					}, 0);
+				
+				} else {
+					this.pending = true;
+				}
 			} else {
 				console.log('track is undefined');
 			}
@@ -16,6 +37,8 @@ define(['../player/PlayerModel'], function(PlayerModel){
 
 		pauseTrack: function(){
 			if (this.track){
+				this.playing = false;
+				this.trigger('pause');
 				this.track.pause();
 			} else {
 				console.log('track is undefined');
@@ -40,6 +63,7 @@ define(['../player/PlayerModel'], function(PlayerModel){
 
 		stopTrack: function(url){
 			if (this.track){
+				this.canPlay = false;
 				this.track.pause();
 				this.track = null;
 				if (url){
@@ -51,6 +75,6 @@ define(['../player/PlayerModel'], function(PlayerModel){
 		}
 
 	};
-
+	_.extend(audioHandler, Backbone.Events);
 	return audioHandler;
 });
