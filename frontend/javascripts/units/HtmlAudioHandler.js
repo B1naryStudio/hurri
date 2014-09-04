@@ -7,7 +7,7 @@ define(['underscore', 'backbone'], function(_, Backbone){
 			this.track = new Audio(url);
 			this.track.addEventListener('canplaythrough', function(){
 				self.canPlay = true;
-				console.log('pending=', self.pending);
+				console.log('pending=', self.pending, Date.now());
 				if (self.pending){
 					self.trigger('playing');
 					self.track.play();
@@ -19,14 +19,11 @@ define(['underscore', 'backbone'], function(_, Backbone){
 		playTrack: function(){ 
 			var self = this;
 			if (this.track){
-				console.log('canplay=', this.canPlay);
+				console.log('canplay=', this.canPlay, Date.now());
 				if (this.canPlay){
-					setTimeout(function(){
 						self.playing = true;
 						self.trigger('playing');
-						self.track.play();							
-					}, 0);
-				
+						self.track.play();						
 				} else {
 					this.pending = true;
 				}
@@ -66,11 +63,12 @@ define(['underscore', 'backbone'], function(_, Backbone){
 				this.canPlay = false;
 				this.track.pause();
 				this.track = null;
-				if (url){
-					this.initialize(url);
-				}
 			} else {
 				console.log('track is undefined');
+			}
+
+			if (url){
+				this.initialize(url);
 			}
 		}
 

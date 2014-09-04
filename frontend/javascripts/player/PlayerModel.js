@@ -27,17 +27,8 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		initialize: function(){
 			this.bindListeners();
-			//playlistModel.playTrack(this.get('currentTrack'));
-			var url = context.currentSongModel.getStream();
-			if (url){
-				audioHandler.initialize(url);
-			} else {
-				context.currentSongModel.once('change:url', function(){
-					audioHandler.initialize(context.currentSongModel.get('url'));
-				});
-			}
-
-			this.setTrackInfoParams();
+			
+			this.setTrackInfoParams();	
 
 			this.set('guid', this.generateGUID());
 			window.addEventListener('storage', $.proxy(this.checkCurrentPlay, this), false);

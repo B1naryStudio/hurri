@@ -19,9 +19,12 @@ define(['backbone'], function(Backbone){
 
 		getStream: function(){
 			var self = this;
-				$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('artist')}, function(data){
-					self.set({url: data.url, duration: data.duration});
-				});
+			var url = this.get('url');
+				if (!url){
+					$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('artist')}, function(data){
+						self.set({url: data.url, duration: data.duration});
+					});
+				}
 			return self.get('url');
 		}
 

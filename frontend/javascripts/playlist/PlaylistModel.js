@@ -18,8 +18,9 @@ define(['backbone', '../app/context', '../app/enums', './SongCollection', 'under
 			this.set('position', position);
 			var track = this.collection.at(position);
 			var prev = this.collection.findWhere({current : true});
-			if (prev)
+			if (prev){
 				prev.set({current: false}); 
+			}
 			track.set({current : true});
 			context.currentSongModel.set(track.attributes);
 		},
