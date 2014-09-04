@@ -9,6 +9,8 @@ block content
 		div#menu
 		#playlist-menu-container
 	div#main
+	#result-artist-composite
+	#result-album-composite
 	div#sidebar
 		#sidebar-region
 		#sidebar-clear
@@ -44,6 +46,8 @@ block content
 	include ./main/friends-template
 	include ./main/result-tile-template
 	include ./main/result-songlist-template
+	include ./main/no-result-template
+	include ./main/empty-template
 	script#not_found_template(type="text/template")
 		h1 Page not found
 		p

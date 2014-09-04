@@ -1,4 +1,4 @@
-define(['marionette', './ResultTileView','clipboard'], 
+define(['marionette', './AlbumTileView','clipboard'], 
 	function(Marionette, ResultTileView, ZeroClipboard){
 	var AlbumCompositeView = Marionette.CompositeView.extend({
 		id: 'result-album-composite',

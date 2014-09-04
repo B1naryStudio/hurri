@@ -16,7 +16,7 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 		events: {
 			'click @ui.searchButton'	: 'showMore',
 			'keyup @ui.searchInput'		: 'refreshInput',
-			'blur @ui.searchInput' 		: 'closeSearch',
+			//'blur @ui.searchInput' 		: 'closeSearch',
 			'click @ui.searchInput' 	: 'refreshInput',
 			'click @ui.more' 			: 'showMore'
 		},
@@ -29,11 +29,12 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 		},
 
 		showMore: function(){
+			console.log('show more');
 			Backbone.trigger('searchbar:show-more', this.ui.searchInput[0].value);
 		},
 
-		closeSearch: function(){
-			this.searchResultsView.el.style.display = 'none';
+		closeSearch: function(event){
+			
 		},
 		search: function(){
 			this.model.set('currentInput', this.ui.searchInput[0].value);
@@ -41,12 +42,26 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 			//console.log(this.model.get('currentInput'));
 			this.model.search(function(collection){
 				console.log(collection);
-				if (collection.length === 0 || self.ui.searchInput[0].value === '')
+				if (collection.length === 0 || self.ui.searchInput[0].value === ''){
 					self.searchResultsView.el.style.display = 'none';
-				else
+				} else {
 					self.searchResultsView.el.style.display = 'block';
+					self.bindClickHandler();
+				}
 			});
 			this.setResultsViewPosition();
+		},
+
+		bindClickHandler: function(){
+			var self = this;
+			$(document).on('click', function(){
+					self.searchResultsView.el.style.display = 'none';
+					self.unbindClickHandler();	
+			});
+		},
+
+		unbindClickHandler: function(){
+			$(document).off('click', function(){});
 		},
 
 		backgroundSearch: _.debounce(function(){

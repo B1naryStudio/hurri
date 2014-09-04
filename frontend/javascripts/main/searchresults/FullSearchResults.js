@@ -11,10 +11,15 @@ define(['marionette', './AlbumCollection', './ArtistCollection', '../songlistmai
 		});
 	};
 
-	SearchResults.prototype.setData = function(input){
+	SearchResults.prototype.getData = function(input, callback){
 		var self = this;
 		this.getSearchResult(input, function(data){
 			self.data  = data;
+			callback({
+				song: self.getSongCollection(),
+				album: self.getAlbumCollection(),
+				artist: self.getArtistCollection()
+			});
 		}); 	
 	};
 

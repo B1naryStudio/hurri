@@ -25,7 +25,9 @@ define(['marionette',
 	 './searchresults/FullSearchResults',
 	 './searchresults/SongResultCompositeView',
 	 './searchresults/ArtistCompositeView',
-	  './searchresults/AlbumCompositeView'],
+	  './searchresults/AlbumCompositeView',
+	  './searchresults/NoResultsView',
+	  './searchresults/ResultView'],
 	function(Marionette, 
 		PlaylistsView,
 		ListenedView, 
@@ -53,7 +55,9 @@ define(['marionette',
 		FullSearchResults,
 		SongResultCompositeView,
 		ArtistCompositeView,
-		AlbumCompositeView){
+		AlbumCompositeView,
+		NoResultsView,
+		ResultView){
 	
 	var MainController = function(){		
 		
@@ -274,17 +278,21 @@ define(['marionette',
 		this.listened.view = this.getListenedView();
 	};
 
-	MainController.prototype.initializeResults = function(input){
+	MainController.prototype.initializeResults = function(input, callback){
 		var res = FullSearchResults;
-		res.setData(input);
-		this.results = {
-			model: new Backbone.Model(),
-			collection: res.getSongCollection(),
-			artist_collection: res.getArtistCollection(),
-			album_collection: res.getAlbumCollection()
-		};
+		var self = this;
+		res.getData(input, function(obj){
+			self.results = {
+				model: new Backbone.Model(),
+				collection: obj.song,
+				artist_collection: obj.artist,
+				album_collection: obj.album
+			};
+			callback(obj);
+		});
+		
 
-		this.results.view = this.getSearchResultView();
+		
 	};
 
 	
@@ -388,10 +396,21 @@ define(['marionette',
 		},this);
 
 		Backbone.on('searchbar:show-more', function(input){
-			this.initializeResults(input);
-			this.mainRegion.show(this.getSearchResultView());
-			this.getArtistResultView().render();
-			this.getAlbumResultView().render();
+			var self = this;
+			this.initializeResults(input, function(obj){
+				if ((obj.song.length === 0) && (obj.artist.length === 0) && (obj.album.length === 0)){
+					self.mainRegion.show(new NoResultsView());	
+				} else {
+					self.mainRegion.show(new ResultView());
+				}
+
+				self.getArtistResultView();
+				self.getAlbumResultView().render();
+				//self.getArtistResultView().render();
+			});
+			
+			//this.getArtistResultView().render();
+			//this.getAlbumResultView().render();
 		},this);
 	};
 
