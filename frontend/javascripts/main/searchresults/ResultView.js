@@ -2,25 +2,29 @@ define(['marionette', './SongResultCompositeView', './ArtistCompositeView','./Al
 	function(Marionette, SongResultCompositeView, ArtistCompositeView, AlbumCompositeView){
 	var ResultView = Marionette.ItemView.extend({
 		initialize: function(options){
-			this.songResultView = new SongResultCompositeView({
-				model: new Backbone.Model(),
-				collection: options.song
-			});
-			this.artistResultView = new ArtistCompositeView({
-				model: new Backbone.Model(),
-				collection: options.artist
-			});
-			this.albumResultView = new AlbumCompositeView({
-				model: new Backbone.Model(),
-				collection: options.album
-			});
+			this.data = options;
 		},
 		id: 'result-main-composite',
 		template: '#empty-template',
 		onShow: function(){
-			this.songResultView.render();
-			this.artistResultView.render();
-			this.albumResultView.render();
+			var songResultView = new SongResultCompositeView({
+				model: new Backbone.Model(),
+				collection: this.data.song
+			});
+
+			var artistResultView = new ArtistCompositeView({
+				model: new Backbone.Model(),
+				collection: this.data.artist
+			});
+
+			var albumResultView = new AlbumCompositeView({
+				model: new Backbone.Model(),
+				collection: this.data.album
+			});
+
+			songResultView.render();
+			artistResultView.render();
+			albumResultView.render();
 		}
 	});
 
