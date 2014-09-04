@@ -9,6 +9,7 @@ block content
 		div#menu
 		#playlist-menu-container
 	div#main
+		div#result-main-composite
 	div#sidebar
 		#sidebar-region
 		#sidebar-clear
@@ -42,7 +43,12 @@ block content
 	include ./main/main-song-template
 	include ./main/listened-template
 	include ./main/friends-template
-	
+	include ./main/result-tile-template
+	include ./main/result-songlist-template
+	include ./main/no-result-template
+	include ./main/empty-template
+	include ./main/charts-template
+
 	script#not_found_template(type="text/template")
 		h1 Page not found
 		p

@@ -11,22 +11,33 @@ function(Backbone, SearchResultsCollection){
 
 		searchResultsCollection: new SearchResultsCollection(),
 		
-		getSearchResult: function(input){
+		getSearchResult: function(input, callback){
 			var self = this;
-				$.getJSON('/search',{query: input}, function(data){
-					self.set({searchResult: data});
-					console.log(data);	
+				$.getJSON('/search',{query: input, limit: 3, quick : '^'}, function(data){
+					var searchResultsData = data;
+					console.log('Quick search ', data);
+					if (searchResultsData.length !== 0){
+						for (i= 0; i < 3; i++){
+							searchResultsData[i] = searchResultsData[i].slice(0,3);
+						}
+					}
+					self.searchResultsCollection.parse(searchResultsData);
+					self.attributes.previousInputs.push(input);
+					self.set('currentInput', null);
+					callback(self.searchResultsCollection);
 				});
 		},
 
-		search: function(){
+		search: function(callback){
 			var input = this.get('currentInput');
 			if(!input){
-				return;
+				callback({length:0});
 			}
 
-			this.getSearchResult(input);
-
+			this.getSearchResult(input, function(collection){
+				callback(collection);
+			});
+			//console.log(input);
 			/*
 			 * Get search results from server and save
 			 * them into searchResultsData.
@@ -36,14 +47,18 @@ function(Backbone, SearchResultsCollection){
 			  * Test search results data. Remove this code when
 			  * search request mechanism will be implemented.
 			  */
-			var searchResultsData = this.get('searchResult');
-			for (i= 0; i < 3; i++){
-				searchResultsData[i] = searchResultsData[i].slice(0,3);
-			}
-			this.searchResultsCollection.parse(searchResultsData);
+			// var searchResultsData = this.get('searchResult');
+			// if (searchResultsData.length !== 0){
+			// 	for (i= 0; i < 3; i++){
+			// 		searchResultsData[i] = searchResultsData[i].slice(0,3);
+			// 	}
+			// }
 
-			this.attributes.previousInputs.push(input);
-			this.set('currentInput', null);
+			// this.searchResultsCollection.parse(searchResultsData);
+			// this.attributes.previousInputs.push(input);
+			// this.set('currentInput', null);
+			// console.log(searchResultsData);
+			// return searchResultsData;
 		}
 
 	});

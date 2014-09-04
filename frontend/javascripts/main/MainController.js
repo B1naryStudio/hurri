@@ -14,6 +14,8 @@ define(['marionette',
 	'./bars/playlist/PlaylistBarCollection',
 	'./bars/playlist/PlaylistBarModel',
 	'./songlistmain/MainSongCollectionView',
+	'./charts/ChartsCollection',
+	'./charts/ChartsView',
 
 	 '../playlist/SongCollection',
 	 '../playlist/PlaylistModel',
@@ -21,7 +23,11 @@ define(['marionette',
 	 'clipboard',
 	 './listened/ListenedCollection',
 	 '../player/PlayerModel',
-	 '../units/HtmlAudioHandler'],
+	 '../units/HtmlAudioHandler',
+	 './searchresults/FullSearchResults',
+
+	  './searchresults/NoResultsView',
+	  './searchresults/ResultView'],
 	function(Marionette, 
 		PlaylistsView,
 		ListenedView, 
@@ -38,13 +44,19 @@ define(['marionette',
 		PlaylistBarCollection, 
 		PlaylistBarModel,
 		MainSongCollectionView,
+		ChartsCollection,
+		ChartsView,
 		MainSonglistCollection,
 		PlaylistModel,
 		FavoritesCollection, 
 		ZeroClipboard,
 		ListenedCollection,
 		PlayerModel,
-		audioHandler){
+		audioHandler,
+		FullSearchResults,
+
+		NoResultsView,
+		ResultView){
 	
 	var MainController = function(){		
 		
@@ -74,7 +86,11 @@ define(['marionette',
 
 		this.initializeListened();
 
+		//this.initializeResults();
+
 		this.initializeLayout();
+
+		this.initializeCharts();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -245,6 +261,36 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeCharts = function(){
+		this.charts = {
+			collection: new ChartsCollection()
+		};
+		this.charts.collection.add([
+			{artist: 'The Beatles',  	title: 'Yesterday'},
+			{artist: 'John Lennon',  	title: 'Imagine'},
+			{artist: 'The Beatles',  	title: 'Let It Be'},
+			{artist: 'Pink Floyd',  	title: 'Time'},
+			{artist: 'Queen',  			title: 'The Show Must Go On'},
+			{artist: 'Queen',  			title: 'Bohemian Rhapsody'},
+			{artist: 'Led Zeppelin',  	title: 'Stairway To Heaven'},
+			{artist: 'Queen',  			title: 'We Are The Champions'},
+			{artist: 'The Beatles',  	title: 'Come Together'},
+			{artist: 'Pink Floyd',  	title: 'Shine On You Crazy Diamond'},
+			{artist: 'Pink Floyd',  	title: 'Another Brick In The Wall'},
+			{artist: 'Queen',  			title: 'We Will Rock You'},
+			{artist: 'Louis Armstrong', title: 'What A Wonderful World'},
+			{artist: 'Elvis Presley',  	title: 'Love Me Tender'},
+			{artist: 'Eagles',  		title: 'Hotel California'},
+		]);
+		this.charts.view = this.getChartsView();
+	};
+
+	MainController.prototype.getChartsView = function(model){
+		return new ChartsView({
+			collection: this.charts.collection
+		});
+	};
+
 	MainController.prototype.initializeFavoritesSonglist = function(){
 		this.favoriteslist = {
 			model: PlaylistModel,
@@ -262,6 +308,39 @@ define(['marionette',
 
 		this.listened.view = this.getListenedView();
 	};
+
+	MainController.prototype.initializeResults = function(input, callback){
+		var res = FullSearchResults;
+		var self = this;
+		res.getData(input, function(obj){
+			callback(obj);
+		});
+		
+
+		
+	};
+
+	
+	// MainController.prototype.getSearchResultView = function(){
+	// 	return new SongResultCompositeView({
+	// 		model: this.results.model,
+	// 		collection: this.results.collection
+	// 	});
+	// };
+
+	// MainController.prototype.getArtistResultView = function(){
+	// 	return new ArtistCompositeView({
+	// 		model: this.results.model,
+	// 		collection: this.results.artist_collection
+	// 	});
+	// };
+
+	// MainController.prototype.getAlbumResultView = function(){
+	// 	return new AlbumCompositeView({
+	// 		model: this.results.model,
+	// 		collection: this.results.album_collection
+	// 	});
+	// };
 
 	MainController.prototype.getFavoritesSonglistView = function(){
 		return new MainSongCollectionView({
@@ -316,6 +395,10 @@ define(['marionette',
 			this.mainRegion.show(this.getFavoritesSonglistView());
 		},this);
 
+		Backbone.on('show-charts', function(){
+			this.mainRegion.show(this.getChartsView());
+		},this);
+
 		Backbone.on('player:add-comment', function(){
 			this.getLayout();
 		},this);
@@ -339,6 +422,24 @@ define(['marionette',
 		
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));
+		},this);
+
+		Backbone.on('searchbar:show-more', function(input){
+			var self = this;
+			this.initializeResults(input, function(obj){
+				if ((obj.song.length === 0) && (obj.artist.length === 0) && (obj.album.length === 0)){
+					self.mainRegion.show(new NoResultsView());	
+				} else {
+					self.mainRegion.show(new ResultView(obj));
+				}
+
+			//	self.getArtistResultView();
+				//self.getAlbumResultView().render();
+				//self.getArtistResultView().render();
+			});
+			
+			//this.getArtistResultView().render();
+			//this.getAlbumResultView().render();
 		},this);
 	};
 

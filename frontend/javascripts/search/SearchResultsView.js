@@ -5,14 +5,20 @@ define(['marionette'], function(Marionette){
 		template 	: '#searchresults-template',
 		el 			: '#searchresults',
 
+
 		ui: {
-			resultsRegion: '.searchresults-region'
+			resultsRegion: '.searchresults-region',
+			more 		: '.show-more-results'
   		},
 
 		events: {
 			'click @ui.resultsRegion': 'select',
-			'blur @ui.resultsRegion' : 'select'
+			'click .show-more-results' : 'showMore'
 		},
+
+		showMore : function(){
+			alert();
+		}, 
 
 		attachHtml: function(compositeView, childView, index){
 			switch(childView.model.get('type')){
@@ -30,7 +36,6 @@ define(['marionette'], function(Marionette){
 			}
 			
 	    },
-
 		select: function(){
 			this.el.style.display = 'none';
 		}

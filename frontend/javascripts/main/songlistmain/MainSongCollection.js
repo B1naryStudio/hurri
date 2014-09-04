@@ -1,7 +1,6 @@
-define(['backbone', './MainSongModel','../../../app/context'], function(Backbone, MainSongModel, context){
+define(['backbone', './MainSongListModel','../../app/context'], function(Backbone, MainSongModel, context){
 	var MainSongCollection = Backbone.Collection.extend({
-		model: MainSongModel,
-		url: '/api/user/'+context.currentUserModel.attributes._id+'/playlists'
+		model: MainSongModel
 	});
 	return MainSongCollection;
 });
