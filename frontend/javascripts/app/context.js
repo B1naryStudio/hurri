@@ -4,7 +4,8 @@ define(['../song/SongModel',
 	'../main/bars/album/AlbumBarModel',
 	'../main/radio/RadioModel', 
 	'../main/bars/playlist/PlaylistBarModel', 
-	'../songlist/SonglistCollection' 
+	'../songlist/SonglistCollection',
+	'../shared/previousCollection'
 	//'../playlist/PlaylistModel'
 	], 
 	function(SongModel, 
@@ -13,7 +14,8 @@ define(['../song/SongModel',
 		AlbumBarModel, 
 		RadioBarModel, 
 		PlaylistBarModel, 
-		SonglistCollection
+		SonglistCollection,
+		PreviousCollection
 		){
 	var context = {
 			currentSongModel: new SongModel(),
@@ -32,6 +34,7 @@ define(['../song/SongModel',
 			currentRadioBar: new RadioBarModel(),
 			currentPlaylistBar: new PlaylistBarModel(),
 			currentSongCollection: new SonglistCollection(),
+			previousCollection: new SonglistCollection(),
 			toggled: false
 	};
 	console.log(context);

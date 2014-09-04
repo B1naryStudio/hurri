@@ -638,6 +638,17 @@ h3.results-header
 		overflow auto
 		&::-webkit-scrollbar
 			display none
+
+#undo-replace
+	width 100px
+	height 40px
+	padding 5px
+	color lightblue
+	position absolute
+	z-index 20
+	right 10px
+	bottom 35px
+
 .friend
 	padding 2%
 	width 90%
@@ -1083,6 +1094,8 @@ h3.results-header
 		height 30px
 		padding 5px
 		float left
+		&:hover 
+			background SkyBlue
 
 	.main-song-info
 		float left
@@ -1103,13 +1116,15 @@ h3.results-header
 	.main-queue-add
 		width 16px
 		height 16px
-		background url(../images/main/queue.png)
+		background url(../images/main/nothing.png)
 		background-size 16px
 		position absolute
 		z-index 15
 		right 20px
 		top 2px
 		opacity 0
+		&:hover
+			opacity 1 !important
 	.main-like-song
 		width 16px
 		height 16px
@@ -1120,13 +1135,16 @@ h3.results-header
 		right 38px
 		top 2px
 		opacity 0
+		&:hover
+			opacity 1 !important
 		
 	&:hover
 		background #eee
 		.main-share-song
 		.main-like-song
+			opacity 0.5
 		.main-queue-add
-				opacity 0.5
+			opacity 0.5
 
 			
 	.queueposmain

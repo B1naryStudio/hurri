@@ -39,8 +39,8 @@ define(['marionette', './SonglistView', '../app/context', './Behavior', '../play
 
         unqueueSong: function(){
             playlistModel.set({queueNum : 0});
-            for (var i = 0; i < this.collection.length; i ++){
-                this.collection.models[i].set({queuepos: ''});
+            for (var i = 0; i < this.model.collection.length; i ++){
+                this.model.collection.models[i].set({queuepos: ''});
             }
         },
         saveExisting:function(){

@@ -5,7 +5,8 @@ define(['marionette', '../../app/context', '../../playlist/PlaylistModel','clipb
     template : '#main-song-bar',
     events : {
 		'click .main-queue-add' : 'addToQueue',
-		'click .main-like-song' : 'likeSong'
+		'click .main-like-song' : 'likeSong',
+        'click .main-song-cover img': 'playSong'
     },
 
     modelEvents : {
@@ -22,9 +23,14 @@ define(['marionette', '../../app/context', '../../playlist/PlaylistModel','clipb
             self.client.setText('shalala');
         });
     },
+    playSong: function(){
+        var current = this.model.collection.findWhere({current:true});
+        current.set({current:false});
+        Backbone.trigger('song-view:play-song', this.model);
+    },
 
     addToQueue: function(){
-    
+         Backbone.trigger('song-view:add-to-queue', this.model);
     },
 
 	changeCurrent: function(){

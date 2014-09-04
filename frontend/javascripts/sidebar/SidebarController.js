@@ -14,12 +14,13 @@ define(['marionette',
 	'../user/UserModel',
 	'./FollowingsCollectionView',
 	'./FollowingsCollection',
-	 '../main/bars/playlist/PlaylistBarModel'], 
+	 '../main/bars/playlist/PlaylistBarModel',
+	 './UndoPlaylistReplacement'], 
 
 	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsCollectionView, FriendsCollection,
 			NotificationsModel, DefaultView, context, SonglistCollectionView,
 			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel,
-			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel){
+			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel, UndoReplacement){
 	
 	var SidebarController = function(){		
 	
@@ -212,8 +213,39 @@ define(['marionette',
 
 		Backbone.on('main-view:play-songs', function(model_id, collection){
 			this.playlistBarModel._id = model_id;
+			if (context.currentSongCollection.length !== 0){
+				context.previousCollection.reset(context.currentSongCollection.models);
+			}
+			var button = new UndoReplacement();
+			button.render();
+			setTimeout(function(){
+           		$('#undo').empty();
+        	}, 5000);
+			
 			context.currentSongCollection.reset(collection.models);
 			Backbone.trigger('main:play-first');
+		},this);
+
+		Backbone.on('song-view:play-song', function(model){
+			if (context.currentSongCollection.length !== 0){
+				context.previousCollection.reset(context.currentSongCollection.models);
+			}
+			var button = new UndoReplacement();
+			button.render();
+			setTimeout(function(){
+           		$('#undo').empty();
+        	}, 5000);
+        	button.context.hidden = true;
+			context.currentSongCollection.reset(model);
+			Backbone.trigger('main:play-first');
+		},this);
+
+		Backbone.on('songlist-view:play-song', function(i){
+			Backbone.trigger('main:play-at-position', i);
+		},this);
+
+		Backbone.on('song-view:add-to-queue', function(model){
+			context.currentSongCollection.add(model);
 		},this);
 
 		Backbone.on('songlist:save-to-existing-playlist', function(model_id, collection){
