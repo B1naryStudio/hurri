@@ -5,7 +5,8 @@ define(['marionette', '../app/context', '../playlist/PlaylistModel'], function(M
 
 		events : {
 		 	'click .delete-song-from-list'  : 'deleteSong',
-			'click .add-song-to-queue' : 'addSongToQueue'
+			'click .add-song-to-queue' : 'addSongToQueue',
+			'dblclick .sidebar-song-img-box img' : 'playSong'
 		 },
 		
 		modelEvents : {
@@ -15,6 +16,15 @@ define(['marionette', '../app/context', '../playlist/PlaylistModel'], function(M
 
 		ui : {
 			song : '.sidebar-song-wrap'
+		},
+
+		playSong: function(){
+			for (var i = 0; i < this.model.collection.length; i++){
+				if (this.model.cid === this.model.collection.models[i].cid){
+					Backbone.trigger('songlist-view:play-song', i);
+				}
+			}
+			
 		},
 
 		deleteSong: function(){

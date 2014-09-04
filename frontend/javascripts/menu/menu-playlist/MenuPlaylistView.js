@@ -1,4 +1,5 @@
-define(['marionette', '../../app/context'], function(Marionette, context){
+define(['marionette', '../../app/context', '../../player/PlayerModel'], 
+	function(Marionette, context, PlayerModel){
 	var MenuPlaylistView = Marionette.ItemView.extend({
 		className: 'menu-playlist-item',
   		template : '#menu-playlist-template',

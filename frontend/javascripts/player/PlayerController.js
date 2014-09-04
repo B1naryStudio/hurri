@@ -29,6 +29,23 @@ define(['marionette', './PlayerView', '../app/context', './PlayerModel', '../pla
 			});
 			this.playerModel.startTrack();
 		}, this);
+
+		Backbone.on('main:play-at-position', function(i){
+			var self = this;
+			playlistModel.setTrackFromCollection(i);
+			this.playerModel.stopTrack(function(){
+				self.playerModel.setTrackInfoParams();
+			});
+			this.playerModel.startTrack();
+		}, this);
+
+		Backbone.on('check-play', function(model){
+			var self = this;
+			if (self.playerModel.attributes.playback === 'pause'){
+				Backbone.trigger('playlist-open-and-play', model);
+			}
+			
+		}, this);
 	};
 	return PlayerController;
 });

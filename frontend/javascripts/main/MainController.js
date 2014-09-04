@@ -249,7 +249,11 @@ define(['marionette',
 				playlistId : model.attributes._id
 			})
 		};
-		this.mainsonglist.collection.fetch();
+		this.mainsonglist.collection.fetch({
+			success: function () {
+          		Backbone.trigger('check-play', model);
+       		}
+		});
 		this.mainsonglist.view = this.getMainSonglistView();
 	};
 
@@ -407,6 +411,12 @@ define(['marionette',
 			this.initializeMainSonglist(model);
 			this.mainRegion.show(this.getMainSonglistView());
 		},this);
+
+		Backbone.on('playlist-open-and-play', function(model){
+			Backbone.trigger('main-view:play-songs', model.attributes._id, this.mainsonglist.collection);
+		},this);
+
+		
 
 		Backbone.on('show-statistic-listened', function(){
 			this.mainRegion.show(this.getListenedView());
