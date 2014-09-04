@@ -36,9 +36,9 @@ module.exports = function (app) {
 
 	app.get('/search', function(req, res) {
 		async.parallel([
-			albumRepository.getByTitle.bind(albumRepository, req.query.query),
-			artistRepository.getByName.bind(artistRepository, req.query.query),
-			trackRepository.getByTitle.bind(trackRepository, req.query.query)
+			albumRepository.getByTitle.bind(albumRepository, req.query.query, req.query.limit, req.query.quick),
+			artistRepository.getByName.bind(artistRepository, req.query.query, req.query.limit, req.query.quick),
+			trackRepository.getByTitle.bind(trackRepository, req.query.query, req.query.limit, req.query.quick)
 		], function(err, results){
 			res.json(results);
 		});

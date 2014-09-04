@@ -15,10 +15,13 @@ ArtistRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-ArtistRepository.prototype.getByName = function(name, callback) {
+ArtistRepository.prototype.getByName = function(name, limit, quick, callback) {
+	console.log(limit);
 	var model = this.model;
-	regexp = new RegExp('^'+name, "i");
-	var query = model.find({name: regexp}).limit(3);
+	var lim = limit || '';
+	var q = quick || '';
+	regexp = new RegExp(q+name, "i");
+	var query = model.find({name: regexp}).limit(lim);
 	query.exec(callback);
 };
 

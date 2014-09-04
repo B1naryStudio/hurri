@@ -15,10 +15,12 @@ TrackRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-TrackRepository.prototype.getByTitle = function(title, callback) {
+TrackRepository.prototype.getByTitle = function(title, limit, quick, callback) {
 	var model = this.model;
-	regexp = new RegExp('^' + title, "i");
-	var query = model.find({title: regexp}).limit(3);
+	var lim = limit || '';
+	var q = quick || '';
+	regexp = new RegExp(q + title, "i");
+	var query = model.find({title: regexp}).limit(lim);
 	query.exec(callback);
 };
 

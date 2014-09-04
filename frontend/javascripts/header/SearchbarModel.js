@@ -13,9 +13,9 @@ function(Backbone, SearchResultsCollection){
 		
 		getSearchResult: function(input, callback){
 			var self = this;
-				$.getJSON('/search',{query: input}, function(data){
+				$.getJSON('/search',{query: input, limit: 3, quick : '^'}, function(data){
 					var searchResultsData = data;
-					console.log(data);
+					console.log('Quick search ', data);
 					if (searchResultsData.length !== 0){
 						for (i= 0; i < 3; i++){
 							searchResultsData[i] = searchResultsData[i].slice(0,3);

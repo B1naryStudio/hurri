@@ -16,10 +16,12 @@ AlbumRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-AlbumRepository.prototype.getByTitle = function(name, callback) {
+AlbumRepository.prototype.getByTitle = function(name, limit, quick, callback) {
 	var model = this.model;
-	regexp = new RegExp('^' + name, "i");
-	var query = model.find({title: regexp}).limit(3);
+	var lim = limit || '';
+	var q = quick || '';
+	regexp = new RegExp(q + name, "i");
+	var query = model.find({title: regexp}).limit(lim);
 	query.exec(callback);
 };
 

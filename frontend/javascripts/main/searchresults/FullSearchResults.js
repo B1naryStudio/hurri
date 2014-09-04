@@ -6,7 +6,8 @@ define(['marionette', './AlbumCollection', './ArtistCollection', '../songlistmai
 	};
 
 	SearchResults.prototype.getSearchResult = function(input, callback){
-		$.getJSON('/search',{query: input}, function(data){
+		$.getJSON('/search',{query: input, limit: 20, quick : '^'}, function(data){
+			console.log("Full data", data);
 			callback(data);
 		});
 	};
