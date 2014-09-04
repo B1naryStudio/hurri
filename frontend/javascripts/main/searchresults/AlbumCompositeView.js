@@ -2,7 +2,7 @@ define(['marionette', './AlbumTileView','clipboard'],
 	function(Marionette, ResultTileView, ZeroClipboard){
 	var AlbumCompositeView = Marionette.CompositeView.extend({
 		el: '#result-album-composite',
-		template: '#result-songlist-template',
+		template: '#result-albumlist-template',
 		events: {
 			'click #playlist-avatar-header':'showMore'
 		},

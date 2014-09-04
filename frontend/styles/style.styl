@@ -203,6 +203,49 @@ body
 	.show-more-results
 		height 20px
 
+.result-album-composite
+.result-artist-composite
+.result-song-composite
+	display block
+		
+.result-header
+	font-weight bold
+	color #4B90E7
+	display block
+	width 98%
+	padding-left 2%
+	background  linear-gradient(to bottom, rgba(240,240,240,.9) 0, rgba(250,250,250,.9) 100%)
+	padding-top 3px
+	padding-bottom 3px
+.show-full-song-search
+.show-full-album-search
+.show-full-artist-search
+	font-weight normal
+	width 99%
+	padding-left 1%
+	color black
+	font-size 12px
+	display block
+
+.tile-album-wrapper
+.tile-artist-wrapper
+	display inline-block
+	width 100px
+	height 120px
+	&:last-child
+		clear none
+	img.result-tile-icon
+		width 90px
+		height 90px
+		padding 5px
+	.result-tile-name
+		display block
+		font-size 12px
+		height 13px
+		width 100%
+		text-overflow hidden
+		overflow hidden
+
 h3.results-header
 	text-align center !important
 	color #757575

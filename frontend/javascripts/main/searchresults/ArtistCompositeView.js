@@ -2,7 +2,7 @@ define(['marionette', './ArtistTileView','clipboard'],
 	function(Marionette, ResultTileView, ZeroClipboard){
 	var ArtistCompositeView = Marionette.CompositeView.extend({
 		el: '#result-artist-composite',
-		template: '#result-songlist-template',
+		template: '#result-artistlist-template',
 		events: {
 			'click #playlist-avatar-header':'showMore'
 		},

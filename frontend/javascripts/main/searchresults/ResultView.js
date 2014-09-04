@@ -22,9 +22,10 @@ define(['marionette', './SongResultCompositeView', './ArtistCompositeView','./Al
 				collection: this.data.album
 			});
 
-			songResultView.render();
+			
 			artistResultView.render();
 			albumResultView.render();
+			songResultView.render();
 		}
 	});
 
