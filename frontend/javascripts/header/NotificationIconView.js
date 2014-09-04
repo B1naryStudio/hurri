@@ -13,6 +13,7 @@ function(Marionette, NotificationView, context){
 		},
 		
 		showNotifications: function(){
+			this.model.set('unread', 0);
 			Backbone.trigger('show-notifications');
 		}
 	});

@@ -20,7 +20,7 @@ function(Marionette, HeaderView, UserbarView, SearchbarModel,
 			}),
 
 			notificationIcon: new NotificationIconView({
-				model: new NotificationIconModel()
+				model: new NotificationIconModel({unread: window._injectedData.user.alerts.length})
 			}),
 		},
 
