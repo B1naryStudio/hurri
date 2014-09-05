@@ -1,4 +1,5 @@
-define(['marionette', './album/AlbumCollection', './artist/ArtistCollection', '../../shared/songlistmain/MainSongCollection'],
+define(['marionette', './album/AlbumCollection', './artist/ArtistCollection', 
+	'../../shared/songlistmain/MainSongCollection'],
 	function(Marionette, AlbumResultCollection, ArtistResultCollection, SongCollection){
 	
 	var SearchResults = function(){		
