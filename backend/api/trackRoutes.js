@@ -1,67 +1,77 @@
 var trackRepository = require('../repositories/trackRepository');
-var _ = require('underscore');
+var apiResponse = require('../middleware/apiResponse');
 
 module.exports = function(app){
 	app.get('/api/track/id/:id', function(req, res, next){
 		trackRepository.getById(req.params.id, function(err, data){
-			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.get('/api/track/:name', function(req, res, next){
 		trackRepository.getByTitle(req.params.name, function(err, data){
-			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.get('/api/track/:id/title', function(req, res, next){
 		trackRepository.getTitle(req.params.id, function(err, data){
-			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.get('/api/track/:id/lyrics', function(req, res, next){
 		trackRepository.getLirycs(req.params.id, function(err, data){
-			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.get('/api/track/:id/url', function(req, res, next){
 		trackRepository.getUrl(req.params.id, function(err, data){
-			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.get('/api/track/:id/comments', function(req, res, next){
 		trackRepository.getComments(req.params.id, function(err, data){
-			var status = _.isEmpty(data) ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.post('/api/track', function(req, res, next){
 		trackRepository.add(req.body, function(err, data){
-			var status = err ? 400 : 201;
-			res.status(status).json(data);
+			res.successStatus = 201;
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 
 	app.put('/api/track/:id/comments', function(req, res, next){
 		trackRepository.addComments(req.params.id, req.body, function(err, data){
-			var status = err ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 	
 	app.delete('/api/track/:id', function(req, res, next){
 		trackRepository.delete(req.params.id, function(err, data){
-			var status = err ? 400 : 200;
-			res.status(status).json(data);
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+	}, apiResponse);
 };
