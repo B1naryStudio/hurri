@@ -218,10 +218,6 @@ define(['marionette',
 			}
 			var button = new UndoReplacement();
 			button.render();
-			// setTimeout(function(){
-   //         		$('#undo').empty();
-   //      	}, 5000);
-			
 			context.currentSongCollection.reset(collection.models);
 			Backbone.trigger('main:play-first');
 		},this);
@@ -232,10 +228,6 @@ define(['marionette',
 			}
 			var button = new UndoReplacement();
 			button.render();
-			// setTimeout(function(){
-   //         		$('#undo').empty();
-   //      	}, 5000);
-        	// button.context.hidden = true;
 			context.currentSongCollection.reset(model);
 			Backbone.trigger('main:play-first');
 		},this);

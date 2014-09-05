@@ -9,6 +9,7 @@ define(['marionette', '../app/context'],
 		 undoReplacement: function(){
 		 	context.currentSongCollection.reset(context.previousCollection.models);
 		 	Backbone.trigger('main:play-first');
+		 	this.$el.empty();
 		 }
 	});
 	return UndoView;
