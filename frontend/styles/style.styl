@@ -127,7 +127,7 @@ body
 		border-top-left-radius 3px
 		border-bottom-left-radius 3px
 		box-sizing border-box
-
+		padding 0 10px
 		&:focus
 			outline none
 
@@ -154,14 +154,16 @@ body
 	position absolute
 	width 300px
 	height auto
-	max-height 500px 
+	max-height 500px
+	margin-top -7px
 	overflow hidden
 	overflow-y auto
-	background-color #fff
-	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
 	display none
 	cursor pointer
 	z-index 30
+	background-color #fff
+	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
+	border-radius 0 0 3px 3px
 
 	.searchresults-region
 		width 290px
@@ -202,6 +204,7 @@ body
 				margin-left 5px
 	.show-more-results
 		height 20px
+		padding 0 10px
 
 .result-album-composite
 .result-artist-composite
@@ -276,9 +279,6 @@ h3.results-header
 	box-sizing border-box
 
 	#avatar
-		width 200px
-		height auto
-		max-height 500px
 		float left
 
 	#userinfo
@@ -455,15 +455,13 @@ h3.results-header
 	width 25%
 	top 120px
 	bottom 30px
-	overflow-y scroll
-
+	box-shadow 2px 0 5px rgba(50,50,50,0.5)
+	background #eee
+	z-index 1
 	&::-webkit-scrollbar
 		display none
 	#menu
-		background lightgrey
 		width 100%
-		float left
-
 
 	#menu li
 		height 38px
@@ -508,36 +506,35 @@ h3.results-header
 		&:hover 
 			background Snow
 	#playlist-menu-container
-		width 98%
 		margin-left 0px
-		margin-top 160px
 		.menu-playlist-item
-			width 100%
 			height 30px
+			line-height 30px
+			vertical-align middle
+			position relative
+			&:hover
+				background lightblue
 			.playlist-name-menu
-				height 30px
-				width 90%
-				background #eee
 				color black
+				padding-right 35px
+				padding-left 15px
 				cursor pointer
-				float left
-				&:hover
-					background lightblue
-					.delete-menu-playlist
-						opacity 0.5
+				border-bottom 1px solid #ddd
 			.delete-menu-playlist
-				width 10%
+				width 30px
 				height 30px
-				background url('../images/notifications/bin.png') no-repeat
+				background url('../images/notifications/bin.png') no-repeat 50%
 				background-size 16px
-				float left
-				opacity 1
+				position absolute
+				right 0
+				top 0
+				opacity 0.5
 				&:hover
-					opacity 0.8
+					cursor pointer
+					opacity 1
 						
 					
 		.add-playlist-button
-			width 100%
 			background #c0c0c0
 			padding 2% 0 2% 2%
 			cursor pointer
@@ -553,6 +550,9 @@ h3.results-header
 
 	.editing .edit
 		display block
+		width 100%
+		padding 7px 10px
+		box-sizing border-box
 
 #songlist-navi
 	width 100%
@@ -561,47 +561,34 @@ h3.results-header
 	top 0px
 	height 40px
 
-	&:hover 
+	> div
+		color white
+		text-align center
+		line-height 40px
+		vertical-align middle
+		width 33.3%
+		height 40px
+		margin 0
+		float left
+		cursor pointer
+		background #333
+		border-left 1px solid #fff
+		box-sizing border-box
+		&:first-child
+			border-left none
+
+	&:hover
 		opacity 1
 	#unqueue
-		width 33.9%
-		margin-right 0.1%
-		margin-top 0px
-		float left
-		color white
-		background #333
-		text-align center
-		padding 7px 0 2px
-		cursor pointer
-		height 30px
-		&:hover 
+		&:hover
 			background #3ac
 	#save-playlist-from-queue
-		width 33.9%
-		margin-top 0px
-		margin-right 0.1%
-		float left
-		color white
-		text-align center
-		background #333
-		padding 7px 0 2px
-		cursor pointer
-		height 30px
-		&:hover 
+		&:hover
 			background #3ac
 		.can-save-playlist
 			opacity 1
 	#save-playlist-as
-		width 32%
-		margin-top 0px
-		float left
-		color white
-		text-align center
-		background #333
-		padding 7px 0 2px
-		cursor pointer
-		height 30px
-		&:hover 
+		&:hover
 			background #3ac
 	
 .edit2 
@@ -673,23 +660,24 @@ h3.results-header
 			width 12px
 			height 12px
 #friends-navi
-	width 100%
 	background Snow
 	opacity 1
-	top 0px
-	height 40px
-.friends-navi
-	width 49.6%
-	margin-right 0.2%
-	margin-top 0px
-	float left
-	color white
-	background #333
-	text-align center
-	padding 10px 0 10px
-	cursor pointer
-	&:hover 
-		background #39b
+	.friends-navi
+		height 40px
+		line-height 40px
+		vertical-align middle
+		width 50%
+		float left
+		color white
+		background #333
+		text-align center
+		cursor pointer
+		border-left 1px solid #fff
+		box-sizing border-box
+		&:first-child
+			border-left none
+		&:hover
+			background #39b
 
 .notification-message 
 	display block
@@ -1012,62 +1000,85 @@ h3.results-header
 	height 200px
 	position relative
 	float left
+	&:hover
+		.playlist-right
+			position relative
+			height auto
+			z-index 10
+			box-shadow 0 1px 2px #9ACDDD
+	.playlist-date
+		font-size 10px
+		color #333
 
 	.playlist-left
-		width 200px
+		width 190px
 		float left
 		height 196px
 		padding 1px
+		margin-right 10px
 		text-align center
+		position relative
 		background url(../images/main/cdholder.png) no-repeat
-		background-size 94%
+		background-size 100%
 		.play-without-open
+			display none
 			width 30px
 			height 20px
 			background linear-gradient(to top, #eee 0%, #ddd 100%)
 			border-radius 2px
 			border 1px solid lightgray
 
-		.playlist-name 
-			margin-top 3%
-			height 15px
-			background white
-			opacity 0.5
+		.playlist-name
+			font-size 13px
+			margin-top 10px
+			margin-bottom 10px
+			background rgba(255,255,255,0.5)
 		.playlist-total
-			margin-top 50px
+			font-size 11px
+			margin-top 60px
 
 		.playlist-play
-			width 50px
-			height 50px
-			background url(../images/main/play.gif) no-repeat
-			background-size 50px
+			width 182px
+			height 166px
 			position absolute
-			left 75px
-			top 62px
-
+			left 3px
+			top 2px
 			&:hover
-				background url(../images/main/play.gif) no-repeat
-				background-size 50px
-				opacity 0.8
-			&:active 	
-				background url(../images/main/play.gif) no-repeat
-				background-size 50px
-				opacity 0.5
+				cursor pointer
+				&:after
+					content ''
+					position absolute
+					left 50%
+					top 50%
+					margin-top -18px
+					margin-left -15px
+					width 30px
+					height 36px
+					background: url('/images/player/player.png') no-repeat -575px 0
 
 
 	.playlist-right
-		padding 1px
+		padding 5px
+		margin-top 3px
 		float left
 		width 200px
-		background #ddd
-		height 176px
+		background #EBFAFA
+		height 170px
+		min-height 170px
 		text-align center
 		overflow hidden
+		box-sizing border-box
+		.songs-list
+			text-align left
+			list-style-type decimal-leading-zero
+			list-style-position inside
 		.songname-playlist
 			text-overflow ellipsis
+			overflow hidden
 			font-size 12px
 			height 15px
-			width 100%
+			width 90%
+			white-space nowrap
 
 #charts-header
 	width 100%
@@ -1092,10 +1103,11 @@ h3.results-header
 	width 90%
 	height 40px
 	margin auto
-	border-radius 5px
-	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
 	margin-bottom 2px
 	position relative
+	background #fff
+	border-radius 5px
+	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
 	&.activesong
 		background lightblue
 	.main-share-song
@@ -1175,10 +1187,12 @@ h3.results-header
 	opacity 0.8
 
 #header-playlist-wrapper
+	header_playlist_bg = rgb(243, 251, 255)
 	width 100%
-	background Skyblue
 	position relative
-	height 180px
+	min-height 200px
+	background header_playlist_bg
+	box-shadow 0 10px 20px 10px  header_playlist_bg
 
 	#playlist-avatar-header 
 		width 190px
@@ -1199,9 +1213,8 @@ h3.results-header
 			font-size 30px
 			color Dark
 		#playlist-header-tracks-num
-			font-size 18px
-			color darkorange	
-
+			font-size 13px
+			color #4f4f51
 
 button
 	margin auto 3px 
@@ -1215,87 +1228,62 @@ button
 	float left
 	cursor pointer
 	margin-top 22px
-	background-image: url(../images/player/player.png)
+	background-image: url(/images/player/player.png)
 	background-repeat: no-repeat
 	background-size 400px 64px
-.player-button:focus
-	outline 0
-.player-button:active
-	position relative
-	top 1px
+	&:focus
+		outline 0
+
 #play-button
 	height 30px
 	width 30px
 	margin-top 10px
-#play-button.pause
-	background: url('../images/player/player.png') no-repeat -575px 0;
-	width: 40px;
-	height: 40px;
-#play-button.pause:hover
-	background: url('../images/player/player.png') no-repeat -575px -256px;
-	width: 40px;
-	height: 40px;
-#play-button.pause:active
-	background: url('../images/player/player.png') no-repeat -575px -256px;
-	width: 40px;
-	height: 40px;
+	&.pause
+		background: url('/images/player/player.png') no-repeat -575px 0;
+		width: 40px;
+		height: 40px;
+		&:hover
+			background-position: -575px -256px;
 
-#play-button.play
-	background: url('../images/player/player.png') no-repeat -637px 0;
-	width: 40px;
-	height: 40px;
-#play-button.play:hover
-	background: url('../images/player/player.png') no-repeat -637px -255px;
-	width: 40px;
-	height: 40px;
-#play-button.play:active
-	background: url('../images/player/player.png') no-repeat -637px -255px;
-	width: 40px;
-	height: 40px;
+	&.play
+		background: url('/images/player/player.png') no-repeat -640px 0;
+		width: 40px;
+		height: 40px;
+		&:hover
+			background-position: -640px -256px;
+
 #next-button
 	margin-top 15px
-	background: url('../images/player/player.png') no-repeat -447px 0;
+	background: url('/images/player/player.png') no-repeat -447px 0;
 	width 3%
 	height: 42px;
-#next-button:hover
-	background: url('../images/player/player.png') no-repeat -447px -256px;
-	width 3%
-	height: 42px;
-#next-button:active
-	background: url('../images/player/player.png') no-repeat -447px -256px;
-	width 3%
-	height: 42px;
-#next-button:disabled
-	background: url('../images/player/player.png') no-repeat -447px -192px;
-	width 3%
-	height: 42px;
+	&:hover
+		background-position: -447px -256px;
+	&:active
+		background-position: -447px -256px;
+	&:disabled
+		background-position: -447px -192px;
+
 #previous-button
 	margin-top 15px
 	background: url('../images/player/player.png') no-repeat -512px 0;
 	width 3%
 	height: 42px;
-#previous-button:hover
-	background: url('../images/player/player.png') no-repeat -512px -256px;
-	width 3%
-	height: 42px;
-#previous-button:active
-	background: url('../images/player/player.png') no-repeat -512px -256px;
-	width 3%
-	height: 42px;
-#previous-button:disabled
-	background: url('../images/player/player.png') no-repeat -512px -192px;
-	width 3%
-	height: 42px;
+	&:hover
+		background-position: -512px -256px;
+	&:active
+		background-position: -512px -256px;
+	&:disabled
+		background-position: -512px -192px;
+
 #volume
 	margin 21px 0 0 5px
-#volume.unmute
-	background: url('../images/player/player.png') no-repeat -384px 0;
 	width: 2%;
 	height: 28px;
-#volume.mute
-	background: url('../images/player/player.png') no-repeat 0 0;
-	width: 2%;
-	height: 28px;
+	background: url('/images/player/player.png') no-repeat -384px 0;
+	&.mute
+		background-position: 0 0;
+
 #volume-range
 	width 10%
 #playback-range
@@ -1303,103 +1291,70 @@ button
 
 #shuffle-button
 	width 32px
-#shuffle-button.shuffleoff
-	background: url('../images/player/player.png') no-repeat -256px -65px;
-	width: 2%;
-	height: 18px;
-#shuffle-button.shuffleoff:hover
-	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 2%;
-	height: 18px;
-#shuffle-button.shuffleoff:active
-	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 2%;
-	height: 18px;
+	&.shuffleoff
+		width: 2%;
+		height: 18px;
+		background: url('/images/player/player.png') no-repeat -256px -65px;
+		&:hover
+			background-position: -256px -1px;
 
-#shuffle-button.shuffleon
-	background: url('../images/player/player.png') no-repeat -256px -129px;
-	width: 2%;
-	height: 18px;
-#shuffle-button.shuffleon:hover
-	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 2%;
-	height: 18px;
-#shuffle-button.shuffleon:active
-	background: url('../images/player/player.png') no-repeat -256px -1px;
-	width: 2%;
-	height: 18px;
+	&.shuffleon
+		background: url('../images/player/player.png') no-repeat -256px -129px;
+		width: 2%;
+		height: 18px;
+		&:hover
+			background-position: -256px -1px;
 
 #repeat-button
 	width 32px
 	height 25px
-#repeat-button.song
-	background: url('../images/player/player.png') no-repeat -192px -129px;
-	width: 2%;
-	height: 15px;
-#repeat-button.song:hover
-	background: url('../images/player/player.png') no-repeat -192px -1px;
-	width: 2%;
-	height: 15px;
-#repeat-button.song:active
-	background: url('../images/player/player.png') no-repeat -192px -1px;
-	width: 2%;
-	height: 15px;
+	&.song
+		background: url('../images/player/player.png') no-repeat -192px -129px;
+		width: 2%;
+		height: 15px;
+		&:hover
+			background: url('../images/player/player.png') no-repeat -192px -1px;
+		&:active
+			background: url('../images/player/player.png') no-repeat -192px -1px;
 
-#repeat-button.none
-	background: url('../images/player/player.png') no-repeat -320px -64px;
-	width: 2%;
-	height: 17px;
-#repeat-button.none:hover
-	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 2%;
-	height: 17px;
-#repeat-button.none:active
-	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 2%;
-	height: 17px;
+	&.none
+		background: url('../images/player/player.png') no-repeat -320px -64px;
+		width: 2%;
+		height: 17px;
+		&:hover
+			background: url('../images/player/player.png') no-repeat -320px 0;
+		&:active
+			background: url('../images/player/player.png') no-repeat -320px 0;
 
-#repeat-button.album
-	background: url('../images/player/player.png') no-repeat -320px -128px;
-	width: 2%;
-	height: 17px;
-#repeat-button.album:hover
-	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 2%;
-	height: 17px;
-#repeat-button.album:active
-	background: url('../images/player/player.png') no-repeat -320px 0;
-	width: 2%;
-	height: 17px;
+	&.album
+		background: url('../images/player/player.png') no-repeat -320px -128px;
+		width: 2%;
+		height: 17px;
+		&:hover
+			background: url('../images/player/player.png') no-repeat -320px 0;
+		&:active
+			background: url('../images/player/player.png') no-repeat -320px 0;
 
 
 #like-button
 	background: url('../images/player/player.png') no-repeat -64px -65px;
 	width: 2%;
 	height: 16px;
-#like-button.true
-	background: url('../images/player/player.png') no-repeat -64px -129px;
-	width: 2%;
-	height: 16px;	
-#like-button:hover
-	background: url('../images/player/player.png') no-repeat -64px -1px;
-	width: 2%;
-	height: 16px;
-#like-button:active
-	background: url('../images/player/player.png') no-repeat -64px -129px;
-	width: 2%;
-	height: 16px;
+	&:hover
+		background: url('../images/player/player.png') no-repeat -64px -1px;
+	&:active
+		background: url('../images/player/player.png') no-repeat -64px -129px;
+	&.true
+		background: url('../images/player/player.png') no-repeat -64px -129px;
+
 #comment-button
 	background: url('../images/player/player.png') no-repeat -128px -65px;
 	width: 20px;
 	height: 18px;
-#comment-button:hover
-	background: url('../images/player/player.png') no-repeat -128px -1px;
-	width: 20px;
-	height: 18px;	
-#comment-button:active
-	background: url('../images/player/player.png') no-repeat -128px -129px;
-	width: 20px;
-	height: 18px;			
+	&:hover
+		background: url('../images/player/player.png') no-repeat -128px -1px;
+	&:active
+		background: url('../images/player/player.png') no-repeat -128px -129px;
 
 input[type='range'] {
 	cursor pointer

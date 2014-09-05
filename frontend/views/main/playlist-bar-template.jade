@@ -3,15 +3,14 @@ script#playlist-bar(type='text/template')
 		.play-without-open play
 		.playlist-name 
 			{{-name}}
-		.playlist-date 
+		.playlist-date
 			{{-created}}
 		.playlist-cover
-		.playlist-total 
-			span Total tracks {{-totalTracks}}
+		.playlist-total
+			span Total tracks: {{-tracks.length}}
 		.playlist-play
 	.playlist-right
-		span Tracks:
-		{{for (var i = 0; i < tracks.length; i ++){}}
-		div.songname-playlist {{-tracks[i].artist}} {{-tracks[i].title}}
-		{{}}}
-		
+		ol.songs-list
+			{{for (var i = 0; i < tracks.length; i ++){}}
+			li.songname-playlist{{-tracks[i].artist}} {{-tracks[i].title}}
+			{{}}}
