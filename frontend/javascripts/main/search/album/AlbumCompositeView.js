@@ -1,5 +1,5 @@
-define(['marionette', './AlbumTileView','clipboard'], 
-	function(Marionette, ResultTileView, ZeroClipboard){
+define(['marionette', './AlbumTileView'], 
+	function(Marionette, ResultTileView){
 	var AlbumCompositeView = Marionette.CompositeView.extend({
 		el: '#result-album-composite',
 		template: '#result-albumlist-template',
@@ -9,11 +9,6 @@ define(['marionette', './AlbumTileView','clipboard'],
 		childView: ResultTileView,
 		showMore: function(){
 			Backbone.trigger('album-result-composite:show-more');
-		},
-		onShow: function(){
-			ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
-									trustedDomains: location.host } );
-			this.client = new ZeroClipboard( this.$(".main-share-song"));
 		}
 	});
 	return AlbumCompositeView;
