@@ -4,7 +4,7 @@ define(['marionette',
 	'./song/SongView', 
 	'./user/UserView', 
 	'../app/context', 
-	'./explorer/album/tiles/AlbumBarCollection', 
+	'./explorer/album/tiles/AlbumCollection', 
 	'./explorer/album/tiles/AlbumBarCompositeView',
 	'./search/NotFoundView',
 	'./radio/tiles/RadioCollection',
@@ -26,7 +26,7 @@ define(['marionette',
 	 './search/GetSearchResults',
 	  './search/NoResultsView',
 	  './search/ResultView',
-	  './explorer/album/tiles/AlbumBarModel',
+	  './explorer/album/tiles/AlbumModel',
 	  './radio/tiles/RadioModel',
 	  ],
 	function(Marionette, 
@@ -137,7 +137,7 @@ define(['marionette',
 
 	MainController.prototype.initializePlaylistBar = function(){
 		this.playlist = {
-			model: context.currentPlaylistBar,
+			model: new PlaylistBarModel(),
 			collection: new PlaylistBarCollection(window._injectedData.playlists)
 		};
 

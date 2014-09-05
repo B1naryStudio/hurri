@@ -1,5 +1,5 @@
-define(['marionette', './album/AlbumCollection', './artist/ArtistCollection', 
-	'../../shared/songlistmain/MainSongCollection'],
+define(['marionette', '../explorer/album/tiles/AlbumCollection', '../explorer/artist/tiles/ArtistCollection', 
+	'../../shared/playlist/SongCollection'],
 	function(Marionette, AlbumResultCollection, ArtistResultCollection, SongCollection){
 	
 	var SearchResults = function(){		
@@ -26,7 +26,7 @@ define(['marionette', './album/AlbumCollection', './artist/ArtistCollection',
 	};
 
 	SearchResults.prototype.getSongCollection = function(){
-		return new SongCollection(this.data[2]);
+		return new SongCollection(this.data[2], {playlistId:'none'});
 	};
 
 	SearchResults.prototype.getArtistCollection = function(){

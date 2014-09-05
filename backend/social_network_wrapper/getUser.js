@@ -35,9 +35,6 @@ var playlistObject = {
 };
 function getUser (profile, token, auth, done){
 	userRepository.getUserAuth(profile._json.id, function(err, data){
-			//console.log('err');
-			//console.log(err);
-			//console.log('err end');
 			if(!data){ console.log('add');
 				if(auth === 'tw'){
 					userRepository.add({
