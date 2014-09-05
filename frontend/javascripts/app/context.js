@@ -1,29 +1,20 @@
 define(['../shared/song/SongModel',
 	'../shared/notification/NotificationsCollection', 
 	'../shared/user/UserModel', 
-	'../main/explorer/album/tiles/AlbumBarModel',
-	'../main/radio/tiles/RadioModel', 
 	'../main/playlists/tiles/PlaylistBarModel', 
-	'../sidebar/songlist/SonglistCollection',
-	'../shared/previousCollection'
+	'../sidebar/songlist/SonglistCollection'
 	], 
 	function(SongModel, 
 		NotificationCollection, 
-		UserModel, 
-		AlbumBarModel, 
-		RadioBarModel, 
+		UserModel,
 		PlaylistBarModel, 
-		SonglistCollection,
-		PreviousCollection
-		){
+		SonglistCollection){
 	var user = JSON.stringify(window._injectedData.user) + JSON.stringify(window._injectedData.alerts);
 
 	var context = {
 			currentSongModel: new SongModel(),
 			notificationCollection: new NotificationCollection(window._injectedData.alerts),
 			currentUserModel: new UserModel(window._injectedData.user),
-			currentAlbumBar: new AlbumBarModel(),
-			currentRadioBar: new RadioBarModel(),
 			currentPlaylistBar: new PlaylistBarModel(),
 			currentSongCollection: new SonglistCollection(),
 			previousCollection: new SonglistCollection(),

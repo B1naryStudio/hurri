@@ -25,7 +25,10 @@ define(['marionette',
 	 '../units/HtmlAudioHandler',
 	 './search/GetSearchResults',
 	  './search/NoResultsView',
-	  './search/ResultView'],
+	  './search/ResultView',
+	  './explorer/album/tiles/AlbumBarModel',
+	  './radio/tiles/RadioModel',
+	  ],
 	function(Marionette, 
 		PlaylistsView,
 		ListenedView, 
@@ -53,7 +56,10 @@ define(['marionette',
 		audioHandler,
 		FullSearchResults,
 		NoResultsView,
-		ResultView){
+		ResultView,
+		AlbumBarModel,
+		RadioBarModel
+		){
 	
 	var MainController = function(){		
 		
@@ -148,7 +154,7 @@ define(['marionette',
 	MainController.prototype.initializeAlbums = function(){
 		this.album = {
 			collection: new AlbumBarCollection(),
-			model: context.currentAlbumBar
+			model: new AlbumBarModel()
 		};
 
 		this.album.collection.add([
@@ -176,7 +182,7 @@ define(['marionette',
 	MainController.prototype.initializeRadio = function(){
 		this.radio = {
 			collection: new RadioBarCollection(),
-			model: context.currentRadioBar
+			model: new RadioBarModel()
 		};
 
 		this.radio.collection.add([
