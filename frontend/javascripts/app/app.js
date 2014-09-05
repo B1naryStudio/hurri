@@ -10,11 +10,11 @@ define(['underscore', 'units/SocketHandler', 'marionette', './AppController'], f
 
 	MyApp.addRegions({
 		footerRegion: '#footer',
-		headerRegion: '#header',
-		mainRegion: '#main',
-		menuRegion: '#menu',
-		playerRegion: '#player',
-		sidebarRegion: '#sidebar'
+		headerRegion: '#header'//,
+	//	mainRegion: '#main',
+	//	menuRegion: '#menu',
+	//	playerRegion: '#player',
+	//	sidebarRegion: '#sidebar'
 	});
 
 	MyApp.on('start', function(){

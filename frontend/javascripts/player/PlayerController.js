@@ -1,5 +1,5 @@
-define(['marionette', './PlayerView', '../app/context', './PlayerModel', '../playlist/PlaylistModel'], 
-	function(Marionette, PlayerView, context, PlayerModel, playlistModel ){
+define(['marionette', './PlayerView', './PlayerModel', '../shared/playlist/PlaylistModel'], 
+	function(Marionette, PlayerView, PlayerModel, playlistModel ){
 	
 	var PlayerController = function(){	
 		

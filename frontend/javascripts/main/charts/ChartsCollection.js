@@ -1,4 +1,4 @@
-define(['backbone', '../../song/SongModel'],
+define(['backbone', '../../shared/song/SongModel'],
 function(Backbone, SongModel){
 
 	var ChartsCollection = Backbone.Collection.extend({
