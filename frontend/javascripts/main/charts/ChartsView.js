@@ -1,4 +1,4 @@
-define(['marionette', '../songlistmain/MainSongView'],
+define(['marionette', '../../shared/songlistmain/MainSongView'],
 function(Marionette, SongView){
 
 	var ChartsCollectionView = Marionette.CompositeView.extend({

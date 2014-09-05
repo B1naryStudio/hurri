@@ -1,4 +1,4 @@
-define(['marionette', './MenuNavView', './menu-playlist/MenuPlaylistCollectionView', '../playlist/PlaylistModel', '../main/bars/playlist/PlaylistBarCollection'], 
+define(['marionette', './MenuNavView', './menuplaylist/MenuPlaylistCollectionView', '../shared/playlist/PlaylistModel', '../main/playlists/tiles/PlaylistBarCollection'], 
 	function(Marionette, MenuNavView, PlaylistCompositeView, PlaylistModel, PlaylistCollection){
 	
 	var MenuController = function(){

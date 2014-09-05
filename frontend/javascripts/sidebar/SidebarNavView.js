@@ -1,4 +1,4 @@
-define(['marionette', '../playlist/SongCollection'], function(Marionette, collection){
+define(['marionette', '../shared/playlist/SongCollection'], function(Marionette, collection){
 	var SidebarNavView = Marionette.ItemView.extend({
 		el: '#sidebar-nav',
 		template: '#sidebar-template',

@@ -1,4 +1,4 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../playlist/playlistModel', '../main/listened/ListenedCollection'], 
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../shared/playlist/playlistModel', '../main/listened/ListenedCollection'], 
 	function(Backbone, enums, context, LocalStorage, audioHandler, playlistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
 		defaults: {

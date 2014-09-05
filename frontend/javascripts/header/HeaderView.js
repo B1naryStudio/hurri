@@ -1,9 +1,9 @@
-define(['marionette', './HeaderView', './UserbarView',
-		'./SearchbarModel', './SearchbarView', './NotificationIconModel',
-		'./NotificationIconView', '../app/context'],
+define(['marionette', './userbar/UserbarView','./searchbar/SearchbarModel', 
+		'./searchbar/SearchbarView', './notification/NotificationIconModel',
+		'./notification/NotificationIconView', '../app/context'],
 
-function(Marionette, HeaderView, UserbarView, SearchbarModel,
-			SearchbarView, NotificationIconModel, NotificationIconView,
+function(Marionette, UserbarView, SearchbarModel, SearchbarView, 
+			NotificationIconModel, NotificationIconView,
 			context){
 
 	HeaderView = Marionette.ItemView.extend({

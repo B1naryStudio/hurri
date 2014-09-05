@@ -1,24 +1,22 @@
 define(['marionette', 
-	'../notification/NotificationsCollectionView', 
-	'./SidebarNavView',
-	'./FriendsCollectionView',
-	'./FriendsCollection',
-	'../notification/NotificationModel',
-	'./defaultView',
+	'./notification/NotificationsCollectionView', 
+	'./friends/FriendsCollectionView',
+	'./friends/FriendsCollection',
+	'./notification/NotificationModel',
 	'../app/context',
-	'../songlist/SonglistCollectionView',
-	'../playlist/SongCollection',
-	'../song/SongModel',
-	'./StatisticView',
-	'../songlist/SonglistNavi',
-	'../user/UserModel',
-	'./FollowingsCollectionView',
-	'./FollowingsCollection',
-	 '../main/bars/playlist/PlaylistBarModel',
-	 './UndoPlaylistReplacement'], 
+	'./songlist/SonglistCollectionView',
+	'../shared/playlist/SongCollection',
+	'../shared/song/SongModel',
+	'./statistic/StatisticView',
+	'./songlist/SonglistNavi',
+	'../shared/user/UserModel',
+	'./friends/FollowingsCollectionView',
+	'./friends/FollowingsCollection',
+	 '../main/playlists/tiles/PlaylistBarModel',
+	 './songlist/UndoPlaylistReplacement'], 
 
-	function(Marionette, NotificationsCompositeView,  SidebarNavView, FriendsCollectionView, FriendsCollection,
-			NotificationsModel, DefaultView, context, SonglistCollectionView,
+	function(Marionette, NotificationsCompositeView, FriendsCollectionView, FriendsCollection,
+			NotificationsModel, context, SonglistCollectionView,
 			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel,
 			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel, UndoReplacement){
 	
@@ -39,10 +37,7 @@ define(['marionette',
 		this.initializeFriends();
 
 		this.initializeFollowings();
-/*
-		var sidebarView = new SidebarNavView();
-		sidebarView.render();
-*/
+
 		this.sidebarRegion.show(this.song.view);
 
 		this.bindListeners();
@@ -62,13 +57,6 @@ define(['marionette',
 			collection: context.currentSongCollection,
 			model : SonglistModel
 		};
-		// this.song.collection.add([
-		// 	{name : 'Komissar rex', cover : '../images/default/cover.jpg', artist : 'Tim Rot', current : false, albumname : 'Hello I love you'},
-		// 	{name : 'Funny Essso', cover : '../images/default/cover.jpg', artist : 'Ocean', current : true, albumname : 'Digital histoyr'},
-		// 	{name : 'Runble be you', cover : '../images/default/cover.jpg', artist : 'T-Rex', current : false, albumname : 'Wat a flag?'},
-		// 	{name : 'So serious', cover : '../images/default/cover.jpg', artist : 'Kirkorov', current : false, albumname : 'Fust furrry'},
-		// 	{name : 'Defstrouk', cover : '../images/default/cover.jpg', artist : 'U2', current : false, albumname : 'Drums for you'}
-		// ]);
 
 		this.song.view = this.getSongView();
 	};
@@ -194,10 +182,6 @@ define(['marionette',
 		
 			}
 		}, this);
-
-		// Backbone.on('show followers', function(){
-		// 	this.sidebarRegion.show(this.getFollowerView());
-		// }, this);
 
 		Backbone.on('scroll-to-top', function(options){
 			this.sidebarRegion.$el.scrollTop(this.sidebarRegion.$el.scrollTop() + options.top - 200);
