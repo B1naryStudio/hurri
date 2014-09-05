@@ -1,6 +1,6 @@
-define(['backbone', './AlbumModel.js','../../../app/context'], function(Backbone, AlbumModel, context){
+define(['backbone', '../../song/SongModel'], function(Backbone, SongModel){
   var AlbumCollection = Backbone.Collection.extend({
-    model: AlbumModel
+    model: SongModel
 //    events: {
 //      'add':'render'
 //    },

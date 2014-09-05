@@ -1,5 +1,5 @@
-define(['marionette', '../songlistmain/MainSongView.js', '../../app/context','clipboard'],
-	function(Marionette, MainSongView, context, ZeroClipboard){
+define(['marionette', '../songlistmain/MainSongView.js'],
+	function(Marionette, MainSongView){
 	var AlbumCompositeView = Marionette.CompositeView.extend({
 		id: 'main-album-composite',
 		template: '#album-header-playlist-template',

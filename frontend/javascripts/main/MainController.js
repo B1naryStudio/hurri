@@ -1,6 +1,5 @@
 define(['marionette', 
 	'./PlaylistsView',
-	'./AlbumView',
 	'./ListenedView',
 	'./SongView', 
 	'../user/UserView', 
@@ -28,7 +27,6 @@ define(['marionette',
 	 '../main/album/AlbumCollection'],
 	function(Marionette,
 		PlaylistsView,
-		AlbumView,
 		ListenedView,
 		SongView, 
 		UserView, 
@@ -367,6 +365,10 @@ define(['marionette',
 		
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));
+		},this);
+
+		Backbone.on('album-view: show-album', function() {
+			this.mainRegion.show(this.getAlbumsView());
 		},this);
 	};
 
