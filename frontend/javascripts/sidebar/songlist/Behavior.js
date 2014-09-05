@@ -26,7 +26,7 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 				collection.remove(model, {silent: true});
 				collection.add(model,{at:ui.item.index(), silent: true});
 			}
-		});           
+		});		   
 	},
 
 	bindListeners: function(){

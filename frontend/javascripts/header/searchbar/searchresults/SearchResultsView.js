@@ -35,7 +35,7 @@ define(['marionette'], function(Marionette){
 					break;
 			}
 			
-	    },
+		},
 		select: function(){
 			this.el.style.display = 'none';
 		}

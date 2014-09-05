@@ -7,8 +7,8 @@ var SongCollection = Backbone.Collection.extend({
 		this.playlistId = options.playlistId;
 	},
 	url: function(){	
-    	return 	'/api/user/' + context.currentUserModel.attributes._id + 
-    			'/playlists/' + this.playlistId + '/tracks';
+		return 	'/api/user/' + context.currentUserModel.attributes._id + 
+				'/playlists/' + this.playlistId + '/tracks';
 	}
 });
 

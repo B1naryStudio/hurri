@@ -13,7 +13,7 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 
 		openEditField : function(){
 			this.$el.addClass("editing");
-      		this.ui.text.focus();
+	  		this.ui.text.focus();
 		},
 
 		createPlaylist: function(evt){

@@ -5,7 +5,7 @@ function VKWrapper(){
 	this.vk = new VK({
 		'appID'	: 4504196,
 		'appSecret' : 'sKTyZBHIHu17JeRLTsez',
-		'mode'      : 'oauth'
+		'mode'	  : 'oauth'
 	});
 }
 

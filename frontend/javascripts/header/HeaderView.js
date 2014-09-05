@@ -26,8 +26,8 @@ function(Marionette, UserbarView, SearchbarModel, SearchbarView,
 
 		ui: {
 			hurriLogo 			: '#hurri-logo',
-			userbar       		: '#userbar',
-			searchbar      		: '#searchbar',
+			userbar	   		: '#userbar',
+			searchbar	  		: '#searchbar',
 			notificationIcon  	: '#notificationbar'
 		},
 

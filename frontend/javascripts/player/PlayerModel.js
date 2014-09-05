@@ -262,7 +262,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		getTimeFormat: function(time){
 			var minutes = Math.floor(time / 60);
 			var seconds = time - minutes * 60;
-    		if (seconds < 10) {seconds = "0"+seconds;}
+			if (seconds < 10) {seconds = "0"+seconds;}
 			var format = minutes + ':' +seconds;
 			return format;
 		},

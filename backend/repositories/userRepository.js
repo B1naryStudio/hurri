@@ -36,7 +36,7 @@ UserRepository.prototype.deleteFollower = function(id, userid, callback) {
 	var model = this.createModel();
 	model.findOne({id: id}, function(err, res){
 				res.followers.remove(userid);
-				res.save(callback);                          
+				res.save(callback);						  
 	});
 };
 
@@ -56,7 +56,7 @@ UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
 	var model = this.createModel();
 	model.findOne({id: id}, function(err, res){
 				res.following.remove(userid);
-				res.save(callback);                          
+				res.save(callback);						  
 	});
 };
 
@@ -76,7 +76,7 @@ UserRepository.prototype.deleteAlert = function(id, alertid, callback) {
 	var model = this.createModel();
 	model.findOne({_id: id}, function(err, res){
 				res.alerts.remove(alertid);
-				res.save(callback);                          
+				res.save(callback);						  
 	});
 };
 
@@ -148,7 +148,7 @@ UserRepository.prototype.deleteLike = function(id, likedid, callback) {
 	//console.log(likedid);
 	model.findOne({user_auth_id: id}, function(err, res){
 				res.liked.remove(likedid);
-				res.save(callback);                          
+				res.save(callback);						  
 	});
 };
 
@@ -156,7 +156,7 @@ UserRepository.prototype.deleteGroups = function(id, groupid, callback) {
 	var model = this.infoModel;
 	model.findOne({user_auth_id: id}, function(err, res){
 				res.group.remove(groupid);
-				res.save(callback);                          
+				res.save(callback);						  
 	});
 };
 
@@ -171,7 +171,7 @@ UserRepository.prototype.deletePlaylists = function(id, playlistid, callback) {
 	var model = this.infoModel;
 	model.findOne({user_auth_id: id}, function(err, res){
 				res.playlists.remove(playlistid);
-				res.save(callback);                          
+				res.save(callback);						  
 	});
 };
 

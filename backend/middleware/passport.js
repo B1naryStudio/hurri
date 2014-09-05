@@ -68,7 +68,7 @@ module.exports = function () {
 	));
 
 	passport.use(new VKontakteStrategy({
-			clientID:     cnfg.oauth.vkontakte.clientID,
+			clientID:	 cnfg.oauth.vkontakte.clientID,
 			clientSecret: cnfg.oauth.vkontakte.clientSecret,
 			callbackURL:  cnfg.oauth.vkontakte.callbackURL,
 			passReqToCallback: true

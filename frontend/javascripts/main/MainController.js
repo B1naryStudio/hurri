@@ -248,8 +248,8 @@ define(['marionette',
 		};
 		this.mainsonglist.collection.fetch({
 			success: function () {
-          		Backbone.trigger('check-play', model);
-       		}
+		  		Backbone.trigger('check-play', model);
+	   		}
 		});
 		this.mainsonglist.view = this.getMainSonglistView();
 	};
