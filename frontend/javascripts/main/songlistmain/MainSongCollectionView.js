@@ -9,11 +9,6 @@ define(['marionette', './MainSongView', '../../app/context','clipboard'],
 		childView: MainSongView,
 		playSongs: function(){
 			Backbone.trigger('main-view:play-songs', this.model.attributes._id, this.collection);
-		},
-		onShow: function(){
-			ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
-									trustedDomains: location.host } );
-			this.client = new ZeroClipboard( this.$(".main-share-song"));
 		}
 	});
 	return MainSongCollectionView;

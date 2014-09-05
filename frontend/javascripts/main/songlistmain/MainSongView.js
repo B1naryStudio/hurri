@@ -40,7 +40,13 @@ define(['marionette', '../../app/context', '../../playlist/PlaylistModel','clipb
 
     likeSong: function(){
     	alert('I like this song!');
-    }
+    },
+
+    onShow: function(){
+            ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
+                                    trustedDomains: location.host } );
+            this.client = new ZeroClipboard( this.$(".main-share-song"));
+        }
 	});
 	return MainSongView;
 });
