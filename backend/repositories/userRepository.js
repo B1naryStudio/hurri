@@ -231,7 +231,7 @@ UserRepository.prototype.getTracks = function(id, pid, callback) {
 		// console.log(data, pid);
 		 //console.log(list);
 		var tracks = list.populate('tracks', function(err, data){
-			callback(tracks.tracks);
+			callback(err, tracks.tracks);
 		 });
 		
 	});
