@@ -9,14 +9,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 				containment:'parent' 
 			}
 		},
-
 		childEvents: {
-			'queue:recount': function (arg, num) {
-				for (var i = 0; i < this.collection.length; i ++){
-					if (this.collection.models[i].attributes.queuepos > num )
-						 this.collection.models[i].set({queuepos: this.collection.models[i].attributes.queuepos-1});
-				}
-			},
 			'change-current': function(view, options){
 			   Backbone.trigger('scroll-to-top', options);
 			}
@@ -39,8 +32,8 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 
 		unqueueSong: function(){
 			playlistModel.set({queueNum : 0});
-			for (var i = 0; i < this.model.collection.length; i ++){
-				this.model.collection.models[i].set({queuepos: ''});
+			for (var i = 0; i < this.collection.length; i ++){
+				this.collection.models[i].set({queuepos: ''});
 			}
 		},
 		saveExisting:function(){

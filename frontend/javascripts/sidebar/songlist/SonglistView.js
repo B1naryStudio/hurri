@@ -17,6 +17,12 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		ui : {
 			song : '.sidebar-song-wrap'
 		},
+		bindListeners: function(){
+			var self = this;
+			Backbone.on('queue-recount', function (num) {
+				self.recountQueue(num);
+			});
+		},
 
 		playSong: function(){
 			for (var i = 0; i < this.model.collection.length; i++){
@@ -42,8 +48,14 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		},
 
 		recountQueue: function(num) {
-			this.trigger('queue:recount',num);
+			for (var i = 0; i < this.model.collection.length; i ++){
+				if (this.model.collection.models[i].attributes.queuepos > num ){
+					this.model.collection.models[i].set({queuepos: this.model.collection.models[i].attributes.queuepos-1});
+					console.log('queuepos recount =', this.model.collection.models[i].get('queuepos'));
+				}
+			}
 			playlistModel.set({queueNum : playlistModel.get('queueNum')-1});
+			console.log('queueNum =', playlistModel.get('queueNum'));
 			return '';
 		},
 
@@ -61,6 +73,7 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 
 		onRender: function(){
   			this.changeCurrent();
+  			this.bindListeners();
   		}
 	});
 	return SonglistView;

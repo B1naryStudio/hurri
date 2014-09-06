@@ -14,6 +14,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard'],
 	},
 
 	ui : {
+			like : '.main-like-song',
 			song : '.main-song-item'
 	},
 
@@ -38,9 +39,11 @@ define(['marionette', '../playlist/PlaylistModel','clipboard'],
 		 this.ui.song.toggleClass('activesong', current);
 	},
 
-	likeSong: function(){
-		alert('I like this song!');
-		Backbone.trigger('song-view:like-song', this.model);
+	likeSong : function(){
+		var mode = this.model.likeState(this.model.get('_id'));
+		mode = 'main-like-song' + ' ' + mode;
+		this.ui.like.removeClass();
+		this.ui.like.addClass(mode);
 	},
 
 	onShow: function(){

@@ -15,8 +15,20 @@ define(['backbone'], function(Backbone){
 			url: undefined,
 			comments : [''],
 			queuepos : '',
+			liked: false,
 			current : false,
 			modelType : 'song'
+		},
+
+		likeState : function(songId){
+			if (!this.get('liked')){
+				this.set({liked: true});
+				$.ajax({type:'PUT', url:'/api/user/' + window._injectedData.user._id + '/like/' + songId});
+			} else {
+				this.set({liked: false});
+				$.ajax({type:'DELETE', url:'/api/user/' + window._injectedData.user._id + '/like/' + songId});
+			}
+			return this.get('liked');
 		},
 
 		getStream: function(){

@@ -50,13 +50,13 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 		nextPlayedTrack: function(direction, repeatMode, currentTrack){
 			var next;
 			var current;
-			if (this.get('queueNum') > 0){
 				for (var i = 0; i < this.collection.length; i++){
 					if (this.collection.models[i].get('queuepos') === 1){
 						next = i;
+						Backbone.trigger('queue-recount', 1);
+						return next;
 					}
 				}
-			} else {
 				if (direction === 'direct'){
 					if (repeatMode === enums.repeatModes.none){
 						console.log('repeat off');
@@ -95,8 +95,6 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 				} else {
 					console.log('error');
 				}
-
-			}
 			return next;
 		}
 	});
