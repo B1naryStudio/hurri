@@ -19,7 +19,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard'],
 
 	listner: function(){
 		var self = this;
-	  	this.client.on('mousedown', function () {
+		this.client.on('mousedown', function () {
 			self.client.setText('shalala');
 		});
 	},
@@ -40,6 +40,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard'],
 
 	likeSong: function(){
 		alert('I like this song!');
+		Backbone.trigger('song-view:like-song', this.model);
 	},
 
 	onShow: function(){

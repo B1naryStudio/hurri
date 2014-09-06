@@ -225,8 +225,6 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 			if (!this.get('liked')){
 				this.set({liked: true});
-				console.log(context.currentUserModel.get('_id'));
-				console.log(context.currentSongModel.get('_id'));
 				$.ajax({type:'PUT', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('_id')});
 			} else {
 				this.set({liked: false});

@@ -52,7 +52,7 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 			var current;
 			if (this.get('queueNum') > 0){
 				for (var i = 0; i < this.collection.length; i++){
-					if (this.collection.models[1].get('queuepos') === 1){
+					if (this.collection.models[i].get('queuepos') === 1){
 						next = i;
 					}
 				}
