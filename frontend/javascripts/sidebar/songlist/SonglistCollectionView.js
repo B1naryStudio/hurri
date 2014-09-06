@@ -21,6 +21,18 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			'click #save-playlist-from-queue':'saveExisting'
 		},
 
+		initialize: function(){
+			this.bindListeners();
+		},
+
+		bindListeners: function(){
+
+			var self = this;
+			Backbone.on('queue-recount', function (num) {
+				self.recountQueue(num);
+			});
+		},
+
 		ui : {
 			text : ".edit2" 
 		},
@@ -28,6 +40,21 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 		setClass: function(){
 			this.$el.addClass("editing2");
 			this.ui.text.focus();
+		},
+
+		recountQueue: function(num) {
+			var currentPosition;
+			for (var i = 0; i < this.collection.length; i ++){
+				currentPosition = this.collection.models[i].get('queuepos');
+				if (currentPosition > num ){
+					this.collection.models[i].set({queuepos: currentPosition - 1});
+				} else if (currentPosition === num){
+					this.collection.models[i].set({queuepos: ''});
+				}
+			}
+			playlistModel.set({queueNum : playlistModel.get('queueNum')-1});
+			console.log('queueNum =', playlistModel.get('queueNum'));
+			return '';
 		},
 
 		unqueueSong: function(){
