@@ -15,7 +15,7 @@ module.exports = function (app) {
 	app.use(isLoggedIn, function(req, res, next) {
 
 		if (req.accepts('html')) {
-			injectData(req, res, '<h1>404 error</h1><h2>Not found</h2>', true);
+			injectData(req, res, {}, true);
 			return;
 		}
 

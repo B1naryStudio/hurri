@@ -16,7 +16,7 @@ var CommentLayoutView = Marionette.LayoutView.extend({
   initialize: function(){
     if (context.currentSongModel.attributes._id !== undefined)
       this.model  = context.currentSongModel;
-    else{
+    else {
       this.model  = new SongModel(window._injectedData.track);
       context.currentSongModel.attributes = window._injectedData.track;
       context.currentSongCollection.add(this.model);

@@ -257,6 +257,8 @@ define(['marionette',
 
 	MainController.prototype.initializeMainSonglist = function(id){
 		var playlist = _.findWhere(window._injectedData.playlists, {_id:id});
+		if (!playlist)
+			return "404";
 		var model = new Backbone.Model(playlist);
 		this.mainsonglist = {
 			model: model,
@@ -390,7 +392,10 @@ define(['marionette',
 	// };
 
 	MainController.prototype.getLayout = function() {
-		this.mainRegion.show(new LayoutView());
+		if (context.currentSongModel.attributes._id === undefined && !window._injectedData.track)
+			this.mainRegion.show(this.getNotFoundView());
+		else
+			this.mainRegion.show(new LayoutView());
 	};
 
 	MainController.prototype.bindListeners = function(){
@@ -423,8 +428,11 @@ define(['marionette',
 		},this);
 
 		Backbone.on('playlist-play', function(id){
-			this.initializeMainSonglist(id);
-			this.mainRegion.show(this.getMainSonglistView());
+			var err = this.initializeMainSonglist(id);
+			if (err === '404')
+				this.mainRegion.show(this.getNotFoundView());
+			else
+				this.mainRegion.show(this.getMainSonglistView());
 		},this);
 
 		Backbone.on('playlist-open-and-play', function(model){
@@ -448,6 +456,10 @@ define(['marionette',
 		Backbone.on('show-friends-details', function(model){
 			this.mainRegion.show(this.getUserView(model));
 		},this);
+
+		Backbone.on('show-404', function(){
+			this.mainRegion.show(this.getNotFoundView());
+		}, this);
 
 		Backbone.on('searchbar:show-more', function(input){
 			var self = this;
