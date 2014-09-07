@@ -1,4 +1,5 @@
-define(['marionette', '../../../shared/playlist/PlaylistModel'], function(Marionette, PlaylistModel){
+define(['marionette', '../../../shared/playlist/PlaylistModel', '../../../app/context', '../../../app/routes'], 
+	function(Marionette, PlaylistModel, context, router){
 	var PlaylistBarView = Marionette.ItemView.extend({
 		className: 'playlist-bar',
   		template : '#playlist-bar',
@@ -7,7 +8,7 @@ define(['marionette', '../../../shared/playlist/PlaylistModel'], function(Marion
 			'click .play-without-open' : 'playlistPlayNotOpen'
 		},
 		playlistPlay : function(){
-			Backbone.trigger('playlist-play', this.model);
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists/' + this.model.attributes._id, true);
 		},
 		playlistPlayNotOpen:function(){
 			PlaylistModel.playTrack(0);
