@@ -1,4 +1,5 @@
-define(['marionette'], function(Marionette){
+define(['marionette', '../../app/routes'], 
+	function(Marionette, router){
 	var FriendsView = Marionette.ItemView.extend({
 		template: '#friends-template',
 		events : {
@@ -9,7 +10,7 @@ define(['marionette'], function(Marionette){
 	 		this.model.destroy();
 	 	},
 	 	showDetails: function(){
-	 		Backbone.trigger('show-friends-details', this.model);
+	 		router.navigate('/user/'+ this.model.attributes._id,true);
 	 	}
 	});
 	return FriendsView;

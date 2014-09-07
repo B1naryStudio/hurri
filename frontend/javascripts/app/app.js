@@ -1,4 +1,5 @@
-define(['underscore', 'units/SocketHandler', 'marionette', './AppController'], function(_, socketHandler, Marionette, AppController){
+define(['underscore', 'backbone','units/SocketHandler', 'marionette', './AppController'], 
+	function(_, Backbone, socketHandler, Marionette, AppController){
 
 	_.templateSettings = {
 		'evaluate': /\{\{(.+?)\}\}/g,
@@ -19,6 +20,8 @@ define(['underscore', 'units/SocketHandler', 'marionette', './AppController'], f
 
 	MyApp.on('start', function(){
 		var appController = new AppController();
+		if (Backbone.history){ Backbone.history.start({ pushState: true }); }
+		
 	});
 
 	MyApp.start();

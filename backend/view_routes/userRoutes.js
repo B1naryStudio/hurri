@@ -1,27 +1,51 @@
 var userRepository = require('../repositories/userRepository');
-
+var isLoggedIn = require('../middleware/isLoggedIn');
 var injectData = require('../middleware/injectDataMiddleware');
 
 module.exports = function(app){
 
-	app.get('/user/:id', function(req, res, next) {
-		injectData(userRepository.getUserAuth(req.params.id), res);
+	app.get('/charts', isLoggedIn, function(req, res, next) {
+		//userRepository.getLike(req.params.id, function(err, data){
+			injectData(req, res, {}, false);
+		//});
 	});
 
-	app.get('/user/:id/like', function(req, res, next) {
-		injectData(userRepository.getLike(req.params.id), res);
+
+	app.get('/user/:id', isLoggedIn, function(req, res, next) {
+	//	userRepository.getUserAuth(req.params.id, function(err, data){
+			injectData(req, res, {}, false);
+		//});
 	});
 
-	app.get('/user/:id/groups', function(req, res, next) {
-		injectData(userRepository.getGroups(req.params.id), res);
+	app.get('/user/:id/like', isLoggedIn, function(req, res, next) {
+		//userRepository.getLike(req.params.id, function(err, data){
+			injectData(req, res, {}, false);
+		//});
 	});
 
-	app.get('/user/:id/playlists', function(req, res, next) {
-		injectData(userRepository.getPlaylists(req.params.id), res);
+	app.get('/user/:id/listened', isLoggedIn, function(req, res, next) {
+		//userRepository.getLike(req.params.id, function(err, data){
+			injectData(req, res, {}, false);
+		//});
 	});
 
-	app.get('/user/:id/playlists/:id_pl', function(req, res, next) {
-		injectData(userRepository.getPlaylistsShare(req.params.id, req.params.id_pl), res);
+	app.get('/user/:id/groups', isLoggedIn, function(req, res, next) {
+		userRepository.getGroups(req.params.id, function(err, data){
+			injectData(req, res, {groups: data}, false);
+		});
+	});
+
+	app.get('/user/:id/playlists', isLoggedIn, function(req, res, next) {
+		userRepository.getPlaylists(req.params.id, function(err, data){
+			console.log(data.playlists[0]);
+			injectData(req, res, {playlists : data.playlists}, false);
+		});
+	});
+
+	app.get('/user/:id/playlists/:id_pl', isLoggedIn, function(req, res, next) {
+		//userRepository.getPlaylistsShare(req.params.id, req.params.id_pl, function(err, data){
+			injectData(req, res, {}, false);
+		//});
 	});
 
 };

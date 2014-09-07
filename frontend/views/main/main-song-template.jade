@@ -4,8 +4,8 @@ script#main-song-bar(type='text/template')
 			img(src='{{-albumCover}}')
 		.main-song-info
 			.main-song-name
-				{{-title}} - {{-artist}}
-		.main-share-song(data-clipboard-text='http://85.17.248.247:3055/track/{{-_id}}')
+				{{-title}} - {{-singer}}
+		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
 		.main-queue-add
 		.main-like-song
 		.queueposmain {{-queuepos}}
@@ -13,7 +13,7 @@ script#main-song-bar(type='text/template')
 script#main-header-playlist-template(type='text/template')
 	#header-playlist-wrapper
 		#playlist-avatar-header
-			img#img(src='./images/main/cdholder.png')
+			img#img(src='/./images/main/cdholder.png')
 		#header-playlist-info
 			#playlist-header-name {{-name}}
 			#playlist-header-tracks-num Created: {{-created}}

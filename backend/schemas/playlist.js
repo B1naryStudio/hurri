@@ -16,6 +16,10 @@ var playlistSchema = new Schema({
 		type: String, 
 		default: 'unknown'
 	},
+	created: {
+		type: Date,
+		default: Date.now
+	},
 	type: {
 		type: String, 
 		default: 'default'

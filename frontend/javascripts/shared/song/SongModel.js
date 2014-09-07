@@ -11,7 +11,7 @@ define(['backbone'], function(Backbone){
 			lyrics : 'No lyrics for this song. Sorry.',
 			albumTitle : 'AlbumName',
 			albumCover: '/images/default/cover.png',
-			artist: 'Singer',
+			singer: 'Singer',
 			url: undefined,
 			comments : [''],
 			queuepos : '',
@@ -23,7 +23,7 @@ define(['backbone'], function(Backbone){
 			var self = this;
 			var url = this.get('url');
 				if (!url){
-					$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('artist')}, function(data){
+					$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('singer')}, function(data){
 						self.set({url: data.url, duration: data.duration});
 					});
 				}

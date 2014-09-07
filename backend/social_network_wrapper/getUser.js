@@ -97,7 +97,10 @@ function getUser (profile, token, auth, done){
 									duration : playlist.duration,
 									url : playlist.url,
 									genre: genres[playlist.genre],
-									type: 'vk'
+									type: 'vk',
+									singer: null,
+									albumTitle : 'VK',
+									albumCover: '/images/default/cover.png'
 								};
 								trackRepository.add(track, function(error, track){
 									///console.log(playlistObject.duration);

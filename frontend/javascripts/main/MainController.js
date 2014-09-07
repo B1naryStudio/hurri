@@ -1,4 +1,5 @@
 define(['marionette', 
+	'underscore',
 	'./playlists/PlaylistsView',
 	'./listened/ListenedView',
 	'./song/SongView', 
@@ -28,8 +29,10 @@ define(['marionette',
 	  './search/ResultView',
 	  './explorer/album/tiles/AlbumModel',
 	  './radio/tiles/RadioModel',
+	  '../app/routes'
 	  ],
 	function(Marionette, 
+		_,
 		PlaylistsView,
 		ListenedView, 
 		SongView, 
@@ -58,7 +61,8 @@ define(['marionette',
 		NoResultsView,
 		ResultView,
 		AlbumBarModel,
-		RadioBarModel
+		RadioBarModel,
+		Router
 		){
 	
 	var MainController = function(){		
@@ -68,7 +72,7 @@ define(['marionette',
 			el: '#main'
 
 		});
-		
+
 		this.mainRegion = new MainRegion();
 		
 		this.initializeUser();
@@ -91,14 +95,14 @@ define(['marionette',
 
 		//this.initializeResults();
 
-		this.initializeLayout();
+		// this.initializeLayout();
 
 		this.initializeCharts();
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
 		} else {
-			this.mainRegion.show(this.getPlaylistBarView());
+			//this.mainRegion.show(this.getPlaylistBarView());
 		}
 		this.bindListeners();	
 	};
@@ -123,14 +127,21 @@ define(['marionette',
 		this.user.view = this.getUserView();
 	};
 
-	MainController.prototype.getUserView = function(object){
-		if (object === undefined){
+	MainController.prototype.getUserView = function(id){
+		if (id === this.user.model.attributes._id){
 			return new UserView({
 				model: this.user.model
 			});
 		} else{
+			var follower = _.findWhere(window._injectedData.followers, {_id:id});
+			var following = _.findWhere(window._injectedData.following, {_id:id});
+			var model;
+			if (follower)
+				model = new Backbone.Model(follower);
+			else 
+				model = new Backbone.Model(following); 
 			return new UserView({
-				model: object
+				model: model
 			});
 		}
 	};
@@ -188,7 +199,7 @@ define(['marionette',
 		this.radio.collection.add([
 			{
 				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master: {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				master: {name: 'Serhio', avatarUrl: '/images/avatar.png'},
 				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
@@ -196,7 +207,7 @@ define(['marionette',
 			]},
 			{
 				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master : {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				master : {name: 'Serhio', avatarUrl: '/images/avatar.png'},
 				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
@@ -204,7 +215,7 @@ define(['marionette',
 			]},
 			{
 				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master: {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				master: {name: 'Serhio', avatarUrl: '/images/avatar.png'},
 				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
@@ -212,7 +223,7 @@ define(['marionette',
 			]},
 			{
 				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master: {name: 'Serhio', avatarUrl: 'images/avatar.png'},
+				master: {name: 'Serhio', avatarUrl: '/images/avatar.png'},
 				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
 						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
@@ -244,8 +255,9 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeMainSonglist = function(model){
-		console.log(model.attributes._id);
+	MainController.prototype.initializeMainSonglist = function(id){
+		var playlist = _.findWhere(window._injectedData.playlists, {_id:id});
+		var model = new Backbone.Model(playlist);
 		this.mainsonglist = {
 			model: model,
 			collection: new MainSonglistCollection([], {
@@ -386,8 +398,8 @@ define(['marionette',
 			this.mainRegion.show(this.getAlbumView());
 		},this);
 
-		Backbone.on('action:showUserView', function(){
-			this.mainRegion.show(this.getUserView());
+		Backbone.on('action:showUserView', function(id){
+			this.mainRegion.show(this.getUserView(id));
 		},this);
 
 		Backbone.on('show-playlists show-statistic-playlists', function(){
@@ -410,13 +422,13 @@ define(['marionette',
 			this.getLayout();
 		},this);
 
-		Backbone.on('playlist-play', function(model){
-			this.initializeMainSonglist(model);
+		Backbone.on('playlist-play', function(id){
+			this.initializeMainSonglist(id);
 			this.mainRegion.show(this.getMainSonglistView());
 		},this);
 
 		Backbone.on('playlist-open-and-play', function(model){
-			Backbone.trigger('main-view:play-songs', model.attributes._id, this.mainsonglist.collection);
+			Backbone.trigger('main-view:play-songs', model._id, this.mainsonglist.collection);
 		},this);
 
 		

@@ -1,4 +1,5 @@
-define(['marionette'], function(Marionette){
+define(['marionette', '../app/routes', '../app/context'], 
+	function(Marionette, router, context){
 	MenuNavView = Marionette.ItemView.extend({
 		id: 'menu-navigation',
 		template: '#menu-nav-template',
@@ -6,38 +7,28 @@ define(['marionette'], function(Marionette){
 			'click #favorites-button' : 'showFavorites',
 			'click #playlists-button' : 'showPlaylists',
 			'click #radio-button' : 'showGroupes',
-			'click #genres-button' : 'showGenres',
-			'click #artists-button' : 'showArtists',
-			'click #albums-button' : 'showAlbums',
+			'click #albums-button' : 'showExplorer',
 			'click #charts-button' : 'showCharts'
 		},
 
 		showFavorites : function(){
-			Backbone.trigger('show-favorites');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/like',true);
 		},
 
 		showPlaylists : function(){
-			Backbone.trigger('show-playlists');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists',true);
 		},
 
 		showGroupes : function(){
-			Backbone.trigger('show-groupes');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/groups',true);
 		},
 
-		showGenres : function(){
-			Backbone.trigger('show-genres');
-		},
-
-		showArtists : function(){
-			Backbone.trigger('show-artists');
-		},
-
-		showAlbums : function(){
-			Backbone.trigger('show-albums');
+		showExplorer : function(){
+			router.navigate('/explorer/albums',true);
 		},
 
 		showCharts : function(){
-			Backbone.trigger('show-charts');
+			router.navigate('/charts',true);
 		}
 	});
 	

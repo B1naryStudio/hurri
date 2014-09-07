@@ -1,4 +1,5 @@
-define(['marionette'], function(Marionette){
+define(['marionette','../../app/routes', '../../app/context'], 
+	function(Marionette, router, context){
 
 	UserbarView = Marionette.ItemView.extend({
 
@@ -10,11 +11,11 @@ define(['marionette'], function(Marionette){
 		},
 
 		events: {
-			"click"	: "showUserView",
+			"click @ui.avatarIcon"	: "showUserView",
 		},
 
 		showUserView: function(){
-			Backbone.trigger('action:showUserView');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id,true);
 		},
 
 	});

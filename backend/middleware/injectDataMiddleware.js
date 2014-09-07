@@ -56,7 +56,7 @@ function populateInjectData(user, callback_main){
 			});
 		},		
 	}, function(err, results){
-		console.log('inject=', results);
+		//console.log('inject=', results);
 		callback_main(results);
 	});
 }
