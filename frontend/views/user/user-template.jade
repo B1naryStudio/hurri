@@ -1,13 +1,13 @@
 script#user-template(type='text/template')
 	div#user
+		div#add-social-profile
+			a(href='/logout').socialButton(title='Log out') Logout
+			a(href='/auth/vkontakte', data-type="vk").socialButton#addVk(title='Add VK account') VK
+			a(href='/auth/twitter', data-type="tw").socialButton#addTw(title='Add Twitter account') Twitter
+			a(href='/auth/facebook', data-type="fb").socialButton#addFb(title='Add Facebook account') Facebook
 		img#avatar('src={{-avatarUrl}}')
 		div#userinfo
 			div#name {{-name}}
 			div#info Age: {{-age}}
 			div#info e-mail: {{-email}}
 			div#info Country: {{-country}}
-			div#add-social-profile 
-				a(href='/auth/vkontakte', data-type="vk").socialButton#addVk add VK
-				a(href='/auth/twitter', data-type="tw").socialButton#addTw add Twitter
-				a(href='/auth/facebook', data-type="fb").socialButton#addFb add Facebook
-				a(href='/logout') logout

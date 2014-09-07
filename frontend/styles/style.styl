@@ -328,19 +328,23 @@ img.no-item-to-show
 	box-sizing border-box
 
 	#avatar
+		width 200px
+		height auto
+		max-height 300px
 		float left
+		padding 20px
 
 	#userinfo
 		width auto
 		height auto
 		float left
-		margin 10px
+		padding 20px
 		box-sizing border-box
 
 		#name
 			width auto
 			height auto
-			margin-bottom 10px
+			padding-bottom 10px
 
 		#info
 			width auto
@@ -389,12 +393,34 @@ img.no-item-to-show
 		display none
 	&.toggled-main
 		width 75%
+
 	#add-social-profile
+		width 100%
+		height 40px
+		padding 5px
+		box-sizing border-box
+		background #333
+
 		.socialButton
+			width auto
+			height 100%
+			line-height 30px
+			float right
+			margin 0 5px
+			padding 0 2px
 			display block
+			font-size 12px
 			text-decoration none
+			color white
+			border hidden
+			border-radius 3px
+
+			&:hover
+				background #3ac
+
 			&.disabled
 				display none
+
 #main-bar-header
 	width 360px
 	height 25px
