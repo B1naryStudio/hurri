@@ -1,9 +1,13 @@
-define(['marionette'], function(Marionette){
+define(['marionette', './UserFavoritesView', './UserListenedView', './UserPlaylistsView',
+		'../favorites/FavoritesCollection', '../listened/ListenedCollection',
+		'../playlists/tiles/PlaylistBarCollection'],
+function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
+			FavoritesCollection, ListenedCollection, PlaylistBarCollection){
 
 	UserView = Marionette.ItemView.extend({
 
-		template: 	'#user-template',
-		
+		template: '#user-template',
+
 		ui: {
    			avatar	: '#avatar',
    			name	: '#name',
@@ -12,8 +16,11 @@ define(['marionette'], function(Marionette){
    			country	: '#country',
    			addVk	: '#addVk',
    			addTw	: '#addTw',
-   			addFb	: '#addFb'
+   			addFb	: '#addFb',
 
+   			userfavorites: '#user-favorites',
+   			userlistened : '#user-listened',
+   			userplaylists: '#user-playlists'
   		},
 
 		events: {
@@ -31,6 +38,19 @@ define(['marionette'], function(Marionette){
 			if (window._injectedData.user.twToken) {
 				this.ui.addTw.addClass('disabled');
 			}
+
+			this.childViews = {
+				userfavorites: new UserFavoritesView({
+					collection: FavoritesCollection
+				}),
+				userlistened: new UserListenedView({
+					collection: ListenedCollection
+				}),
+				userplaylists: new UserPlaylistsView({
+					collection: new PlaylistBarCollection(window._injectedData.playlists)
+				}),
+			};
+			this.renderChildViews();
 		},
 		addVkUser: function(){
 			this.render();
@@ -40,6 +60,13 @@ define(['marionette'], function(Marionette){
 		},
 		addFbUser: function(){
 			this.render();
+		},
+
+		renderChildViews: function(){
+			_.each(this.childViews, function(view, el){
+				view.render();
+				this.ui[el].html(view.$el);
+			}, this);
 		}
 	});
 	return UserView;
