@@ -24,7 +24,7 @@ require(['../../bower_components/jquery-ui/ui/sortable', 'fetchCache', 'localSto
 	var oldGetCache = Backbone.fetchCache.getCacheKey;
 	Backbone.fetchCache.getCacheKey = function(){
 		try{
-			oldGetCache.apply(this, [].slice(arguments));
+			return oldGetCache.apply(this, [].slice.call(arguments));
 		} catch(e) {
 
 		}
