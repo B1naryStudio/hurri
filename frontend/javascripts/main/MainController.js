@@ -259,7 +259,7 @@ define(['marionette',
 		var playlist = _.findWhere(window._injectedData.playlists, {_id:id});
 		if (!playlist)
 			return "404";
-		var model = new Backbone.Model(playlist);
+		var model = PlaylistModel.set(playlist);
 		this.mainsonglist = {
 			model: model,
 			collection: new MainSonglistCollection([], {

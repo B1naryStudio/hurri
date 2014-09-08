@@ -23,6 +23,10 @@ var playlistSchema = new Schema({
 	type: {
 		type: String, 
 		default: 'default'
+	},
+	genre: {
+		type: String, 
+		default: 'unknown'
 	}
 });
 
