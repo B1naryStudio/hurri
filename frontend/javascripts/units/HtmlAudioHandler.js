@@ -1,10 +1,36 @@
 define(['underscore', 'backbone'], function(_, Backbone){
 	var audioHandler = {
+		error: undefined,
 		canPlay: undefined,
 		initialize: function(url){
 			var self = this;
 			this.canPlay = false;
 			this.track = new Audio(url);
+			this.track.load();
+			this.track.addEventListener('error', function failed(e) {
+				switch (e.target.error.code) {
+					case e.target.error.MEDIA_ERR_ABORTED:
+						self.error = 1;
+						console.log('You aborted the audio playback.');
+						break;
+					case e.target.error.MEDIA_ERR_NETWORK:
+						self.error = 2;
+						console.log('A network error caused the audio download to fail.');
+						break;
+					case e.target.error.MEDIA_ERR_DECODE:
+						self.error = 3;					
+						console.log('The audio playback was aborted due to a corruption problem or because the audio used features your browser did not support.');
+						break;
+					case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+						self.error = 4;
+						console.log('The audio not be loaded, either because the server or network failed or because the format is not supported.');
+						self.trigger('urlError');
+						break;
+					default:
+						console.log('An unknown error occurred.');
+						break;
+				}
+			}, true);
 			this.track.addEventListener('canplaythrough', function(){
 				self.canPlay = true;
 				console.log('pending=', self.pending, Date.now());

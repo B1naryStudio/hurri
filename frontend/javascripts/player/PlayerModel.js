@@ -1,4 +1,4 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../shared/playlist/playlistModel', '../main/listened/ListenedCollection'], 
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../shared/playlist/PlaylistModel', '../main/listened/ListenedCollection'], 
 	function(Backbone, enums, context, LocalStorage, audioHandler, playlistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
 		defaults: {
@@ -87,6 +87,12 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				self.stopTimer();
 				window.localStorage.removeItem("currentPlay");
 			});
+	 		audioHandler.on('urlError', function(){
+	 			$.getJSON('/getStream',{query: self.get('currentTrackName') + ' ' + self.get('currentArtistName')}, function(data){
+					context.currentSongModel.set({url: data.url, duration: data.duration});
+				});
+				self.trigger('playing');
+	 		}); 
 		},
 
 		newTrack: function(param){
