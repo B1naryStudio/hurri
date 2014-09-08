@@ -65,7 +65,8 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 				"Electro":0
 			};
 			for (var i = 0; i < this.collection.length; i ++){
-				genres[this.collection.models[i].attributes.genre] += 1;	
+				genres[this.collection.models[i].attributes.genre] += 1;
+				console.log(this.collection.models[i].attributes.genre);	
 			}
 			var max = 0; var genre = 'unknown';
 			for (var j in genres){

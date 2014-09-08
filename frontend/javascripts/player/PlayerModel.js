@@ -1,5 +1,5 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../shared/playlist/playlistModel', '../main/listened/ListenedCollection'], 
-	function(Backbone, enums, context, LocalStorage, audioHandler, playlistModel, listenedCollection){
+define(['backbone', '../app/enums', '../app/context', '../units/HtmlAudioHandler', '../shared/playlist/playlistModel', '../main/listened/ListenedCollection'], 
+	function(Backbone, enums, context,  audioHandler, playlistModel, listenedCollection){
 	var PlayerModel = Backbone.Model.extend({
 		defaults: {
 			playback: 'pause',
