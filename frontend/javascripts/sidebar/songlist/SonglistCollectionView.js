@@ -26,7 +26,9 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			'click #save-playlist-as' : 'setClass',
 			"keypress .edit2" : "createPlaylist",
 			'click #save-playlist-from-queue':'saveExisting',
-			'blur .edit2' : 'close'
+			'blur .edit2' : 'close',
+			'click .close-enter-add' : 'close',
+			'click .enter-button-add' : 'createPlaylist'
 		},
 
 		ui : {

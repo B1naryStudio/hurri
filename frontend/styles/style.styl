@@ -594,25 +594,6 @@ h3.results-header
 	#save-playlist-as
 		&:hover
 			background #3ac
-	
-.edit2 
-	position absolute
-	display none
-	width 100%
-	height 36px
-	font-size 20px
-	margin-top 0px
-
-	
- .editing2 .edit2
-		display block
-		position absolute
-		z-index 20
-		width 98%
-		left 0%
-		border 2px solid lightblue
-		padding-left 5%
-
 
 .toggled
 	display none
@@ -635,6 +616,47 @@ h3.results-header
 		overflow auto
 		&::-webkit-scrollbar
 			display none
+
+	.input-wrapper-sidebar	
+		position absolute
+		display none
+		.edit2 
+			position absolute
+			display block
+			width 100%
+			height 36px
+			font-size 20px
+			margin-top 0px
+			left 0%
+			border 2px solid lightblue
+			padding-left 55px
+			z-index 20
+		.enter-button-add
+			position absolute
+			top 2px
+			width 50px
+			height 36px
+			background #3399CC
+			z-index 21
+			border-radius 2px
+			&:hover
+				background orange
+		.close-enter-add
+			width 16px
+			height 16px
+			background url(../images/notifications/delete.png)
+			background-size 16px
+			position absolute
+			z-index 21
+			right 3px
+			top 3px
+			opacity 0.5
+			&:hover
+				opacity 1
+			
+	.editing2 .input-wrapper-sidebar	
+		display block
+		width 100%
 
 #undo-replace
 	width 100px
