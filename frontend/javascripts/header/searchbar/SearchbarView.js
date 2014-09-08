@@ -61,7 +61,7 @@ function(Marionette, SearchResultsView, SearchResultsItemView, router){
 		},
 
 		unbindClickHandler: function(){
-			$(document).off('click', function(){});
+			$(document).off('click');
 		},
 
 		backgroundSearch: _.debounce(function(){

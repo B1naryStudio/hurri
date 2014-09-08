@@ -25,11 +25,17 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			'click #unqueue' : 'unqueueSong',
 			'click #save-playlist-as' : 'setClass',
 			"keypress .edit2" : "createPlaylist",
-			'click #save-playlist-from-queue':'saveExisting'
+			'click #save-playlist-from-queue':'saveExisting',
+			'blur .edit2' : 'close'
 		},
 
 		ui : {
-			text : ".edit2" 
+			text : ".edit2"
+		},
+		
+		close: function(){
+			this.ui.text[0].value = '';
+			this.$el.removeClass("editing2");
 		},
 		
 		setClass: function(){
