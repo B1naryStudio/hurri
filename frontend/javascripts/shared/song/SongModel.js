@@ -38,7 +38,8 @@ define(['backbone'], function(Backbone){
 					$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('artist')}, function(data){
 						self.set({url: data.url, duration: data.duration});
 					});
-				}
+		 		}
+
 			return self.get('url');
 		}
 

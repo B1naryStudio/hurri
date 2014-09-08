@@ -13,6 +13,7 @@ define(['../shared/song/SongModel',
 
 	var context = {
 			currentSongModel: new SongModel(),
+			queueSavedSong: undefined,
 			notificationCollection: new NotificationCollection(window._injectedData.alerts),
 			currentUserModel: new UserModel(window._injectedData.user),
 			currentPlaylistBar: new PlaylistBarModel(),

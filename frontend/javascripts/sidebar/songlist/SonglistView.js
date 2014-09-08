@@ -22,22 +22,33 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 
 		playSong: function(){
 			for (var i = 0; i < this.model.collection.length; i++){
-				if (this.model.cid === this.model.collection.models[i].cid){
+				if (this.model.get === this.model.collection.models[i].cid){
 					Backbone.trigger('songlist-view:play-song', i);
 				}
-			}
-			
+			}	
 		},
 
 		deleteSong: function(){
 		 	context.currentSongCollection.remove(this.model);
 		 },
 
-		addSongToQueue: function(){		
-			this.model.set({queuepos : this.model.attributes.queuepos === '' ? this.setQueuepos() : this.recountQueue(this.model.attributes.queuepos)});
+		addSongToQueue: function(){
+			if(this.model.get('queuepos') === ''){		
+				this.model.set({queuepos : this.setQueuepos()});
+			} else {
+				Backbone.trigger('queue-recount', this.model.get('queuepos'));
+			}
 		},
 
 		setQueuepos : function (){
+			if(playlistModel.get('queueNum') === 0){
+				for (var i = 0; i < this.model.collection.length; i++){
+					if (this.model.collection.models[i].get('_id') == context.currentSongModel.get('_id')){
+						context.queueSavedSong = i;
+						break;
+					}
+				}			
+			}
 			var queue = playlistModel.get('queueNum') + 1;
 			playlistModel.set({queueNum : queue});
 			return queue;

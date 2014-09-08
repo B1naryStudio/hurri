@@ -11,7 +11,8 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 			numberOfTracks: 1,
 			queueNum : 0,
 			position: undefined,
-			type: 'default'
+			type: 'default',
+			privatePlaylsit: false 
 		},
 
 		setTrackFromCollection: function(position){
@@ -50,12 +51,19 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 		nextPlayedTrack: function(direction, repeatMode, currentTrack){
 			var next;
 			var current;
-				for (var i = 0; i < this.collection.length; i++){
-					if (this.collection.models[i].get('queuepos') === 1){
-						next = i;
-						Backbone.trigger('queue-recount', 1);
-						return next;
+				if (this.get('queueNum') > 0){
+					for (var i = 0; i < this.collection.length; i++){
+						if (this.collection.models[i].get('queuepos') === 1){
+							next = i;
+							console.log('queueNum=',this.get('queueNum'));
+							Backbone.trigger('queue-recount', 1);
+							return next;
+						}
 					}
+				} else if ((this.get('queueNum') === 0) && (typeof context.queueSavedSong !== 'undefined' )){
+					next = context.queueSavedSong;
+					context.queueSavedSong = undefined;
+					return next;
 				}
 				if (direction === 'direct'){
 					if (repeatMode === enums.repeatModes.none){
