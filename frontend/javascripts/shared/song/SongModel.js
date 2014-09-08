@@ -19,18 +19,16 @@ define(['backbone'], function(Backbone){
 			current : false,
 			modelType : 'song'
 		},
-
-		likeState : function(songId){
+		likeState : function(modelId){
 			if (!this.get('liked')){
 				this.set({liked: true});
-				$.ajax({type:'PUT', url:'/api/user/' + window._injectedData.user._id + '/like/' + songId});
+				Backbone.trigger('like-song', modelId);
 			} else {
 				this.set({liked: false});
-				$.ajax({type:'DELETE', url:'/api/user/' + window._injectedData.user._id + '/like/' + songId});
+				Backbone.trigger('unlike-song', modelId);
 			}
 			return this.get('liked');
 		},
-
 		getStream: function(){
 			var self = this;
 			var url = this.get('url');
@@ -42,7 +40,12 @@ define(['backbone'], function(Backbone){
 
 			return self.get('url');
 		}
-
+	});
+	Backbone.on('like-song',function(songId){
+		$.ajax({type:'PUT', url:'/api/user/' + window._injectedData.user._id + '/like/' + songId});
+	});
+	Backbone.on('unlike-song',function(songId){	
+		$.ajax({type:'DELETE', url:'/api/user/' + window._injectedData.user._id + '/like/' + songId});
 	});
 	return SongModel;
 });

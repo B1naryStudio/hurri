@@ -224,10 +224,6 @@ define(['marionette',
 			context.currentSongCollection.add(model);
 		},this);
 
-		Backbone.on('song-view:like-song', function(model){
-			$.ajax({type:'PUT', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + model.get('_id')});
-		}, this);
-
 		Backbone.on('songlist:save-to-existing-playlist', function(model_id, collection){
 			var tracks = [];
 			for(var i = 0; i < collection.models.length; i++)

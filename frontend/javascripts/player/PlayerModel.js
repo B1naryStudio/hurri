@@ -104,12 +104,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 			this.volumeLevelSetup(this.get('volumeLevel'));
 			this.startTrack();
-			for(var i=0; i < window._injectedData.liked.length; i++) {
-				if (window._injectedData.liked[i]._id === context.currentSongModel.get('_id')) {
-					this.set({liked: true});
-				} else {
-					this.set({liked: false});
-				}
+			if (context.currentSongModel.get('liked')) {
+				this.set({liked: true});
+			} else {
+				this.set({liked: false});
 			}
 		},
 
@@ -141,7 +139,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			listenedCollection.add(context.currentSongModel.attributes);
 			var next = playlistModel.nextPlayedTrack('direct', this.get('repeatTrack'), this.get('currentTrack'));
 			this.newTrack(next);
-			if (this.get('currentTrack') > 0){
+			if ((this.get('currentTrack') > 0) && (playlistModel.get('numberOfTracks') > 0)) {
 				this.set({previousButtonState: false});
 			}
 			if ((this.get('currentTrack') === playlistModel.get('numberOfTracks')-1)&&(this.get('repeatTrack') === enums.repeatModes.none)){
@@ -169,6 +167,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				currentTrackName: context.currentSongModel.get('title'),
 				currentArtistName: context.currentSongModel.get('artist'),
 				duration: context.currentSongModel.get('duration'),
+				liked: context.currentSongModel.get('liked'),
 				position: 0,
 			});
 			this.volumeLevelSetup(this.get('volumeLevel'));
@@ -228,13 +227,12 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		likeState : function(){
-
 			if (!this.get('liked')){
 				this.set({liked: true});
-				$.ajax({type:'PUT', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('_id')});
+				Backbone.trigger('like-song', context.currentSongModel.get('_id'));
 			} else {
 				this.set({liked: false});
-				$.ajax({type:'DELETE', url:'/api/user/' + context.currentUserModel.get('_id') + '/like/' + context.currentSongModel.get('_id')});
+				Backbone.trigger('unlike-song', context.currentSongModel.get('_id'));
 			}
 			return this.get('liked');
 		},
