@@ -1,5 +1,8 @@
-define(['marionette', './track/SongResultCompositeView', './artist/ArtistCompositeView','./album/AlbumCompositeView'], 
-	function(Marionette, SongResultCompositeView, ArtistCompositeView, AlbumCompositeView){
+define(['marionette', './track/SongResultCompositeView', 
+	'./artist/ArtistCompositeView','./album/AlbumCompositeView', 
+	'./NotFoundSong', './NotFoundAlbum', './NotFoundArtist'], 
+	function(Marionette, SongResultCompositeView, ArtistCompositeView, AlbumCompositeView, 
+		NotFoundSong, NotFoundAlbum, NotFoundArtist){
 	var ResultView = Marionette.ItemView.extend({
 		initialize: function(options){
 			this.data = options;
@@ -21,11 +24,28 @@ define(['marionette', './track/SongResultCompositeView', './artist/ArtistComposi
 				model: new Backbone.Model(),
 				collection: this.data.album
 			});
-
 			
-			artistResultView.render();
-			albumResultView.render();
-			songResultView.render();
+			if (this.data.artist.length === 0){
+				var notfoundartist = new NotFoundArtist([],1);
+				notfoundartist.render();
+			}
+			else
+				artistResultView.render();
+
+			if (this.data.album.length === 0){
+				var notfoundalbum = new NotFoundAlbum([],3);
+				notfoundalbum.render();
+			}
+			else
+				albumResultView.render();
+
+			if (this.data.song.length === 0){
+				var notfoundsong = new NotFoundSong([],2);
+				notfoundsong.render();
+			}
+			else
+				songResultView.render();
+
 		}
 	});
 

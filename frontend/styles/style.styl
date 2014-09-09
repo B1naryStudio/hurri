@@ -221,6 +221,8 @@ body
 	background  linear-gradient(to bottom, rgba(240,240,240,.9) 0, rgba(250,250,250,.9) 100%)
 	padding-top 3px
 	padding-bottom 3px
+	position relative
+	border-top 1px solid lightgray
 .show-full-song-search
 .show-full-album-search
 .show-full-artist-search
@@ -252,7 +254,12 @@ body
 
 h3.results-header
 	text-align center !important
-	color #757575
+	color #aaa
+	height 30px
+	background #333
+	border-right 1px solid white
+	padding-top 10px
+
 
 .nothing-to-show
 	height 100%
@@ -289,7 +296,21 @@ img.album-composite-cover
 .total_tracks
 	clear both
 	
-	
+img.no-item-to-show
+	width 150px
+	height 150px
+	opacity 0.3
+	margin auto
+	display block
+
+.item-not-found
+	color darkgrey
+	font-size 25px
+	position absolute
+	top 45%
+	left 20%
+	bottom 10px
+
 
 #user
 	width 100%
