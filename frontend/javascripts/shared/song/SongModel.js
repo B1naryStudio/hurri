@@ -11,7 +11,7 @@ define(['backbone'], function(Backbone){
 			lyrics : 'No lyrics for this song. Sorry.',
 			albumTitle : 'AlbumName',
 			albumCover: '/images/default/cover.png',
-			singer: {name : 'Artist'},
+			singer: { name : 'Artist'},
 			url: undefined,
 			comments : [''],
 			queuepos : '',
