@@ -7,13 +7,15 @@ define(['marionette', '../album/AlbumCompositeView', '../album/tiles/AlbumModel'
 			id: 'album-complete-view',
 			template: '#album-complete-template',
 			onShow: function(){
-				console.log(this.collection);
-				var view = new AlbumCompositeView({
-					model : new AlbumModel(this.collection.models[0]),
-					collection : new SongCollection(this.collection.models[0].attributes.tracks, {playlistId:'none'})
-				});
+				var content;
+				for (var i = 0 ; i < this.collection.models.length; i ++){
+					var view = new AlbumCompositeView({
+						model : new AlbumModel(this.collection.models[0]),
+						collection : new SongCollection(this.collection.models[0].attributes.tracks, {playlistId:'none'})
+					});
 
-				view.render();
+					view.render().$el.appendTo(this.$el);
+				}
 			}
 	}); 
 	return AlbumComplete;
