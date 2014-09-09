@@ -30,11 +30,11 @@ define(['marionette', '../explorer/album/tiles/AlbumCollection', '../explorer/ar
 	};
 
 	SearchResults.prototype.getArtistCollection = function(){
-		return new ArtistResultCollection(this.data[1]);
+		return new ArtistResultCollection(this.data[1], {playlistId:'none'});
 	};
 
 	SearchResults.prototype.getAlbumCollection = function(){
-		return new AlbumResultCollection(this.data[0]);
+		return new AlbumResultCollection(this.data[0], {playlistId:'none'});
 	};
 	return new SearchResults();
 });

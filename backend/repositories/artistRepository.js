@@ -1,6 +1,7 @@
 var connection = require('../db/dbconnect.js');
 var Artist = require('../schemas/artist.js');
 var Repository = require('./generalRepository.js');
+var Track = require('../schemas/track.js');
 
 function ArtistRepository(){
 	Repository.prototype.constructor.call(this);
@@ -13,6 +14,16 @@ ArtistRepository.prototype.getById = function(id, callback) {
 	var model = this.model;
 	var query = model.findOne({_id: id}).populate('albums_id');
 	query.exec(callback);
+};
+
+ArtistRepository.prototype.getArtistAlbums = function(id, callback) {
+	var model = this.model;
+	model.findOne({_id: id}, 'albums_id').lean().populate({path:'albums_id albums_id.tracks'}).exec(function(err, data){
+		var opts = [
+			{ path: 'tracks', model: 'Track' }
+		];
+		Track.populate(data.albums_id, opts, callback);
+	});
 };
 
 ArtistRepository.prototype.getByName = function(name, limit, quick, callback) {

@@ -45,7 +45,7 @@ module.exports = function(app){
 	app.get('/api/album/:id/tracks', function(req, res, next){
 		albumRepository.getTracks(req.params.id, function(err, data){
 			res.err = err;
-			res.data = data;
+			res.data = data.tracks;
 			next();
 		});
 	}, apiResponse);
