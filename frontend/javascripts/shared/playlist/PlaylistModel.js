@@ -12,7 +12,6 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 			queueNum : 0,
 			position: undefined,
 			type: 'default',
-			privatePlaylsit: false 
 		},
 
 		setTrackFromCollection: function(position){
@@ -46,6 +45,31 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 				return _.reduce(function(memo, collection) {
 					return memo + this.collection.get('duration');
 				}, 0);
+		},
+
+		setPrivate: function(){
+			if (this.get('type') !== 'private'){
+				this.set({type: 'private'});
+				$.ajax({
+					type:'PUT', 
+					dataType: "json",
+					url:'/api/user/' + window._injectedData.user._id + '/playlist/' + this.get('_id') + '/type',
+					data: {
+						type: 'private'
+					}
+				});
+			} else {
+				this.set({type: 'shared'});
+				$.ajax({
+					type:'PUT',
+					dataType: "json", 
+					url:'/api/user/' + window._injectedData.user._id + '/playlist/' + this.get('_id') + '/type',
+					data: {
+						type: 'shared'
+					}
+				});
+			}
+			return this.get('type');
 		},
 
 		nextPlayedTrack: function(direction, repeatMode, currentTrack){

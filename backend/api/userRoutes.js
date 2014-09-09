@@ -192,6 +192,15 @@ module.exports = function(app){
 			next();
 		});
 	}, apiResponse);
+
+	app.put('/api/user/:id/playlist/:pl_id/type', function(req, res, next){
+		userRepository.updatePlaylistType(req.params.id, req.params.pl_id, req.body, function(err, data){
+			res.successStatus = 201;
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
 	
 	app.delete('/api/user/:id/follower/:fid', function(req, res, next){
 		userRepository.deleteFollower(req.params.id, req.params.fid, function(err, data){

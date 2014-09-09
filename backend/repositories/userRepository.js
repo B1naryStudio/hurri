@@ -199,6 +199,19 @@ UserRepository.prototype.updatePlaylist = function(id, pid, body, callback) {
 	});
 };
 
+UserRepository.prototype.updatePlaylistType = function(id, pid, body, callback) {
+	var model = this.infoModel;
+	var query = model.findOne({user_auth_id: id}, function(err, data){
+		for(var i = 0; i < data.playlists.length; i++){
+			if (data.playlists[i]._id == pid){
+				console.log('body=', body);
+				data.playlists[i].type = body.type;
+				data.save(callback);
+			}
+		}
+	});
+};
+
 UserRepository.prototype.deleteSongFromPlaylist = function(id, pid, tid, callback) {
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id}, function(err, data){
