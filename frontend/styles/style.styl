@@ -355,9 +355,9 @@ img.no-item-to-show
 				font-size 12px
 
 			#music-statistic
-				width 300px
-				height 60px
-				margin-top 70px
+				width auto
+				height 100px
+				margin-top 15px
 
 				.statistic-title
 					width auto
@@ -375,17 +375,47 @@ img.no-item-to-show
 					cursor pointer
 
 				.statistic-bar
-					width 302px
+					width 300px
 					height 30px
 					position absolute
-					margin-top 30px
+					margin-top 20px
 					border 1px gray solid
-					box-sizing border-box
 					overflow hidden
 					
 					.statistic-bar-strip
-						height 28px
+						height 30px
 						float left
+
+				.statistic-legend
+					width 300px
+					height 50px
+					position absolute
+					margin-top 60px
+					border 1px gray solid
+					border-radius 3px
+					overflow hidden
+					overflow-y auto
+
+					.legend-item
+						width auto
+						height 20px
+						float left
+
+						.item-box
+							width 10px
+							height 10px
+							margin 5px
+							float left
+							display none
+
+						.item-name
+							width auto
+							height 10px
+							padding 5px 0
+							font-size 12px
+							line-height 12px
+							float left
+							display none
 
 	.subtitle
 		width auto

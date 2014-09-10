@@ -13,9 +13,11 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
    			addTw: '#addTw',
    			addFb: '#addFb',
 
-   			statisticTitle   : '.statistic-title',
-   			statisticBar  	 : '.statistic-bar',
-   			statisticBarStrip: '.statistic-bar-strip',
+   			statisticTitle     : '.statistic-title',
+   			statisticBar  	   : '.statistic-bar',
+   			statisticBarStrip  : '.statistic-bar-strip',
+   			statisticLegendBox : '.item-box',
+   			statisticLegendName: '.item-name',
 
    			statisticByArtists: '#byArtists',
    			statisticByGenres : '#byGenres',
@@ -70,6 +72,12 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 			this.render();
 		},
 		showStatisticByArtists: function() {
+			for(var j = 0; j < 7; j++) {
+				this.ui.statisticBarStrip[j].style.width = 0 +'px';
+				this.ui.statisticLegendBox[j].style.display = 'none';
+				this.ui.statisticLegendName[j].style.display = 'none';
+			}
+
 			var artists = {}, artistsTotal = 0;
 			_.each(ListenedCollection.models, function(model) {
 				var artist = model.get('artist');
@@ -88,16 +96,28 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 					local.ui.statisticBarStrip[i].style.width = (percents[artist] * 3) + 'px';
 					local.ui.statisticBarStrip[i].setAttribute('title',
 						'Artist: ' + artist + ' (' + percents[artist] + '%)');
+					local.ui.statisticLegendBox[i].style.display = 'block';
+					local.ui.statisticLegendName[i].style.display = 'block';
+					local.ui.statisticLegendName[i].textContent = artist;
 					i++;
 				}
 			});
-			if(percentsTotal !== 0) {
+			if(percentsTotal > 0 && percentsTotal < 100) {
 				this.ui.statisticBarStrip[i].style.width = ((100 - percentsTotal) * 3) + 'px';
 				this.ui.statisticBarStrip[i].setAttribute('title',
 					'Artist: Other' + ' (' + (100 - percentsTotal) + '%)');
+				this.ui.statisticLegendBox[i].style.display = 'block';
+				this.ui.statisticLegendName[i].style.display = 'block';
+				this.ui.statisticLegendName[i].textContent = 'Other';
 			}
 		},
 		showStatisticByGenres: function() {
+			for(var j = 0; j < 7; j++) {
+				this.ui.statisticBarStrip[j].style.width = 0 +'px';
+				this.ui.statisticLegendBox[j].style.display = 'none';
+				this.ui.statisticLegendName[j].style.display = 'none';
+			}
+
 			var genres = {}, genresTotal = 0;
 			_.each(ListenedCollection.models, function(model) {
 				var genre = model.get('genre');
@@ -116,13 +136,19 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 					local.ui.statisticBarStrip[i].style.width = (percents[genre] * 3) + 'px';
 					local.ui.statisticBarStrip[i].setAttribute('title',
 						'Genre: ' + genre + ' (' + percents[genre] + '%)');
+					local.ui.statisticLegendBox[i].style.display = 'block';
+					local.ui.statisticLegendName[i].style.display = 'block';
+					local.ui.statisticLegendName[i].textContent = genre;
 					i++;
 				}
 			});
-			if(percentsTotal !== 0) {
+			if(percentsTotal > 0 && percentsTotal < 100) {
 				this.ui.statisticBarStrip[i].style.width = ((100 - percentsTotal) * 3) + 'px';
 				this.ui.statisticBarStrip[i].setAttribute('title',
 					'Genre: Other' + ' (' + (100 - percentsTotal) + '%)');
+				this.ui.statisticLegendBox[i].style.display = 'block';
+				this.ui.statisticLegendName[i].style.display = 'block';
+				this.ui.statisticLegendName[i].textContent = 'Other';
 			}
 		},
 		renderChildViews: function(){
