@@ -1,6 +1,13 @@
 script#song-template(type='text/template')
-	div
-		#song-info-text {{-title}} - {{-singer}} </br>
-		div#song-info-image 
+	.main-song-item
+		.main-song-cover
 			img(src='{{-albumCover}}')
-		#duration
+		.main-song-info
+			.main-song-name
+				{{-title}} - {{-singer.name}}
+		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
+		.main-queue-add
+		.main-like-song
+		.queueposmain {{-queuepos}}
+	div#song-info-image 
+		img(src='{{-album.cover}}')

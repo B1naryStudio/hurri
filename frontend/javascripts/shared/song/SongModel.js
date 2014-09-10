@@ -11,7 +11,8 @@ define(['backbone'], function(Backbone){
 			lyrics : 'No lyrics for this song. Sorry.',
 			albumTitle : 'AlbumName',
 			albumCover: '/images/default/cover.png',
-			singer: 'Singer',
+			album: {cover : '/images/default/cover.png'},
+			singer: { name : 'Artist'},
 			url: undefined,
 			comments : [''],
 			queuepos : '',
@@ -20,6 +21,11 @@ define(['backbone'], function(Backbone){
 			modelType : 'song'
 		},
 		initialize: function(){
+			var singer = this.get('singer');
+			if (singer === null){
+				this.set('singer', {name : ''});
+			}
+			
 			this.on('change:liked', function(){
 				var type = this.get('liked') ? 'PUT' : 'DELETE';
 				$.ajax({
@@ -29,6 +35,7 @@ define(['backbone'], function(Backbone){
 				});
 			});
 		},
+
 		likeState : function(){
 			if (!this.get('liked')){
 				this.set({liked: true});
@@ -37,6 +44,7 @@ define(['backbone'], function(Backbone){
 			}
 			return this.get('liked');
 		},
+
 		getStream: function(){
 			var self = this;
 			var url = this.get('url');

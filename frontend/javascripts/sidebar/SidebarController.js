@@ -207,14 +207,14 @@ define(['marionette',
 			Backbone.trigger('main:play-first');
 		},this);
 
-		Backbone.on('song-view:play-song', function(model){
+		Backbone.on('song-view:play-song', function(model, i){
 			if (context.currentSongCollection.length !== 0){
 				context.previousCollection.reset(context.currentSongCollection.models);
 			}
 			var button = new UndoReplacement();
 			button.render();
 			context.currentSongCollection.reset(model);
-			Backbone.trigger('main:play-first');
+			Backbone.trigger('main:play-at-position', i);
 		},this);
 
 		Backbone.on('songlist-view:play-song', function(i){

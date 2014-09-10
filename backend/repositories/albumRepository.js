@@ -21,7 +21,7 @@ AlbumRepository.prototype.getByTitle = function(name, limit, quick, callback) {
 	var lim = limit || '';
 	var q = quick || '';
 	regexp = new RegExp(q + name, "i");
-	var query = model.find({title: regexp}).limit(lim);
+	var query = model.find({title: regexp}).populate('singer').populate('tracks').limit(lim);
 	query.exec(callback);
 };
 

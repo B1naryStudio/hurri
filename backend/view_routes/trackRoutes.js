@@ -5,9 +5,7 @@ var injectData = require('../middleware/injectDataMiddleware');
 module.exports = function (app) {
 
 	app.get('/track/id/:id', isLoggedIn, function(req, res, next) {
-		console.log(req.params.id);
 		trackRepository.getById(req.params.id, function(err, data){
-			console.log(err, data);
 			injectData(req, res, {track:data}, false);
 		});
 	});

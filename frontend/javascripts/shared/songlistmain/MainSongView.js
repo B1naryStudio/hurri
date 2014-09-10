@@ -28,8 +28,14 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 	},
 	playSong: function(){
 		var current = this.model.collection.findWhere({current:true});
-		current.set({current:false});
-		Backbone.trigger('song-view:play-song', this.model);
+		if (current)
+			current.set({current:false});
+		var position = 0;
+		for (var i = 0; i < this.model.collection.models.length; i++){
+			if (this.model.collection.models[i] == this.model)
+				position = i;
+		}
+		Backbone.trigger('song-view:play-song', this.model.collection.models, position);
 	},
 
 	addToQueue: function(){

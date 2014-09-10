@@ -1,0 +1,17 @@
+script#album-composite-template(type='text/template')
+	#album-composite-view-main
+	p.album-composite-header {{-title}}
+	img.album-composite-cover(src="{{-cover}}")
+	.album-composite-release 
+		span.bold Release date:
+		span {{-release_date}}
+	.album-duration 
+		span.bold Total duration: 
+		span	{{-hours}} : {{-minutes}} : {{-seconds}}
+	.album-singer 
+		span.bold Singer name: 
+		span {{-singer.name}}
+	.total_tracks 
+		span.bold Total tracks: 
+		span{{-tracks.length}}
+

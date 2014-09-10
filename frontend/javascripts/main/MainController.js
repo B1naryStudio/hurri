@@ -29,7 +29,12 @@ define(['marionette',
 	  './search/ResultView',
 	  './explorer/album/tiles/AlbumModel',
 	  './radio/tiles/RadioModel',
-	  '../app/routes'
+	  '../app/routes',
+	  './explorer/album/AlbumCompositeView',
+	  './explorer/artist/AlbumCompleteView',
+	   './explorer/artist/tiles/ArtistModel',
+	   './explorer/album/tiles/AlbumCollection',
+	   '../shared/song/SongModel'
 	  ],
 	function(Marionette, 
 		_,
@@ -62,7 +67,12 @@ define(['marionette',
 		ResultView,
 		AlbumBarModel,
 		RadioBarModel,
-		Router
+		Router,
+		AlbumCompositeView,
+		AlbumCompleteView,
+		ArtistModel,
+		AlbumCollection,
+		SongModel
 		){
 	
 	var MainController = function(){		
@@ -93,6 +103,8 @@ define(['marionette',
 
 		this.initializeListened();
 
+		//this.initializeAlbumInner();
+
 		//this.initializeResults();
 
 		// this.initializeLayout();
@@ -111,8 +123,8 @@ define(['marionette',
 		this.notFoundView = this.getNotFoundView();
 	};
 
-	MainController.prototype.initializeLayout = function(){
-		this.layoutView = this.getLayout();
+	MainController.prototype.initializeLayout = function(id){
+		this.layoutView = this.getLayout(id);
 	};
 
 	MainController.prototype.getNotFoundView = function(){
@@ -164,7 +176,7 @@ define(['marionette',
 
 	MainController.prototype.initializeAlbums = function(){
 		this.album = {
-			collection: new AlbumBarCollection(),
+			collection: new AlbumBarCollection([], {playlistId: 'none'}),
 			model: new AlbumBarModel()
 		};
 
@@ -263,7 +275,8 @@ define(['marionette',
 		this.mainsonglist = {
 			model: model,
 			collection: new MainSonglistCollection([], {
-				playlistId : model.attributes._id
+				playlistId : '/api/user/' + context.currentUserModel.attributes._id + 
+							'/playlists/' + model.attributes._id + '/tracks'
 			})
 		};
 		this.mainsonglist.collection.fetch({
@@ -280,6 +293,64 @@ define(['marionette',
 		return new MainSongCollectionView({
 			model: this.mainsonglist.model,
 			collection: this.mainsonglist.collection
+		});
+	};
+
+	MainController.prototype.initializeAlbumInner = function(id, obj){
+		var album;
+		if (obj.deezer_id)
+			album = obj;
+		else
+			album = _.findWhere(obj, {_id:id});
+		this.albuminner = {	
+			model: new AlbumBarModel(album),
+			collection: new MainSonglistCollection([], {
+				playlistId : '/api/album/' + id + '/tracks'
+			})
+		};
+
+		this.albuminner.collection.fetch({
+			cache: true, 
+			success: function () {
+		  		Backbone.trigger('show-tracks');
+	   		}
+		});
+	};
+
+	MainController.prototype.getAlbumInnerView = function(){
+
+		return new AlbumCompositeView({
+			model: this.albuminner.model,
+			collection: this.albuminner.collection
+		});
+	};
+
+	MainController.prototype.getArtistInnerView = function(){
+
+		return new AlbumCompleteView({
+			model: this.artistinner.model,
+			collection: this.artistinner.collection
+		});
+	};
+
+	MainController.prototype.initializeArtistInner = function(id, obj){
+		var artist;
+		if (obj.deezer_id)
+			artist = obj;
+		else
+			artist = _.findWhere(obj, {_id:id});
+		this.artistinner = {	
+			model: new ArtistModel(artist),
+			collection: new AlbumCollection([], {
+				playlistId : '/api/artist/id/' + id + '/albums'
+			})
+		};
+
+		this.artistinner.collection.fetch({
+			cache: true, 
+			success: function () {
+		  		Backbone.trigger('show-artits-alb');
+	   		}
 		});
 	};
 
@@ -333,6 +404,7 @@ define(['marionette',
 
 	MainController.prototype.initializeResults = function(input, callback){
 		var res = FullSearchResults;
+		this.fullresults = res;
 		var self = this;
 		res.getData(input, function(obj){
 			callback(obj);
@@ -392,11 +464,36 @@ define(['marionette',
 	// 	});
 	// };
 
-	MainController.prototype.getLayout = function() {
-		if (context.currentSongModel.attributes._id === undefined && !window._injectedData.track)
+	MainController.prototype.getLayout = function(id) {
+		var model;
+		if (id === undefined && !window._injectedData.track)
 			this.mainRegion.show(this.getNotFoundView());
-		else
-			this.mainRegion.show(new LayoutView());
+		else {
+				if (context.currentSongModel.attributes._id === undefined && window._injectedData.track && window._injectedData.track._id === id){
+					model  = new SongModel(window._injectedData.track);
+					this.mainRegion.show(new LayoutView(model));
+				} else {
+					var self = this;
+					$.ajax({url: '/api/track/id/'+id}).done(function(data){
+						model = new SongModel(data);
+						self.mainRegion.show(new LayoutView(model));
+					});
+				}
+
+				
+				// if (context.currentSongModel.attributes._id === id){
+				// 	self.mainRegion.show(new LayoutView(track));
+				// }
+
+				// 	var Track = SongModel.extend({urlRoot: '/track/id'});
+				// 	var track = new Track({id:id});
+				// 	track.fetch({
+				// 		success: function () {
+				// 			alert();
+				// 	  		self.mainRegion.show(new LayoutView(track));
+				// 	  	}
+				//    	});
+			}
 	};
 
 	MainController.prototype.bindListeners = function(){
@@ -424,9 +521,39 @@ define(['marionette',
 			this.mainRegion.show(this.getChartsView());
 		},this);
 
-		Backbone.on('player:add-comment', function(){
-			this.getLayout();
+		Backbone.on('player:add-comment', function(id){
+			this.getLayout(id);
 		},this);
+
+		Backbone.on('show-album-tracks', function(id){
+			if (this.fullresults)
+				this.initializeAlbumInner(id, this.fullresults.data[0]);
+			else {
+				var self = this;
+				$.ajax({url: '/api/album/id/'+id}).done(function(data){
+						self.initializeAlbumInner(id, data);
+				});
+			}
+		},this);
+
+		Backbone.on('show-artist-albums', function(id){
+			if (this.fullresults)
+				this.initializeArtistInner(id, this.fullresults.data[1]);
+			else {
+				var self = this;
+				$.ajax({url: '/api/artist/id/'+id}).done(function(data){
+						self.initializeArtistInner(id, data);
+				});
+			}
+		},this);
+
+		Backbone.on('show-artits-alb', function(){
+			this.mainRegion.show(this.getArtistInnerView());
+		},this);
+
+		Backbone.on('show-tracks', function(){
+			this.mainRegion.show(this.getAlbumInnerView());
+		}, this);
 
 		Backbone.on('playlist-play', function(id){
 			var err = this.initializeMainSonglist(id);

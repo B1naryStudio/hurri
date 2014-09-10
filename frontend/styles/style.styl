@@ -109,7 +109,8 @@ body
 		color white
 		display inline
 		padding 1px 2px
-
+.bold 
+	font-weight bold
 #searchbar
 	width auto
 	height bar_height
@@ -165,7 +166,9 @@ body
 	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
 	border-radius 0 0 3px 3px
 
-	.searchresults-region
+	.searchresults-region_album
+	.searchresults-region_artist
+	.searchresults-region_song
 		width 290px
 		height auto
 		border-style hidden
@@ -220,6 +223,8 @@ body
 	background  linear-gradient(to bottom, rgba(240,240,240,.9) 0, rgba(250,250,250,.9) 100%)
 	padding-top 3px
 	padding-bottom 3px
+	position relative
+	border-top 1px solid lightgray
 .show-full-song-search
 .show-full-album-search
 .show-full-artist-search
@@ -251,7 +256,12 @@ body
 
 h3.results-header
 	text-align center !important
-	color #757575
+	color #aaa
+	height 30px
+	background #333
+	border-right 1px solid white
+	padding-top 10px
+
 
 .nothing-to-show
 	height 100%
@@ -271,6 +281,37 @@ h3.results-header
 		position absolute
 		bottom 40px
 		right 40px
+p.album-composite-header
+	color darkgrey
+	font-size 20px
+	font-weight bold
+	text-align center
+img.album-composite-cover
+	width 30%
+	width 30%
+	float left
+.album-composite-release
+.album-duration 
+.album-singer 
+	width 70%
+	float left
+.total_tracks
+	clear both
+	
+img.no-item-to-show
+	width 150px
+	height 150px
+	opacity 0.3
+	margin auto
+	display block
+
+.item-not-found
+	color darkgrey
+	font-size 25px
+	position absolute
+	top 45%
+	left 20%
+	bottom 10px
 
 
 #user
@@ -374,10 +415,13 @@ h3.results-header
 	#song-info-text
 		width 90%
 		margin 3% auto
-	#song-info-image
-		width 170px
-		height 170px
+	#song-info-image 
+		width 200px
+		height 200px
 		margin 3% auto
+		img
+			width 190px
+			
 
 #album-bar-wrapper
 	margin auto

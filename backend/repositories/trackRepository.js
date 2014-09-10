@@ -22,7 +22,7 @@ TrackRepository.prototype.getByTitle = function(title, limit, quick, callback) {
 	var lim = limit || '';
 	var q = quick || '';
 	regexp = new RegExp(q + title, "i");
-	var query = model.find({title: regexp}).limit(lim);
+	var query = model.find({title: regexp}).populate('singer').limit(lim);
 	query.exec(callback);
 };
 

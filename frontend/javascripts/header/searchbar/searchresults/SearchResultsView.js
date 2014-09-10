@@ -7,31 +7,31 @@ define(['marionette', '../../../app/routes'], function(Marionette, router){
 
 
 		ui: {
-			resultsRegion: '.searchresults-region',
+			resultsRegionAlbum: '.searchresults-region_album',
+			resultsRegionArtist: '.searchresults-region_artist',
+			resultsRegionSong: '.searchresults-region_song',
 			more 		: '.show-more-results'
   		},
 
 		events: {
-			'click @ui.resultsRegion': 'select',
+			'click @ui.resultsRegionAlbum': 'select',
+			'click @ui.resultsRegionArtist': 'select',
+			'click @ui.resultsRegionSong': 'select',
 			'click .show-more-results' : 'showMore'
 		},
-
-		// showMore : function(){
-		// 	router.navigate('/search/' + this.ui.searchInput[0].value, true);
-		// }, 
 
 		attachHtml: function(compositeView, childView, index){
 			switch(childView.model.get('type')){
 				case 'album':
-					compositeView.ui.resultsRegion[0].appendChild(childView.el);
+					compositeView.ui.resultsRegionAlbum[0].appendChild(childView.el);
 					break;
 
 				case 'artist':
-					compositeView.ui.resultsRegion[1].appendChild(childView.el);
+					compositeView.ui.resultsRegionArtist[0].appendChild(childView.el);
 					break;
 
 				case 'song':
-					compositeView.ui.resultsRegion[2].appendChild(childView.el);
+					compositeView.ui.resultsRegionSong[0].appendChild(childView.el);
 					break;
 			}
 			
