@@ -18,6 +18,13 @@ define(['backbone'], function(Backbone){
 			current : false,
 			modelType : 'song'
 		},
+		initialize: function(){
+			var singer = this.get('singer');
+			if (singer === null){
+				this.set('singer', {name : ''});
+			}
+			
+		},
 
 		getStream: function(){
 			var self = this;

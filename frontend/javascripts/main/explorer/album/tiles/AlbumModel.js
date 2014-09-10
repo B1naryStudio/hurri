@@ -8,20 +8,25 @@ define(['backbone'], function(Backbone){
 			cover : '',
 			duration : undefined,
 			release_date : undefined,
-			singer : {name : 'unknown'},
+			singer : { name : 'unknown'},
 			genres : [],
 			comment : [],
 			tracks : [],
 			modelType : 'album',
 			total_tracks : 0,
-			normalized_duration : 0
+			minutes : 0,
+			hours : 0,
+			seconds : 0
 		},
 
 		initialize: function(){
-			var self = this;
-			this.on('change:duration', function(){
-				self.set({'normalized_duration': duration/60});
-			});
+			var duration = this.get('duration');
+			this.set({'hours': Math.floor(duration / 3600)});
+			var hours = this.get('hours');
+			this.set({'minutes': Math.floor(duration / 60) - hours * 60 });
+			var minutes = this.get('minutes');
+			this.set({'seconds': duration - minutes * 60 - hours * 60 });
+
 		}
 	});
 	return AlbumModel;

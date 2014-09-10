@@ -4,7 +4,7 @@ script#main-song-bar(type='text/template')
 			img(src='{{-albumCover}}')
 		.main-song-info
 			.main-song-name
-				{{-title}} - {{-singer}}
+				{{-title}} - {{-singer.name}}
 		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
 		.main-queue-add
 		.main-like-song
