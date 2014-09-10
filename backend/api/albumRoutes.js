@@ -18,6 +18,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/explorer/albums', function(req, res, next){
+		albumRepository.getAll(function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/album/:id/cover', function(req, res, next){
 		albumRepository.getCover(req.params.id, function(err, data){
 			res.err = err;

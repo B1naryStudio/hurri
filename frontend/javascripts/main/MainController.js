@@ -176,21 +176,12 @@ define(['marionette',
 
 	MainController.prototype.initializeAlbums = function(){
 		this.album = {
-			collection: new AlbumBarCollection([], {playlistId: 'none'}),
-			model: new AlbumBarModel()
+			collection: new AlbumBarCollection([], {
+				playlistId : '/api/explorer/albums',
+			}),
+			model: new AlbumBarModel()	
 		};
-
-		this.album.collection.add([
-			{name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10},
-			{name: 'Sadfield', artist: 'New Artists', totalTracks: 5},
-			{name: 'New Yrear', artist: 'Ocean Artists', totalTracks: 12},
-			{name: 'Fast Food', artist: 'Various Fieds', totalTracks: 6},
-			{name: 'Some fink', artist: 'Various Artists 2', totalTracks: 12},
-			{name: 'Suffer from', artist: 'Some other', totalTracks: 34},
-			{name: 'Astroby', artist: 'General Autos', totalTracks: 2},
-			{name: 'Digerty or nothing', artist: 'U2', totalTracks: 10},
-			{name: 'Dgg', artist: 'Gactor Vasskez', totalTracks: 170}
-		]);
+		this.album.collection.fetch();
 
 		this.album.view = this.getAlbumView();
 	};

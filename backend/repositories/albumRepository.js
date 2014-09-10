@@ -16,6 +16,12 @@ AlbumRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
+AlbumRepository.prototype.getAll = function(callback) {
+	var model = this.model;
+	var query = model.find({}).populate('singer').populate('tracks').limit(50);
+	query.exec(callback);
+};
+
 AlbumRepository.prototype.getByTitle = function(name, limit, quick, callback) {
 	var model = this.model;
 	var lim = limit || '';
