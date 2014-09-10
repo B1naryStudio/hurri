@@ -121,8 +121,8 @@ define(['marionette',
 		this.notFoundView = this.getNotFoundView();
 	};
 
-	MainController.prototype.initializeLayout = function(){
-		this.layoutView = this.getLayout();
+	MainController.prototype.initializeLayout = function(id){
+		this.layoutView = this.getLayout(id);
 	};
 
 	MainController.prototype.getNotFoundView = function(){
@@ -454,8 +454,8 @@ define(['marionette',
 	// 	});
 	// };
 
-	MainController.prototype.getLayout = function() {
-		if (context.currentSongModel.attributes._id === undefined && !window._injectedData.track)
+	MainController.prototype.getLayout = function(id) {
+		if (id === undefined && !window._injectedData.track)
 			this.mainRegion.show(this.getNotFoundView());
 		else
 			this.mainRegion.show(new LayoutView());
@@ -486,8 +486,8 @@ define(['marionette',
 			this.mainRegion.show(this.getChartsView());
 		},this);
 
-		Backbone.on('player:add-comment', function(){
-			this.getLayout();
+		Backbone.on('player:add-comment', function(id){
+			this.getLayout(id);
 		},this);
 
 		Backbone.on('show-album-tracks', function(id){

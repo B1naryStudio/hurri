@@ -14,25 +14,10 @@ define(['marionette', '../../../app/routes'], function(Marionette, router){
   		},
 
 		events: {
-			'click @ui.resultsRegionAlbum': 'showAlbum',
-			'click @ui.resultsRegionArtist': 'showArtist',
-			'click @ui.resultsRegionSong': 'showSong',
+			'click @ui.resultsRegionAlbum': 'select',
+			'click @ui.resultsRegionArtist': 'select',
+			'click @ui.resultsRegionSong': 'select',
 			'click .show-more-results' : 'showMore'
-		},
-
-		// showMore : function(){
-		// 	router.navigate('/search/' + this.ui.searchInput[0].value, true);
-		// }, 
-		showAlbum: function(){
-			router.navigate('/album/id/' + this.collection.model._id, true);
-		},
-
-		showSong: function(){
-			router.navigate('/track/id/'+ context.currentSongModel.attributes._id,true);
-		},
-
-		showArtist: function(){
-			router.navigate('/artist/id/' + this.model.attributes._id + '/albums', true);
 		},
 
 		attachHtml: function(compositeView, childView, index){

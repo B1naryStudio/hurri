@@ -111,7 +111,7 @@ var HurriRoutes = Marionette.AppRouter.extend({
 
 	RouteController.prototype.showTrack =  function(id){
 		console.log('show albums');
-		Backbone.trigger('player:add-comment');
+		Backbone.trigger('player:add-comment', id);
 		window.localStorage.setItem("currentTab", "track/id/" + id);
 	};
 
