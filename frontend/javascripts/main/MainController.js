@@ -520,14 +520,14 @@ define(['marionette',
 		Backbone.on('show-album-tracks', function(id){
 			if (this.fullresults)
 				this.initializeAlbumInner(id, this.fullresults.data[0]);
-			else
+			else if (window._injectedData.album)
 				this.initializeAlbumInner(id, window._injectedData.album);
 		},this);
 
 		Backbone.on('show-artist-albums', function(id){
 			if (this.fullresults)
 				this.initializeArtistInner(id, this.fullresults.data[1]);
-			else
+			else if (window._injectedData.artist)
 				this.initializeArtistInner(id, window._injectedData.artist[0]);
 		},this);
 
