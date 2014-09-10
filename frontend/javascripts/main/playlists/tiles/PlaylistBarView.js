@@ -7,6 +7,11 @@ define(['marionette', '../../../shared/playlist/PlaylistModel'], function(Marion
 			'click @ui.playWithoutOpen' : 'playlistPlayNotOpen',
 			'click @ui.playlistPrivate' : 'playlistSetPrivate'
 		},
+		onRender: function(){
+			mode = 'playlist-private' + ' ' + this.model.get('type');
+			this.ui.playlistPrivate.removeClass();
+			this.ui.playlistPrivate.addClass(mode);
+		},
 		ui: {
 			playlistPlay: '.playlist-play',
 			playWithoutOpen: '.play-without-open',

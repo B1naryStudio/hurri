@@ -11,7 +11,7 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 			numberOfTracks: 1,
 			queueNum : 0,
 			position: undefined,
-			type: 'default',
+			type: undefined,
 		},
 		setTrackFromCollection: function(position){
 			this.set({numberOfTracks: this.collection.length});
@@ -49,14 +49,13 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 		},
 
 		setPrivate: function(model){
-			var type;
-			console.log('model=', model); 
-			if (this.get('type') !== 'private'){
+			var type; 
+			if (model.get('type') !== 'private'){
 				type = 'private';
 			} else {
 				type = 'shared';
 			}
-			this.set({type: type});
+			model.set({type: type});
 			$.ajax({
 				type:'PUT',
 				dataType: "json", 
@@ -65,7 +64,7 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 					type: type
 				}
 			});
-			return this.get('type');
+			return model.get('type');
 		},
 
 		nextPlayedTrack: function(direction, repeatMode, currentTrack){
