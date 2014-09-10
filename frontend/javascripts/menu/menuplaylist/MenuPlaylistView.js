@@ -1,5 +1,5 @@
-define(['marionette', '../../app/context', '../../player/PlayerModel'], 
-	function(Marionette, context, PlayerModel){
+define(['marionette', '../../app/context', '../../player/PlayerModel', '../../app/routes'], 
+	function(Marionette, context, PlayerModel, router){
 	var MenuPlaylistView = Marionette.ItemView.extend({
 		className: 'menu-playlist-item',
   		template : '#menu-playlist-template',
@@ -9,7 +9,7 @@ define(['marionette', '../../app/context', '../../player/PlayerModel'],
 		},
 
 		showPlaylist: function(){
-			Backbone.trigger('playlist-play', this.model);
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists/' + this.model.attributes._id, true);
 		},
 
 		deletePlaylist: function(){

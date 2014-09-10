@@ -1,4 +1,4 @@
-define(['marionette'], function(Marionette){
+define(['marionette','../../app/routes', '../../app/context'], function(Marionette, router, context){
 
 	StatisticView = Marionette.ItemView.extend({
 
@@ -13,7 +13,7 @@ define(['marionette'], function(Marionette){
 		},
 
 		events: {
-			'click .statistic-info' : 'showListened',
+			// 'click .statistic-info' : 'showListened',
 			'click @ui.listened' 	: 'getListened',
 			'click @ui.playlists'	: 'getPlaylists',
 			'click @ui.followers'	: 'getFollowers',
@@ -25,10 +25,10 @@ define(['marionette'], function(Marionette){
 			Backbone.trigger('sidebar:show-listened');
 		}, 
 		getListened : function(){  
-			Backbone.trigger('show-statistic-listened');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/listened',true);
 		},
 		getPlaylists: function(){
-			Backbone.trigger('show-statistic-playlists');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists',true);
 		},
 		getFollowers : function(){  
 			Backbone.trigger('show-statistic-followers');
@@ -37,7 +37,7 @@ define(['marionette'], function(Marionette){
 			Backbone.trigger('show-statistic-followings');
 		},			
 		getLiked : function(){  
-			Backbone.trigger('show-statistic-liked');
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/like',true);
 		}
 	});
 	return StatisticView;

@@ -7,13 +7,15 @@ module.exports = function (req, res, obj, error) {
 	error = error || false;
 
 	populateInjectData(req.user, function(data){
-		obj.user = req.user;
-		obj.alerts = data.alerts;
-		obj.playlists = data.playlists;
-		obj.followers = data.followers;
-		obj.following = data.following;
-		obj.liked = data.liked;
-		obj.listened = data.listened;
+		if (obj){
+			obj.user = req.user;
+			obj.alerts = data.alerts;
+			obj.playlists = data.playlists;
+			obj.followers = data.followers;
+			obj.following = data.following;
+			obj.liked = data.liked;
+			obj.listened = data.listened;
+		}
 		res.header('Content-Type', 'text/html');
 		fs.createReadStream(__dirname + '/../../public/' + '_index.html')
 			.pipe(replaceStream("[\"data_replace\"]", JSON.stringify(obj).
@@ -56,6 +58,7 @@ function populateInjectData(user, callback_main){
 			});
 		},		
 	}, function(err, results){
+		//console.log('inject=', results);
 		callback_main(results);
 	});
 }

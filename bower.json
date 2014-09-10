@@ -19,6 +19,7 @@
     "marionette": "~2.1.0",
     "requirejs": "~2.1.14",
     "jquery-ui": "~1.11.1",
-    "zeroclipboard": "~2.1.6"
+    "zeroclipboard": "~2.1.6",
+    "backbone-fetch-cache": "~1.4.0"
   }
 }

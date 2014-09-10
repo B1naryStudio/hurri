@@ -2,7 +2,7 @@ script#statistic-template(type='text/template')
 	div#statistic-title STATISTIC
 	div#statistic
 		div.statistic-info#listened Listened: {{-listenedCollection.length}}
-		div.statistic-info#playlists Playlists: {{-playlists}}
-		div.statistic-info#followers Followers: {{-followers}}
-		div.statistic-info#followings Followings: {{-followings}}
+		div.statistic-info#playlists Playlists: {{-window._injectedData.playlists.length}}
+		div.statistic-info#followers Followers: {{-window._injectedData.followers.length}}
+		div.statistic-info#followings Followings: {{-window._injectedData.following.length}}
 		div.statistic-info#liked Liked: {{-liked}}

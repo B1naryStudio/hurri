@@ -12,11 +12,11 @@ script#song-item-template(type='text/template')
 	div.sidebar-song-wrap
 		div.sidebar-song-img-box
 			img(src="{{-albumCover}}")
-			img.gif(src='../images/songlist/blue_equalizer.gif')
+			img.gif(src='/../images/songlist/blue_equalizer.gif')
 		.sidebar-song-header
-			h4(title='{{-title}} - {{-artist}}') {{-title}}
+			h4(title='{{-title}} - {{-singer}}') {{-title}}
 		.sidebar-song-info 
-			{{-artist}}
+			{{-singer}}
 		.delete-song-from-list
 		.add-song-to-queue
 		.queuepos {{-queuepos}}
@@ -26,7 +26,11 @@ script#sidebar-songlist-navi(type='text/template')
 		#unqueue unqueue
 		#save-playlist-from-queue save playist
 		#save-playlist-as save as...
-		input.edit2
+		.input-wrapper-sidebar
+			input.clearable.edit2
+			.enter-button-add Add
+			.close-enter-add
+
 
 script#sidebar-friends-navi(type='text/template')
 	#friends-navi

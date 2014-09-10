@@ -10,7 +10,10 @@ var userAuthSchema = new Schema({
 	idTw: Number,
 	idFb: Number,
 	name : String,
-	email : String,
+	email : {
+		type: String,
+		default: 'undefined'
+	},
 	avatarUrl : String,
 	country : {
 		type: String, 

@@ -18,7 +18,10 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			'click #unqueue' : 'unqueueSong',
 			'click #save-playlist-as' : 'setClass',
 			"keypress .edit2" : "createPlaylist",
-			'click #save-playlist-from-queue':'saveExisting'
+			'click #save-playlist-from-queue':'saveExisting',
+			'blur .edit2' : 'close',
+			'click .close-enter-add' : 'close',
+			'click .enter-button-add' : 'createPlaylist'
 		},
 
 		initialize: function(){
@@ -34,7 +37,12 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 		},
 
 		ui : {
-			text : ".edit2" 
+			text : ".edit2"
+		},
+		
+		close: function(){
+			this.ui.text[0].value = '';
+			this.$el.removeClass("editing2");
 		},
 		
 		setClass: function(){
@@ -70,15 +78,44 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			if (evt.keyCode == 13) this.savePlaylist();
 		},
 
+		defineGenre: function(){
+			var genres = {
+				"Rock":0,
+				"Pop":0,
+				"Hip Hop":0,
+				"R&B/Soul/Funk":0,
+				"Dance":0,
+				"World":0,
+				"Jazz":0,
+				"Reggae":0,
+				"Classical":0,
+				"Alternative":0,
+				"Electro":0
+			};
+			for (var i = 0; i < this.collection.length; i ++){
+				genres[this.collection.models[i].attributes.genre] += 1;
+				console.log(this.collection.models[i].attributes.genre);	
+			}
+			var max = 0; var genre = 'unknown';
+			for (var j in genres){
+				if (genres[j]>=max){
+					max = genres[j];  genre = j;
+				}
+			} 
+			return genre;
+		},
+
 		savePlaylist: function(){
 			var value = this.ui.text.val();
+			var genre = this.defineGenre();
 			if (value){
 				var playlist = {
 					name: value || "My playlist",
 					tracks : [],
 					duration : 0,
 					mood : 'I like it!',
-					type: 'playlist'
+					type: 'playlist',
+					genre: genre
 				};
 				console.log(this.collection);
 				for (var i = 0; i < this.collection.length; i ++){

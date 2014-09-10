@@ -1,4 +1,5 @@
-define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
+define(['marionette', './PlayerModel', '../app/routes','../app/context'], 
+	function(Marionette, PlayerModel, router, context){
 	var PlayerView = Marionette.ItemView.extend({
 		template: '#player-template',
 		model: PlayerModel,
@@ -123,7 +124,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 
 
 		addComment: function(){
-			Backbone.trigger('player:add-comment');
+			router.navigate('/track/id/'+ context.currentSongModel.attributes._id,true);
 		},
 
 		volumeLevelSetup : function(){

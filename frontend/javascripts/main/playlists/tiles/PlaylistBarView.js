@@ -1,4 +1,5 @@
-define(['marionette', '../../../shared/playlist/PlaylistModel'], function(Marionette, PlaylistModel){
+define(['marionette', '../../../shared/playlist/PlaylistModel', '../../../app/context', '../../../app/routes'], 
+	function(Marionette, PlaylistModel, context, router){
 	var PlaylistBarView = Marionette.ItemView.extend({
 		className: 'playlist-bar',
   		template : '#playlist-bar',
@@ -18,7 +19,7 @@ define(['marionette', '../../../shared/playlist/PlaylistModel'], function(Marion
 			playlistPrivate: '.playlist-private'
 		},
 		playlistPlay : function(){
-			Backbone.trigger('playlist-play', this.model);
+			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists/' + this.model.attributes._id, true);
 		},
 		playlistSetPrivate: function(){
 			var mode = PlaylistModel.setPrivate(this.model);

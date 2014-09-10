@@ -27,6 +27,19 @@ var genres = {
 	22: "Electro"
 };
 
+var genres_count = {
+	"Rock":0,
+	"Pop":0,
+	"Hip Hop":0,
+	"R&B/Soul/Funk":0,
+	"Dance":0,
+	"World":0,
+	"Jazz":0,
+	"Reggae":0,
+	"Alternative":0,
+	"Electro":0
+};
+
 var playlistObject = {
 	name: "VK",
 	tracks : [],
@@ -77,7 +90,15 @@ function getUser (profile, token, auth, done){
 										setTrack(playlist.response[i], id);
 										playlistObject.tracks.push(id);
 										playlistObject.duration += playlist.response[i].duration;
+										genres_count[playlist.response[i].genre] += 1;
 									}
+									var max = 0; var genre = 'unknown';
+									for (var g in genres_count){
+										if (genres_count[g] >= max){
+											max = genres_count[g];  genre = g;
+										}
+									} 
+									playlistObject.genre = genre;
 									userRepository.addPlaylists(user._id, playlistObject, function(err, res){
 									});
 								});
@@ -97,7 +118,10 @@ function getUser (profile, token, auth, done){
 									duration : playlist.duration,
 									url : playlist.url,
 									genre: genres[playlist.genre],
-									type: 'vk'
+									type: 'vk',
+									singer: null,
+									albumTitle : 'VK',
+									albumCover: '/images/default/cover.png'
 								};
 								trackRepository.add(track, function(error, track){
 									///console.log(playlistObject.duration);

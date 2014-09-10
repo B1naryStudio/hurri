@@ -4,28 +4,44 @@ var injectData = require('../middleware/injectDataMiddleware');
 
 module.exports = function (app) {
 
+	app.get('/explorer/albums', function(req, res, next) {
+		injectData(req, res, {}, false);
+	});
+
 	app.get('/album/:id', function(req, res, next) {
-		injectData(albumRepository.getById(req.params.id), res);
+		albumRepository.getById(req.params.id, function(err, data){
+			injectData(req, res, data, false);
+		}); 
 	});
 
 	app.get('/album/:id/cover', function(req, res, next) {
-		injectData(albumRepository.getCover(req.params.id), res);
+		albumRepository.getCover(req.params.id, function(err, data){
+			injectData(req, res, data, false);
+		}); 
 	});
 
 	app.get('/album/:id/singer', function(req, res, next) {
-		injectData(albumRepository.getSinger(req.params.id), res);
+		albumRepository.getSinger(req.params.id, function(err, data){
+			injectData(req, res, data, false);
+		}); 
 	});
 
 	app.get('/album/:id/genres', function(req, res, next) {
-		injectData(albumRepository.getGenres(req.params.id), res);
+		albumRepository.getGenres(req.params.id, function(err, data){
+			injectData(req, res, data, false);
+		}); 
 	});
 
 	app.get('/album/:id/tracks', function(req, res, next) {
-		injectData(albumRepository.getTracks(req.params.id), res);
+		albumRepository.getTracks(req.params.id, function(err, data){
+			injectData(req, res, data, false);
+		}); 
 	});
 
 	app.get('/album/:id/comments', function(req, res, next) {
-		injectData(albumRepository.getComments(req.params.id), res);
+		albumRepository.getComments(req.params.id, function(err, data){
+			injectData(req, res, data, false);
+		}); 
 	});
 
 };

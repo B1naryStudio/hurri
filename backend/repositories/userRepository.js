@@ -132,7 +132,7 @@ UserRepository.prototype.addLike = function(id, likedid, callback) {
 UserRepository.prototype.addListened = function(id, listenedid, callback) {
 	var model = this.infoModel;
 	//console.log(listenedid);
-	var query = model.findOneAndUpdate({user_auth_id: id},{$push: {listened:listenedid}} );
+	var query = model.findOneAndUpdate({user_auth_id: id},{$addToSet: {listened:listenedid}} );
 	query.exec(callback);
 };
 

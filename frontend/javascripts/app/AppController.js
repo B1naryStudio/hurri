@@ -1,4 +1,7 @@
-define(['../footer/FooterController', '../header/HeaderController', '../main/MainController', '../menu/MenuController', '../player/PlayerController', '../sidebar/SidebarController'], function(FooterController, HeaderController, MainController, MenuController, PlayerController, SidebarController){
+define(['../footer/FooterController', '../header/HeaderController', '../main/MainController', 
+		'../menu/MenuController', '../player/PlayerController', '../sidebar/SidebarController'], 
+function(FooterController, HeaderController, MainController, MenuController, PlayerController, 
+		SidebarController){
 
 	var AppController = function(){
 		var footerController = new FooterController();

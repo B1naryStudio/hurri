@@ -1,5 +1,5 @@
-define(['marionette', './searchresults/SearchResultsView', './searchresults/SearchResultsItemView'],
-function(Marionette, SearchResultsView, SearchResultsItemView){
+define(['marionette', './searchresults/SearchResultsView', './searchresults/SearchResultsItemView', '../../app/routes'],
+function(Marionette, SearchResultsView, SearchResultsItemView, router){
 
 	SearchbarView = Marionette.ItemView.extend({
 
@@ -30,7 +30,7 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 
 		showMore: function(){
 			console.log('show more');
-			Backbone.trigger('searchbar:show-more', this.ui.searchInput[0].value);
+			router.navigate('/search/' + this.ui.searchInput[0].value, true);
 		},
 
 		closeSearch: function(event){
@@ -61,7 +61,7 @@ function(Marionette, SearchResultsView, SearchResultsItemView){
 		},
 
 		unbindClickHandler: function(){
-			$(document).off('click', function(){});
+			$(document).off('click');
 		},
 
 		backgroundSearch: _.debounce(function(){

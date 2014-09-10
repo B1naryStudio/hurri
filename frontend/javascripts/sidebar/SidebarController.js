@@ -184,6 +184,7 @@ define(['marionette',
 		}, this);
 
 		Backbone.on('scroll-to-top', function(options){
+			if (!options) options = {top : 0};
 			this.sidebarRegion.$el.scrollTop(this.sidebarRegion.$el.scrollTop() + options.top - 200);
 		}, this);
 

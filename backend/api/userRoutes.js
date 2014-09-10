@@ -51,6 +51,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/user/:id/listened', function(req, res, next){
+		userRepository.getListened(req.params.id, function(err, data){
+			res.data = data;
+			res.err = err;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/user/:id/groups', function(req, res, next){
 		userRepository.getGroups(req.params.id, function(err, data){
 			res.data = data;

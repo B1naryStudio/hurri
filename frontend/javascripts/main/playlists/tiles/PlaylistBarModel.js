@@ -6,6 +6,7 @@ define(['backbone'], function(Backbone){
 			name: 'myPlaylist',
  			created: Date(1),
 			totalTracks : 0,
+			genre: 'unknown',
 			tracks: [{artist : 'Artist name', title: 'unknown'}]
 		}
 	});

@@ -1,6 +1,7 @@
 var connection = require('../db/dbconnect.js');
 var Track = require('../schemas/track.js');
 var Repository = require('./generalRepository.js');
+var mongoose = require('mongoose');
 
 function TrackRepository(){
 	Repository.prototype.constructor.call(this);
@@ -10,8 +11,9 @@ function TrackRepository(){
 TrackRepository.prototype = new Repository();
 
 TrackRepository.prototype.getById = function(id, callback) {
+	var ids = mongoose.Types.ObjectId(id);
 	var model = this.model;
-	var query = model.findOne({_id:id}).populate('album').populate('singer');
+	var query = model.findOne({_id:ids}).populate('album').populate('singer');
 	query.exec(callback);
 };
 

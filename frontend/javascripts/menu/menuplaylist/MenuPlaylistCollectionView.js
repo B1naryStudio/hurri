@@ -4,11 +4,14 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 		childView: MenuPlaylistView,
 		template: '#menu-playlist-composite-template',
 		events : {
-			"click .add-playlist-button" : "openEditField",
-			"keypress .edit"		: "createPlaylist"
 		},
 		ui : {
 			text : ".edit" 
+		},
+
+		closeField: function(){
+			this.ui.text[0].value = '';
+			this.$el.removeClass("editing");
 		},
 
 		openEditField : function(){

@@ -3,8 +3,7 @@ var ListenedCollection = Backbone.Collection.extend({
 	model: SongModel
 });
 
-listenedCollection = new ListenedCollection();
-
+listenedCollection = new ListenedCollection(window._injectedData.listened);
 return listenedCollection;	
 });
 

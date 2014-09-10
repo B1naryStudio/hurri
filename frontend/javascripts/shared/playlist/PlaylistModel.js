@@ -4,7 +4,7 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 		collection: context.currentSongCollection,
 		
 		defaults: {
-			genre: ['unknown'],
+			genre: 'unknown',
 			playlistName: 'myPlaylist',
 			created: Date(1),
 			oldCollection: null,

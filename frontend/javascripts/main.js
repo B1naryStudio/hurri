@@ -8,8 +8,8 @@ require.config({
 		backbone: '../../bower_components/backbone/backbone',
 		marionette: '../../bower_components/marionette/lib/backbone.marionette',
 		localStorage: './libs/backbone.localStorage',
-		clipboard: '../../bower_components/zeroclipboard/dist/ZeroClipboard'
-		// sortable: '../../bower_components/jquery-ui/ui/sortable'
+		clipboard: '../../bower_components/zeroclipboard/dist/ZeroClipboard',
+		fetchCache: '../../bower_components/backbone-fetch-cache/backbone.fetch-cache'
 
 	},
 
@@ -20,6 +20,14 @@ require.config({
 	}
 });
 
-require(['app/app']);
-require(['./blur']);
-require(['../../bower_components/jquery-ui/ui/sortable']);
+require(['../../bower_components/jquery-ui/ui/sortable', 'fetchCache', 'localStorage'], function(){
+	var oldGetCache = Backbone.fetchCache.getCacheKey;
+	Backbone.fetchCache.getCacheKey = function(){
+		try{
+			return oldGetCache.apply(this, [].slice.call(arguments));
+		} catch(e) {
+
+		}
+	};
+	require(['app/app']);
+});

@@ -145,6 +145,11 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		nextTrack : function(){
 			listenedCollection.add(context.currentSongModel.attributes);
+			$.ajax({
+				type:'PUT',
+				dataType: "json", 
+				url:'/api/user/' + window._injectedData.user._id + '/listened/' + context.currentSongModel.get('_id')
+			});
 			var next = playlistModel.nextPlayedTrack('direct', this.get('repeatTrack'), this.get('currentTrack'));
 			this.newTrack(next);
 			if ((this.get('currentTrack') > 0) && (playlistModel.get('numberOfTracks') > 0)) {

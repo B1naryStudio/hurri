@@ -1,4 +1,4 @@
-define(['marionette'], function(Marionette){
+define(['marionette', '../../../app/routes'], function(Marionette, router){
 
 	SearchResultsView = Marionette.CompositeView.extend({
 
@@ -16,9 +16,9 @@ define(['marionette'], function(Marionette){
 			'click .show-more-results' : 'showMore'
 		},
 
-		showMore : function(){
-			alert();
-		}, 
+		// showMore : function(){
+		// 	router.navigate('/search/' + this.ui.searchInput[0].value, true);
+		// }, 
 
 		attachHtml: function(compositeView, childView, index){
 			switch(childView.model.get('type')){
