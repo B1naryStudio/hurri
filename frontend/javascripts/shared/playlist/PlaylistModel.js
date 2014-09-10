@@ -13,8 +13,8 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 			position: undefined,
 			type: 'default',
 		},
-
 		setTrackFromCollection: function(position){
+			this.set({numberOfTracks: this.collection.length});
 			this.set('position', position);
 			var track = this.collection.at(position);
 			var prev = this.collection.findWhere({current : true});
@@ -22,7 +22,8 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 				prev.set({current: false}); 
 			}
 			track.set({current : true});
-			context.currentSongModel.set(track.attributes);
+			context.currentSongModel = track;
+			Backbone.trigger('playlist:setCurrentSongModel');
 		},
 
 		unShuffle: function(){
@@ -47,28 +48,23 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 				}, 0);
 		},
 
-		setPrivate: function(){
+		setPrivate: function(model){
+			var type;
+			console.log('model=', model); 
 			if (this.get('type') !== 'private'){
-				this.set({type: 'private'});
-				$.ajax({
-					type:'PUT', 
-					dataType: "json",
-					url:'/api/user/' + window._injectedData.user._id + '/playlist/' + this.get('_id') + '/type',
-					data: {
-						type: 'private'
-					}
-				});
+				type = 'private';
 			} else {
-				this.set({type: 'shared'});
-				$.ajax({
-					type:'PUT',
-					dataType: "json", 
-					url:'/api/user/' + window._injectedData.user._id + '/playlist/' + this.get('_id') + '/type',
-					data: {
-						type: 'shared'
-					}
-				});
+				type = 'shared';
 			}
+			this.set({type: type});
+			$.ajax({
+				type:'PUT',
+				dataType: "json", 
+				url:'/api/user/' + window._injectedData.user._id + '/playlist/' + model.get('_id') + '/type',
+				data: {
+					type: type
+				}
+			});
 			return this.get('type');
 		},
 
@@ -87,7 +83,10 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 				} else if ((this.get('queueNum') === 0) && (typeof context.queueSavedSong !== 'undefined' )){
 					next = context.queueSavedSong;
 					context.queueSavedSong = undefined;
-					return next;
+					if (next === this.collection.length-1){
+						next = next - 1;
+					}
+					return next + 1;
 				}
 				if (direction === 'direct'){
 					if (repeatMode === enums.repeatModes.none){

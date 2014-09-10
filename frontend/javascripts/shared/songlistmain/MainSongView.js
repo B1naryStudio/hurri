@@ -1,5 +1,5 @@
-define(['marionette', '../playlist/PlaylistModel','clipboard'], 
-	function(Marionette, playlistModel, ZeroClipboard){
+define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/context'], 
+	function(Marionette, playlistModel, ZeroClipboard, context){
 	var MainSongView = Marionette.ItemView.extend({
 	className: 'main-song-bar',
 	template : '#main-song-bar',
@@ -10,7 +10,8 @@ define(['marionette', '../playlist/PlaylistModel','clipboard'],
 	},
 
 	modelEvents : {
-			'change:current' : 'changeCurrent'
+			'change:current': 'changeCurrent',
+			'change:liked'	: 'changeLiked'
 	},
 
 	ui : {
@@ -40,12 +41,13 @@ define(['marionette', '../playlist/PlaylistModel','clipboard'],
 	},
 
 	likeSong : function(){
-		var mode = this.model.likeState(this.model.get('_id'));
-		mode = 'main-like-song' + ' ' + mode;
-		this.ui.like.removeClass();
-		this.ui.like.addClass(mode);
+		mode = this.model.likeState();
 	},
-
+	changeLiked: function(){
+		var mode = 'main-like-song' + ' ' + this.model.get('liked');
+		this.ui.like.removeClass();
+		this.ui.like.addClass(mode);		
+	},
 	onShow: function(){
 			ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
 									trustedDomains: location.host } );

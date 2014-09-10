@@ -9,7 +9,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			'change:duration': 'render',
 			'change:positionFormat': 'changedPosition',
 			'change:durationFormat':'render',
-			'change:liked': 'render'
+			'change:liked': 'changeLiked'
 		},
 		events : {
 			"click @ui.nextButton"			: "nextTrack",
@@ -49,7 +49,17 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			this.ui.likeButton.removeClass();
 			this.ui.likeButton.addClass(mode);  			
   		},
-
+		likeState : function(){
+			var mode = this.model.likeState();
+			mode = 'player-button' + ' ' + mode;
+			this.ui.likeButton.removeClass();
+			this.ui.likeButton.addClass(mode);	
+		},
+		changeLiked: function(){
+			var mode = 'player-button' + ' ' + this.model.get('liked');
+			this.ui.likeButton.removeClass();
+			this.ui.likeButton.addClass(mode);		
+		},
   		setUpVolume: function(){
   			this.flag = true;
   			this.volumeLevelSetup();
@@ -110,12 +120,7 @@ define(['marionette', './PlayerModel'], function(Marionette, PlayerModel){
 			this.ui.repeatButton.addClass(mode);
 		},
 
-		likeState : function(){
-			var mode = this.model.likeState();
-			mode = 'player-button' + ' ' + mode;
-			this.ui.likeButton.removeClass();
-			this.ui.likeButton.addClass(mode);	
-		},
+
 
 		addComment: function(){
 			Backbone.trigger('player:add-comment');

@@ -76,8 +76,16 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 		bindListeners: function(){
 			var self = this;
+			var songModel = context.currentSongModel;
 			this.on('change:shuffle change:repeatTrack change:currentTrackName change:currentArtistName change:volumeLevel', function(){
 				this.save();
+			});
+			Backbone.on('playlist:setCurrentSongModel', function(){
+				this.stopListening(songModel);
+				songModel = context.currentSongModel;
+				this.listenTo(context.currentSongModel, 'change:liked', function(){
+					self.set({liked: context.currentSongModel.get('liked')});
+				});				
 			});
 			audioHandler.on('playing', function(){
 				self.startTimer();
@@ -157,7 +165,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			if ((this.get('currentTrack') === 0)&&(this.get('repeatTrack') === enums.repeatModes.none)){
 				this.set({previousButtonState: true});
 			}
-			if (this.get('currentTrack') <= playlistModel.get('numberOfTracks')-1){
+			if (this.get('currentTrack') < playlistModel.get('numberOfTracks')-1){
 				this.set({nextButtonState: false});
 			}
 		},
@@ -229,10 +237,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		likeState : function(){
 			if (!this.get('liked')){
 				this.set({liked: true});
-				Backbone.trigger('like-song', context.currentSongModel.get('_id'));
+				context.currentSongModel.set({liked: true});
 			} else {
 				this.set({liked: false});
-				Backbone.trigger('unlike-song', context.currentSongModel.get('_id'));
+				context.currentSongModel.set({liked: false});
 			}
 			return this.get('liked');
 		},

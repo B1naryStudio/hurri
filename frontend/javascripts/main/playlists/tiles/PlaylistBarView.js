@@ -16,7 +16,7 @@ define(['marionette', '../../../shared/playlist/PlaylistModel'], function(Marion
 			Backbone.trigger('playlist-play', this.model);
 		},
 		playlistSetPrivate: function(){
-			var mode = PlaylistModel.setPrivate();
+			var mode = PlaylistModel.setPrivate(this.model);
 			mode = 'playlist-private' + ' ' + mode;
 			this.ui.playlistPrivate.removeClass();
 			this.ui.playlistPrivate.addClass(mode);

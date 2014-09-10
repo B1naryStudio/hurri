@@ -198,6 +198,8 @@ module.exports = function(app){
 			res.successStatus = 201;
 			res.err = err;
 			res.data = data;
+			console.log('data=', data);
+			console.log('err=',err);
 			next();
 		});
 	}, apiResponse);

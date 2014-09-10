@@ -1,9 +1,9 @@
-var groupRepository = require('../repositories/groupRepository');
+var likeRepository = require('../repositories/likeRepository');
 var apiResponse = require('../middleware/apiResponse');
 
 module.exports = function(app){
-	app.get('/api/like/:id', function(req, res, next){
-		likeRepository.getLikes(req.params.id, function(err, data){
+	app.get('/api/like/:song_id', function(req, res, next){
+		likeRepository.getLikes(req.params.song_id, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();
@@ -11,39 +11,39 @@ module.exports = function(app){
 	}, apiResponse);
 
 	app.post('/api/like', function(req, res, next){
-		groupRepository.add(req.body, function(err, data){
+		likeRepository.add(req.body, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();
 		});
 	}, apiResponse);
 
-	app.put('/api/like/:id', function(req, res, next){
-		likeRepository.update(req.params.id, req.body, function(err, data){
+	app.put('/api/like/:song_id', function(req, res, next){
+		likeRepository.update(req.params.song_id, req.body, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();
 		});
 	}, apiResponse);
 
-	app.put('/api/like/:id/:user_id', function(req, res, next){
-		likeRepository.addLike(req.params.id, req.params.user_id, req.body, function(err, data){
+	app.put('/api/like/:song_id/:user_id', function(req, res, next){
+		likeRepository.addLike(req.params.song_id, req.params.user_id, req.body, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();
 		});
 	}, apiResponse);
 
-	app.delete('/api/like/:id/:user_id', function(req, res, next){
-		likeRepository.deleteTrack(req.params.id, req.params.user_id, function(err, data){
+	app.delete('/api/like/:song_id/:user_id', function(req, res, next){
+		likeRepository.deleteLike(req.params.song_id, req.params.user_id, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();
 		});
 	}, apiResponse);
 
-	app.delete('/api/like/:id', function(req, res, next){
-		likeRepository.delete(req.params.id, function(err, data){
+	app.delete('/api/like/:song_id', function(req, res, next){
+		likeRepository.delete(req.params.song_id, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();
