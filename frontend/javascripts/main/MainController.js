@@ -33,7 +33,8 @@ define(['marionette',
 	  './explorer/album/AlbumCompositeView',
 	  './explorer/artist/AlbumCompleteView',
 	   './explorer/artist/tiles/ArtistModel',
-	   './explorer/album/tiles/AlbumCollection'
+	   './explorer/album/tiles/AlbumCollection',
+	   '../shared/song/SongModel'
 	  ],
 	function(Marionette, 
 		_,
@@ -70,7 +71,8 @@ define(['marionette',
 		AlbumCompositeView,
 		AlbumCompleteView,
 		ArtistModel,
-		AlbumCollection
+		AlbumCollection,
+		SongModel
 		){
 	
 	var MainController = function(){		
@@ -455,10 +457,35 @@ define(['marionette',
 	// };
 
 	MainController.prototype.getLayout = function(id) {
+		var model;
 		if (id === undefined && !window._injectedData.track)
 			this.mainRegion.show(this.getNotFoundView());
-		else
-			this.mainRegion.show(new LayoutView());
+		else {
+				if (context.currentSongModel.attributes._id === undefined && window._injectedData.track._id === id){
+					model  = new SongModel(window._injectedData.track);
+					this.mainRegion.show(new LayoutView(model));
+				} else {
+					var self = this;
+					$.ajax({url: '/api/track/id/'+id}).done(function(data){
+						model = new SongModel(data);
+						self.mainRegion.show(new LayoutView(model));
+					});
+				}
+
+				
+				// if (context.currentSongModel.attributes._id === id){
+				// 	self.mainRegion.show(new LayoutView(track));
+				// }
+
+				// 	var Track = SongModel.extend({urlRoot: '/track/id'});
+				// 	var track = new Track({id:id});
+				// 	track.fetch({
+				// 		success: function () {
+				// 			alert();
+				// 	  		self.mainRegion.show(new LayoutView(track));
+				// 	  	}
+				//    	});
+			}
 	};
 
 	MainController.prototype.bindListeners = function(){
