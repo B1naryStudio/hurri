@@ -22,7 +22,7 @@ function(Backbone, SearchResultsItemModel){
 			});
 			_.each(data[2], function(data){
 				items.push({type	: 'song',
-							cover	: '../images/song.png',
+							cover	: '/../images/song.png',
 							title	: data.title,
 							data	: data});
 			});

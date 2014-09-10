@@ -518,11 +518,17 @@ define(['marionette',
 		},this);
 
 		Backbone.on('show-album-tracks', function(id){
-			this.initializeAlbumInner(id, this.fullresults.data[0]);
+			if (this.fullresults)
+				this.initializeAlbumInner(id, this.fullresults.data[0]);
+			else
+				this.initializeAlbumInner(id, window._injectedData.album);
 		},this);
 
 		Backbone.on('show-artist-albums', function(id){
-			this.initializeArtistInner(id, this.fullresults.data[1]);
+			if (this.fullresults)
+				this.initializeArtistInner(id, this.fullresults.data[1]);
+			else
+				this.initializeArtistInner(id, window._injectedData.artist[0]);
 		},this);
 
 		Backbone.on('show-artits-alb', function(){

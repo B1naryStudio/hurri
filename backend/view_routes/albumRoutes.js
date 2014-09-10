@@ -32,9 +32,9 @@ module.exports = function (app) {
 		}); 
 	});
 
-	app.get('/album/:id/tracks', function(req, res, next) {
+	app.get('/album/id/:id', function(req, res, next) {
 		albumRepository.getTracks(req.params.id, function(err, data){
-			injectData(req, res, data, false);
+			injectData(req, res, {album : data}, false);
 		}); 
 	});
 
