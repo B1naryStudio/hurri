@@ -297,7 +297,11 @@ define(['marionette',
 	};
 
 	MainController.prototype.initializeAlbumInner = function(id, obj){
-		var album = _.findWhere(obj, {_id:id});
+		var album;
+		if (obj.deezer_id)
+			album = obj;
+		else
+			album = _.findWhere(obj, {_id:id});
 		this.albuminner = {	
 			model: new AlbumBarModel(album),
 			collection: new MainSonglistCollection([], {
@@ -330,7 +334,11 @@ define(['marionette',
 	};
 
 	MainController.prototype.initializeArtistInner = function(id, obj){
-		var artist = _.findWhere(obj, {_id:id});
+		var artist;
+		if (obj.deezer_id)
+			artist = obj;
+		else
+			artist = _.findWhere(obj, {_id:id});
 		this.artistinner = {	
 			model: new ArtistModel(artist),
 			collection: new AlbumCollection([], {
@@ -461,7 +469,7 @@ define(['marionette',
 		if (id === undefined && !window._injectedData.track)
 			this.mainRegion.show(this.getNotFoundView());
 		else {
-				if (context.currentSongModel.attributes._id === undefined && window._injectedData.track._id === id){
+				if (context.currentSongModel.attributes._id === undefined && window._injectedData.track && window._injectedData.track._id === id){
 					model  = new SongModel(window._injectedData.track);
 					this.mainRegion.show(new LayoutView(model));
 				} else {
@@ -520,15 +528,23 @@ define(['marionette',
 		Backbone.on('show-album-tracks', function(id){
 			if (this.fullresults)
 				this.initializeAlbumInner(id, this.fullresults.data[0]);
-			else if (window._injectedData.album)
-				this.initializeAlbumInner(id, window._injectedData.album);
+			else {
+				var self = this;
+				$.ajax({url: '/api/album/id/'+id}).done(function(data){
+						self.initializeAlbumInner(id, data);
+				});
+			}
 		},this);
 
 		Backbone.on('show-artist-albums', function(id){
 			if (this.fullresults)
 				this.initializeArtistInner(id, this.fullresults.data[1]);
-			else if (window._injectedData.artist)
-				this.initializeArtistInner(id, window._injectedData.artist[0]);
+			else {
+				var self = this;
+				$.ajax({url: '/api/artist/id/'+id}).done(function(data){
+						self.initializeArtistInner(id, data);
+				});
+			}
 		},this);
 
 		Backbone.on('show-artits-alb', function(){

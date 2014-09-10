@@ -33,7 +33,7 @@ module.exports = function (app) {
 	});
 
 	app.get('/album/id/:id', function(req, res, next) {
-		albumRepository.getTracks(req.params.id, function(err, data){
+		albumRepository.getById(req.params.id, function(err, data){
 			injectData(req, res, {album : data}, false);
 		}); 
 	});
