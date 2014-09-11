@@ -9,6 +9,7 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 		template: '#user-template',
 
 		ui: {
+
    			addVk: '#addVk',
    			addTw: '#addTw',
    			addFb: '#addFb',
@@ -18,6 +19,14 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
    			statisticBarStrip  : '.statistic-bar-strip',
    			statisticLegendBox : '.item-box',
    			statisticLegendName: '.item-name',
+
+   			avatar	: '#avatar',
+   			name	: '#name',
+   			age		: '#age',
+   			email	: '#email',
+   			country	: '#country',
+   			sync 	: '#syncvk',
+
 
    			statisticByArtists: '#byArtists',
    			statisticByGenres : '#byGenres',
@@ -34,6 +43,8 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 
 			'click @ui.statisticByArtists': 'showStatisticByArtists',
 			'click @ui.statisticByGenres' : 'showStatisticByGenres',
+			'click #syncvk': 'syncVk'
+
 		},
 		onRender: function(){
 			if (window._injectedData.user.fbToken) {
@@ -71,6 +82,7 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 		addFbUser: function(){
 			this.render();
 		},
+
 		showStatisticByArtists: function() {
 			for(var j = 0; j < 7; j++) {
 				this.ui.statisticBarStrip[j].style.width = 0 +'px';
@@ -156,6 +168,9 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 				view.render();
 				this.ui[el].html(view.$el);
 			}, this);
+		},
+		syncVk:function(){
+			$.ajax({url:'/sync/'+window._injectedData.user._id, method:'POST'});
 		}
 	});
 	return UserView;

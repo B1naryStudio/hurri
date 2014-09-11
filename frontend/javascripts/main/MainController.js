@@ -639,7 +639,7 @@ define(['marionette',
 		},this);
 
 		Backbone.on('playlist-open-and-play', function(model){
-			Backbone.trigger('main-view:play-songs', model._id, this.mainsonglist.collection);
+			Backbone.trigger('main-view:play-songs', model.attributes._id, this.mainsonglist.collection);
 		},this);
 
 		
