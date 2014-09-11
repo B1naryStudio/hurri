@@ -6,8 +6,8 @@ var userRepository = require('../repositories/userRepository');
 var async = require('async');
 
 module.exports = function (app) {
-	app.get('/getPlaylist', function(req, res){
-		VKWrapper.getUserAudio(req.query.id, function(results){
+	app.get('/getPlaylist/:id', function(req, res){
+		VKWrapper.getUserAudio(req.params.id, function(results){
 			res.json(results);
 		});
 	});

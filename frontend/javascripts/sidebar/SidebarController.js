@@ -55,7 +55,7 @@ define(['marionette',
 	SidebarController.prototype.initializeSongs = function() {
 		this.song = {
 			collection: context.currentSongCollection,
-			model : SonglistModel
+			model : new SonglistModel()
 		};
 
 		this.song.view = this.getSongView();
@@ -63,7 +63,7 @@ define(['marionette',
 
 	SidebarController.prototype.getSongView = function() {
 		return new SonglistCollectionView({
-			model: this.playlistBarModel,
+			model: this.song.model,
 			collection: this.song.collection
 		});
 	};
@@ -197,7 +197,7 @@ define(['marionette',
 		}, this);
 
 		Backbone.on('main-view:play-songs', function(model_id, collection){
-			this.playlistBarModel._id = model_id;
+			this.song.model._id = model_id;
 			if (context.currentSongCollection.length !== 0){
 				context.previousCollection.reset(context.currentSongCollection.models);
 			}

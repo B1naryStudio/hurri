@@ -12,14 +12,16 @@ define(['marionette'], function(Marionette){
    			country	: '#country',
    			addVk	: '#addVk',
    			addTw	: '#addTw',
-   			addFb	: '#addFb'
+   			addFb	: '#addFb',
+   			sync 	: '#syncvk'
 
   		},
 
 		events: {
 			'click @ui.addVk': 'addVkUser',
 			'click @ui.addTw': 'addTwUser',
-			'click @ui.addFb': 'addFbUser'
+			'click @ui.addFb': 'addFbUser',
+			'click #syncvk': 'syncVk'
 		},
 		onRender: function(){
 			if (window._injectedData.user.fbToken) {
@@ -40,6 +42,9 @@ define(['marionette'], function(Marionette){
 		},
 		addFbUser: function(){
 			this.render();
+		},
+		syncVk:function(){
+			$.ajax({url:'/api/sync'+window._injectedData.user._id, method:'POST'});
 		}
 	});
 	return UserView;

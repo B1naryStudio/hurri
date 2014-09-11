@@ -100,6 +100,15 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.post('/api/sync/:id', function(req, res, next){
+		userRepository.sync(req.params.id, function(err, data){
+			res.successStatus = 201;
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
 	app.post('/api/user/info', function(req, res, next){
 		userRepository.addUserInfo(req.body, function(err, data){
 			res.successStatus = 201;

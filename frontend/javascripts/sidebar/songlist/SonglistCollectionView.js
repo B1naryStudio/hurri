@@ -1,5 +1,5 @@
-define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/PlaylistModel','../../main/playlists/tiles/PlaylistBarCollection'],
-	function(Marionette, SonglistView, behavior, playlistModel,PlaylistBarCollection){
+define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/PlaylistModel','../../main/playlists/tiles/PlaylistBarCollection', '../../app/context'],
+	function(Marionette, SonglistView, behavior, playlistModel,PlaylistBarCollection, context){
 
 	var SonglistCollectionView = Marionette.CompositeView.extend({
 		childView: SonglistView,
@@ -72,10 +72,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			}
 		},
 		saveExisting:function(){
-			if (playlistModel.attributes.name === 'VK')
-				alert('Атата! Ахтунг! Аларма! \n\nНельзя делать сохранение в плейлисте из ВК. Мы заботимся о Вашей безопасности. \n\n Команда hurri');
-			else
-				Backbone.trigger('songlist:save-to-existing-playlist', playlistModel.attributes._id, this.collection);
+				Backbone.trigger('songlist:save-to-existing-playlist', this.model.attributes._id, this.collection);
 		},
 		createPlaylist: function(evt){
 			if (evt.keyCode == 13) this.savePlaylist();
