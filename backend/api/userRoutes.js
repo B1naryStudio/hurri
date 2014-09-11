@@ -100,7 +100,8 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.post('/api/sync/:id', function(req, res, next){
+	app.post('/sync/:id', function(req, res, next){
+		console.log('SYNC');
 		userRepository.sync(req.params.id, function(err, data){
 			res.successStatus = 201;
 			res.err = err;

@@ -44,7 +44,7 @@ define(['marionette'], function(Marionette){
 			this.render();
 		},
 		syncVk:function(){
-			$.ajax({url:'/api/sync'+window._injectedData.user._id, method:'POST'});
+			$.ajax({url:'/sync/'+window._injectedData.user._id, method:'POST'});
 		}
 	});
 	return UserView;

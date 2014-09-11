@@ -3,8 +3,34 @@ var Userinfo = require('../schemas/user_info.js');
 var Userauth = require('../schemas/user_auth.js');
 var Repository = require('./generalRepository.js');
 var PlayList = require('../schemas/playlist.js');
+var trackRepository = require('./trackRepository.js');
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var Track = require('../schemas/track.js');
+var VK = require('../social_network_wrapper/VKWrapper');
+var genres = {
+	1: "Rock",
+	2: "Pop",
+	3: "Hip Hop",
+	4: "R&B/Soul/Funk",
+	5: "Dance",
+	6: "World",
+	7: "World",
+	8: "World",
+	9: "Jazz",
+	10: "World",
+	11: "World",
+	12: "World",
+	13: "World",
+	14: "World",
+	15: "Reggae",
+	16: "Classical",
+	17: "World",
+	18: "World",
+	19: "World",
+	21: "Alternative",
+	22: "Electro"
+};
 
 function UserRepository(){
 	Repository.prototype.constructor.call(this);
@@ -98,6 +124,80 @@ UserRepository.prototype.getUserInfo = function(id, callback) {
 	query.exec(callback);
 };
 
+UserRepository.prototype.sync = function(id, callback) {
+	var self = this;
+	var model = this.infoModel;
+	var query = model.findOne({user_auth_id: id}, 'playlists', { lean: true }).findOne({'playlists.name' : 'VK'});
+	query.exec(function(err, data){
+		var opts = [
+			{ path: 'tracks', model: 'Track' }
+		];
+		Track.populate(data.playlists, opts, function(err, res){
+			var result = _.findWhere(res, {name : 'VK'});
+			var list = result.tracks;
+			var auth = self.createModel();
+			auth.findOne({_id:id},'idVk', function(err, dataauth){
+				console.log(data);
+				VK.getUserAudio(dataauth.idVk, function(playlist){
+					var vklist = playlist.response;
+					var vkSongNames = [];
+					var vkSongTitle = _.pluck(vklist, 'title');
+					var vkSongSinger = _.pluck(vklist, 'artist');
+					for (var i = 1; i < vkSongTitle.length; i++){
+						vkSongNames.push(vkSongTitle[i] + ' - ' + vkSongSinger[i]);
+					}
+					//console.log(vkSongNames);
+					var synchronised = _.filter(list, function(item){
+    					return vkSongNames.indexOf(item.title) !== -1;
+					});
+
+					var synchronisedNames = _.pluck(synchronised, 'title');
+
+					var synchronisedDiff = _.filter(vklist, function(item){
+    					return synchronisedNames.indexOf(item.title + ' - '+item.artist) === -1;
+					});
+
+					var synchronisedFinal = synchronised.concat(synchronisedDiff);
+					var pure = _.filter(synchronisedFinal, function(item){
+						return item.title !== undefined;
+					});
+					var tracksToSave = [];
+					var ids = [];
+
+					for (var track in pure){
+						if (pure[track].aid){
+							var tid = mongoose.Types.ObjectId();
+							var newTrack = {
+									_id: tid,
+									title : pure[track].title + ' - ' + pure[track].artist,
+									duration : pure[track].duration,
+									url : pure[track].url,
+									genre: genres[pure[track].genre],
+									type: 'vk',
+									singer: null,
+									albumTitle : 'VK',
+									albumCover: '/images/default/cover.png'
+							};
+							ids.push(tid);
+							trackRepository.add(newTrack);
+						} else {
+							ids.push(pure[track]._id);
+						}
+					}
+					console.log('ID', id,  'PLAYLIST:', result._id);
+					self.updatePlaylist(id, result._id, {tracks: ids}, function(err, info){
+						console.log(err, info);
+					});
+				});
+
+			});
+			
+			//console.log('DATA: ', result.tracks);
+		});
+		
+	});
+};
+
 Repository.prototype.updateUserInfo = function(id, body, callback) {
 	var model = this.infoModel;
 	var query = model.findOneAndUpdate({_id: id}, body);
@@ -188,10 +288,14 @@ UserRepository.prototype.addSongToPlaylist = function(id, pid, tid, callback) {
 };
 
 UserRepository.prototype.updatePlaylist = function(id, pid, body, callback) {
+	console.log('update Called');
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id}, function(err, data){
+		console.log(err, data);
 		for(var i = 0; i < data.playlists.length; i++){
-			if (data.playlists[i]._id == pid){
+			console.log(data.playlists[i]._id, pid);
+			if (data.playlists[i]._id.toString() === pid.toString()){
+				console.log('Find list');
 				data.playlists[i].tracks = body.tracks;
 				data.save(callback);
 			}
