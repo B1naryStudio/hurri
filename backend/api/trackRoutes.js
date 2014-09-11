@@ -18,6 +18,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/explorer/tracks', function(req, res, next){
+		trackRepository.getAll(function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/track/:id/title', function(req, res, next){
 		trackRepository.getTitle(req.params.id, function(err, data){
 			res.err = err;

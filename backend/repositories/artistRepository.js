@@ -16,6 +16,12 @@ ArtistRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
+ArtistRepository.prototype.getAll = function(callback) {
+	var model = this.model;
+	var query = model.find({}).populate('albums_id').limit(50);
+	query.exec(callback);
+};
+
 ArtistRepository.prototype.getArtistAlbums = function(id, callback) {
 	var model = this.model;
 	model.findOne({_id: id}, 'albums_id').lean().populate({path:'albums_id albums_id.tracks'}).exec(function(err, data){

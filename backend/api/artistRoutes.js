@@ -10,6 +10,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/explorer/artists', function(req, res, next){
+		artistRepository.getAll(function(err, data){
+			res.data = data;
+			res.err = err;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/artist/id/:id/albums', function(req, res, next){
 		artistRepository.getArtistAlbums(req.params.id, function(err, data){
 			res.data = data;

@@ -1,6 +1,5 @@
-define(['marionette', './AlbumBarView'], function(Marionette, AlbumBarView){
+define(['marionette', './AlbumBarView','../../../../app/routes'], function(Marionette, AlbumBarView, router){
 	var AlbumBarCompositeView = Marionette.CompositeView.extend({
-		childView: AlbumBarView,
 		template: '#album-bar-composite',
 		events : {
 			'click #album-select' : 'albumShow',
@@ -8,15 +7,15 @@ define(['marionette', './AlbumBarView'], function(Marionette, AlbumBarView){
 			'click #track-select' : 'trackShow'
 		},
 		albumShow : function(){
-			Backbone.trigger('show-albums');
+			router.navigate('/explorer/albums', true);
 		},
 
 		artistShow : function(){
-			Backbone.trigger('show-artists');
+			router.navigate('/explorer/artists', true);
 		},
 
 		trackShow : function(){
-			Backbone.trigger('show-tracks');
+			router.navigate('/explorer/tracks', true);
 		}
 	});
 	return AlbumBarCompositeView;

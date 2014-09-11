@@ -1,8 +1,8 @@
 script#album-bar(type='text/template')
-	#nameAlbum {{-name}}
-	img#albumCover(src='{{-cover}}')
-	#artistAlbum {{-singer.name}}
-	#totalTracksAlbum Tracks: {{-tracks.length}}
+	.nameAlbum {{-name}}
+	img.albumCover(src='{{-cover}}')
+	.artistAlbum {{-singer.name}}
+	.totalTracksAlbum Tracks: {{-tracks.length}}
 
 script#album-bar-composite(type='text/template')
 	#main-bar-header

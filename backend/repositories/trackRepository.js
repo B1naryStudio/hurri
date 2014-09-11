@@ -17,6 +17,12 @@ TrackRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
+TrackRepository.prototype.getAll = function(callback) {
+	var model = this.model;
+	var query = model.find({}).populate('album').populate('singer').limit(50);
+	query.exec(callback);
+};
+
 TrackRepository.prototype.getByTitle = function(title, limit, quick, callback) {
 	var model = this.model;
 	var lim = limit || '';
