@@ -72,7 +72,10 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			}
 		},
 		saveExisting:function(){
-			Backbone.trigger('songlist:save-to-existing-playlist', this.model._id, this.collection);
+			if (playlistModel.attributes.name === 'VK')
+				alert('Атата! Ахтунг! Аларма! \n\nНельзя делать сохранение в плейлисте из ВК. Мы заботимся о Вашей безопасности. \n\n Команда hurri');
+			else
+				Backbone.trigger('songlist:save-to-existing-playlist', playlistModel.attributes._id, this.collection);
 		},
 		createPlaylist: function(evt){
 			if (evt.keyCode == 13) this.savePlaylist();
