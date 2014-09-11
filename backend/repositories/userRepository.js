@@ -52,6 +52,13 @@ UserRepository.prototype.getFollowing = function(id, callback) {
 	query.exec(callback);
 };
 
+UserRepository.prototype.getFollowersFromList = function(id, list, callback) {
+	var model = this.createModel();
+	console.log('list=', list);
+	var query = model.findOne({_id: id}, 'following').populate('following').find({'following._id': {$in: list}});
+	query.exec(callback);
+};
+
 UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
 	var model = this.createModel();
 	model.findOne({id: id}, function(err, res){
@@ -96,6 +103,37 @@ UserRepository.prototype.getUserInfo = function(id, callback) {
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id});
 	query.exec(callback);
+};
+
+UserRepository.prototype.getUserListInfo = function(list, callback) {
+	var model = this.infoModel;
+	var query = model.find({user_auth_id: {$in:list}});
+	query.exec(callback);
+};
+
+UserRepository.prototype.getFollowersInfo = function(id, callback) {
+	var model = this.createModel();
+	var query = model.findOne({_id: id}, 'followers').populate('followers');
+	var self = this;
+	query.exec(function(err,data){
+		var infomodel = Userinfo;
+			console.log('id=',data.followers[0]._id);
+			var list = [];
+			for (var i=0; i<data.followers.length; i++){
+				list.push(data.followers[i]._id);
+				
+			}
+			console.log('list', list);
+			self.getUserListInfo(list, function(error, data){
+				console.log('data=',data);
+				console.log('error', error);
+				callback(err, data);
+			});
+	//	}
+		
+	});
+
+
 };
 
 Repository.prototype.updateUserInfo = function(id, body, callback) {

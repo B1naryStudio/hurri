@@ -9,7 +9,7 @@ var likeSchema = new Schema({
 	},
 	userId : [{ 
 		type: Schema.Types.ObjectId, 
-		ref: 'user_info' 
+		ref: 'Userinfo' 
 	}],
 });
 

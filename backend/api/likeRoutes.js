@@ -10,6 +10,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/like/:song_id/state/:user_id', function(req, res, next){
+		likeRepository.songLikeState(req.params.song_id, req.params.user_id, function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
 	app.post('/api/like', function(req, res, next){
 		likeRepository.add(req.body, function(err, data){
 			res.err = err;

@@ -18,6 +18,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/user/info/:id/followers', function(req, res, next){
+		userRepository.getFollowersInfo(req.params.id, function(err, data){
+			res.data = data;
+			res.err = err;
+			next();
+		});
+	}, apiResponse);
+
 
 	app.get('/api/user/:id/follower', function(req, res, next){
 		userRepository.getFollower(req.params.id, function(err, data){
