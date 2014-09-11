@@ -1,6 +1,7 @@
 var fs = require('fs');
 var replaceStream = require('replacestream');
 var userRepository = require('../repositories/userRepository');
+var likeRepository = require('../repositories/likeRepository');
 var async = require('async');
 
 module.exports = function (req, res, obj, error) {
@@ -48,7 +49,12 @@ function populateInjectData(user, callback_main){
 			});
 		},
 		liked : function(callback){
-			userRepository.getLike(user._id, function(err, data){
+			likeRepository.getLikesByUserId(user._id, function(err, data){
+				var likedSongs=[];
+				for (var i=0; i < data.length; i++){
+					likedSongs[i] = data[i].likeSong;
+				}
+				data.liked = likedSongs;
 				callback(err, data.liked);
 			});
 		},

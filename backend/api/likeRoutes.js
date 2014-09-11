@@ -3,7 +3,7 @@ var apiResponse = require('../middleware/apiResponse');
 
 module.exports = function(app){
 	app.get('/api/like/:song_id', function(req, res, next){
-		likeRepository.getLikes(req.params.song_id, function(err, data){
+		likeRepository.getLikesBySongId(req.params.song_id, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();

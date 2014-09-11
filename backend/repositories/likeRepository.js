@@ -10,9 +10,15 @@ function LikeRepository(){
 }
 LikeRepository.prototype = new Repository();
 
-LikeRepository.prototype.getLikes = function(sid, callback) {
+LikeRepository.prototype.getLikesBySongId = function(sid, callback) {
 	var model = this.createModel();
 	var query = model.findOne({likeSong: sid}, 'userId').populate('userId');
+	query.exec(callback);
+};
+
+LikeRepository.prototype.getLikesByUserId = function(uid, callback) {
+	var model = this.createModel();
+	var query = model.find({userId: uid}, 'likeSong').populate('likeSong');
 	query.exec(callback);
 };
 
