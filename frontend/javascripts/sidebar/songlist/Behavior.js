@@ -19,6 +19,7 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 			grid: this.options.grid || false,
 			containment: this.options.containment || false,
 			cursor: "move",
+			items: ".song-item",
 			handle:this.options.handle || false,
 			revert: this.options.revert || true,
 			update: function( event, ui ) {

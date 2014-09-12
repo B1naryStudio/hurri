@@ -3,6 +3,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 
 	var SonglistCollectionView = Marionette.CompositeView.extend({
 		childView: SonglistView,
+		className: 'sidebarSongWrapper',
 		template: '#sidebar-songlist-navi',
 		behaviors: {
 			Sortable:{
