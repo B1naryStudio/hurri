@@ -31,9 +31,10 @@ body
 	width 100%
 	min-width 1280px
 	height header_height
-	background header_background_color
+	background #d3d3d3
 	padding 10px
 	box-sizing border-box
+	border-bottom 1px solid #999
 
 #hurri-logo
 	height 40px
@@ -171,7 +172,7 @@ img.filter-image
 	cursor pointer
 	z-index 30
 	background-color #fff
-	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
+	box-shadow 0 1px 1px rgba(0, 0, 0, 0.4)
 	border-radius 0 0 3px 3px
 
 	.searchresults-region_album
@@ -182,7 +183,7 @@ img.filter-image
 		border-style hidden
 		border-radius 2px
 		margin 5px
-		box-shadow 0px 0px 3px 0px rgba(50, 50, 50, 0.5)
+		box-shadow 0px 0px 1px 0px rgba(50, 50, 50, 0.5)
 		position relative
 		cursor pointer
 
@@ -190,9 +191,7 @@ img.filter-image
 			width 290px
 			height 40px
 			background white
-			border-style solid
-			border-width 1px
-			border-color #c0c0c0
+			border-bottom 1px solid #c3c3c3
 			box-sizing border-box
 			cursor pointer
 
@@ -442,7 +441,7 @@ img.no-item-to-show
 	height 60px
 	min-width 1280px
 	margin 0 auto
-	background:  linear-gradient( to bottom, #232323, #444, #444, #232323)
+	background:  #333
 
 #player-content
 	height 70px 
@@ -458,6 +457,9 @@ img.no-item-to-show
 #song-name
 	top 5px
 	left 27%
+	overflow hidden
+	height 18px
+	width 45%
 
 #song-duration
 	top 37px
@@ -470,16 +472,16 @@ img.no-item-to-show
 #main
 	background white
 	float left
-	width 50%
+	width 60%
 	overflow hidden
 	overflow-y auto
 	position absolute
 	top 120px
 	bottom 30px
-	margin-left 25%
+	margin-left 15%
 
 	&.toggled-main
-		width 75%
+		width 85%
 
 	#add-social-profile
 		width 100%
@@ -509,18 +511,20 @@ img.no-item-to-show
 				display none
 
 #main-bar-header
-	width 360px
-	height 25px
-	background lightgrey
-	margin 5px auto
+	width 100%
+	height 40px
+	background #333
+	margin 0px auto
 
 	#genres-select
 		display inline-block
 		height 25px
 		margin-right 20px
+		margin-left 25%
 	#album-select
 	#artist-select
 	#track-select
+		margin 10px auto 10px	
 		display inline-block
 		height 20px
 		text-align center
@@ -617,7 +621,7 @@ img.no-item-to-show
 	font-weight bold
 #menu-wrap
 	position absolute
-	width 25%
+	width 15%
 	top 120px
 	bottom 30px
 	box-shadow 2px 0 5px rgba(50,50,50,0.5)
@@ -632,7 +636,7 @@ img.no-item-to-show
 		height 38px
 		border-bottom 1px solid darkgrey
 		list-style-type none;
-		background linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%)
+		background #efefef
 		&:hover
 			cursor pointer
 
@@ -669,7 +673,7 @@ img.no-item-to-show
 		.name
 			padding-top 10px
 		&:hover 
-			background Snow
+			background Skyblue
 	#playlist-menu-container
 		margin-left 0px
 		.menu-playlist-item
@@ -729,6 +733,7 @@ img.no-item-to-show
 	opacity 1
 	top 0px
 	height 40px
+	border-top 1px solid #999
 
 	> div
 		color white
@@ -860,6 +865,7 @@ img.no-item-to-show
 	background Snow
 	opacity 1
 	height 40px
+	border-top 1px solid #999
 	.friends-navi
 		height 40px
 		line-height 40px
@@ -1187,15 +1193,15 @@ img.no-item-to-show
 			opacity 0.5
 
 .playlist-bar-wrapper
-	width 412px
-	margin auto
-	margin-top 15px
-	
+	width 512px
+	margin-top 35px
+	padding 20px
+	float left
 
 
 .playlist-bar
-	width 412px
-	height 200px
+	width 512px
+	height 250px
 	position relative
 	float left
 	&:hover
@@ -1205,18 +1211,23 @@ img.no-item-to-show
 			z-index 10
 			box-shadow 0 1px 2px #9ACDDD
 	.playlist-date
-		font-size 10px
-		color #333
+		font-size 15px
+		width 35px
+		height 15px
+		text-overflow hidden
+		overflow hidden
+		color #eee
+		margin auto
 
 	.playlist-left
-		width 190px
+		width 250px
 		float left
-		height 196px
+		height 246px
 		padding 1px
 		margin-right 10px
 		text-align center
 		position relative
-		background url(/../images/main/cdholder.png) no-repeat
+		background url(/../images/main/logo-playlist.jpg) no-repeat
 		background-size 100%
 		.play-without-open
 			display none
@@ -1227,31 +1238,39 @@ img.no-item-to-show
 			border 1px solid lightgray
 
 		.playlist-name
-			font-size 13px
-			margin-top 10px
+			font-size 28px
+			margin-top 5px
+			color white
 			margin-bottom 10px
-			background rgba(255,255,255,0.5)
 		.playlist-total
-			font-size 11px
-			margin-top 60px
+			font-size 15px
+			position absolute
+			bottom 10px
+			left 20px
+			color white
+
 		.playlist-private
 			position absolute
 			width 32px
 			height 32px
-			right 2px
+			right 5px
 			bottom 32px
-			background: url('/images/private.png') no-repeat
+			background: url('/images/lock.png') no-repeat
+			background-size 32px
 			opacity 0.5
+			z-index 5
 			&.private
 				opacity 1
 		.playlist-play
-			width 182px
-			height 166px
+			width 150px
+			height 150px
 			position absolute
-			left 3px
-			top 2px
+			left 55px
+			top 42px
 			&:hover
 				cursor pointer
+				background #333
+				opacity 0.4
 				&:after
 					content ''
 					position absolute
@@ -1268,10 +1287,10 @@ img.no-item-to-show
 		padding 5px
 		margin-top 3px
 		float left
-		width 200px
+		width 250px
 		background #EBFAFA
-		height 170px
-		min-height 170px
+		height 220px
+		min-height 200px
 		text-align center
 		overflow hidden
 		box-sizing border-box
@@ -1282,7 +1301,7 @@ img.no-item-to-show
 		.songname-playlist
 			text-overflow ellipsis
 			overflow hidden
-			font-size 12px
+			font-size 13px
 			height 15px
 			width 90%
 			white-space nowrap

@@ -121,7 +121,7 @@ function getUser (profile, token, auth, done){
 									type: 'vk',
 									singer: null,
 									albumTitle : 'VK',
-									albumCover: '/images/default/cover.png'
+									albumCover: '/images/default/vk.png'
 								};
 								trackRepository.add(track, function(error, track){
 									///console.log(playlistObject.duration);

@@ -233,7 +233,7 @@ UserRepository.prototype.sync = function(id, callback) {
 									type: 'vk',
 									singer: null,
 									albumTitle : 'VK',
-									albumCover: '/images/default/cover.png'
+									albumCover: '/images/default/vk.png'
 							};
 							ids.push(tid);
 							trackRepository.add(newTrack);

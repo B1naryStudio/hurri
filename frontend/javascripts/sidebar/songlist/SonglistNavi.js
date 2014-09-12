@@ -1,7 +1,7 @@
 define(['marionette', '../../shared/playlist/SongCollection'], 
 	function(Marionette, playlistCollection){
 	var SonglistNavi = Marionette.ItemView.extend({
-		el: '#songlist-navi',
+		// el: '#songlist-navi',
   		template : '#sidebar-songlist-navi',
 		events : {
 		 	'click #unqueue'  : 'unqueueSong',
