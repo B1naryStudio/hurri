@@ -15,7 +15,8 @@ define(['underscore', 'backbone','units/SocketHandler', 'marionette', './AppCont
 		mainRegion: '#main',
 		menuRegion: '#menu',
 		playerRegion: '#player',
-		sidebarRegion: '#sidebar'
+		sidebarRegion: '#sidebar',
+		visualisation: '#visualisation'
 	});
 
 	MyApp.on('start', function(){

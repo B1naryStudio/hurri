@@ -475,7 +475,7 @@ img.no-item-to-show
 	top 37px
 	left 27%
 
-#main
+#main-container
 	background white
 	float left
 	width 60%
@@ -1613,6 +1613,15 @@ button
 	&:active
 		background: url('../images/player/player.png') no-repeat -128px -129px;
 
+#visualisation-button
+	background: url('../images/player/visualisation.png') !important
+	background-size: 100% 100% !important
+	width: 20px
+	height: 18px
+	margin-left: 5px
+	&:hover
+		cursor: pointer
+
 input[type='range'] {
 	cursor pointer
 	float left
@@ -1674,3 +1683,15 @@ input[type='range']::-ms-thumb {
 /*Sign in styles*/
 @import url(signin.styl);
 @import url(not_found.styl);
+
+
+#frequency-visualisation-container
+	padding-bottom: 80px
+	padding-left: 8px
+	overflow: hidden
+
+#frequency-visualisation-canvas
+	width: 100%
+	@css{
+  -webkit-box-reflect: below 5px -webkit-linear-gradient(top, transparent, transparent 50%, rgba(255,255,255,0.2))
+	}

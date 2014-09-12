@@ -21,6 +21,7 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			"click @ui.likeButton"			: "likeState",
 			"click @ui.volume"				: "mute",
 			"click @ui.commentButton"		: "addComment",
+			"click @ui.visualisationButton": "toggleVisualisation",
 			"click @ui.songInfo"			: "countdown",
 			"mousemove @ui.volumeRange"		: "volumeLevelSetup",
 			"mousemove @ui.playbackRange"	: "playbackPosition",
@@ -38,6 +39,7 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
    			repeatButton: "#repeat-button",
    			likeButton: "#like-button",
    			commentButton: "#comment-button",
+   			visualisationButton: "#visualisation-button",
    			volumeRange: '#volume-range',
    			playbackRange: "#playback-range",
    			volume: '#volume',
@@ -121,7 +123,9 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			this.ui.repeatButton.addClass(mode);
 		},
 
-
+		toggleVisualisation: function(){
+			Backbone.trigger('player:toggle-visualisation');
+		},
 
 		addComment: function(){
 			router.navigate('/track/id/'+ context.currentSongModel.attributes._id,true);
