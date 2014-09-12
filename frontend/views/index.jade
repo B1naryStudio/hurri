@@ -8,7 +8,9 @@ block content
 	#menu-wrap
 		div#menu
 		#playlist-menu-container
-	div#main
+	div#main-container
+		div#visualisation
+		#main
 		div#result-main-composite
 	div#sidebar
 		#sidebar-region
@@ -55,6 +57,7 @@ block content
 	include ./main/album-composite-template
 	include ./main/artist-composite-template
 	include ./main/album-complete-template
+	include ./visualisation/frequency-visualisation-template
 
 	script#not_found_template(type="text/template")
 		h1 Page not found

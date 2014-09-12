@@ -1,7 +1,8 @@
 define(['../footer/FooterController', '../header/HeaderController', '../main/MainController', 
-		'../menu/MenuController', '../player/PlayerController', '../sidebar/SidebarController'], 
+		'../menu/MenuController', '../player/PlayerController', '../sidebar/SidebarController',
+		'../visualisation/VisualisationController'], 
 function(FooterController, HeaderController, MainController, MenuController, PlayerController, 
-		SidebarController){
+		SidebarController, VisualisationController){
 
 	var AppController = function(){
 		var footerController = new FooterController();
@@ -10,6 +11,7 @@ function(FooterController, HeaderController, MainController, MenuController, Pla
 		var menuController = new MenuController();
 		var playerController = new PlayerController();
 		var sidebarController = new SidebarController();
+		var visualisationController = new VisualisationController();
 	};
 
 	return AppController;
