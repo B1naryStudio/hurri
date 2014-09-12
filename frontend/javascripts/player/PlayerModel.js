@@ -87,6 +87,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					self.set({liked: context.currentSongModel.get('liked')});
 				});				
 			});
+
+			Backbone.on('behavior:change-current', function(i){
+				self.set({currentTrack: i});
+			});
 			audioHandler.on('playing', function(){
 				self.startTimer();
 				window.localStorage.setItem("currentPlay", self.get('guid'));

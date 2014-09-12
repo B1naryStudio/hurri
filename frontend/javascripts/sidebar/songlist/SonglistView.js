@@ -43,7 +43,7 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		setQueuepos : function (){
 			if(playlistModel.get('queueNum') === 0){
 				for (var i = 0; i < this.model.collection.length; i++){
-					if (this.model.collection.models[i].get('_id') == context.currentSongModel.get('_id')){
+					if (context.currentSongCollection.models[i].get('_id') == context.currentSongModel.get('_id')){
 						context.queueSavedSong = i;
 						break;
 					}

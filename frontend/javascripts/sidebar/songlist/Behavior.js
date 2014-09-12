@@ -20,11 +20,15 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 			containment: this.options.containment || false,
 			cursor: "move",
 			handle:this.options.handle || false,
-			revert: this.options.revert || false,
+			revert: this.options.revert || true,
 			update: function( event, ui ) {
-				var model=collection.get(ui.item.data('backbone-cid')); 
+				var model=collection.get(ui.item.attr('data-backbone-cid')); 
+				console.log(collection);
 				collection.remove(model, {silent: true});
-				collection.add(model,{at:ui.item.index(), silent: true});
+				collection.add(model,{at:ui.item.index()-1, silent: true});
+				for (var i = 0; i < collection.models.length; i++)
+					if(collection.models[i].attributes.current === true)
+						Backbone.trigger('behavior:change-current', i);
 			}
 		});		   
 	},
