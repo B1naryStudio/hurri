@@ -31,10 +31,10 @@ body
 	width 100%
 	min-width 1280px
 	height header_height
-	background #d3d3d3
+	background #318ABD
 	padding 10px
 	box-sizing border-box
-	border-bottom 1px solid #999
+	border-bottom 1px solid #5ac
 
 #hurri-logo
 	height 40px
@@ -525,6 +525,7 @@ img.no-item-to-show
 	height 40px
 	background #333
 	margin 0px auto
+	border-top 1px solid #999
 
 	#genres-select
 		display inline-block
@@ -562,35 +563,40 @@ img.no-item-to-show
 	margin auto
 .album-bar 
 	width 150px
-	height 150px
-	background url('../images/default/cover.png')
+	height 200px
+	background url('../images/default/cover.png') no-repeat;
 	background-size 150px
 	float left
 	margin 10px
 	position relative
+	overflow hidden
+	img.albumCover
+		width 150px
 
 	.artistAlbum
 		width 100%
 		height 15%
 		background white
-		opacity 0.8
+		opacity 1
 		text-align center
 
 	.totalTracksAlbum
 		width 100%
-		height 10%
+		height 15px		
 		background white
-		opacity 0.8
+		opacity 1
 		text-align center
 		
 	.nameAlbum
 		position absolute
 		bottom 0
 		width 100%
-		height 20%
+		height 15px
 		background white
-		opacity 0.8
+		opacity 1
 		text-align center
+		overflow hidden
+		text-overflow hidden
 #comment-buttons-wrapper
 	width 100%
 	margin auto
@@ -1255,6 +1261,9 @@ img.no-item-to-show
 		.playlist-name
 			font-size 28px
 			margin-top 5px
+			height 30px
+			text-overflow hidden
+			overflow hidden
 			color white
 			margin-bottom 10px
 		.playlist-total
@@ -1304,7 +1313,7 @@ img.no-item-to-show
 		float left
 		width 250px
 		background #EBFAFA
-		height 240px
+		height 242px
 		min-height 240px
 		text-align center
 		overflow hidden
@@ -1313,6 +1322,8 @@ img.no-item-to-show
 			text-align left
 			list-style-type decimal-leading-zero
 			list-style-position inside
+			height 240px
+			overflow hidden
 		.songname-playlist
 			text-overflow ellipsis
 			overflow hidden
