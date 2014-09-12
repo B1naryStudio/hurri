@@ -33,8 +33,8 @@ function(Marionette, SearchResultsView, SearchResultsItemView, router){
 			router.navigate('/search/' + this.ui.searchInput[0].value, true);
 		},
 
-		closeSearch: function(event){
-			
+		closeSearch: function(){
+			this.searchResultsView.el.style.display = 'none';
 		},
 		search: function(){
 			this.model.set('currentInput', this.ui.searchInput[0].value);
@@ -78,6 +78,7 @@ function(Marionette, SearchResultsView, SearchResultsItemView, router){
 		refreshInput: function(event){
 			if(event.which === 13){	// enter key
 				this.showMore();
+				this.closeSearch();
 			}else{
 				this.backgroundSearch();
 			}
