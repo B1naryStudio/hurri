@@ -21,7 +21,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			'click #save-playlist-from-queue':'saveExisting',
 			'blur .edit2' : 'close',
 			'click .close-enter-add' : 'close',
-			'click .enter-button-add' : 'createPlaylist'
+			'click .enter-button-add' : 'save'
 		},
 
 		initialize: function(){
@@ -39,7 +39,9 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 		ui : {
 			text : ".edit2"
 		},
-		
+		save: function(){
+			this.savePlaylist();
+		},
 		close: function(){
 			this.ui.text[0].value = '';
 			this.$el.removeClass("editing2");

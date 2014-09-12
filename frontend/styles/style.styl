@@ -294,17 +294,22 @@ p.album-composite-header
 	font-size 20px
 	font-weight bold
 	text-align center
+	margin-bottom 15px
+	margin-top 15px
 img.album-composite-cover
 	width 30%
 	width 30%
 	float left
+	margin-left 5%
 .album-composite-release
 .album-duration 
 .album-singer 
-	width 70%
+	width 62%
 	float left
+	padding-left 3%
 .total_tracks
 	clear both
+	margin-left 12%
 	
 img.no-item-to-show
 	width 150px
@@ -489,6 +494,7 @@ img.no-item-to-show
 		height 40px
 		padding 5px
 		box-sizing border-box
+		border-top 1px solid #999
 		background #333
 
 		.socialButton
@@ -510,6 +516,9 @@ img.no-item-to-show
 
 			&.disabled
 				display none
+		#syncvk
+			background orange
+			padding 0 5px 0
 
 #main-bar-header
 	width 100%
@@ -677,11 +686,17 @@ img.no-item-to-show
 			background Skyblue
 	#playlist-menu-container
 		margin-left 0px
+		position absolute
+		height 100%
+		top 200px
+		bottom 0px
+		overflow scroll
 		.menu-playlist-item
 			height 30px
 			line-height 30px
 			vertical-align middle
 			position relative
+			overflow hidden
 			&:hover
 				background lightblue
 			.playlist-name-menu
@@ -1290,8 +1305,8 @@ img.no-item-to-show
 		float left
 		width 250px
 		background #EBFAFA
-		height 220px
-		min-height 200px
+		height 240px
+		min-height 240px
 		text-align center
 		overflow hidden
 		box-sizing border-box

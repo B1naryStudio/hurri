@@ -5,6 +5,7 @@ script#user-template(type='text/template')
 			a(href='/auth/vkontakte', data-type="vk").socialButton#addVk(title='Add VK account') VK
 			a(href='/auth/twitter', data-type="tw").socialButton#addTw(title='Add Twitter account') Twitter
 			a(href='/auth/facebook', data-type="fb").socialButton#addFb(title='Add Facebook account') Facebook
+			a.socialButton#syncvk sync VK
 		div#userinfo
 			img#avatar('src={{-avatarUrl}}')
 			div#info
@@ -12,7 +13,6 @@ script#user-template(type='text/template')
 				div.info-field Age: {{-age}}
 				div.info-field e-mail: {{-email}}
 				div.info-field Country: {{-country}}
-				#syncvk sync
 				div#music-statistic
 					div.statistic-title
 					div.statistic-field#byArtists by Artists
