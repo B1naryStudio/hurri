@@ -151,21 +151,28 @@ define(['marionette',
 	};
 
 	MainController.prototype.getUserView = function(id){
-		if (id === this.user.model.attributes._id){
+		if(id === this.user.model.attributes._id) {
 			return new UserView({
-				model: this.user.model
+				model: this.user.model,
+				type: 'me'
 			});
-		} else{
+		} else {
 			var follower = _.findWhere(window._injectedData.followers, {_id:id});
 			var following = _.findWhere(window._injectedData.following, {_id:id});
 			var model;
-			if (follower)
+			if(follower) {
 				model = new Backbone.Model(follower);
-			else 
-				model = new Backbone.Model(following); 
-			return new UserView({
-				model: model
-			});
+				return new UserView({
+					model: model,
+					type: 'follower'
+				});
+			} else {
+				model = new Backbone.Model(following);
+				return new UserView({
+					model: model,
+					type: 'following'
+				});
+			}
 		}
 	};
 
