@@ -10,6 +10,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/search/full/albums/:name', function(req, res, next){
+		albumRepository.getByTitle(req.params.name, 100, '', function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/album/id/:id', function(req, res, next){
 		albumRepository.getById(req.params.id, function(err, data){
 			res.err = err;

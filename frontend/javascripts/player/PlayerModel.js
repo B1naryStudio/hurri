@@ -6,7 +6,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			nextButtonState: false, //disabled - true
 			previousButtonState: true, //disabled - true
 			currentTrack: 0,
-			currentTrackName: 'Track',
+			currentTrackName: 'No track playing now',
 			currentArtistName: 'Artist',
 			volumeLevel: 50,
 			mute: 'unmute',
@@ -275,7 +275,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		setDurationFormat: function(){
-			this.set({durationFormat:this.getTimeFormat(this.get('duration'))});
+			var duration = this.get('duration');
+			if (!duration)
+				duration = 0;
+			this.set({durationFormat:this.getTimeFormat(duration)});
 		},
 
 		getTimeFormat: function(time){

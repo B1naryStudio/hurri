@@ -34,6 +34,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/search/full/artists/:name', function(req, res, next){
+		artistRepository.getByName(req.params.name, 50, '', function(err, data){
+			res.data = data;
+			res.err = err;
+			next();
+		});
+	}, apiResponse);
+
 	app.post('/api/artist/', function(req, res){
 		artistRepository.add(req.body, function(err, data){
 			res.data = data;
