@@ -1,6 +1,7 @@
 define(['marionette', './FrequencyVisualisationView', '../units/AudioAnalyzer',
-	'backbone'], 
-		function(Marionette, FrequencyVisualisationView, AudioAnalyzer, Backbone){
+	'backbone', './particle/ParticlesVisualisationView'], 
+		function(Marionette, FrequencyVisualisationView, AudioAnalyzer, Backbone,
+			ParticlesVisualisationView){
 	var VisualisationController = function(){
 
 		var VisualisationRegion = Marionette.Region.extend({
@@ -9,7 +10,8 @@ define(['marionette', './FrequencyVisualisationView', '../units/AudioAnalyzer',
 		this.visualisationRegion = new VisualisationRegion();
 
 		this.hidden = true;
-		this.currentView = FrequencyVisualisationView;
+		// this.currentView = FrequencyVisualisationView;
+		this.currentView = ParticlesVisualisationView;
 
 		this.bindListeners();
 	};
