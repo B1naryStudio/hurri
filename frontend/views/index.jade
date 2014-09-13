@@ -9,7 +9,12 @@ block content
 		div#menu
 		#playlist-menu-container
 	div#main-container
-		div#visualisation
+		div#visualisation-container
+			#visualisation-controls
+				#vc-waveform-visualisation.vc-option
+				#vc-frequency-visualisation.vc-option
+				#vc-particles-visualisation.vc-option
+			#visualisation
 		#main
 		div#result-main-composite
 	div#sidebar
@@ -59,6 +64,7 @@ block content
 	include ./main/album-complete-template
 	include ./visualisation/frequency-visualisation-template
 	include ./visualisation/particles-visualisation-template
+	include ./visualisation/waveform-visualisation-template
 
 	script#not_found_template(type="text/template")
 		h1 Page not found

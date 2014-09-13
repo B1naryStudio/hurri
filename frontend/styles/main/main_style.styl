@@ -103,6 +103,49 @@
 	background-size 16px
 	opacity 0.8
 
+#visualisation-container
+	overflow: hidden
+	position: relative
+
+#visualisation-controls
+	position: absolute
+	left: 50%
+	margin-left: -20px
+	height: 30px
+	width: 85px
+	background: #333
+	opacity: 0.1
+	z-index: 2
+	&:hover
+		opacity: 1
+
+.vc-option
+	display: inline-block
+	height: 20px
+	width: 20px
+	box-sizing: border-box
+	color: white
+	cursor: pointer
+	margin-right: 7px
+	background-size: 100% 100% 
+	margin-top: 5px
+
+.vc-option:last-child
+	margin: 0px
+
+.vc-option:first-child
+	margin-left: 5px
+
+
+#vc-frequency-visualisation
+	background: url(../images/player/visualisation.png)
+
+#vc-waveform-visualisation
+	background: url(../images/player/visualisation.png)
+
+#vc-particles-visualisation
+	background: url(../images/player/visualisation.png)
+
 #frequency-visualisation-container
 	padding-bottom: 80px
 	padding-left: 8px

@@ -1,7 +1,8 @@
 define(['marionette', './FrequencyVisualisationView', '../units/AudioAnalyzer',
-	'backbone', './particle/ParticlesVisualisationView'], 
+	'backbone', './particle/ParticlesVisualisationView', './VisualisationControlView',
+	'./waveform/WaveformView'], 
 		function(Marionette, FrequencyVisualisationView, AudioAnalyzer, Backbone,
-			ParticlesVisualisationView){
+			ParticlesVisualisationView, VisualisationControlView, WaveformView){
 	var VisualisationController = function(){
 
 		var VisualisationRegion = Marionette.Region.extend({
@@ -10,8 +11,16 @@ define(['marionette', './FrequencyVisualisationView', '../units/AudioAnalyzer',
 		this.visualisationRegion = new VisualisationRegion();
 
 		this.hidden = true;
-		// this.currentView = FrequencyVisualisationView;
+
+		this.views = {
+			'waveform': WaveformView,
+			'particles': ParticlesVisualisationView,
+			'frequency': FrequencyVisualisationView
+		};
+
 		this.currentView = ParticlesVisualisationView;
+
+		this.visualisationControlView = new VisualisationControlView();
 
 		this.bindListeners();
 	};
@@ -20,6 +29,7 @@ define(['marionette', './FrequencyVisualisationView', '../units/AudioAnalyzer',
 		var self = this;
 
 		Backbone.on('player:toggle-visualisation', this.toggleVisualisation, this);
+		this.visualisationControlView.on('change:current', this.changeCurrentView, this);
 	};
 
 	VisualisationController.prototype.toggleVisualisation = function() {
@@ -29,6 +39,13 @@ define(['marionette', './FrequencyVisualisationView', '../units/AudioAnalyzer',
 			this.visualisationRegion.show(currentView);
 		} else {
 			this.visualisationRegion.empty();
+		}
+	};
+
+	VisualisationController.prototype.changeCurrentView = function(viewName) {
+		if (this.currentView !== this.views[viewName]){
+			this.currentView = this.views[viewName];
+			this.visualisationRegion.show(new this.currentView());
 		}
 	};
 

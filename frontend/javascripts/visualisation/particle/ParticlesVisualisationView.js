@@ -25,7 +25,7 @@ define(['backbone', 'marionette', './Particle'],
 
 		initializeParticles: function(){
 			this.width = 1000;
-			this.height = 250;
+			this.height = 330;
 			this.particles = [];
 			for (var i = 0, length = NUM_PARTICLES; i < length; i++) {
 			  x = random(this.width);
