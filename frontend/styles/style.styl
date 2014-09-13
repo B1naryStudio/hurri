@@ -532,23 +532,25 @@ img.no-item-to-show
 
 	#genres-select
 		display inline-block
-		height 25px
+		height 30px
 		margin-right 20px
 		margin-left 25%
+		option
+			padding 5px
 	#album-select
 	#artist-select
 	#track-select
-		margin 10px auto 10px	
+		padding 10px	
 		display inline-block
 		height 20px
 		text-align center
-		border-right 1px solid grey
-		background linear-gradient(to bottom, rgba(245,245,245,1) 0%,rgba(224,224,224,1) 100%)
+		border-left 1px solid grey
+		color white
 		width 80px
 		&:last-child
-			border none
+			border-right 1px solid grey
 		&:hover
-			background #f6f6f6
+			background #39d
 
 #song-info-content
 	#song-info-text
@@ -567,7 +569,6 @@ img.no-item-to-show
 .album-bar 
 	width 150px
 	height 200px
-	background url('../images/default/cover.png') no-repeat;
 	background-size 150px
 	float left
 	margin 10px
@@ -1034,7 +1035,8 @@ img.no-item-to-show
 	border-radius 0px
 	background #F3F4F8
 	position relative
-	border-bottom 1px solid #ccc
+	border-bottom: 1px solid #DADADA;
+	border-top: 1px solid rgb(253, 253, 253);
 	
 	&:hover 
 		background linear-gradient(to top, rgba(73,192,240,0.2) 0%,rgba(44,175,227,0.2) 100%)

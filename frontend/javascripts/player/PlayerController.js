@@ -11,10 +11,10 @@ define(['marionette', './PlayerView', './PlayerModel', '../shared/playlist/Playl
 		});
 
 		var playerRegion = new PlayerRegion();
-		var playerView = new PlayerView({
+		this.playerView = new PlayerView({
 			model: this.playerModel
 		});
-		playerRegion.show(playerView);
+		playerRegion.show(this.playerView);
 
 		this.bindListeners();
 		
@@ -28,6 +28,8 @@ define(['marionette', './PlayerView', './PlayerModel', '../shared/playlist/Playl
 				self.playerModel.setTrackInfoParams();
 			});
 			this.playerModel.startTrack();
+			if (this.playerModel.attributes.playback === 'pause')
+				this.playerView.playbackState();
 		}, this);
 
 		Backbone.on('main:play-at-position', function(i){
@@ -37,6 +39,8 @@ define(['marionette', './PlayerView', './PlayerModel', '../shared/playlist/Playl
 				self.playerModel.setTrackInfoParams();
 			});
 			this.playerModel.startTrack();
+			if (this.playerModel.attributes.playback === 'pause')
+				this.playerView.playbackState();
 		}, this);
 
 		Backbone.on('check-play', function(model){
