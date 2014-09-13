@@ -1,0 +1,81 @@
+.song-item
+	width 100%
+.sidebar-song-wrap
+	width 100%
+	margin 0px auto
+	height 50px
+	border-radius 0px
+	background #F3F4F8
+	position relative
+	border-bottom 1px solid #ccc
+	
+	&:hover 
+		background linear-gradient(to top, rgba(73,192,240,0.2) 0%,rgba(44,175,227,0.2) 100%)
+
+	.sidebar-song-img-box 
+		background grey
+		img
+			width 40px
+			height 40px
+			float left
+			padding 5px
+
+	.sidebar-song-header
+		padding 5px 0 5px 0
+		height 15px
+		overflow hidden
+		text-overflow ellipsis
+		display block
+		width 70%
+
+	.sidebar-song-info
+		margin-left 50px
+		height 20px
+		text-overflow ellipsis
+		overflow hidden
+		display block
+		font-size 12px
+		width 70%
+
+	.delete-song-from-list
+		width 12px
+		height 12px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 12px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+	
+	.queuepos
+		position absolute
+		right 0
+		bottom 3px
+		font-size 10px
+		font-weight bold
+		margin-right 4px
+
+	.add-song-to-queue
+		width 12px
+		height 12px
+		position absolute
+		background: url('../images/songlist/queue.png') no-repeat;
+		background-size: 12px
+		right 2px
+		top 16px
+		opacity 0.3
+
+		&:hover 
+			opacity 0.7
+
+	&.activesong
+		background linear-gradient(to top, rgba(73,192,240,1) 0%,rgba(44,175,227,1) 100%)
+		.gif
+			position absolute
+			left 0
+			display block
+.gif
+	display none

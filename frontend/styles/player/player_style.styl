@@ -1,0 +1,175 @@
+#player
+	height 60px
+	min-width 1280px
+	margin 0 auto
+	background:  #333
+
+#player-content
+	height 70px 
+	width 80%
+	margin auto
+
+#song-block
+	color white
+	position relative
+.song-info
+	position absolute
+
+#song-name
+	top 5px
+	left 27%
+	overflow hidden
+	height 18px
+	width 45%
+
+#song-duration
+	top 37px
+	left 67%
+
+#song-position
+	top 37px
+	left 27%
+
+.player-button
+	height 25px
+	width 25px
+	background-size cover
+	float left
+	cursor pointer
+	margin-top 22px
+	background-image: url(/images/player/player.png)
+	background-repeat: no-repeat
+	background-size 400px 64px
+	&:focus
+		outline 0
+
+#play-button
+	height 30px
+	width 30px
+	margin-top 10px
+	&.pause
+		background: url('/images/player/player.png') no-repeat -575px 0;
+		width: 40px;
+		height: 40px;
+		&:hover
+			background-position: -575px -256px;
+
+	&.play
+		background: url('/images/player/player.png') no-repeat -640px 0;
+		width: 40px;
+		height: 40px;
+		&:hover
+			background-position: -640px -256px;
+
+#next-button
+	margin-top 15px
+	background: url('/images/player/player.png') no-repeat -447px 0;
+	width 3%
+	height: 42px;
+	&:hover
+		background-position: -447px -256px;
+	&:active
+		background-position: -447px -256px;
+	&:disabled
+		background-position: -447px -192px;
+
+#previous-button
+	margin-top 15px
+	background: url('../images/player/player.png') no-repeat -512px 0;
+	width 3%
+	height: 42px;
+	&:hover
+		background-position: -512px -256px;
+	&:active
+		background-position: -512px -256px;
+	&:disabled
+		background-position: -512px -192px;
+
+#volume
+	margin 21px 0 0 5px
+	width: 2%;
+	height: 28px;
+	background: url('/images/player/player.png') no-repeat -384px 0;
+	&.mute
+		background-position: 0 0;
+
+#volume-range
+	width 10%
+#playback-range
+	width 45%
+
+#shuffle-button
+	width 32px
+	&.shuffleoff
+		width: 2%;
+		height: 18px;
+		background: url('/images/player/player.png') no-repeat -256px -65px;
+		&:hover
+			background-position: -256px -1px;
+
+	&.shuffleon
+		background: url('../images/player/player.png') no-repeat -256px -129px;
+		width: 2%;
+		height: 18px;
+		&:hover
+			background-position: -256px -1px;
+
+#repeat-button
+	width 32px
+	height 25px
+	&.song
+		background: url('../images/player/player.png') no-repeat -192px -129px;
+		width: 2%;
+		height: 15px;
+		&:hover
+			background: url('../images/player/player.png') no-repeat -192px -1px;
+		&:active
+			background: url('../images/player/player.png') no-repeat -192px -1px;
+
+	&.none
+		background: url('../images/player/player.png') no-repeat -320px -64px;
+		width: 2%;
+		height: 17px;
+		&:hover
+			background: url('../images/player/player.png') no-repeat -320px 0;
+		&:active
+			background: url('../images/player/player.png') no-repeat -320px 0;
+
+	&.album
+		background: url('../images/player/player.png') no-repeat -320px -128px;
+		width: 2%;
+		height: 17px;
+		&:hover
+			background: url('../images/player/player.png') no-repeat -320px 0;
+		&:active
+			background: url('../images/player/player.png') no-repeat -320px 0;
+
+
+#like-button
+	background: url('../images/player/player.png') no-repeat -64px -65px;
+	width: 2%;
+	height: 16px;
+	&:hover
+		background: url('../images/player/player.png') no-repeat -64px -1px;
+	&:active
+		background: url('../images/player/player.png') no-repeat -64px -129px;
+	&.true
+		background: url('../images/player/player.png') no-repeat -64px -129px;
+
+#comment-button
+	background: url('../images/player/player.png') no-repeat -128px -65px;
+	width: 20px;
+	height: 18px;
+	&:hover
+		background: url('../images/player/player.png') no-repeat -128px -1px;
+	&:active
+		background: url('../images/player/player.png') no-repeat -128px -129px;
+
+#visualisation-button
+	background: url('../images/player/visualisation.png') !important
+	background-size: 100% 100% !important
+	width: 20px
+	height: 18px
+	margin-left: 5px
+	&:hover
+		cursor: pointer

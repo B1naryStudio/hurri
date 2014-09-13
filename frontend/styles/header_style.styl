@@ -1,0 +1,130 @@
+/*Header*/
+header_height = 60px
+header_background_color = #27709b
+
+bar_height = 40px
+searchbar_width = 300px
+
+#header
+	width 100%
+	min-width 1280px
+	height header_height
+	background #318ABD
+	padding 10px
+	box-sizing border-box
+	border-bottom 1px solid #5ac
+
+#hurri-logo
+	height 40px
+	cursor pointer
+	float left
+
+#userbar
+	width auto
+	height bar_height
+	float right
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	&:hover
+		background #529de1
+
+	#avatar-icon
+		width bar_height
+		height bar_height
+		max-width 50px
+		cursor pointer
+		border-style hidden
+		border-top-left-radius 3px
+		border-bottom-left-radius 3px
+		box-sizing border-box
+
+	#name-field
+		width auto
+		height 100%
+		float right
+		font-size 15px
+		font-weight 700
+		line-height bar_height
+		padding-left 10px
+		padding-right 10px
+		cursor pointer
+		border-style hidden
+		border-top-right-radius 3px
+		border-bottom-right-radius 3px
+		box-sizing border-box
+
+#notificationbar
+	width auto
+	height bar_height
+	float right
+	margin-right 10px
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	cursor pointer
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	&:hover
+		background #529de1
+
+	#notification-icon
+		width bar_height
+		height bar_height
+		cursor pointer
+		box-sizing border-box
+
+	#unread-number
+		height 20px
+		width 20px
+		background orange
+		cursor pointer
+		border-radius 3px
+		text-align center
+		font-size 90%
+		font-weight bold
+		color white
+		display inline
+		padding 1px 2px
+
+#searchbar
+	width auto
+	height bar_height
+	float right
+	margin-right 50px
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	#search-input
+		width searchbar_width
+		height bar_height
+		font-size 18px
+		border-style hidden
+		border-top-left-radius 3px
+		border-bottom-left-radius 3px
+		box-sizing border-box
+		padding 0 10px
+		&:focus
+			outline none
+
+	#search-button
+		width auto
+		height bar_height
+		float right
+		background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+		font-size 15px
+		font-weight 700
+		line-height bar_height
+		cursor pointer
+		padding-left 10px
+		padding-right 10px
+		border-style hidden
+		border-top-right-radius 3px
+		border-bottom-right-radius 3px
+		box-sizing border-box
+
+		&:hover
+			background #529de1

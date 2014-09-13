@@ -1,0 +1,52 @@
+#sidebar-nav
+		clear both
+		float right
+		background #2b2e31
+		width 25%
+		height 30px
+		background #2b2e31
+		border-top 1px solid darkgrey
+		position absolute
+		bottom 0px
+		right 0px
+		li
+			float right
+			height 25px
+			list-style-type none;
+			display: inline-block
+			width 24%
+			border-right 1px solid lightgrey
+
+			&:last-child
+				border-right none
+
+			&#friendsButton
+				background: url('../images/sidebar/friends.png') no-repeat;
+				background-size: 25px
+				opacity: 0.5
+				background-position: center
+				&:hover
+					opacity 1
+			&#musicButton
+				background: url('../images/sidebar/music.png') no-repeat;
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+			&#infoButton
+				background: url('../images/sidebar/info.png') no-repeat;
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+			&#hideButton
+				background: url('../images/sidebar/hide.png') no-repeat;
+				background-size: 25px
+				background-position: center
+				opacity: 0.5
+				&:hover
+					opacity 1
+				&.toggled-button
+					display none

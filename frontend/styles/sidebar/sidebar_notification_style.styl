@@ -1,0 +1,65 @@
+.notification-message 
+	display block
+	border-radius 2px
+	background #fefefe
+	opacity 0.8
+	margin 0 auto 0
+	padding 2%
+	width 90%
+	box-shadow 0px 0px 5px 0px rgba(50, 50, 50, 0.5)
+	margin-bottom: 5px
+	position relative
+	
+	&.newNotification
+		background PeachPuff
+	&:last-child 
+		border none
+
+	.information-part
+		padding-right 16px
+
+	.removeNotification
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/delete.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 2px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+	.renewMessage
+		width 16px
+		height 16px
+		position absolute
+		background: url('../images/notifications/notification.png') no-repeat;
+		background-size: 16px
+		right 2px
+		top 18px
+		opacity 0.3
+
+		&:hover 
+			opacity 1
+
+.notifHeadWrapper
+	display block
+	margin 0 auto 0
+	padding 2%
+	h3
+		
+		display block
+		wigth 80%
+		
+.deleteAll
+	width 16px
+	height 16px
+	top 0
+	opacity 0.3
+	background: url('../images/notifications/bin.png') no-repeat;
+	background-size: 16px
+
+	&:hover
+		opacity 0.9

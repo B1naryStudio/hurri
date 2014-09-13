@@ -1,0 +1,65 @@
+#main-bar-header
+	width 100%
+	height 40px
+	background #333
+	margin 0px auto
+	border-top 1px solid #999
+
+	#genres-select
+		display inline-block
+		height 25px
+		margin-right 20px
+		margin-left 25%
+	#album-select
+	#artist-select
+	#track-select
+		margin 10px auto 10px	
+		display inline-block
+		height 20px
+		text-align center
+		border-right 1px solid grey
+		background linear-gradient(to bottom, rgba(245,245,245,1) 0%,rgba(224,224,224,1) 100%)
+		width 80px
+		&:last-child
+			border none
+		&:hover
+			background #f6f6f6
+
+.album-bar-wrapper
+	margin auto
+.album-bar 
+	width 150px
+	height 200px
+	background url('../images/default/cover.png') no-repeat;
+	background-size 150px
+	float left
+	margin 10px
+	position relative
+	overflow hidden
+	img.albumCover
+		width 150px
+
+	.artistAlbum
+		width 100%
+		height 15%
+		background white
+		opacity 1
+		text-align center
+
+	.totalTracksAlbum
+		width 100%
+		height 15px		
+		background white
+		opacity 1
+		text-align center
+		
+	.nameAlbum
+		position absolute
+		bottom 0
+		width 100%
+		height 15px
+		background white
+		opacity 1
+		text-align center
+		overflow hidden
+		text-overflow hidden

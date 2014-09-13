@@ -1,0 +1,165 @@
+#searchresults
+	position absolute
+	width 300px
+	height auto
+	max-height 500px
+	margin-top -7px
+	overflow hidden
+	overflow-y auto
+	display none
+	cursor pointer
+	z-index 30
+	background-color #fff
+	box-shadow 0 1px 1px rgba(0, 0, 0, 0.4)
+	border-radius 0 0 3px 3px
+
+	.searchresults-region_album
+	.searchresults-region_artist
+	.searchresults-region_song
+		width 290px
+		height auto
+		border-style hidden
+		border-radius 2px
+		margin 5px
+		box-shadow 0px 0px 1px 0px rgba(50, 50, 50, 0.5)
+		position relative
+		cursor pointer
+
+		.result-item
+			width 290px
+			height 40px
+			background white
+			border-bottom 1px solid #c3c3c3
+			box-sizing border-box
+			cursor pointer
+
+			&:hover
+				background #d3d3d3
+
+			.result-cover
+				width 40px
+				height 40px
+				float left
+				border-right-style solid
+				border-right-width 1px
+				border-right-color #c0c0c0
+
+			.result-title
+				width 240px
+				height 40px
+				float left
+				font-size 15px
+				margin-left 5px
+	.show-more-results
+		height 20px
+		padding 0 10px
+
+.result-album-composite
+.result-artist-composite
+.result-song-composite
+	display block
+		
+.result-header
+	font-weight bold
+	color #4B90E7
+	display block
+	width 98%
+	padding-left 2%
+	background  linear-gradient(to bottom, rgba(240,240,240,.9) 0, rgba(250,250,250,.9) 100%)
+	padding-top 3px
+	padding-bottom 3px
+	position relative
+	border-top 1px solid lightgray
+.show-full-song-search
+.show-full-album-search
+.show-full-artist-search
+	font-weight normal
+	width 99%
+	padding-left 1%
+	color black
+	font-size 12px
+	display block
+
+.tile-album-wrapper
+.tile-artist-wrapper
+	display inline-block
+	width 100px
+	height 120px
+	&:last-child
+		clear none
+	img.result-tile-icon
+		width 90px
+		height 90px
+		padding 5px
+	.result-tile-name
+		display block
+		font-size 12px
+		height 13px
+		width 100%
+		text-overflow hidden
+		overflow hidden
+
+h3.results-header
+	text-align center !important
+	color #aaa
+	height 30px
+	background #333
+	border-right 1px solid white
+	padding-top 10px
+	border-top 1px solid #999
+
+
+.nothing-to-show
+	height 100%
+	width 100%
+	position absolute
+	background #e5e5e5
+	.no-results-message
+		text-align center
+		position absolute
+		bottom 10px
+		right 35px
+		color #757575
+		font-size 20px
+
+	.no-results-img
+		width 150px
+		position absolute
+		bottom 40px
+		right 40px
+p.album-composite-header
+	color darkgrey
+	font-size 20px
+	font-weight bold
+	text-align center
+	margin-bottom 15px
+	margin-top 15px
+img.album-composite-cover
+	width 30%
+	width 30%
+	float left
+	margin-left 5%
+.album-composite-release
+.album-duration 
+.album-singer 
+	width 62%
+	float left
+	padding-left 3%
+.total_tracks
+	clear both
+	margin-left 12%
+	
+img.no-item-to-show
+	width 150px
+	height 150px
+	opacity 0.3
+	margin auto
+	display block
+
+.item-not-found
+	color darkgrey
+	font-size 25px
+	position absolute
+	top 45%
+	left 20%
+	bottom 10px

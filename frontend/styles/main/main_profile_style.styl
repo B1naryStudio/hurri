@@ -1,0 +1,151 @@
+#main-container
+	#add-social-profile
+		width 100%
+		height 40px
+		padding 5px
+		box-sizing border-box
+		border-top 1px solid #999
+		background #333
+
+		.socialButton
+			width auto
+			height 100%
+			line-height 30px
+			float right
+			margin 0 5px
+			padding 0 2px
+			display block
+			font-size 12px
+			text-decoration none
+			color white
+			border hidden
+			border-radius 3px
+
+			&:hover
+				background #3ac
+
+			&.disabled
+				display none
+		#syncvk
+			background orange
+			padding 0 5px 0
+			cursor pointer
+			&:hover
+				background #3cc
+
+#user
+	width 100%
+	height auto
+	box-sizing border-box
+
+	#userinfo
+		width 100%
+		height 250px
+
+		#avatar
+			width 200px
+			height 200px
+			float left
+			padding 20px
+
+		#info
+			width auto
+			height auto
+			float left
+			padding 20px
+			box-sizing border-box
+
+			.name
+				width auto
+				height auto
+				padding-bottom 10px
+
+			.info-field
+				width auto
+				height auto
+				font-size 12px
+
+			#music-statistic
+				width auto
+				height 100px
+				margin-top 15px
+
+				.statistic-title
+					width auto
+					height auto
+					font-size 12px
+					float left
+					padding-right 10px
+
+				.statistic-field
+					width auto
+					height auto
+					font-size 12px
+					float left
+					padding-right 5px
+					cursor pointer
+
+				.statistic-bar
+					width 300px
+					height 30px
+					position absolute
+					margin-top 20px
+					border 1px gray solid
+					overflow hidden
+					
+					.statistic-bar-strip
+						height 30px
+						float left
+
+				.statistic-legend
+					width 300px
+					height 50px
+					position absolute
+					margin-top 60px
+					border 1px gray solid
+					border-radius 3px
+					overflow hidden
+					overflow-y auto
+
+					.legend-item
+						width auto
+						height 20px
+						float left
+
+						.item-box
+							width 10px
+							height 10px
+							margin 5px
+							float left
+							display none
+
+						.item-name
+							width auto
+							height 10px
+							padding 5px 0
+							font-size 12px
+							line-height 12px
+							float left
+							display none
+
+	.subtitle
+		width auto
+		height auto
+		padding 10px 20px
+		cursor pointer
+
+	#user-favorites
+		width auto
+		height auto
+		margin-bottom 10px
+
+	#user-listened
+		width auto
+		height auto
+		margin-bottom 10px
+
+	#user-playlists
+		width auto
+		height auto
+		margin-bottom 10px
+

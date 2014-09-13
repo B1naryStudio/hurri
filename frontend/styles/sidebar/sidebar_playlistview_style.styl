@@ -1,0 +1,111 @@
+#songlist-navi
+	width 100%
+	background Snow
+	opacity 1
+	top 0px
+	height 40px
+	border-top 1px solid #999
+
+	> div
+		color white
+		text-align center
+		line-height 40px
+		vertical-align middle
+		width 33.3%
+		height 40px
+		margin 0
+		float left
+		cursor pointer
+		background #333
+		border-left 1px solid #fff
+		box-sizing border-box
+		&:first-child
+			border-left none
+
+	&:hover
+		opacity 1
+	#unqueue
+		&:hover
+			background #3ac
+	#save-playlist-from-queue
+		&:hover
+			background #3ac
+		.can-save-playlist
+			opacity 1
+	#save-playlist-as
+		&:hover
+			background #3ac
+
+.toggled
+	display none
+#sidebar
+	position absolute
+	background #eee
+	width 25%
+	float left
+	right 0px
+	top 120px
+	bottom 30px
+	box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.5);
+	
+	#sidebar-region
+		width 100%
+		top 0px
+		position absolute
+		bottom 5px
+		display block
+		overflow auto
+		&::-webkit-scrollbar
+			display none
+
+	.input-wrapper-sidebar	
+		position absolute
+		display none
+		.edit2 
+			position absolute
+			display block
+			width 100%
+			height 36px
+			font-size 20px
+			margin-top 0px
+			left 0%
+			border 2px solid lightblue
+			padding-left 55px
+			z-index 20
+		.enter-button-add
+			position absolute
+			top 2px
+			width 50px
+			height 36px
+			background #3399CC
+			z-index 21
+			border-radius 2px
+			&:hover
+				background orange
+		.close-enter-add
+			width 16px
+			height 16px
+			background url(../images/notifications/delete.png)
+			background-size 16px
+			position absolute
+			z-index 21
+			right 3px
+			top 3px
+			opacity 0.5
+			&:hover
+				opacity 1
+			
+	.editing2 .input-wrapper-sidebar	
+		display block
+		width 100%
+
+#undo-replace
+	width 100px
+	height 40px
+	padding 5px
+	color lightblue
+	position absolute
+	z-index 20
+	right 10px
+	bottom 35px
+

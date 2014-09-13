@@ -1,0 +1,118 @@
+.playlist-bar-wrapper
+	width 512px
+	margin-top 35px
+	padding 20px
+	float left
+
+
+.playlist-bar
+	width 512px
+	height 250px
+	position relative
+	float left
+	&:hover
+		.playlist-right
+			position relative
+			height auto
+			z-index 10
+			box-shadow 0 1px 2px #9ACDDD
+	.playlist-date
+		font-size 15px
+		width 35px
+		height 15px
+		text-overflow hidden
+		overflow hidden
+		color #eee
+		margin auto
+
+	.playlist-left
+		width 250px
+		float left
+		height 246px
+		padding 1px
+		margin-right 10px
+		text-align center
+		position relative
+		background url(/../images/main/logo-playlist.jpg) no-repeat
+		background-size 100%
+		.play-without-open
+			display none
+			width 30px
+			height 20px
+			background linear-gradient(to top, #eee 0%, #ddd 100%)
+			border-radius 2px
+			border 1px solid lightgray
+
+		.playlist-name
+			font-size 28px
+			margin-top 5px
+			height 30px
+			text-overflow hidden
+			overflow hidden
+			color white
+			margin-bottom 10px
+		.playlist-total
+			font-size 15px
+			position absolute
+			bottom 10px
+			left 20px
+			color white
+
+		.playlist-private
+			position absolute
+			width 32px
+			height 32px
+			right 5px
+			bottom 32px
+			background: url('/images/lock.png') no-repeat
+			background-size 32px
+			opacity 0.5
+			z-index 5
+			&.private
+				opacity 1
+		.playlist-play
+			width 150px
+			height 150px
+			position absolute
+			left 55px
+			top 42px
+			&:hover
+				cursor pointer
+				background #333
+				opacity 0.4
+				&:after
+					content ''
+					position absolute
+					left 50%
+					top 50%
+					margin-top -18px
+					margin-left -15px
+					width 30px
+					height 36px
+					background: url('/images/player/player.png') no-repeat -575px 0
+
+
+	.playlist-right
+		padding 5px
+		margin-top 3px
+		float left
+		width 250px
+		background #EBFAFA
+		height 242px
+		min-height 240px
+		text-align center
+		overflow hidden
+		box-sizing border-box
+		.songs-list
+			text-align left
+			list-style-type decimal-leading-zero
+			list-style-position inside
+			height 240px
+			overflow hidden
+		.songname-playlist
+			text-overflow ellipsis
+			overflow hidden
+			font-size 13px
+			height 15px
+			width 90%
+			white-space nowrap

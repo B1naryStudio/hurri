@@ -1,0 +1,115 @@
+#main
+	&.toggled-main
+		width 85%
+#main-container
+	background white
+	float left
+	width 60%
+	overflow hidden
+	overflow-y auto
+	position absolute
+	top 120px
+	bottom 30px
+	margin-left 15%
+	&.toggled-main
+		width 85%
+.main-song-item
+	width 90%
+	height 40px
+	margin auto
+	margin-bottom 2px
+	position relative
+	background #fff
+	border-radius 5px
+	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
+	&.activesong
+		background lightblue
+	.main-share-song
+		width 16px
+		height 16px
+		background url(../images/main/share.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 2px
+		top 2px
+		opacity 0
+	.main-song-cover img
+		width 30px
+		height 30px
+		padding 5px
+		float left
+		&:hover 
+			background SkyBlue
+
+	.main-song-info
+		float left
+		height 30px
+		overflow hidden
+		display inline
+		width 80%
+
+		.main-song-name
+			padding-top 10px
+			height 20px
+			text-overflow ellipsis
+		.main-song-album
+			display block
+			height 20px
+			font-size 12px
+	
+	.main-queue-add
+		width 16px
+		height 16px
+		background url(../images/main/nothing.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 20px
+		top 2px
+		opacity 0
+		&:hover
+			opacity 1 !important
+	.main-like-song
+		width 16px
+		height 16px
+		background url(../images/main/like.png)
+		background-size 16px
+		position absolute
+		z-index 15
+		right 38px
+		top 2px
+		opacity 0
+		&:hover
+			opacity 1 !important
+		&.true
+			opacity 1 !important
+		
+	&:hover
+		background #eee
+		.main-share-song
+		.main-like-song
+			opacity 0.5
+		.main-queue-add
+			opacity 0.5
+
+			
+	.queueposmain
+		position absolute	
+		right 60px
+		
+.global-zeroclipboard-container:hover
+	background url(../images/main/share.png)
+	background-size 16px
+	opacity 0.8
+
+#frequency-visualisation-container
+	padding-bottom: 80px
+	padding-left: 8px
+	overflow: hidden
+
+#frequency-visualisation-canvas
+	width: 100%
+	@css{
+  -webkit-box-reflect: below 5px -webkit-linear-gradient(top, transparent, transparent 50%, rgba(255,255,255,0.2))
+	}
