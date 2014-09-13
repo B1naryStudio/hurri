@@ -6,6 +6,7 @@ define(['marionette', './ArtistTileView'],
 		events: {
 			'click .show-full-artist-search':'showMore'
 		},
+		childViewContainer: '.childMainContainer',
 		childView: ResultTileView,
 		showMore: function(){
 			Backbone.trigger('artist:search-more');

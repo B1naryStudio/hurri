@@ -7,6 +7,7 @@ define(['marionette', '../../../shared/songlistmain/MainSongView'],
 			'click .show-full-song-search':'showMore'
 		},
 		childView: MainSongView,
+		childViewContainer: '.childMainContainer',
 		showMore: function(){
 			Backbone.trigger('song:search-more');
 		}

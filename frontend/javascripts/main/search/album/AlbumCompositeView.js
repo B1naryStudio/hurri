@@ -7,6 +7,7 @@ define(['marionette', './AlbumTileView', '../../../app/routes'],
 			'click .show-full-album-search':'showMore',
 
 		},
+		childViewContainer: '.childMainContainer',
 		childView: ResultTileView,
 		showMore: function(){
 			Backbone.trigger('album:search-more');
