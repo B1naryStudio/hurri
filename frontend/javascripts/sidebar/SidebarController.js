@@ -207,7 +207,8 @@ define(['marionette',
 			Backbone.trigger('main:play-first');
 		},this);
 
-		Backbone.on('song-view:play-song', function(model, i){
+		Backbone.on('song-view:play-song', function(model, i, id){
+			this.song.model.attributes._id = id;
 			if (context.currentSongCollection.length !== 0){
 				context.previousCollection.reset(context.currentSongCollection.models);
 			}

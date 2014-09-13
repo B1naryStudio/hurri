@@ -6,6 +6,13 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 			'click #artist-select' : 'artistShow',
 			'click #track-select' : 'trackShow'
 		},
+		childEvents: {
+			'song-view:play-collection' : function(info, models, position){
+				console.log('THIS', this.model);
+				Backbone.trigger('song-view:play-song', models, position, this.model.attributes._id);
+			}
+			
+		},
 		albumShow : function(){
 			router.navigate('/explorer/albums', true);
 		},

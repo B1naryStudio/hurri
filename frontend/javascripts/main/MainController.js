@@ -334,7 +334,7 @@ define(['marionette',
 			})
 		};
 		this.mainsonglist.collection.fetch({
-			cache: true, 
+		//	cache: true, 
 			success: function () {
 		  		Backbone.trigger('check-play', model);
 	   		}

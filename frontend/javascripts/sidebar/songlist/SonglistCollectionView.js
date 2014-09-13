@@ -75,7 +75,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 			}
 		},
 		saveExisting:function(){
-				Backbone.trigger('songlist:save-to-existing-playlist', this.model.attributes._id, this.collection);
+				Backbone.trigger('songlist:save-to-existing-playlist', this.model._id, this.collection);
 		},
 		createPlaylist: function(evt){
 			if (evt.keyCode == 13) this.savePlaylist();
