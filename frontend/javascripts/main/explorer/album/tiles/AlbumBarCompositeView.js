@@ -18,8 +18,12 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 		},
 
 		getTemplate: function(){
-			if (this.template === 'full'){
+			if (this.template === 'album'){
 				return '#album-full-search';
+			} else if (this.template === 'artist'){
+				return '#artist-full-search';
+			} if (this.template === 'song') {
+				return '#song-full-search';
 			} else {
 				return '#album-bar-composite';
 			}

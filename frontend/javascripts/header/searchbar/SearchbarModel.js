@@ -20,6 +20,14 @@ function(Backbone, SearchResultsCollection, router){
 			Backbone.on('album:search-more', function(){
 				router.navigate('/search/full/albums/' + self.attributes.previousInputs[self.attributes.previousInputs.length-1], true);
 			});
+
+			Backbone.on('artist:search-more', function(){
+				router.navigate('/search/full/artists/' + self.attributes.previousInputs[self.attributes.previousInputs.length-1], true);
+			});
+
+			Backbone.on('song:search-more', function(){
+				router.navigate('/search/full/tracks/' + self.attributes.previousInputs[self.attributes.previousInputs.length-1], true);
+			});
 		},
 
 		getSearchResult: function(input, callback){
