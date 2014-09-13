@@ -26,6 +26,8 @@ define(['backbone'], function(Backbone){
 			this.set({'minutes': Math.floor(duration / 60) - hours * 60 });
 			var minutes = this.get('minutes');
 			this.set({'seconds': duration - minutes * 60 - hours * 60 });
+			var cover = this.get('cover');
+			this.set({'cover': cover + '?size=big'});
 
 		}
 	});
