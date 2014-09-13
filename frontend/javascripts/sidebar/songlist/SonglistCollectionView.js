@@ -10,6 +10,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 				containment:'parent' 
 			}
 		},
+		childViewContainer: '#sidebar-songlist-container', 
 		childEvents: {
 			'change-current': function(view, options){
 			   Backbone.trigger('scroll-to-top', options);
