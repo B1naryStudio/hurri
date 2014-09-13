@@ -1,5 +1,5 @@
-define(['backbone', './searchresults/SearchResultsCollection'],
-function(Backbone, SearchResultsCollection){
+define(['backbone', './searchresults/SearchResultsCollection', '../../app/routes'],
+function(Backbone, SearchResultsCollection, router){
 
 	var SearchbarModel = Backbone.Model.extend({
 		
@@ -9,8 +9,19 @@ function(Backbone, SearchResultsCollection){
 			searchResult: []
 		},
 
+		initialize: function(){
+			this.bindListeners();
+		},
+
 		searchResultsCollection: new SearchResultsCollection(),
 		
+		bindListeners: function(){
+			var self = this;
+			Backbone.on('album:search-more', function(){
+				router.navigate('/search/full/albums/' + self.attributes.previousInputs[self.attributes.previousInputs.length-1], true);
+			});
+		},
+
 		getSearchResult: function(input, callback){
 			var self = this;
 				$.getJSON('/search',{query: input, limit: 3, quick : '^'}, function(data){

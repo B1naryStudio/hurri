@@ -1,6 +1,9 @@
 define(['marionette', './AlbumBarView','../../../../app/routes'], function(Marionette, AlbumBarView, router){
 	var AlbumBarCompositeView = Marionette.CompositeView.extend({
-		template: '#album-bar-composite',
+		initialize : function(options, other){
+			this.template = other;
+		},
+		template: this.getTemplate,
 		events : {
 			'click #album-select' : 'albumShow',
 			'click #artist-select' : 'artistShow',
@@ -12,6 +15,14 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 				Backbone.trigger('song-view:play-song', models, position, this.model.attributes._id);
 			}
 			
+		},
+
+		getTemplate: function(){
+			if (this.template === 'full'){
+				return '#album-full-search';
+			} else {
+				return '#album-bar-composite';
+			}
 		},
 		albumShow : function(){
 			router.navigate('/explorer/albums', true);

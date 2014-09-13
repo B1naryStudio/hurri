@@ -201,12 +201,36 @@ define(['marionette',
 		this.album.view = this.getAlbumView();
 	};
 
+
+
 	MainController.prototype.getAlbumView = function() {
 		return new AlbumBarView({
 			model : this.album.model,
 			collection : this.album.collection,
 			childView: AlbumBarChildView
 		});
+	};
+
+	MainController.prototype.initializeFullAlbumResults = function(name){
+		this.albumfull = {
+			collection: new AlbumBarCollection([], {
+				playlistId : '/api/search/full/albums/' + name,
+			}),
+			model: new AlbumBarModel()	
+		};
+		this.albumfull.collection.fetch({
+			success : function(data){
+				Backbone.trigger('results:full-albums');
+			}
+		});
+	};
+
+	MainController.prototype.getFullAlbumView = function() {
+		return new AlbumBarView({
+			model : this.albumfull.model,
+			collection : this.albumfull.collection,
+			childView: AlbumBarChildView
+		}, 'full');
 	};
 
 	MainController.prototype.initializeArtists = function(){
@@ -562,6 +586,14 @@ define(['marionette',
 
 		Backbone.on('show-artists', function(){
 			this.initializeArtists();
+		},this);
+
+		Backbone.on('album-result-composite:show-more', function(name){
+			this.initializeFullAlbumResults(name);
+		},this);
+
+		Backbone.on('results:full-albums', function(){
+			this.mainRegion.show(this.getFullAlbumView());
 		},this);
 
 		Backbone.on('show-artist-tiles', function(){

@@ -17,6 +17,9 @@ var HurriRoutes = Marionette.AppRouter.extend({
 		'artist/id/:id/albums' : 'showArtistAlbums',
 		'explorer/artists' : 'showExplorerArtists',
 		'explorer/tracks' : 'showExplorerTracks',
+		'search/full/albums/:name' : 'showFullAlbumList',
+		'search/full/artists' : 'showFullArtistList',
+		'search/full/tracks' : 'showFullSongList',
 		'*404' : 'notFound',
 		'notFound' : 'notFound'
 
@@ -36,6 +39,24 @@ var HurriRoutes = Marionette.AppRouter.extend({
 		console.log('Album Tracks');
 		Backbone.trigger('show-album-tracks', id);
 		window.localStorage.setItem("currentTab", "album/id/" + id);
+	};
+
+	RouteController.prototype.showFullAlbumList =  function(name){
+		console.log('Album Tracks');
+		Backbone.trigger('album-result-composite:show-more', name);
+		window.localStorage.setItem("currentTab", "search/full/albums/" + name);
+	};
+
+	RouteController.prototype.showFullArtistList =  function(){
+		console.log('Album Tracks');
+		Backbone.trigger('artist-result-composite:show-more');
+		window.localStorage.setItem("currentTab", "search/full/tracks");
+	};
+
+	RouteController.prototype.showFullSongList =  function(){
+		console.log('Album Tracks');
+		Backbone.trigger('song-result-composite:show-more');
+		window.localStorage.setItem("currentTab", "search/full/songs");
 	};
 
 	RouteController.prototype.showExplorerTracks =  function(id){
