@@ -2,6 +2,7 @@ var connection = require('../db/dbconnect.js');
 var Track = require('../schemas/track.js');
 var Repository = require('./generalRepository.js');
 var mongoose = require('mongoose');
+var VK = require('../social_network_wrapper/VKWrapper');
 
 function TrackRepository(){
 	Repository.prototype.constructor.call(this);
@@ -38,10 +39,35 @@ TrackRepository.prototype.getTitle = function(id, callback) {
 	query.exec(callback);
 };
 
-TrackRepository.prototype.getLirycs = function(id, callback) {
+TrackRepository.prototype.getLyrics = function(id, name, callback) {
 	var model = this.model;
 	var query = model.findOne({_id: id},'lyrics');
-	query.exec(callback);
+	query.exec(function(err, data){
+		if (data.lyrics === 'No lyrics for this song. Sorry.'){
+			var options = {
+				query: encodeURIComponent(name),
+				sort: 2,
+				onlyArtist: 0,
+				auto_complete: 1,
+				count: 5
+			};
+
+			VK.getAudioSearch(options, function(results){
+				if (results !== 404 && results.lyrics_id !== undefined){
+					VK.getLyricsById(results.lyrics_id, function(lyrics){
+						model.findOneAndUpdate({_id:id}, {lyrics: lyrics.response.text}, function(){
+							callback(err, lyrics.response.text);
+						});
+						
+					});
+				} else {
+					callback(err, 'Sorry, we didn\'t find any lyrics...');
+				}
+			});
+		} else {
+			callback(err, data.lyrics);
+		}
+	});
 };
 
 TrackRepository.prototype.getUrl = function(id, callback) {

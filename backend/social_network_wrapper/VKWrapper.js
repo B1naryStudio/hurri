@@ -67,6 +67,7 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 	});
 	
 	this.vk.once('done:audio.search', function(result) {
+		console.log(result);
 		if (result.response[1]){
 			var object = {
 				url: result.response[1].url,
@@ -74,6 +75,8 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 				lyrics_id: result.response[1].lyrics_id
 			};
 			callback(object);
+		} else {
+			callback(404);
 		}
 	});
 

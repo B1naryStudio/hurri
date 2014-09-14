@@ -11,22 +11,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.get('/vk/track/:query', function(req, res, next){
-
-		var options = {
-			query: encodeURIComponent(req.params.query),
-			sort: 2,
-			onlyArtist: 0,
-			auto_complete: 1,
-			count: 5
-		};
-
-		VK.getAudioSearch(options, function(results){
-			VK.getLyricsById(results.lyrics_id, function(lyrics){
-				res.send(lyrics);
-			});
+	app.get('/api/track/:id/lyrics/:name', function(req, res, next){
+		trackRepository.getLyrics(req.params.id, req.params.name, function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
 		});
-	});
+		
+	}, apiResponse);
 
 	app.get('/api/track/:name', function(req, res, next){
 		trackRepository.getByTitle(req.params.name, function(err, data){

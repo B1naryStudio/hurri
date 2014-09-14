@@ -55,17 +55,17 @@ LikeRepository.prototype.songLikeState = function(sid, uid, callback) {
 			}
 		}
 		object.likedId = data.userId;
-		console.log('uid=', uid);
+		//console.log('uid=', uid);
 		userRepository.getFollowersFromList(uid, data.userId, function(err, data){
-			console.log('data list=', data);
+			//console.log('data list=', data);
 			for (var i = 0; i < data.length; i++){
 				object.likedId[i] = data[i].following; 
 			}
-			console.log(' err list=', err);
+			//console.log(' err list=', err);
 		});
 /*		var queryTwo = this.userModel.find({followers: {$in: data.userId}});
 		queryTwo.exec (function(err, data){
-			console.log('queryTwo=', data);
+			//console.log('queryTwo=', data);
 		});*/
 		callback(err, object);		
 	});

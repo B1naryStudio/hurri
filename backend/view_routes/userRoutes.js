@@ -37,7 +37,7 @@ module.exports = function(app){
 
 	app.get('/user/:id/playlists', isLoggedIn, function(req, res, next) {
 		userRepository.getPlaylists(req.params.id, function(err, data){
-			console.log(data.playlists[0]);
+			//console.log(data.playlists[0]);
 			injectData(req, res, {playlists : data.playlists}, false);
 		});
 	});
