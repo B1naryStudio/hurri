@@ -3,7 +3,7 @@ define(['backbone'], function(Backbone){
 		defaults:{
 			_id: undefined,
 			id: undefined,
-			title : 'Title',
+			title : 'Song isn\'t playing',
 			duration : undefined,
 			position : 0,
 			release_date : new Date(1),

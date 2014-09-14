@@ -6,7 +6,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 	events : {
 		'click .main-queue-add' : 'addToQueue',
 		'click .main-like-song' : 'likeSong',
-		'click .main-song-cover img': 'playSong'
+		'click .main-song-cover': 'playSong'
 	},
 
 	modelEvents : {
@@ -37,7 +37,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 			if (this.model.collection.models[i] == this.model)
 				position = i;
 		}
-		Backbone.trigger('song-view:play-song', this.model.collection.models, position);
+		this.trigger('song-view:play-collection', this.model.collection.models, position);
 	},
 
 	addToQueue: function(){
