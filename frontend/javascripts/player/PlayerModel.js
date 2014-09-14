@@ -107,7 +107,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					context.currentSongModel.set({url: data.url, duration: data.duration});
 					audioHandler.initialize(data.url);
 				});
-	 		}); 
+			});
 		},
 
 		newTrack: function(param){
@@ -271,7 +271,6 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		volumeLevelSetup : function(input){
 			this.set({volumeLevel: input});
 			audioHandler.volumeLevelSetup(input);
-
 		},
 
 		playbackPosition : function(input){
