@@ -99,11 +99,13 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				self.stopTimer();
 				window.localStorage.removeItem("currentPlay");
 			});
-	 		audioHandler.on('urlError', function(){
+	 		Backbone.on('urlError', function(){
 	 			$.getJSON('/getStream',{query: self.get('currentTrackName') + ' ' + self.get('currentArtistName')}, function(data){
+					console.log('new url=', data.url);
+					console.log('params =', self.get('currentTrackName') + ' ' + self.get('currentArtistName'));
 					context.currentSongModel.set({url: data.url, duration: data.duration});
+
 				});
-				self.trigger('playing');
 	 		}); 
 		},
 

@@ -7,6 +7,6 @@ module.exports = function(req, res, next){
 		res.status(400).end();
 	}
 	var status = _.isEmpty(res.data) ? failureStatus : successStatus;
-	console.log(res.data);
+	//console.log(res.data);
 	res.status(status).json(res.data);
 };

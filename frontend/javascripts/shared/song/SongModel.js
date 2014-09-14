@@ -17,6 +17,7 @@ define(['backbone'], function(Backbone){
 			comments : [''],
 			queuepos : '',
 			liked: false,
+			likedId: [],
 			current : false,
 			modelType : 'song'
 		},
