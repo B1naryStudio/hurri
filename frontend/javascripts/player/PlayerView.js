@@ -46,12 +46,12 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			player : '#player',
 			songPosition: '#song-position'
   		},
-  		onRender: function () {
+		onRender: function () {
 			var mode = this.model.get('liked');
 			mode = 'player-button' + ' ' + mode;
 			this.ui.likeButton.removeClass();
 			this.ui.likeButton.addClass(mode);  			
-  		},
+		},
 		likeState : function(){
 			var mode = this.model.likeState();
 			mode = 'player-button' + ' ' + mode;

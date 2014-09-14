@@ -151,21 +151,28 @@ define(['marionette',
 	};
 
 	MainController.prototype.getUserView = function(id){
-		if (id === this.user.model.attributes._id){
+		if(id === this.user.model.attributes._id) {
 			return new UserView({
-				model: this.user.model
+				model: this.user.model,
+				type: 'me'
 			});
-		} else{
+		} else {
 			var follower = _.findWhere(window._injectedData.followers, {_id:id});
 			var following = _.findWhere(window._injectedData.following, {_id:id});
 			var model;
-			if (follower)
+			if(follower) {
 				model = new Backbone.Model(follower);
-			else 
-				model = new Backbone.Model(following); 
-			return new UserView({
-				model: model
-			});
+				return new UserView({
+					model: model,
+					type: 'follower'
+				});
+			} else {
+				model = new Backbone.Model(following);
+				return new UserView({
+					model: model,
+					type: 'following'
+				});
+			}
 		}
 	};
 
@@ -201,12 +208,58 @@ define(['marionette',
 		this.album.view = this.getAlbumView();
 	};
 
+
+
 	MainController.prototype.getAlbumView = function() {
 		return new AlbumBarView({
 			model : this.album.model,
 			collection : this.album.collection,
 			childView: AlbumBarChildView
 		});
+	};
+
+	MainController.prototype.initializeFullAlbumResults = function(name){
+		this.albumfull = {
+			collection: new AlbumBarCollection([], {
+				playlistId : '/api/search/full/albums/' + name,
+			}),
+			model: new AlbumBarModel()	
+		};
+		this.albumfull.collection.fetch({
+			success : function(data){
+				Backbone.trigger('results:full-albums');
+			}
+		});
+	};
+
+	MainController.prototype.getFullAlbumView = function() {
+		return new AlbumBarView({
+			model : this.albumfull.model,
+			collection : this.albumfull.collection,
+			childView: AlbumBarChildView
+		}, 'album');
+	};
+
+	MainController.prototype.initializeFullArtistResults = function(name){
+		this.artistfull = {
+			collection: new ArtistCollection([], {
+				playlistId : '/api/search/full/artists/' + name,
+			}),
+			model: new Backbone.Model()	
+		};
+		this.artistfull.collection.fetch({
+			success : function(data){
+				Backbone.trigger('results:full-artists');
+			}
+		});
+	};
+
+	MainController.prototype.getFullArtistView = function() {
+		return new AlbumBarView({
+			model : this.artistfull.model,
+			collection : this.artistfull.collection,
+			childView: ArtistView
+		}, 'artist');
 	};
 
 	MainController.prototype.initializeArtists = function(){
@@ -230,6 +283,28 @@ define(['marionette',
 			collection : this.artist.collection,
 			childView: ArtistView
 		});
+	};
+
+	MainController.prototype.initializeFullSongResults = function(name){
+		this.songfull = {
+			collection: new MainSonglistCollection([], {
+				playlistId : '/api/search/full/tracks/' + name,
+			}),
+			model: new Backbone.Model()	
+		};
+		this.songfull.collection.fetch({
+			success : function(data){
+				Backbone.trigger('results:full-songs');
+			}
+		});
+	};
+
+	MainController.prototype.getFullSongView = function() {
+		return new AlbumBarView({
+			model : this.songfull.model,
+			collection : this.songfull.collection,
+			childView: MainSongView
+		}, 'song');
 	};
 
 	MainController.prototype.initializeTracks = function(){
@@ -334,7 +409,7 @@ define(['marionette',
 			})
 		};
 		this.mainsonglist.collection.fetch({
-			cache: true, 
+		//	cache: true, 
 			success: function () {
 		  		Backbone.trigger('check-play', model);
 	   		}
@@ -564,6 +639,30 @@ define(['marionette',
 			this.initializeArtists();
 		},this);
 
+		Backbone.on('album-result-composite:show-more', function(name){
+			this.initializeFullAlbumResults(name);
+		},this);
+
+		Backbone.on('artist-result-composite:show-more', function(name){
+			this.initializeFullArtistResults(name);
+		},this);
+
+		Backbone.on('song-result-composite:show-more', function(name){
+			this.initializeFullSongResults(name);
+		},this);
+
+		Backbone.on('results:full-albums', function(){
+			this.mainRegion.show(this.getFullAlbumView());
+		},this);
+
+		Backbone.on('results:full-artists', function(){
+			this.mainRegion.show(this.getFullArtistView());
+		},this);
+
+		Backbone.on('results:full-songs', function(){
+			this.mainRegion.show(this.getFullSongView());
+		},this);
+
 		Backbone.on('show-artist-tiles', function(){
 			this.mainRegion.show(this.getArtistView());
 		},this);
@@ -639,7 +738,7 @@ define(['marionette',
 		},this);
 
 		Backbone.on('playlist-open-and-play', function(model){
-			Backbone.trigger('main-view:play-songs', model.attributes._id, this.mainsonglist.collection);
+			Backbone.trigger('main-view:play-songs', model.attributes._id, this.mainsonglist.collection, 'set');
 		},this);
 
 		

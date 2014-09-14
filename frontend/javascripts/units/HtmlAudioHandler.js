@@ -6,7 +6,6 @@ define(['underscore', 'backbone'], function(_, Backbone){
 			this.canPlay = false;
 			this.track = new Audio(url);
 			this.track.load();
-
 			this.bindListeners();
 		},
 		playTrack: function(){ 

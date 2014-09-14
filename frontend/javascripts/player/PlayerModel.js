@@ -6,7 +6,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			nextButtonState: false, //disabled - true
 			previousButtonState: true, //disabled - true
 			currentTrack: 0,
-			currentTrackName: 'Track',
+			currentTrackName: 'No track playing now',
 			currentArtistName: 'Artist',
 			volumeLevel: 50,
 			mute: 'unmute',
@@ -99,11 +99,13 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				self.stopTimer();
 				window.localStorage.removeItem("currentPlay");
 			});
-	 		audioHandler.on('urlError', function(){
+	 		Backbone.on('urlError', function(){
 	 			$.getJSON('/getStream',{query: self.get('currentTrackName') + ' ' + self.get('currentArtistName')}, function(data){
+					console.log('new url=', data.url);
+					console.log('params =', self.get('currentTrackName') + ' ' + self.get('currentArtistName'));
 					context.currentSongModel.set({url: data.url, duration: data.duration});
+
 				});
-				self.trigger('playing');
 	 		}); 
 		},
 
@@ -275,7 +277,10 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		setDurationFormat: function(){
-			this.set({durationFormat:this.getTimeFormat(this.get('duration'))});
+			var duration = this.get('duration');
+			if (!duration)
+				duration = 0;
+			this.set({durationFormat:this.getTimeFormat(duration)});
 		},
 
 		getTimeFormat: function(time){

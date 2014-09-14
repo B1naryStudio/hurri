@@ -4,11 +4,12 @@ define(['marionette', './ArtistTileView'],
 		el: '#result-artist-composite',
 		template: '#result-artistlist-template',
 		events: {
-			'click #playlist-avatar-header':'showMore'
+			'click .show-full-artist-search':'showMore'
 		},
+		childViewContainer: '.childMainContainer',
 		childView: ResultTileView,
 		showMore: function(){
-			Backbone.trigger('artist-result-composite:show-more');
+			Backbone.trigger('artist:search-more');
 		}
 	});
 	return ArtistCompositeView;

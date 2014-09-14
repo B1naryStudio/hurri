@@ -1,13 +1,16 @@
 var connection = require('../db/dbconnect.js');
 var Userinfo = require('../schemas/user_info.js');
 var Userauth = require('../schemas/user_auth.js');
+var Like = require('../schemas/like.js');
 var Repository = require('./generalRepository.js');
+var likeRepository = require ('./likeRepository.js');
 var PlayList = require('../schemas/playlist.js');
 var trackRepository = require('./trackRepository.js');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var Track = require('../schemas/track.js');
 var VK = require('../social_network_wrapper/VKWrapper');
+var async = require('async');
 var genres = {
 	1: "Rock",
 	2: "Pop",
@@ -31,11 +34,13 @@ var genres = {
 	21: "Alternative",
 	22: "Electro"
 };
+var ObjectId = require('mongoose').Types.ObjectId;
 
 function UserRepository(){
 	Repository.prototype.constructor.call(this);
 	this.model = Userauth;
-	this.infoModel  = Userinfo;
+	this.infoModel = Userinfo;
+	this.likeModel = Like;
 }
 
 UserRepository.prototype = new Repository();
@@ -78,12 +83,7 @@ UserRepository.prototype.getFollowing = function(id, callback) {
 	query.exec(callback);
 };
 
-UserRepository.prototype.getFollowersFromList = function(id, list, callback) {
-	var model = this.createModel();
-	console.log('list=', list);
-	var query = model.findOne({_id: id}, 'following').populate('following').find({'following._id': {$in: list}});
-	query.exec(callback);
-};
+
 
 UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
 	var model = this.createModel();
@@ -118,7 +118,81 @@ UserRepository.prototype.deleteAllAlerts = function(id, callback) {
 	model.update({_id: id},{ $set: { alerts: [] }}).exec(callback);
 };
 
+
+UserRepository.prototype.getFollowersFromList = function(id, list, callback) {
+	var model = this.createModel();
+	//console.log('list=', list);
+	var query = model.findOne({_id: id}, 'following').populate('following').find({'following._id': {$in: list}});
+	query.exec(callback);
+};
 //========USER-INFO==========================================//
+UserRepository.prototype.songLikeState = function(uid, song, callback) {
+	song = song.toObject();
+	var self = this;
+	var sid = song._id;
+	var model = this.likeModel;
+	//console.log('sid', sid);
+	//console.log('uid', uid);
+	var query =  model.findOne({likeSong: sid});
+	query.exec(function(err, data){
+		//console.log('err=', err);
+		//console.log('data=', data);
+		if (!data || err){
+			callback(err, song);
+			return;
+		}
+		
+		for (var i = 0; i < data.userId.length; i++){
+		//	console.log('data userid', data.userId[i], uid, data.userId[i].equals(uid));
+			if (data.userId[i].equals(uid)){
+				song.liked = true;
+				break;
+			} else {
+				song.liked =  false;
+			}
+		}
+		self.getFollowersFromList(uid, data.userId, function(err, data){
+		//console.log('data=', data[0].following[0]);
+		//console.log('song=', song);
+			if (!data[0] || err){
+				callback(err, song);
+				return;
+			}
+		//	for (var i = 0; i < data.length; i++){
+				song.likedId = data[0].following;
+		//	}
+			//console.log(' err list=', err);
+			callback(err, song);
+		});		
+	});
+};
+
+UserRepository.prototype.getTracks = function(id, pid, callback) {
+	var self = this;
+	var model = this.infoModel;
+	var query = model.findOne({user_auth_id: id},'playlists', function(err, data){
+		//console.log(data);
+		var  res = _.filter(data.playlists, function(it){
+			//console.log(it.toString(), pid);
+			return it._id.toString() === pid;
+		});
+		var playlist = mongoose.model('Playlist', PlayList);
+		var list = new playlist(res[0]);
+		// console.log(data, pid);
+		 //console.log(list);
+		var tracks = list.populate('tracks', function(err, data){
+			//console.log('tracks=',tracks.tracks);
+			async.map(tracks.tracks, self.songLikeState.bind(self, id), function(err, results){
+				//console.log('getTracksResults=', results);
+				callback(err, results);
+			});
+		//	callback(err, results);
+		 });
+		
+	});
+};
+
+
 UserRepository.prototype.addUserInfo = function(user, callback){
 	var model = this.infoModel;
 	var newitem = new model(user);
@@ -389,25 +463,6 @@ UserRepository.prototype.getPlaylists = function(id, callback) {
 	//console.log(id);
 	var query = model.findOne({user_auth_id: id},'playlists', { lean: true }).populate('playlists.tracks');
 	query.exec(callback);
-};
-
-UserRepository.prototype.getTracks = function(id, pid, callback) {
-	var model = this.infoModel;
-	var query = model.findOne({user_auth_id: id},'playlists', function(err, data){
-		//console.log(data);
-		var  res = _.filter(data.playlists, function(it){
-			//console.log(it.toString(), pid);
-			return it._id.toString() === pid;
-		});
-		var playlist = mongoose.model('Playlist', PlayList);
-		var list = new playlist(res[0]);
-		// console.log(data, pid);
-		 //console.log(list);
-		var tracks = list.populate('tracks', function(err, data){
-			callback(err, tracks.tracks);
-		 });
-		
-	});
 };
 
 UserRepository.prototype.getPlaylistsShare = function(id, pl_id, callback) {

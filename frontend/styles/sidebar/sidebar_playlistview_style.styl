@@ -54,9 +54,16 @@
 		position absolute
 		bottom 5px
 		display block
-		overflow auto
-		&::-webkit-scrollbar
-			display none
+		#sidebar-songlist-container
+			position absolute
+			top 40px
+			bottom 0px
+			overflow scroll
+			&::-webkit-scrollbar
+				display none
+			
+		#sidebar-songlist-container
+			width 100%
 
 	.input-wrapper-sidebar	
 		position absolute

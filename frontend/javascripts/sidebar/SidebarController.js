@@ -196,7 +196,7 @@ define(['marionette',
 			});
 		}, this);
 
-		Backbone.on('main-view:play-songs', function(model_id, collection){
+		Backbone.on('main-view:play-songs', function(model_id, collection, set){
 			this.song.model._id = model_id;
 			if (context.currentSongCollection.length !== 0){
 				context.previousCollection.reset(context.currentSongCollection.models);
@@ -204,10 +204,12 @@ define(['marionette',
 			var button = new UndoReplacement();
 			button.render();
 			context.currentSongCollection.reset(collection.models);
-			Backbone.trigger('main:play-first');
+			if (!set)
+				Backbone.trigger('main:play-first');
 		},this);
 
-		Backbone.on('song-view:play-song', function(model, i){
+		Backbone.on('song-view:play-song', function(model, i, id){
+			this.song.model.attributes._id = id;
 			if (context.currentSongCollection.length !== 0){
 				context.previousCollection.reset(context.currentSongCollection.models);
 			}

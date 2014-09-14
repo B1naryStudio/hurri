@@ -1,10 +1,14 @@
 script#main-song-bar(type='text/template')
 	.main-song-item
 		.main-song-cover
-			img(src='{{-albumCover}}')
 		.main-song-info
 			.main-song-name
 				{{-title}}  {{-singer.name}}
+		.main-song-friends
+			{{ for(var i=0; i<likedId.length; i++){ }}
+			a(href="/user/"+'{{-likedId[i]._id}}')
+				img(src='{{-likedId[i].avatarUrl}}')
+			{{ } }}
 		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
 		.main-queue-add
 		.main-like-song

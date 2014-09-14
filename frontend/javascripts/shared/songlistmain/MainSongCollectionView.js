@@ -7,6 +7,13 @@ define(['marionette', './MainSongView', 'clipboard'],
 			'click #playlist-avatar-header':'playSongs'
 		},
 		childView: MainSongView,
+		childEvents: {
+			'song-view:play-collection' : function(info, models, position){
+				console.log('THIS', this.model);
+				Backbone.trigger('song-view:play-song', models, position, this.model.attributes._id);
+			}
+			
+		},
 		playSongs: function(){
 			Backbone.trigger('main-view:play-songs', this.model.attributes._id, this.collection);
 		}
