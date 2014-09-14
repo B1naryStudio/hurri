@@ -19,7 +19,9 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 			song : '.main-song-item',
 			share : '.main-share-song'
 	},
-
+	onRender: function () {
+		this.changeLiked();			
+	},
 	listner: function(){
 		var self = this;
 		this.client.on('mousedown', function () {
