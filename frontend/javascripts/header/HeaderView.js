@@ -1,9 +1,10 @@
 define(['marionette', './userbar/UserbarView','./searchbar/SearchbarModel', 
 		'./searchbar/SearchbarView', './notification/NotificationIconModel',
-		'./notification/NotificationIconView', '../app/context'],
+		'./notification/NotificationIconView', './hotkeysbar/HotkeysbarView',
+		'../app/context'],
 
 function(Marionette, UserbarView, SearchbarModel, SearchbarView, 
-			NotificationIconModel, NotificationIconView,
+			NotificationIconModel, NotificationIconView, HotkeysbarView,
 			context){
 
 	HeaderView = Marionette.ItemView.extend({
@@ -22,13 +23,16 @@ function(Marionette, UserbarView, SearchbarModel, SearchbarView,
 			notificationIcon: new NotificationIconView({
 				model: new NotificationIconModel({unread: window._injectedData.user.alerts.length})
 			}),
+
+			hotkeysbar: new HotkeysbarView()
 		},
 
 		ui: {
 			hurriLogo 			: '#hurri-logo',
 			userbar	   			: '#userbar',
 			searchbar	  		: '#searchbar',
-			notificationIcon  	: '#notificationbar'
+			notificationIcon  	: '#notificationbar',
+			hotkeysbar 			: '#hotkeysbar'
 		},
 
 		events: {

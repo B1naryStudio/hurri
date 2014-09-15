@@ -23,6 +23,7 @@ searchbar_width = 300px
 	width auto
 	height bar_height
 	float right
+	margin-right 10px
 	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 	border-style hidden
 	border-radius 3px
@@ -128,3 +129,43 @@ searchbar_width = 300px
 
 		&:hover
 			background #529de1
+
+#hotkeysbar
+	width auto
+	height bar_height
+	float right
+	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
+	cursor pointer
+	border-style hidden
+	border-radius 3px
+	box-sizing border-box
+
+	&:hover
+		background #529de1
+
+	#hotkeys-icon
+		width 30px
+		height bar_height
+		cursor pointer
+		font-size 20px
+		font-weight 700
+		line-height bar_height
+		text-align center
+
+#hotkeys
+	position absolute
+	width auto
+	height auto
+	overflow hidden
+	display none
+	z-index 100
+	background-color #fff
+	box-shadow 0 1px 1px rgba(0, 0, 0, 0.4)
+	border-radius 3px
+
+	#hotkeys-info
+		width auto
+		height auto
+		cursor default
+		border hidden
+		border-radius 3px
