@@ -21,6 +21,11 @@ function(Marionette, SearchResultsView, SearchResultsItemView, router){
 			'click @ui.more' 			: 'showMore'
 		},
 
+		initialize: function() {
+			var self = this;
+			Backbone.on('hotkey:search-focus', $.proxy(self.focus, self));
+		},
+
 		onRender: function(){
 			this.searchResultsView = new SearchResultsView();
 			this.searchResultsView.collection = this.model.searchResultsCollection;
@@ -88,6 +93,10 @@ function(Marionette, SearchResultsView, SearchResultsItemView, router){
 			this.searchResultsView.el.style.top = this.el.offsetTop + 
 											this.el.clientHeight + 5 + 'px';
 			this.searchResultsView.el.style.left = this.el.offsetLeft + 'px';
+		},
+
+		focus: function() {
+			this.ui.searchInput[0].focus();
 		}
 
 	});
