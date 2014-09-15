@@ -92,7 +92,7 @@ define(['underscore', 'backbone'], function(_, Backbone){
 					case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
 						self.error = 4;
 						console.log('The audio not be loaded, either because the server or network failed or because the format is not supported.');
-						self.trigger('urlError');
+						Backbone.trigger('urlError');
 						break;
 					default:
 						console.log('An unknown error occurred.');
