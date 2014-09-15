@@ -5,9 +5,12 @@ script#playlist-bar(type='text/template')
 			{{-name}}
 		.playlist-cover
 		.playlist-total
-			span Total tracks: {{-tracks.length}} Genre: {{-genre}}
+			span Total tracks: {{-tracks.length}} Genre: {{-genre}} 
 		.playlist-play
-		.playlist-private
+		{{if (owner_id === window._injectedData.user._id){ }}
+		{{-owner_id}}
+		{{ } }}
+		.playlist-private 
 	.playlist-right
 		ol.songs-list
 			{{for (var i = 0; i < tracks.length; i ++){}}

@@ -11,6 +11,10 @@ var playlistSchema = new Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'Track' 
 	}],
+	owner_id: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	},
 	duration : { type: Number, min: 0 },
 	mood : {
 		type: String, 

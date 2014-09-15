@@ -119,7 +119,8 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 					duration : 0,
 					mood : 'I like it!',
 					type: 'playlist',
-					genre: genre
+					genre: genre,
+					owner_id: window._injectedData.user._id
 				};
 				console.log(this.collection);
 				for (var i = 0; i < this.collection.length; i ++){

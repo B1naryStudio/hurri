@@ -85,6 +85,7 @@ function getUser (profile, token, auth, done){
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
 								VK.getUserAudio(user.idVk, function(playlist){
+									console.log('get playlist=', playlist);
 									for (var i = 1; i < playlist.response.length; i ++){
 										var id = mongoose.Types.ObjectId();
 										setTrack(playlist.response[i], id);
@@ -99,6 +100,7 @@ function getUser (profile, token, auth, done){
 										}
 									} 
 									playlistObject.genre = genre;
+									playlistObject.owner_id = user._id;
 									userRepository.addPlaylists(user._id, playlistObject, function(err, res){
 									});
 								});
