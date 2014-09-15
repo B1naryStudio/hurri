@@ -49,3 +49,42 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 		}		
 	}
 });
+
+Behaviors.Draggable = Marionette.Behavior.extend({ 
+	initialize: function(){
+		this.bindListeners();
+	},
+
+	onRender:function(){
+		
+		this.$el.draggable({
+			axis: this.options.axis || false,
+			grid: this.options.grid || false,
+			containment: this.options.containment || false,
+			cursor: "move",
+			handle:this.options.handle || false,
+			revert: this.options.revert || true,
+			opacity: this.options.opacity,
+			zIndex: this.options.zIndex,
+			connectToSortable: this.options.connectToSortable,
+			drag: function( event, ui ) {
+				console.log('I drag till drop');
+			}
+		});		   
+	},
+
+	bindListeners: function(){
+		this.on('add:child', this.setViewDataId, this);
+	},
+
+	setViewDataId: function(view){
+		view.$el.attr('data-backbone-cid', view.model.cid);
+	},
+
+	setViewDataIds: function(items){
+		for(var v in items){
+			view = items[v];
+			view.$el.attr('data-backbone-cid', view.model.cid);
+		}		
+	}
+});

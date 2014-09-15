@@ -1,5 +1,5 @@
-define(['marionette', '../../../shared/songlistmain/MainSongView'], 
-	function(Marionette, MainSongView){
+define(['marionette', '../../../shared/songlistmain/MainSongView','../../../sidebar/songlist/Behavior'], 
+	function(Marionette, MainSongView, behavior){
 	var AlbumCompositeView = Marionette.CompositeView.extend({
 		id: '#main-explorer-navi',
 		childView: MainSongView,
