@@ -11,6 +11,7 @@ define(['backbone', '../../app/context', '../../app/enums', './SongCollection', 
 			numberOfTracks: 1,
 			queueNum : 0,
 			position: undefined,
+			owner_id: undefined,
 			type: undefined,
 		},
 		setTrackFromCollection: function(position){

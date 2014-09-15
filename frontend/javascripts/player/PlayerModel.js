@@ -104,7 +104,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 					console.log('new url=', data.url);
 					console.log('params =', self.get('currentTrackName') + ' ' + self.get('currentArtistName'));
 					context.currentSongModel.set({url: data.url, duration: data.duration});
-
+					audioHandler.initialize(data.url);
 				});
 	 		}); 
 		},
