@@ -49,8 +49,8 @@ VKWrapper.prototype.getAudioById = function(aid, count, callback){
 	});
 };
 
-VKWrapper.prototype.getLyricsById = function(lid, count, callback){
-	this.vk.request('audio.getLyrics', {'lyrics_id' : lid, 'count': count});
+VKWrapper.prototype.getLyricsById = function(lid, callback){
+	this.vk.request('audio.getLyrics', {'lyrics_id' : lid});
 	this.vk.once('done:audio.getLyrics', function(result) {
 		callback(result);
 	});
@@ -67,12 +67,16 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 	});
 	
 	this.vk.once('done:audio.search', function(result) {
+		console.log(result);
 		if (result.response[1]){
 			var object = {
 				url: result.response[1].url,
-				duration: result.response[1].duration
+				duration: result.response[1].duration,
+				lyrics_id: result.response[1].lyrics_id
 			};
 			callback(object);
+		} else {
+			callback(404);
 		}
 	});
 

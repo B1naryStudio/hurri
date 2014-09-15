@@ -33,7 +33,7 @@ ArtistRepository.prototype.getArtistAlbums = function(id, callback) {
 };
 
 ArtistRepository.prototype.getByName = function(name, limit, quick, callback) {
-	console.log(limit);
+	//console.log(limit);
 	var model = this.model;
 	var lim = limit || '';
 	var q = quick || '';

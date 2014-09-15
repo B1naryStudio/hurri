@@ -1,5 +1,6 @@
 var trackRepository = require('../repositories/trackRepository');
 var apiResponse = require('../middleware/apiResponse');
+var VK = require('../social_network_wrapper/VKWrapper');
 
 module.exports = function(app){
 	app.get('/api/track/id/:id', function(req, res, next){
@@ -8,6 +9,15 @@ module.exports = function(app){
 			res.data = data;
 			next();
 		});
+	}, apiResponse);
+
+	app.get('/api/track/:id/lyrics/:name', function(req, res, next){
+		trackRepository.getLyrics(req.params.id, req.params.name, function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
+		});
+		
 	}, apiResponse);
 
 	app.get('/api/track/:name', function(req, res, next){

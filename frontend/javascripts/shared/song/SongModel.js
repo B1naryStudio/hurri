@@ -37,6 +37,19 @@ define(['backbone'], function(Backbone){
 			});
 		},
 
+		getLyrics: function(){
+			var artist = this.singer ? this.singer.name : '';
+			var self = this;
+			$.ajax({
+					url: '/api/track/' +this.attributes._id + '/lyrics/' + 
+						artist + this.attributes.title,
+					method: 'GET'
+				}).done(function(data, err){
+					self.set({lyrics:data});
+					console.log(err);
+			});
+		},
+
 		likeState : function(){
 			if (!this.get('liked')){
 				this.set({liked: true});
