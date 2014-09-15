@@ -18,8 +18,8 @@ var trackSchema = new Schema({
 		default: 128
 	},
 	lyrics : {
-		type: String, 
-		default: 'No lyrics for this song. Sorry.'
+		type: Schema.Types.ObjectId, 
+		ref: 'Lyric'
 	},
 	album : { 
 		type: Schema.Types.ObjectId, 
@@ -38,7 +38,11 @@ var trackSchema = new Schema({
 		default: 'deezer'
 	},
 	url : String,
-	comment : [commentSchema]
+	comment : [commentSchema],
+	lyricsText : {
+		type: Schema.Types.ObjectId, 
+		ref: 'Lyric'
+	},
 });
 
 module.exports = mongoose.model('Track', trackSchema);
