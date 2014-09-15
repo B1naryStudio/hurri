@@ -5,9 +5,6 @@ script#song-template(type='text/template')
 			.main-song-name
 				{{-title}} - {{-singer.name}}
 		.main-song-friends
-			{{ for(var i=0; i<likeId.length; i++){ }}
-			{{-likeId[i].name}}
-			{{ } }}
 		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
 		.main-queue-add
 		.main-like-song

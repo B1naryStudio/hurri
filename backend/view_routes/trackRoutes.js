@@ -22,8 +22,11 @@ module.exports = function (app) {
 		injectData(trackRepository.getUrl(req.params.id), res);
 	});
 
-	app.get('/track/:id/comments', function(req, res, next) {
-		injectData(trackRepository.getComments(req.params.id), res);
+	app.get('/track/:id/comments', isLoggedIn, function(req, res, next) {
+		trackRepository.getComments(req.params.id, function(err, data){
+			console.log('comments data=', data.comment);
+			injectData(req, res, {comments: data.comment}, false);
+		});
 	});
 
 };

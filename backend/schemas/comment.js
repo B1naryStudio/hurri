@@ -7,11 +7,10 @@ var commentSchema = new Schema({
 		type : Schema.Types.ObjectId,
 		ref : 'Userauth' 
 	},
-	comment : String, 
-	date : {
-		type: Date, 
-		default: Date.now
-	}
+	comment : String,
+	userName: String,
+	avatar: String, 
+	date : String
 });
 mongoose.model('Comment', commentSchema);
 module.exports = commentSchema;

@@ -52,7 +52,7 @@ TrackRepository.prototype.getUrl = function(id, callback) {
 
 TrackRepository.prototype.getComments = function(id, callback) {
 	var model = this.model;
-	var query = model.findOne({_id: id}, 'comment').populate('comment.user_auth_id').exec(callback);
+	var query = model.findOne({_id: id}, 'comment').exec(callback);
 };
 
 TrackRepository.prototype.addComments = function(id, body, callback) {

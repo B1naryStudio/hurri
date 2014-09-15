@@ -1,4 +1,6 @@
 script#comment-item(type='text/template')
-	.comment-text{{-text}}
-	.comment-author{{-userName}}
-	.comment-date{{-date}}
+	.comment-info
+		.comment-author{{-userName}}
+		img.comment-author-avatar(src='{{-avatar}}')
+		.comment-date{{-date}}
+	.comment-text{{-comment}}
