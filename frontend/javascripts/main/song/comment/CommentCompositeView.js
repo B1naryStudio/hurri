@@ -17,6 +17,7 @@ define(['marionette', './CommentView', './CommentCollection', '../../../app/cont
 		},
 		initialize: function(model){
 			console.log('layout model=', model.model);
+			this.collection.reset({});
 			this.collection.url = '/api/track/'+model.model.get('_id')+'/comments';
 			this.collection.fetch();
 		},
