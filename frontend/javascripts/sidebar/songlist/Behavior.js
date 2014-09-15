@@ -22,6 +22,7 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 			items: ".song-item",
 			handle:this.options.handle || false,
 			revert: this.options.revert || true,
+			// appendTo: 'parent',
 			update: function( event, ui ) {
 				var model=collection.get(ui.item.attr('data-backbone-cid')); 
 				console.log(collection);
@@ -30,6 +31,10 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 				for (var i = 0; i < collection.models.length; i++)
 					if(collection.models[i].attributes.current === true)
 						Backbone.trigger('behavior:change-current', i);
+			},
+			receive: function(event, ui){
+				var model = ui;
+				
 			}
 		});		   
 	},
@@ -57,7 +62,7 @@ Behaviors.Draggable = Marionette.Behavior.extend({
 
 	onRender:function(){
 		
-		this.$el.draggable({
+		this.$el.sortable({
 			axis: this.options.axis || false,
 			grid: this.options.grid || false,
 			containment: this.options.containment || false,
@@ -88,3 +93,4 @@ Behaviors.Draggable = Marionette.Behavior.extend({
 		}		
 	}
 });
+

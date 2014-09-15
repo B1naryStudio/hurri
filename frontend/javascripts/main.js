@@ -20,7 +20,7 @@ require.config({
 	}
 });
 
-require(['../../bower_components/jquery-ui/ui/sortable', '../../bower_components/jquery-ui/ui/draggable', 'fetchCache', 'localStorage'], function(){
+require(['../../bower_components/jquery-ui/ui/sortable', '../../bower_components/jquery-ui/ui/draggable', '../../bower_components/jquery-ui/ui/droppable', 'fetchCache', 'localStorage'], function(){
 	var oldGetCache = Backbone.fetchCache.getCacheKey;
 	Backbone.fetchCache.getCacheKey = function(){
 		try{
