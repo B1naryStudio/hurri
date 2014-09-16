@@ -13,12 +13,17 @@ define(['marionette',
 	'./friends/FollowingsCollectionView',
 	'./friends/FollowingsCollection',
 	 '../main/playlists/tiles/PlaylistBarModel',
-	 './songlist/UndoPlaylistReplacement'], 
+	 './songlist/UndoPlaylistReplacement',
+	 './dialogue/DialogueModel',
+	 './dialogue/DialogueCollection',
+	 './dialogue/DialogueCompositeView'
+	 ], 
 
 	function(Marionette, NotificationsCompositeView, FriendsCollectionView, FriendsCollection,
 			NotificationsModel, context, SonglistCollectionView,
 			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel,
-			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel, UndoReplacement){
+			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel, UndoReplacement,
+			DialogueModel, DialogueCollection, DialogueCompositeView){
 	
 	var SidebarController = function(){		
 	
@@ -37,6 +42,8 @@ define(['marionette',
 		this.initializeFriends();
 
 		this.initializeFollowings();
+
+		this.initializeDialogue();
 
 		this.sidebarRegion.show(this.song.view);
 
@@ -118,6 +125,21 @@ define(['marionette',
 		});
 	};
 
+	SidebarController.prototype.initializeDialogue = function(){
+		this.dialogue = {
+			model: new DialogueModel(),
+			collection: new DialogueCollection()
+		};	
+
+		this.dialogue.view = this.getDialogueView();
+	};
+
+	SidebarController.prototype.getDialogueView = function(){
+		return new DialogueCompositeView({
+			model: this.dialogue.model,
+			collection: this.dialogue.collection
+		});
+	};
 
 	SidebarController.prototype.bindListeners = function() {
 
@@ -166,9 +188,12 @@ define(['marionette',
 		}, this);
 
 		Backbone.on('show-statistic-followings', function(){
-				this.sidebarRegion.show(this.getFollowingsView());
+			this.sidebarRegion.show(this.getFollowingsView());
 		}, this);
 
+		Backbone.on('send-message', function(){
+			this.sidebarRegion.show(this.getDialogueView());
+		}, this);
 
 		Backbone.on('toggle-sidebar', function(){
 			if (!context.toggled){
