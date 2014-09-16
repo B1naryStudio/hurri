@@ -196,6 +196,16 @@ define(['marionette',
 			});
 		}, this);
 
+		Backbone.on('add-album-to-playlist', function(collection){
+			if (context.currentSongCollection.length !== 0){
+				context.previousCollection.reset(context.currentSongCollection.models);
+			}
+			context.currentSongCollection.add(collection);
+			var button = new UndoReplacement();
+			button.render();
+		}, this);
+
+
 		Backbone.on('main-view:play-songs', function(model_id, collection, set){
 			this.song.model._id = model_id;
 			if (context.currentSongCollection.length !== 0){

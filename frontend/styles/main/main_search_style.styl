@@ -134,11 +134,30 @@ p.album-composite-header
 	text-align center
 	margin-bottom 15px
 	margin-top 15px
-img.album-composite-cover
+.album-composite-cover
 	width 30%
 	width 30%
 	float left
 	margin-left 5%
+	background black
+	position relative
+	img
+		width 100%
+	&:hover
+		.add-album-to-list
+			display block
+			position absolute
+			top 45%
+			left 45%
+.add-album-to-list
+	width 60px
+	height 60px
+	background url(/../../images/main/add_list.png) no-repeat
+	background-size 60px
+	display none
+
+		
+		
 .album-composite-release
 .album-duration 
 .album-singer 
