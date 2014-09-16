@@ -30,12 +30,18 @@ chartParse.prototype.billboardTop = function (callback) {
 							for (var i = 0; i < data.length; i++){
 								if(data[i].length === 0){
 									data[i] = results[i];
+									/*request('/getStream?query='+results[i].title, function (err, result){
+										data[i].set({url: result.url, duration: result.duration});
+									});*/
 								} else {
 									data[i] = data[i][0];
 								}						
 							}
 						}
-					console.log('result=', data);
+					async.map(data, trackRepository.addTrack.bind(trackRepository), function (err, addResult){
+						console.log('add res=', addResult);
+						console.log('add err=', err);
+					});
 					callback(err, data);
 				});
 
@@ -75,7 +81,10 @@ chartParse.prototype.benMajorUkTop = function (callback) {
 							}						
 						}
 					}
-				console.log(data);
+				async.map(data, trackRepository.addTrack.bind(trackRepository), function (err, addResult){
+					console.log('add res=', addResult);
+					console.log('add err=', err);
+				});
 				callback(err, data);
 			});
 		}
@@ -85,17 +94,17 @@ chartParse.prototype.benMajorUkTop = function (callback) {
 chartParse.prototype.iTunesTop = function (callback) {
 	var baseURL = 'https://itunes.apple.com/ua/rss/topsongs/limit=25/explicit=true/xml';
 	request(baseURL , function (error, response, body) {
-		parseString(body, function (err, result) {
+		parseString(body, function (err, parseResult) {
 			var results = [];
-			for (var i = 0; i < result.feed.entry.length; i++){
+			for (var i = 0; i < parseResult.feed.entry.length; i++){
 				results[i] = {};
 				results[i].rankTw = i+1;
-				results[i].singer = result.feed.entry[i]['im:artist'][0]._;
-				results[i].title = result.feed.entry[i]['im:name'][0];
+				results[i].singer = parseResult.feed.entry[i]['im:artist'][0]._;
+				results[i].title = parseResult.feed.entry[i]['im:name'][0];
 			}
-			results.updated = result.feed.entry.updated;
+			results.updated = parseResult.feed.entry.updated;
 
-			async.map(results, trackRepository.getExistSong.bind(trackRepository), function(err, data){
+			async.map(results, trackRepository.getExistSong.bind(trackRepository), function (err, data){
 					if (!err){
 						for (var i = 0; i < data.length; i++){
 							if(data[i].length === 0){
@@ -105,7 +114,10 @@ chartParse.prototype.iTunesTop = function (callback) {
 							}						
 						}
 					}
-				console.log(data);
+				async.map(data, trackRepository.addTrack.bind(trackRepository), function (err, addResult){
+					console.log('add res=', addResult);
+					console.log('add err=', err);
+				});
 				callback(err, data);
 			});
 

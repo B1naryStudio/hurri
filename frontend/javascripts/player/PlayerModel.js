@@ -115,8 +115,11 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			this.stopTrack(function(){
 				this.setTrackInfoParams();	
 			});
-
-			this.volumeLevelSetup(this.get('volumeLevel'));
+			if (this.get('mute') === enums.muteModes.unmute){
+				this.volumeLevelSetup(this.get('volumeLevel'));
+			} else {
+				this.volumeLevelSetup(0);
+			}
 			this.startTrack();
 			if (context.currentSongModel.get('liked')) {
 				this.set({liked: true});

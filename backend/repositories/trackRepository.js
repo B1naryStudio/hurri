@@ -10,6 +10,18 @@ function TrackRepository(){
 
 TrackRepository.prototype = new Repository();
 
+TrackRepository.prototype.addTrack = function(data, callback){
+	if (data._id === undefined){
+		var ids = mongoose.Types.ObjectId();
+		var model = this.createModel();
+		var newitem = new model({
+			_id:ids,
+			title: data.title + ' - ' + data.singer 
+		});
+		newitem.save(callback);
+	}
+};
+
 TrackRepository.prototype.getById = function(id, callback) {
 	var ids = mongoose.Types.ObjectId(id);
 	var model = this.model;
