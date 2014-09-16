@@ -82,6 +82,32 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 
 };
 
+VKWrapper.prototype.getBigAudioSearch = function(options, callback){
+
+	this.vk.request('audio.search', {
+		'q' : options.query, 
+		'sort': options.sort, 
+		'performer_only': options.onlyArtist, 
+		'auto_complete': options.auto_complete, 
+		'count': options.count
+	});
+	
+	this.vk.once('done:audio.search', function(result) {
+		console.log(result);
+		if (result.response[1]){
+			var object = {
+				url: result.response[1].url,
+				duration: result.response[1].duration,
+				lyrics_id: result.response[1].lyrics_id
+			};
+			callback(object);
+		} else {
+			callback(404);
+		}
+	});
+
+};
+
 VKWrapper.prototype.getRecommendations = function(id, count, callback){
 	this.vk.request('audio.getRecommendations', {'user_id' : id, 'count': count});
 	this.vk.once('done:audio.getRecommendations', function(result) {

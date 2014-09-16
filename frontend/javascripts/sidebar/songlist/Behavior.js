@@ -33,8 +33,23 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 						Backbone.trigger('behavior:change-current', i);
 			},
 			receive: function(event, ui){
-				var model = ui;
-				
+
+				if (ui.type === 'track'){
+				colection.add(model, {at: ui.item.index()-1, silent: true});
+				for (var i = 0; i < collection.models.length; i++)
+					if(collection.models[i].attributes.current === true)
+						Backbone.trigger('behavior:change-current', i);
+				} else if (ui.type === 'album'){
+					var albumCollection =  new MainSonglistCollection([], {
+						playlistId : '/api/album/' + id + '/tracks'
+					});
+					albumCollection.fetch({
+						cache: true, 
+						success: function () {
+					  		collection.add(albumCollection);
+				   		}
+					});
+				}
 			}
 		});		   
 	},

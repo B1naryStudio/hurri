@@ -88,7 +88,6 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 
 		nextTrack: function(){
 			this.model.nextTrack();
-			Backbone.trigger('player:nextTrack');
 		},
 		playbackState : function(){
 			var mode = this.model.playbackState();
