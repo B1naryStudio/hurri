@@ -36,8 +36,8 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.get('/api/explorer/tracks', function(req, res, next){
-		trackRepository.getAll(function(err, data){
+	app.get('/api/explorer/tracks/:genre', function(req, res, next){
+		trackRepository.getAll(decodeURIComponent(req.params.genre), function(err, data){
 			res.err = err;
 			res.data = data;
 			next();

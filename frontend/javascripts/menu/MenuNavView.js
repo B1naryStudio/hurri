@@ -24,7 +24,7 @@ define(['marionette', '../app/routes', '../app/context'],
 		},
 
 		showExplorer : function(){
-			router.navigate('/explorer/albums',true);
+			router.navigate('/explorer/albums/World',true);
 		},
 
 		showCharts : function(){

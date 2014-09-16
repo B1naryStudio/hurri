@@ -10,8 +10,8 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.get('/api/explorer/artists', function(req, res, next){
-		artistRepository.getAll(function(err, data){
+	app.get('/api/explorer/artists/:genre', function(req, res, next){
+		artistRepository.getAll(decodeURIComponent(req.params.genre), function(err, data){
 			res.data = data;
 			res.err = err;
 			next();

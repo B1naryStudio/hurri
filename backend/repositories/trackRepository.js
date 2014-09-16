@@ -19,9 +19,10 @@ TrackRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-TrackRepository.prototype.getAll = function(callback) {
+TrackRepository.prototype.getAll = function(genre, callback) {
 	var model = this.model;
-	var query = model.find({}).populate('album').populate('singer').limit(50);
+	console.log(genre);
+	var query = model.find({}).populate('album', null, {'album.genres': {$in : [genre]}}).populate('singer').limit(50);
 	query.exec(callback);
 };
 

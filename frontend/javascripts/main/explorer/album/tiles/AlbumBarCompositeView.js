@@ -7,7 +7,8 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 		events : {
 			'click #album-select' : 'albumShow',
 			'click #artist-select' : 'artistShow',
-			'click #track-select' : 'trackShow'
+			'click #track-select' : 'trackShow',
+			'change	#genres-select': 'selectItem'
 		},
 		childEvents: {
 			'song-view:play-collection' : function(info, models, position){
@@ -16,7 +17,7 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 			}
 			
 		},
-
+		childViewContainer: '#main-child-container',
 		getTemplate: function(){
 			if (this.template === 'album'){
 				return '#album-full-search';
@@ -28,16 +29,25 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 				return '#album-bar-composite';
 			}
 		},
+		selectItem: function(){
+			var parts = window.localStorage.getItem('currentTab').split('/');
+			var genre = encodeURIComponent($('select[name=selector]').val());
+			router.navigate('/' + parts[0] + '/' + parts[1] + '/' + genre, true);
+		},
+
 		albumShow : function(){
-			router.navigate('/explorer/albums', true);
+			var genre = $('select[name=selector]').val();
+			router.navigate('/explorer/albums/' + encodeURIComponent(genre), true);
 		},
 
 		artistShow : function(){
-			router.navigate('/explorer/artists', true);
+			var genre = $('select[name=selector]').val();
+			router.navigate('/explorer/artists/' + encodeURIComponent(genre), true);
 		},
 
 		trackShow : function(){
-			router.navigate('/explorer/tracks', true);
+			var genre = $('select[name=selector]').val();
+			router.navigate('/explorer/tracks/' + encodeURIComponent(genre), true);
 		}
 	});
 	return AlbumBarCompositeView;

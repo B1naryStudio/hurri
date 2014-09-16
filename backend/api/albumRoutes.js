@@ -26,8 +26,9 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.get('/api/explorer/albums', function(req, res, next){
-		albumRepository.getAll(function(err, data){
+	app.get('/api/explorer/albums/:genre', function(req, res, next){
+		console.log(decodeURIComponent(req.params.genre));
+		albumRepository.getAll(decodeURIComponent(req.params.genre), function(err, data){
 			res.err = err;
 			res.data = data;
 			next();

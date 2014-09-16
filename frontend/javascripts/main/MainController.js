@@ -192,10 +192,10 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeAlbums = function(){
+	MainController.prototype.initializeAlbums = function(name){
 		this.album = {
 			collection: new AlbumBarCollection([], {
-				playlistId : '/api/explorer/albums',
+				playlistId : '/api/explorer/albums/' + encodeURIComponent(name),
 			}),
 			model: new AlbumBarModel()	
 		};
@@ -262,10 +262,10 @@ define(['marionette',
 		}, 'artist');
 	};
 
-	MainController.prototype.initializeArtists = function(){
+	MainController.prototype.initializeArtists = function(name){
 		this.artist = {
 			collection: new ArtistCollection([], {
-				playlistId : '/api/explorer/artists'
+				playlistId : '/api/explorer/artists/' + encodeURIComponent(name)
 			}),
 			model: new Backbone.Model()	
 		};
@@ -307,10 +307,10 @@ define(['marionette',
 		}, 'song');
 	};
 
-	MainController.prototype.initializeTracks = function(){
+	MainController.prototype.initializeTracks = function(name){
 		this.track = {
 			collection: new MainSonglistCollection([], {
-				playlistId : '/api/explorer/tracks'
+				playlistId : '/api/explorer/tracks/' + encodeURIComponent(name)
 			}),
 			model: new Backbone.Model()	
 		};
@@ -627,16 +627,16 @@ define(['marionette',
 
 	MainController.prototype.bindListeners = function(){
 	
-		Backbone.on('show-albums', function(){
-			this.initializeAlbums();
+		Backbone.on('show-albums', function(name){
+			this.initializeAlbums(name);
 		},this);
 
 		Backbone.on('show-album-tiles', function(){
 			this.mainRegion.show(this.getAlbumView());
 		},this);
 
-		Backbone.on('show-artists', function(){
-			this.initializeArtists();
+		Backbone.on('show-artists', function(name){
+			this.initializeArtists(name);
 		},this);
 
 		Backbone.on('album-result-composite:show-more', function(name){
@@ -671,8 +671,8 @@ define(['marionette',
 			this.mainRegion.show(this.getTrackView());
 		},this);
 
-		Backbone.on('show-all-tracks', function(){
-			this.initializeTracks();
+		Backbone.on('show-all-tracks', function(name){
+			this.initializeTracks(name);
 		},this);
 
 		Backbone.on('action:showUserView', function(id){

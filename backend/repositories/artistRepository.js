@@ -16,9 +16,9 @@ ArtistRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-ArtistRepository.prototype.getAll = function(callback) {
+ArtistRepository.prototype.getAll = function(genre, callback) {
 	var model = this.model;
-	var query = model.find({}).populate('albums_id').limit(50);
+	var query = model.find({genres: {$in : [genre]}}).populate('albums_id').limit(50);
 	query.exec(callback);
 };
 
