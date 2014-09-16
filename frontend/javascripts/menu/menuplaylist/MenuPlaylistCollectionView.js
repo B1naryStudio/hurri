@@ -2,6 +2,7 @@ define(['marionette', './MenuPlaylistView', '../../app/context'], function(Mario
 	var MenuPlaylistCompositeView = Marionette.CompositeView.extend({
 		el: '#playlist-menu-container',
 		childView: MenuPlaylistView,
+		childViewContainer: '.menu-playlist-container-child',
 		template: '#menu-playlist-composite-template',
 		events : {
 		},

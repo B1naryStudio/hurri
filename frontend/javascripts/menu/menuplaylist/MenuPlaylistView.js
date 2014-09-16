@@ -8,7 +8,7 @@ define(['marionette', '../../app/context', '../../player/PlayerModel', '../../ap
 			'click .delete-menu-playlist'  : 'deletePlaylist',
 		},
 
-		showPlaylist: function(){
+		showPlaylist: function(ev){
 			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists/' + this.model.attributes._id, true);
 		},
 
