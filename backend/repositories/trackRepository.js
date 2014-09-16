@@ -32,6 +32,12 @@ TrackRepository.prototype.getByTitle = function(title, limit, quick, callback) {
 	query.exec(callback);
 };
 
+TrackRepository.prototype.getExistSong = function(song, callback) {
+	var model = this.model;
+	var query = model.find({title: song.title +' - '+ song.singer});
+	query.exec(callback);
+};
+
 TrackRepository.prototype.getTitle = function(id, callback) {
 	var model = this.model;
 	var query = model.find({_id:id}, 'title');
