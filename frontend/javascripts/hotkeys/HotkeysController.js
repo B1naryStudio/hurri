@@ -40,7 +40,6 @@ define(['backbone'], function(Backbone) {
 			this.currentInput.push(event.keyCode);
 		}
 		this.checkHotkeys();
-		event.preventDefault();
 	};
 
 	HotkeysController.prototype.keyUp = function(event) {
@@ -51,15 +50,8 @@ define(['backbone'], function(Backbone) {
 	};
 
 	HotkeysController.prototype.checkHotkeys = function() {
-		var state;
 		for(var i = 0; i < this.keyMap.length; i++) {
-			state = true;
-			for(var j = 0; j < this.keyMap[i].keys.length; j++)
-				if(this.currentInput.indexOf(this.keyMap[i].keys[j]) === -1) {
-					state = false;
-					break;
-				}
-			if(state) {
+			if(_.isEqual(this.keyMap[i].keys, this.currentInput)) {
 				Backbone.trigger(this.keyMap[i].event);
 			}
 		}

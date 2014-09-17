@@ -36,8 +36,14 @@ function(Backbone, Marionette, HotkeysView){
 		},
 
 		showHotkeysView: function(){
-			this.hotkeysView.el.style.display = 'block';
-			this.setHotkeysViewPosition();
+			if(this.showed) {
+				this.hideHotkeysView();
+				this.showed = false;
+			} else {
+				this.hotkeysView.el.style.display = 'block';
+				this.setHotkeysViewPosition();
+				this.showed = true;
+			}
 		},
 
 		hideHotkeysView: function(event){
