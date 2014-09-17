@@ -1,16 +1,28 @@
 script#radio-bar(type='text/template')
 	.radio-wrapper
-		.playicon
-		.nameRadio{{-name}}
 		.left-side
-			.masterName{{-master.name}}
-			img.master-avatar(src='{{-master.avatarUrl}}')
-			.listeners Listeners now : {{-listeners}}
+			.nameRadio {{-name}}
+			.first-track-in-list you will listen:
+			{{ var tracksnames = 2; if (listeners.length < 2) tracksnames = listeners.length; for (var i = 0; i < tracksnames; i ++){}}
+			.tracksnames {{-tracks[i].title}}, 
+			{{}}}...
+			table.recommend-radio-wrapper
+				tr
+					td(rowspan='2')
+						img.master-avatar(src='{{-user_auth_id.avatarUrl}}')
+					td.recommend-channel-header THIS CHANNEL CREATED by
+				tr
+					td.masterName {{-user_auth_id.name}}
+			p.first-track-in-list Total tracks: {{-tracks.length}}
 		.tracks-side
-			.totalTracksRadio Tracks: {{-totalTracks}}
-			{{for (var i = 0; i < tracks.length; i ++){}}
-			div {{-tracks[i].title}}
-			{{}}}
+			.first-track-in-list They are listening to this radio : 
+			.listeners-list-wrap
+				{{for (var i = 0; i < listeners.length; i ++){}}
+				img(src='{{-listeners[i].avatarUrl}}')
+				{{}}}
+			.playicon listen
+
+			
 
 script#radio-main-header(type='text/template')
 	.radio-main-header RADIO

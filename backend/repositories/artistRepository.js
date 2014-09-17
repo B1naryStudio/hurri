@@ -28,7 +28,12 @@ ArtistRepository.prototype.getArtistAlbums = function(id, callback) {
 		var opts = [
 			{ path: 'tracks', model: 'Track' }
 		];
-		Track.populate(data.albums_id, opts, callback);
+		Track.populate(data.albums_id, opts, function(err, res){
+			var opts = [
+				{ path: 'singer', model: 'Artist' }
+			];
+			Artist.populate(res.tracks, opts, callback);
+		});
 	});
 };
 
