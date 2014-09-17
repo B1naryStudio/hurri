@@ -62,15 +62,17 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 			});
 			this.favoritesCollection = new SongCollection();
 			this.listenedCollection = new SongCollection();
+			this.fullListenedCollection = new SongCollection();
 			this.playlists = new PlaylistBarCollection();
 
 			var local = this;
 			if(this.options.type == 'me') {
-				this.favoritesCollection = FavoritesCollection;
-				this.listenedCollection = ListenedCollection;
+				this.favoritesCollection.reset(FavoritesCollection.slice(0, 20));
+				this.listenedCollection.reset(ListenedCollection.slice(0, 20));
+				this.fullListenedCollection = ListenedCollection;
 				this.playlists.reset(window._injectedData.playlists);
 
-				this.ui.statisticTitle[0].textContent = 'Total listened: ' + this.listenedCollection.length;
+				this.ui.statisticTitle[0].textContent = 'Total listened: ' + this.fullListenedCollection.length;
 				this.showStatisticByArtists();
 			} else if(this.options.type == 'follower') {
 				$.ajax({url: '/api/user/info/' + window._injectedData.user._id + '/followers'}).done(function(data){
@@ -100,11 +102,12 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 				if(data[i]._id == this.model.get('_id'));
 					break;
 			}
-			this.favoritesCollection.reset(data[i].liked);
-			this.listenedCollection.reset(data[i].listened);
+			this.favoritesCollection.reset(data[i].liked.slice(0, 20));
+			this.listenedCollection.reset(data[i].listened.slice(0, 20));
+			this.fullListenedCollection.reset(data[i].listened);
 			this.playlists.reset(data[i].playlists);
 
-			this.ui.statisticTitle[0].textContent = 'Total listened: ' + this.listenedCollection.length;
+			this.ui.statisticTitle[0].textContent = 'Total listened: ' + this.fullListenedCollection.length;
 			this.showStatisticByArtists();
 		},
 		showStatisticByField: function(collection, field) {
@@ -174,10 +177,10 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 			}
 		},
 		showStatisticByArtists: function() {
-			this.showStatisticByField(this.listenedCollection, 'artist');
+			this.showStatisticByField(this.fullListenedCollection, 'artist');
 		},
 		showStatisticByGenres: function() {
-			this.showStatisticByField(this.listenedCollection, 'genre');
+			this.showStatisticByField(this.fullListenedCollection, 'genre');
 		},
 		renderChildViews: function(){
 			_.each(this.childViews, function(view, el){
