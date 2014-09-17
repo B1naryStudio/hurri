@@ -13,9 +13,8 @@ function GroupRepository(){
 GroupRepository.prototype = new Repository();
 
 GroupRepository.prototype.bindListeners = function(){
-	console.log(mediator);
 	mediator.on("add-user-to-radio", function(){
-		console.log(arguments); 
+		console.log(arguments[0]); 
 	});
 };
 
