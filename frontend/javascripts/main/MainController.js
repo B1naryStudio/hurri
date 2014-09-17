@@ -721,7 +721,7 @@ define(['marionette',
 		},this);
 
 		Backbone.on('toggle-sidebar', function(){
-			this.mainRegion.$el.toggleClass('toggled-main');
+			this.mainRegion.$el.parent().toggleClass('toggled-main');
 		}, this);
 		
 		// Backbone.on('sidebar:show-listened', function(){

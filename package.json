@@ -63,6 +63,7 @@
     "socket.io": "~1.0.6",
     "stylus-lemonade": "^0.1.8",
     "vksdk": "^4.0.0",
+    "xml2js": "~0.4.4",
     "passport.socketio": "~3.3.0",
     "cookie-parser": "~1.3.3",
     "connect-mongo": "~0.4.1"

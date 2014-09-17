@@ -71,7 +71,7 @@ module.exports = function(app){
 	app.get('/api/track/:id/comments', function(req, res, next){
 		trackRepository.getComments(req.params.id, function(err, data){
 			res.err = err;
-			res.data = data;
+			res.data = data.comment;
 			next();
 		});
 	}, apiResponse);
@@ -85,7 +85,7 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.put('/api/track/:id/comments', function(req, res, next){
+	app.post('/api/track/:id/comments', function(req, res, next){
 		trackRepository.addComments(req.params.id, req.body, function(err, data){
 			res.err = err;
 			res.data = data;
@@ -93,6 +93,17 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 	
+	app.put('/api/track/:id', function(req, res, next){
+		trackRepository.update(req.params.id, req.body, function(err, data){
+			console.log('route err=',err);
+			console.log('route data=',data);
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
+
 	app.delete('/api/track/:id', function(req, res, next){
 		trackRepository.delete(req.params.id, function(err, data){
 			res.err = err;

@@ -7,10 +7,7 @@ var messageSchema = new Schema({
 			type : Schema.Types.ObjectId,
 			ref : 'Userauth'
 		}, 
-		date : {
-			type: Date, 
-			default: Date.now
-		}, 
+		date : String, 
 		message : String
 });
 

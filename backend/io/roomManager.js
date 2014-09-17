@@ -64,7 +64,7 @@ RoomManager.prototype.getSocketsByRoom = function(roomId) {
 		}
 	}
 	return res;
-}
+};
 
 
 module.exports = new RoomManager();

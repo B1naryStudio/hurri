@@ -12,6 +12,18 @@ function TrackRepository(){
 
 TrackRepository.prototype = new Repository();
 
+TrackRepository.prototype.addTrack = function(data, callback){
+	if (data._id === undefined){
+		var ids = mongoose.Types.ObjectId();
+		var model = this.createModel();
+		var newitem = new model({
+			_id:ids,
+			title: data.title + ' - ' + data.singer 
+		});
+		newitem.save(callback);
+	}
+};
+
 TrackRepository.prototype.getById = function(id, callback) {
 	var ids = mongoose.Types.ObjectId(id);
 	var model = this.model;
@@ -32,6 +44,12 @@ TrackRepository.prototype.getByTitle = function(title, limit, quick, callback) {
 	var q = quick || '';
 	regexp = new RegExp(q + title, "i");
 	var query = model.find({title: regexp}).populate('singer').limit(lim);
+	query.exec(callback);
+};
+
+TrackRepository.prototype.getExistSong = function(song, callback) {
+	var model = this.model;
+	var query = model.find({title: song.title +' - '+ song.singer});
 	query.exec(callback);
 };
 
@@ -84,7 +102,7 @@ TrackRepository.prototype.getUrl = function(id, callback) {
 
 TrackRepository.prototype.getComments = function(id, callback) {
 	var model = this.model;
-	var query = model.findOne({_id: id}, 'comment').populate('comment.user_auth_id').exec(callback);
+	var query = model.findOne({_id: id}, 'comment').exec(callback);
 };
 
 TrackRepository.prototype.addComments = function(id, body, callback) {

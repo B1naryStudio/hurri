@@ -30,7 +30,7 @@ var CommentLayoutView = Marionette.LayoutView.extend({
 	},
 
 	showComments: function(){
-		this.content.show(new CompositeView()); 
+		this.content.show(new CompositeView({model: this.model})); 
 	},
 	
 	onRender: function(){

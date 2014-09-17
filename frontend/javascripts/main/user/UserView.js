@@ -79,7 +79,7 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 					local.fillUserInfo(data);
 				});
 			} else if(this.options.type == 'following') {
-				$.ajax({url: '/api/user/info/' + window._injectedData.user._id + '/followings'}).done(function(data){
+				$.ajax({url: '/api/user/info/' + window._injectedData.user._id + '/following'}).done(function(data){
 					local.fillUserInfo(data);
 				});
 			}
@@ -98,6 +98,7 @@ function(Marionette, UserFavoritesView, UserListenedView, UserPlaylistsView,
 			this.renderChildViews();
 		},
 		fillUserInfo: function(data) {
+			console.log('fillUser=', data);
 			for(var i = 0; i < data.length; i++) {
 				if(data[i]._id == this.model.get('_id'));
 					break;

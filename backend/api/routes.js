@@ -7,6 +7,7 @@ var likeRoutes = require('./likeRoutes');
 var userRoutes = require('./userRoutes');
 var searchRoutes = require('./searchRoutes');
 var testRoutes = require('./testRoutes');
+var chartsRoutes = require('./chartsRoutes');
 
 
 
@@ -20,6 +21,7 @@ module.exports = function(app){
 		likeRoutes: likeRoutes(app),
 		userRoutes: userRoutes(app),
 		searchRoutes: searchRoutes(app),
-		testRoutes: testRoutes(app)
+		testRoutes: testRoutes(app),
+		chartsRoutes: chartsRoutes(app)
 	};
 };

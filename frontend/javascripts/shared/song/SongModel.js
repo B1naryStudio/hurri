@@ -14,7 +14,7 @@ define(['backbone'], function(Backbone){
 			album: {cover : '/images/default/cover.png'},
 			singer: { name : 'Artist'},
 			url: undefined,
-			comments : [''],
+			comment : [''],
 			queuepos : '',
 			liked: false,
 			likedId: [],
