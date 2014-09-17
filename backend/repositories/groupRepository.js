@@ -16,6 +16,13 @@ GroupRepository.prototype.getMembers = function(id, callback) {
 	query.exec(callback);
 };
 
+
+GroupRepository.prototype.getAll = function(callback) {
+	var model = this.createModel();
+	var query = model.find({}).populate('tracks').populate('listeners').populate('user_auth_id');
+	query.exec(callback);
+};
+
 GroupRepository.prototype.getById = function(id, callback) {
 	var model = this.createModel();
 	var query = model.findOne({_id: id}).populate('listeners').populate('tracks');

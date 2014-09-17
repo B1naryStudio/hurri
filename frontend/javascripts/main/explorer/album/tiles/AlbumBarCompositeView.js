@@ -3,6 +3,7 @@ define(['marionette', './AlbumBarView','../../../../app/routes'], function(Mario
 		initialize : function(options, other){
 			this.template = other;
 		},
+		className : 'main-explorer-wrapper',
 		template: this.getTemplate,
 		events : {
 			'click #album-select' : 'albumShow',

@@ -58,37 +58,37 @@ searchbar_width = 300px
 		box-sizing border-box
 
 #notificationbar
-	width auto
+	width 50px
 	height bar_height
 	float right
 	margin-right 10px
-	background linear-gradient(to bottom, rgba(255,255,255,.3) 0, rgba(255,255,255,.2) 100%)
 	cursor pointer
 	border-style hidden
 	border-radius 3px
 	box-sizing border-box
-
-	&:hover
-		background #529de1
+	position relative
 
 	#notification-icon
 		width bar_height
 		height bar_height
 		cursor pointer
-		box-sizing border-box
+		position absolute
+
 
 	#unread-number
 		height 20px
-		width 20px
-		background orange
+		background #f7071b
+		display inline
 		cursor pointer
 		border-radius 3px
 		text-align center
 		font-size 90%
 		font-weight bold
 		color white
-		display inline
-		padding 1px 2px
+		padding 1px 3px 0px 3px
+		position absolute
+		top 0
+		right 10px
 
 #searchbar
 	width auto

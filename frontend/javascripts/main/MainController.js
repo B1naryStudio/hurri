@@ -333,44 +333,17 @@ define(['marionette',
 
 	MainController.prototype.initializeRadio = function(){
 		this.radio = {
-			collection: new RadioBarCollection(),
+			collection: new RadioBarCollection([], {
+				playlistId: '/api/group'
+			}),
 			model: new RadioBarModel()
 		};
 
-		this.radio.collection.add([
-			{
-				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master: {name: 'Serhio', avatarUrl: '/images/avatar.png'},
-				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
-			]},
-			{
-				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master : {name: 'Serhio', avatarUrl: '/images/avatar.png'},
-				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
-			]},
-			{
-				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master: {name: 'Serhio', avatarUrl: '/images/avatar.png'},
-				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
-			]},
-			{
-				name: 'Bzzzzzzzzzz', artist: 'Various Artists', totalTracks: 10, 
-				master: {name: 'Serhio', avatarUrl: '/images/avatar.png'},
-				tracks : [{ artist : 'Brainstorm', title : 'Undefined name', duration : 0},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 101},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 70},
-						{ artist : 'Brainstorm', title : 'Undefined name', duration : 45}
-			]},
-		]);
+		this.radio.collection.fetch({
+			success: function(data, req){
+				console.log('DATA=',data, 'REQ=', req);
+			}
+		});
 
 		this.radio.view = this.getRadioView();
 	};
