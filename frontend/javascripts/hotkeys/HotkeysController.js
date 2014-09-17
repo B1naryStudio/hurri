@@ -40,6 +40,10 @@ define(['backbone'], function(Backbone) {
 			this.currentInput.push(event.keyCode);
 		}
 		this.checkHotkeys();
+
+		if(event.keyCode === 83) {
+			event.preventDefault();
+		}
 	};
 
 	HotkeysController.prototype.keyUp = function(event) {
