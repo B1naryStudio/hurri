@@ -61,6 +61,7 @@
     "socket.io": "~1.0.6",
     "express-session": "~1.7.5",
     "stylus-lemonade": "^0.1.8",
-    "vksdk": "^4.0.0"
+    "vksdk": "^4.0.0",
+    "xml2js": "~0.4.4"
   }
 }
