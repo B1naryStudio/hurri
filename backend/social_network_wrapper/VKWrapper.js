@@ -66,7 +66,9 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 		'count': options.count
 	});
 	
-	this.vk.once('done:audio.search', function(result) {
+	this.vk.once('done:audio.search', function(result, error) {
+		console.log('res stream=', result);
+		console.log('err stream=', error);
 		if (result.response[1]){
 			var object = {
 				url: result.response[1].url,

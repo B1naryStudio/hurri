@@ -1,4 +1,4 @@
-define(['marionette', './DialogueView', './DialogueCollection', '../../../app/context'], 
+define(['marionette', './DialogueView', './DialogueCollection', '../../app/context'], 
 	function(Marionette, DialogueView, DialogueCollection, context){
 	var DialogueCompositeView = Marionette.CompositeView.extend({
 

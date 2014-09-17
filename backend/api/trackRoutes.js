@@ -83,6 +83,17 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 	
+	app.put('/api/track/:id', function(req, res, next){
+		trackRepository.update(req.params.id, req.body, function(err, data){
+			console.log('route err=',err);
+			console.log('route data=',data);
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
+
 	app.delete('/api/track/:id', function(req, res, next){
 		trackRepository.delete(req.params.id, function(err, data){
 			res.err = err;
