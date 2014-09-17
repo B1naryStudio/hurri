@@ -1,5 +1,5 @@
 var socketio = require('socket.io');
-var mediator = require('../units/mediator');
+// var mediator = require('../units/mediator');
 
 module.exports = function(server){
 	
@@ -7,7 +7,7 @@ module.exports = function(server){
 
 	io.on('connection', function (socket) {
 		socket.on('add-user-to-radio', function (id) {
-			mediator.publish("add-user-to-radio", id);
+			// mediator.publish("add-user-to-radio", id);
 		});
 	});
 
