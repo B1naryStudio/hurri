@@ -208,7 +208,7 @@ UserRepository.prototype.getUserInfo = function(id, callback) {
 
 UserRepository.prototype.getUserListInfo = function(list, callback) {
 	var model = this.infoModel;
-	var query = model.find({user_auth_id: {$in:list}});
+	var query = model.find({user_auth_id: {$in:list}}).populate('listened').populate('liked');
 	query.exec(callback);
 };
 
@@ -222,16 +222,14 @@ UserRepository.prototype.getFollowersInfo = function(id, callback) {
 			var list = [];
 			for (var i=0; i<data.followers.length; i++){
 				list.push(data.followers[i]._id);
-				
 			}
-			console.log('list', list);
 			self.getUserListInfo(list, function(error, data){
 				console.log('data=',data);
 				console.log('error', error);
-				callback(err, data);
+				callback(error, data);
 			});
 	//	}
-		
+
 	});
 };
 
@@ -250,8 +248,9 @@ UserRepository.prototype.getFollowingInfo = function(id, callback) {
 			self.getUserListInfo(list, function(error, data){
 				console.log('data=',data);
 				console.log('error', error);
-				callback(err, data);
+				callback(error, data);
 			});
+			
 		});
 };
 

@@ -36,6 +36,7 @@ module.exports = function(app){
 
 	app.get('/api/user/info/:id/following', function(req, res, next){
 		userRepository.getFollowingInfo(req.params.id, function(err, data){
+			console.log('route data=', data);
 			res.data = data;
 			res.err = err;
 			next();
