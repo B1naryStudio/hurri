@@ -2,13 +2,22 @@ var connection = require('../db/dbconnect.js');
 var Group = require('../schemas/radio.js');
 var Repository = require('./generalRepository.js');
 var _ = require('underscore');
+var mediator = require('../units/mediator.js');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
 	this.model = Group;
+	this.bindListeners();
 }
 
 GroupRepository.prototype = new Repository();
+
+GroupRepository.prototype.bindListeners = function(){
+	console.log(mediator);
+	mediator.subscribe("add-user-to-radio", function(){
+		console.log(arguments); 
+	});
+};
 
 GroupRepository.prototype.getMembers = function(id, callback) {
 	var model = this.createModel();
