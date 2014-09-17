@@ -1,4 +1,4 @@
-define(['socketio'], function(io){
+define(['socketio', './Sockiator'], function(io, Sockiator){
 
 	var SocketHandler = function(){
 
@@ -21,5 +21,17 @@ define(['socketio'], function(io){
 		console.log('user disconnected!');
 	};
 
-	return new SocketHandler();
+	SocketHandler.prototype = _.extend(SocketHandler.prototype, Sockiator.prototype);
+
+	var socketHandler = new SocketHandler();
+
+	socketHandler
+		.in({
+			'turn': 'socket:turn-network'
+		})
+		.out({
+			'backbone:radio-view':'add-user-to-radio'
+		});
+
+	return socketHandler;
 });

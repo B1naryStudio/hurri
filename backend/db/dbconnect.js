@@ -5,6 +5,7 @@ var config = require('../config/');
 mongoose.connect(config.db.uri, config.db.opts);
 
 //mongoose.set('debug', true);
+this.connection = mongoose.connection;
 
 mongoose.connection.on('connected', function () {
 	this.state = 'connected';

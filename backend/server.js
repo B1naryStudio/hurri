@@ -4,7 +4,6 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-
 var app = express();
 
 var morgan = require('./middleware/morgan');
@@ -17,7 +16,20 @@ app.use(express.static(staticPath));
 staticPath = path.normalize(__dirname + '/../bower_components');
 app.use('/bower_components', express.static(staticPath));
 
-app.use(session({ secret: 'SECRET' }));
+var config = require('./config/');
+var MongoStore = require('connect-mongo')(session);
+var mongoose_connection = require('./db/dbConnect').connection;
+
+var context = require('./units/context');
+
+context.mongoStore = new MongoStore({
+	mongoose_connection : mongoose_connection
+});
+
+app.use(session({
+	secret: config.session.secret,
+	store: context.mongoStore
+}));
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({extended: true}) );
