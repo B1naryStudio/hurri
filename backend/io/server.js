@@ -1,3 +1,4 @@
+var socketio = require('socket.io');
 var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var config = require('../config/');
@@ -10,30 +11,27 @@ var mediator = require('../units/mediator');
 
 module.exports = function(server){
 	
-	var io = socketio(server);
+	context.io = socketio(server);
 
-	io.use(passportSocketIo.authorize({
+	context.io.use(passportSocketIo.authorize({
 		cookieParser: cookieParser,
 		key: 'connect.sid',     
 		secret: config.session.secret,  
 		store: context.mongoStore
 	}));
 
-	io.on('connection', function (socket) {
+	context.io.on('connection', function (socket) {
 		socketManager.addSocketForUser(socket.request.user._id, socket.id);
 
 		socket.on('disconnect', function () {
 			socketManager.removeSocketForUser(socket.request.user._id, socket.id);
 		});
 
-		socket.on('add-user-to-radio', function (id) {
+		socket.on('add-user-to-radio', function (radio_id) {
 			// mediator.publish("add-user-to-radio", id);
-
+			roomManager.addUserToRoom(socket.request.user._id, 'radio_' + radio_id);
 		});
 	});
 	
-
-
-
- return io;
+ return context.io;
 };
