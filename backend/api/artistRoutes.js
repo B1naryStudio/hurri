@@ -10,8 +10,8 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.get('/api/explorer/artists', function(req, res, next){
-		artistRepository.getAll(function(err, data){
+	app.get('/api/explorer/artists/:genre', function(req, res, next){
+		artistRepository.getAll(decodeURIComponent(req.params.genre), function(err, data){
 			res.data = data;
 			res.err = err;
 			next();
@@ -20,6 +20,7 @@ module.exports = function(app){
 
 	app.get('/api/artist/id/:id/albums', function(req, res, next){
 		artistRepository.getArtistAlbums(req.params.id, function(err, data){
+			console.log(data);
 			res.data = data;
 			res.err = err;
 			next();

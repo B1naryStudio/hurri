@@ -18,6 +18,7 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 		},
 		events : {
 			'click #unqueue' : 'unqueueSong',
+			'click #clearall' : 'clearList',
 			'click #save-playlist-as' : 'setClass',
 			"keypress .edit2" : "createPlaylist",
 			'click #save-playlist-from-queue':'saveExisting',
@@ -28,6 +29,10 @@ define(['marionette', './SonglistView', './Behavior', '../../shared/playlist/Pla
 
 		initialize: function(){
 			this.bindListeners();
+		},
+
+		clearList: function(){
+			this.collection.reset();
 		},
 
 		bindListeners: function(){

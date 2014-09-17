@@ -1,20 +1,27 @@
 script#album-bar(type='text/template')
-	.nameAlbum {{-name}}
 	img.albumCover(src='{{-cover}}')
+	.nameAlbum {{-title}}
 	.artistAlbum {{-singer.name}}
 	.totalTracksAlbum Tracks: {{-tracks.length}}
 
 script#album-bar-composite(type='text/template')
 	#main-bar-header
-		select#genres-select 
-			option genres
-			option rock
-			option pop
-			option alternative
-			option rap
+		select(name='selector')#genres-select 
+				option(value="Rock").select-item Rock
+				option(value="Pop").select-item Pop
+				option(value="Hip Hop").select-item Hip Hop
+				option(value="R&B/Soul/Funk").select-item R&B/Soul/Funk
+				option(value="Dance").select-item Dance
+				option(value="World").select-item World
+				option(value="Jazz").select-item Jazz
+				option(value="Reggae").select-item Reggae
+				option(value="Classical").select-item Classical
+				option(value="Alternative").select-item Alternative
+				option(value="Electro").select-item Electro
 		#album-select album
 		#artist-select artist
 		#track-select track
+	#main-child-container
 
 script#album-full-search(type='text/template')
 	.header

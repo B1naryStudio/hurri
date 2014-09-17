@@ -83,8 +83,6 @@ UserRepository.prototype.getFollowing = function(id, callback) {
 	query.exec(callback);
 };
 
-
-
 UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
 	var model = this.createModel();
 	model.findOne({id: id}, function(err, res){
@@ -218,7 +216,7 @@ UserRepository.prototype.getFollowersInfo = function(id, callback) {
 	var self = this;
 	query.exec(function(err,data){
 		var infomodel = Userinfo;
-			console.log('id=',data.followers[0]._id);
+			//console.log('id=',data.followers[0]._id);
 			var list = [];
 			for (var i=0; i<data.followers.length; i++){
 				list.push(data.followers[i]._id);
@@ -239,12 +237,12 @@ UserRepository.prototype.getFollowingInfo = function(id, callback) {
 	var self = this;
 	query.exec(function(err,data){
 		var infomodel = Userinfo;
-			console.log('id=',data.following[0]._id);
+			//console.log('id=',data.following[0]._id);
 			var list = [];
 			for (var i=0; i<data.following.length; i++){
 				list.push(data.following[i]._id);
 			}
-			console.log('list', list);
+			//console.log('list', list);
 			self.getUserListInfo(list, function(error, data){
 				console.log('data=',data);
 				console.log('error', error);
@@ -267,7 +265,7 @@ UserRepository.prototype.sync = function(id, callback) {
 			var list = result.tracks;
 			var auth = self.createModel();
 			auth.findOne({_id:id},'idVk', function(err, dataauth){
-				console.log(data);
+				//console.log(data);
 				VK.getUserAudio(dataauth.idVk, function(playlist){
 					var vklist = playlist.response;
 					var vkSongNames = [];
@@ -276,7 +274,7 @@ UserRepository.prototype.sync = function(id, callback) {
 					for (var i = 1; i < vkSongTitle.length; i++){
 						vkSongNames.push(vkSongTitle[i] + ' - ' + vkSongSinger[i]);
 					}
-					//console.log(vkSongNames);
+					////console.log(vkSongNames);
 					var synchronised = _.filter(list, function(item){
     					return vkSongNames.indexOf(item.title) !== -1;
 					});
@@ -314,15 +312,15 @@ UserRepository.prototype.sync = function(id, callback) {
 							ids.push(pure[track]._id);
 						}
 					}
-					console.log('ID', id,  'PLAYLIST:', result._id);
+					//console.log('ID', id,  'PLAYLIST:', result._id);
 					self.updatePlaylist(id, result._id, {tracks: ids}, function(err, info){
-						console.log(err, info);
+						//console.log(err, info);
 					});
 				});
 
 			});
 			
-			//console.log('DATA: ', result.tracks);
+			////console.log('DATA: ', result.tracks);
 		});	
 	});
 };
@@ -353,14 +351,14 @@ UserRepository.prototype.getGroups = function(id, callback) {
 
 UserRepository.prototype.addLike = function(id, likedid, callback) {
 	var model = this.infoModel;
-	//console.log(likedid);
+	////console.log(likedid);
 	var query = model.findOneAndUpdate({user_auth_id: id},{$push: {liked:likedid}} );
 	query.exec(callback);
 };
 
 UserRepository.prototype.addListened = function(id, listenedid, callback) {
 	var model = this.infoModel;
-	//console.log(listenedid);
+	////console.log(listenedid);
 	var query = model.findOneAndUpdate({user_auth_id: id},{$addToSet: {listened:listenedid}} );
 	query.exec(callback);
 };
@@ -373,8 +371,8 @@ UserRepository.prototype.addGroups = function(id, groupid, callback) {
 
 UserRepository.prototype.deleteLike = function(id, likedid, callback) {
 	var model = this.infoModel;
-	//console.log(id);
-	//console.log(likedid);
+	////console.log(id);
+	////console.log(likedid);
 	model.findOne({user_auth_id: id}, function(err, res){
 				res.liked.remove(likedid);
 				res.save(callback);						  
@@ -391,7 +389,7 @@ UserRepository.prototype.deleteGroups = function(id, groupid, callback) {
 
 UserRepository.prototype.addPlaylists = function(id, playlist, callback) {
 	var model = this.infoModel;
-	//console.log('addPlaylist called');
+	////console.log('addPlaylist called');
 	var query = model.findOneAndUpdate({user_auth_id: id},{$push: {playlists:playlist}} );
 	query.exec(callback);
 };
@@ -417,14 +415,14 @@ UserRepository.prototype.addSongToPlaylist = function(id, pid, tid, callback) {
 };
 
 UserRepository.prototype.updatePlaylist = function(id, pid, body, callback) {
-	console.log('update Called');
+	//console.log('update Called');
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id}, function(err, data){
-		console.log(err, data);
+		//console.log(err, data);
 		for(var i = 0; i < data.playlists.length; i++){
-			console.log(data.playlists[i]._id, pid);
+			//console.log(data.playlists[i]._id, pid);
 			if (data.playlists[i]._id.toString() === pid.toString()){
-				console.log('Find list');
+				//console.log('Find list');
 				data.playlists[i].tracks = body.tracks;
 				data.save(callback);
 			}
@@ -437,7 +435,7 @@ UserRepository.prototype.updatePlaylistType = function(id, pid, body, callback) 
 	var query = model.findOne({user_auth_id: id}, function(err, data){
 		for(var i = 0; i < data.playlists.length; i++){
 			if (data.playlists[i]._id == pid){
-				console.log('body=', body);
+				//console.log('body=', body);
 				data.playlists[i].type = body.type;
 				data.save(callback);
 			}
@@ -459,7 +457,7 @@ UserRepository.prototype.deleteSongFromPlaylist = function(id, pid, tid, callbac
 
 UserRepository.prototype.getPlaylists = function(id, callback) {
 	var model = this.infoModel;
-	//console.log(id);
+	////console.log(id);
 	var query = model.findOne({user_auth_id: id},'playlists', { lean: true }).populate('playlists.tracks');
 	query.exec(callback);
 };

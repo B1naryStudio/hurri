@@ -2,6 +2,15 @@ var groupRepository = require('../repositories/groupRepository');
 var apiResponse = require('../middleware/apiResponse');
 
 module.exports = function(app){
+
+	app.get('/api/group', function(req, res, next){
+		groupRepository.getAll(function(err, data){
+			res.err = err;
+			res.data = data;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/group/:id/members', function(req, res, next){
 		groupRepository.getMembers(req.params.id, function(err, data){
 			res.err = err;

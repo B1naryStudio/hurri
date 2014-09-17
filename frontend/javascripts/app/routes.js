@@ -8,15 +8,15 @@ var HurriRoutes = Marionette.AppRouter.extend({
 		'user/:id/listened' : 'showListened',
 		'user/:id/like'	: 'showFavorites',
 		'user/:id' : 'showUser',
-		'explorer/albums' : 'showEplorerAlbums',
+		'explorer/albums/:name' : 'showEplorerAlbums',
 		'charts' : 'showCharts',
 		'user/:id/playlists/:id_pl' : 'showPlaylist',
 		'track/id/:id' : 'showTrack',
 		'search/:name' : 'showSearch',
 		'album/id/:id' : 'showAlbumTracks',
 		'artist/id/:id/albums' : 'showArtistAlbums',
-		'explorer/artists' : 'showExplorerArtists',
-		'explorer/tracks' : 'showExplorerTracks',
+		'explorer/artists/:name' : 'showExplorerArtists',
+		'explorer/tracks/:name' : 'showExplorerTracks',
 		'search/full/albums/:name' : 'showFullAlbumList',
 		'search/full/artists/:name' : 'showFullArtistList',
 		'search/full/tracks/:name' : 'showFullSongList',
@@ -59,10 +59,10 @@ var HurriRoutes = Marionette.AppRouter.extend({
 		window.localStorage.setItem("currentTab", "search/full/tracks/" + name);
 	};
 
-	RouteController.prototype.showExplorerTracks =  function(id){
+	RouteController.prototype.showExplorerTracks =  function(name){
 		console.log('Explorer Tracks');
-		Backbone.trigger('show-all-tracks', id);
-		window.localStorage.setItem("currentTab", "explorer/tracks");
+		Backbone.trigger('show-all-tracks', name);
+		window.localStorage.setItem("currentTab", "explorer/tracks/" + encodeURIComponent(name));
 	};
 
 
@@ -77,7 +77,7 @@ var HurriRoutes = Marionette.AppRouter.extend({
 		if (tab){
 			router.navigate(tab, true);
 		} else {
-			this.showEplorerAlbums();
+			this.showEplorerAlbums('World');
 		}
 	};
 
@@ -127,16 +127,16 @@ var HurriRoutes = Marionette.AppRouter.extend({
 		window.localStorage.setItem("currentTab", "charts");
 	};
 
-	RouteController.prototype.showEplorerAlbums =  function(){
+	RouteController.prototype.showEplorerAlbums =  function(name){
 		console.log('show albums');
-		Backbone.trigger('show-albums');
-		window.localStorage.setItem("currentTab", "explorer/albums");
+		Backbone.trigger('show-albums', name);
+		window.localStorage.setItem("currentTab", "explorer/albums/" + encodeURIComponent(name));
 	};
 
-	RouteController.prototype.showExplorerArtists =  function(){
+	RouteController.prototype.showExplorerArtists =  function(name){
 		console.log('show artists');
-		Backbone.trigger('show-artists');
-		window.localStorage.setItem("currentTab", "explorer/artists");
+		Backbone.trigger('show-artists', name);
+		window.localStorage.setItem("currentTab", "explorer/artists/" + encodeURIComponent(name));
 	};
 
 	RouteController.prototype.showPlaylist =  function(id, id_pl){

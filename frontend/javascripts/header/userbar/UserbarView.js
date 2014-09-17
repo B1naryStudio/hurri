@@ -15,9 +15,14 @@ define(['marionette','../../app/routes', '../../app/context'],
 			'click @ui.nameField' : 'showUserView',
 		},
 
+		initialize: function() {
+			var self = this;
+			Backbone.on('hotkey:userview-show', $.proxy(self.showUserView, self));
+		},
+
 		showUserView: function(){
 			router.navigate('/user/'+ context.currentUserModel.attributes._id,true);
-		},
+		}
 
 	});
 	return UserbarView;

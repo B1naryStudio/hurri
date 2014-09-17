@@ -4,7 +4,7 @@ var injectData = require('../middleware/injectDataMiddleware');
 
 module.exports = function (app) {
 
-	app.get('/explorer/albums', function(req, res, next) {
+	app.get('/explorer/albums/:genre', function(req, res, next) {
 		injectData(req, res, {}, false);
 	});
 

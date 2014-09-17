@@ -9,6 +9,17 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 		'click .main-song-cover': 'playSong'
 	},
 
+	behaviors: {
+		Draggable:{
+			connectToSortable: '.sidebarSongWrapper',
+			containment:'body',
+			helper: "clone",
+			zIndex: 999999,
+			revert: "invalid",
+			opacity: 0.35
+		}
+	},
+
 	modelEvents : {
 			'change:current': 'changeCurrent',
 			'change:liked'	: 'changeLiked'

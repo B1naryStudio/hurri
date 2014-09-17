@@ -2,17 +2,32 @@ var connection = require('../db/dbconnect.js');
 var Group = require('../schemas/radio.js');
 var Repository = require('./generalRepository.js');
 var _ = require('underscore');
+var mediator = require('../units/mediator');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
 	this.model = Group;
+	this.bindListeners();
 }
 
 GroupRepository.prototype = new Repository();
 
+GroupRepository.prototype.bindListeners = function(){
+	mediator.on("add-user-to-radio", function(){
+		console.log(arguments[0]); 
+	});
+};
+
 GroupRepository.prototype.getMembers = function(id, callback) {
 	var model = this.createModel();
 	var query = model.findOne({_id: id}, 'listeners').populate('listeners');
+	query.exec(callback);
+};
+
+
+GroupRepository.prototype.getAll = function(callback) {
+	var model = this.createModel();
+	var query = model.find({}).populate('tracks').populate('listeners').populate('user_auth_id');
 	query.exec(callback);
 };
 

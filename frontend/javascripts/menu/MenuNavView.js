@@ -10,24 +10,33 @@ define(['marionette', '../app/routes', '../app/context'],
 			'click #albums-button' : 'showExplorer',
 			'click #charts-button' : 'showCharts'
 		},
-
-		showFavorites : function(){
+		clearActive: function(ev){
+			$('ul li').removeClass('active-menu');
+			var $element = ev.currentTarget;
+			$element.className = 'active-menu';
+		},
+		showFavorites : function(ev){
+			this.clearActive(ev);
 			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/like',true);
 		},
 
-		showPlaylists : function(){
+		showPlaylists : function(ev){
+			this.clearActive(ev);
 			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/playlists',true);
 		},
 
-		showGroupes : function(){
+		showGroupes : function(ev){
+			this.clearActive(ev);
 			router.navigate('/user/'+ context.currentUserModel.attributes._id + '/groups',true);
 		},
 
-		showExplorer : function(){
-			router.navigate('/explorer/albums',true);
+		showExplorer : function(ev){
+			this.clearActive(ev);
+			router.navigate('/explorer/albums/World',true);
 		},
 
-		showCharts : function(){
+		showCharts : function(ev){
+			this.clearActive(ev);
 			router.navigate('/charts',true);
 		}
 	});

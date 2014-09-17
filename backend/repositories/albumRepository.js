@@ -1,6 +1,7 @@
 var connection = require('../db/dbconnect.js');
 var Album = require('../schemas/album.js');
 var Repository = require('./generalRepository.js');
+var Artist = require('../schemas/artist.js');
 
 function AlbumRepository(){
 	Repository.prototype.constructor.call(this);
@@ -16,9 +17,10 @@ AlbumRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-AlbumRepository.prototype.getAll = function(callback) {
+AlbumRepository.prototype.getAll = function(genre, callback) {
 	var model = this.model;
-	var query = model.find({}).populate('singer').populate('tracks').limit(50);
+	console.log(genre);
+	var query = model.find({genres: {$in : [genre]}}).populate('singer').populate('tracks').limit(50);
 	query.exec(callback);
 };
 
@@ -52,7 +54,12 @@ AlbumRepository.prototype.getGenres = function(id, callback) {
 AlbumRepository.prototype.getTracks = function(id, callback) {
 	var model = this.model;
 	var query = model.findOne({_id: id}, 'tracks').populate('tracks');
-	query.exec(callback);
+	query.exec(function(err, data){
+		var opts = [
+			{ path: 'singer', model: 'Artist' }
+		];
+		Artist.populate(data.tracks, opts, callback);
+	});
 };
 
 AlbumRepository.prototype.getComments = function(id, callback) {

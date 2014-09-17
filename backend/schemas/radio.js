@@ -3,6 +3,10 @@ var mongoose = require('../db/mongoose');
 var Schema = mongoose.Schema;
 
 var radioSchema = new Schema({
+	name : {
+		type: String,
+		default: ''
+	},
 	user_auth_id : { 
 		type: Schema.Types.ObjectId, 
 		ref: 'Userauth' 

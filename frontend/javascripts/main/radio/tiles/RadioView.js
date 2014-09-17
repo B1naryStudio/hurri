@@ -7,7 +7,7 @@ define(['marionette'], function(Marionette){
   		},
 
   		showRadioMain: function() {
-  			Backbone.trigger('show-radio-main');
+  			Backbone.trigger('backbone:radio-view', this.model.attributes._id);
   			alert('This is костыль');
   		}
 	});

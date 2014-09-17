@@ -9,7 +9,7 @@ define(['backbone'], function(Backbone){
 				title : 'Undefined name',
 				duration : 0
 			}],
-			master : {
+			user_auth_id : {
 				name : 'Undefined name',
 				avatarUrl : 'images/defaults/avatar.jpg'
 			}

@@ -1,4 +1,4 @@
-define(['marionette', './MainSongView', 'clipboard'], 
+define(['marionette', './MainSongView', 'clipboard', '../../sidebar/songlist/Behavior'], 
 	function(Marionette, MainSongView, ZeroClipboard){
 	var MainSongCollectionView = Marionette.CompositeView.extend({
 		id: 'main-songlist-composite',
@@ -6,6 +6,7 @@ define(['marionette', './MainSongView', 'clipboard'],
 		events: {
 			'click #playlist-avatar-header':'playSongs'
 		},
+		
 		childView: MainSongView,
 		childEvents: {
 			'song-view:play-collection' : function(info, models, position){

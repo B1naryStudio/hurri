@@ -8,6 +8,10 @@ define(['marionette', '../shared/playlist/SongCollection'], function(Marionette,
 			'click #friendsButton'	: 'showFriends', 
 			'click #hideButton'		: 'toggleSidebar' 
 		},
+		initialize: function() {
+			var self = this;
+			Backbone.on('hotkey:sidebar-toggle', $.proxy(self.toggleSidebar, self));
+		},
 		showFriends: function(){
 			Backbone.trigger('show-friends');
 		},

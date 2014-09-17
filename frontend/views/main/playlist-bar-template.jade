@@ -7,9 +7,6 @@ script#playlist-bar(type='text/template')
 		.playlist-total
 			span Total tracks: {{-tracks.length}} Genre: {{-genre}} 
 		.playlist-play
-		{{if (owner_id === window._injectedData.user._id){ }}
-		{{-owner_id}}
-		{{ } }}
 		.playlist-private 
 	.playlist-right
 		ol.songs-list

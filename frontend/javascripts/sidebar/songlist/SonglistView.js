@@ -17,6 +17,7 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		ui : {
 			song : '.sidebar-song-wrap'
 		},
+
 		bindListeners: function(){
 		},
 

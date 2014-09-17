@@ -16,9 +16,9 @@ ArtistRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-ArtistRepository.prototype.getAll = function(callback) {
+ArtistRepository.prototype.getAll = function(genre, callback) {
 	var model = this.model;
-	var query = model.find({}).populate('albums_id').limit(50);
+	var query = model.find({genres: {$in : [genre]}}).populate('albums_id').limit(50);
 	query.exec(callback);
 };
 
@@ -28,12 +28,17 @@ ArtistRepository.prototype.getArtistAlbums = function(id, callback) {
 		var opts = [
 			{ path: 'tracks', model: 'Track' }
 		];
-		Track.populate(data.albums_id, opts, callback);
+		Track.populate(data.albums_id, opts, function(err, res){
+			var opts = [
+				{ path: 'singer', model: 'Artist' }
+			];
+			Artist.populate(res.tracks, opts, callback);
+		});
 	});
 };
 
 ArtistRepository.prototype.getByName = function(name, limit, quick, callback) {
-	console.log(limit);
+	//console.log(limit);
 	var model = this.model;
 	var lim = limit || '';
 	var q = quick || '';

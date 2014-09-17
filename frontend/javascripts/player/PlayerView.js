@@ -46,11 +46,31 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			player : '#player',
 			songPosition: '#song-position'
   		},
-		onRender: function () {
+  		initialize: function() {
+  			var self = this;
+
+  			// hotkeys events
+			Backbone.on('hotkey:player-pause', $.proxy(self.playbackState, self));
+			Backbone.on('hotkey:player-stop', $.proxy(self.stop, self));
+			Backbone.on('hotkey:player-replay', $.proxy(self.replay, self));
+			Backbone.on('hotkey:player-previous-track', $.proxy(self.previousTrack, self));
+			Backbone.on('hotkey:player-next-track', $.proxy(self.nextTrack, self));
+			Backbone.on('hotkey:player-playback-up', $.proxy(self.playbackUp, self));
+			Backbone.on('hotkey:player-playback-down', $.proxy(self.playbackDown, self));
+			Backbone.on('hotkey:player-volume-up', $.proxy(self.volumeLevelUp, self));
+			Backbone.on('hotkey:player-volume-down', $.proxy(self.volumeLevelDown, self));
+			Backbone.on('hotkey:player-mute', $.proxy(self.mute, self));
+			Backbone.on('hotkey:player-repeat', $.proxy(self.repeatMode, self));
+			Backbone.on('hotkey:player-shuffle', $.proxy(self.shuffleMode, self));
+			Backbone.on('hotkey:player-like', $.proxy(self.likeState, self));
+			Backbone.on('hotkey:player-comment', $.proxy(self.addComment, self));
+			Backbone.on('hotkey:player-visualization', $.proxy(self.toggleVisualisation, self));
+  		},
+		onRender: function() {
 			var mode = this.model.get('liked');
 			mode = 'player-button' + ' ' + mode;
 			this.ui.likeButton.removeClass();
-			this.ui.likeButton.addClass(mode);  			
+			this.ui.likeButton.addClass(mode);		
 		},
 		likeState : function(){
 			var mode = this.model.likeState();
@@ -67,7 +87,16 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
   			this.flag = true;
   			this.volumeLevelSetup();
   		},
-  		
+  		volumeLevelUp : function(){
+			var volumeLevel = parseInt(this.ui.volumeRange.val());
+			this.ui.volumeRange.val(volumeLevel + 10);
+			this.setUpVolume();
+		},
+		volumeLevelDown : function(){
+			var volumeLevel = parseInt(this.ui.volumeRange.val());
+			this.ui.volumeRange.val(volumeLevel - 10);
+			this.setUpVolume();
+		},
   		setUpPlayback: function(){
   			this.flag = true;
   			this.playbackPosition();
@@ -88,13 +117,36 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 
 		nextTrack: function(){
 			this.model.nextTrack();
-			Backbone.trigger('player:nextTrack');
 		},
 		playbackState : function(){
 			var mode = this.model.playbackState();
 			mode = 'player-button' + ' ' + mode;
 			this.ui.playButton.removeClass();
 			this.ui.playButton.addClass(mode);
+		},
+
+		stop: function() {
+			if(this.model.get('playback') == 'play')
+				this.playbackState();
+
+			this.ui.playbackRange.val(0);
+			this.playbackPosition();
+		},
+
+		replay: function() {
+			this.ui.playbackRange.val(0);
+			this.playbackPosition();
+		},
+
+		playbackUp : function(){
+			var playbackPos = parseInt(this.ui.playbackRange.val());
+			this.ui.playbackRange.val(playbackPos + 10);
+			this.playbackPosition();
+		},
+		playbackDown : function(){
+			var playbackPos = parseInt(this.ui.playbackRange.val());
+			this.ui.playbackRange.val(playbackPos - 10);
+			this.playbackPosition();
 		},
 
 		previousTrack : function(){	
@@ -115,7 +167,6 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			this.ui.shuffleButton.addClass(mode);
 		},
 
-
 		repeatMode : function(){
 			var mode = this.model.repeatMode();
 			mode = 'player-button' + ' ' + mode;
@@ -133,7 +184,7 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 
 		volumeLevelSetup : function(){
 			if (this.flag){
-				var input =  this.ui.volumeRange.val();
+				var input = this.ui.volumeRange.val();
 				this.model.volumeLevelSetup(input);
 			}
 		},

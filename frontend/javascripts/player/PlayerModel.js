@@ -1,5 +1,6 @@
-define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', '../shared/playlist/PlaylistModel', '../main/listened/ListenedCollection'], 
-	function(Backbone, enums, context, LocalStorage, audioHandler, playlistModel, listenedCollection){
+define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/HtmlAudioHandler', 
+	'../shared/playlist/PlaylistModel', '../main/listened/ListenedCollection', '../app/routes'], 
+	function(Backbone, enums, context, LocalStorage, audioHandler, playlistModel, listenedCollection, router){
 	var PlayerModel = Backbone.Model.extend({
 		defaults: {
 			playback: 'pause',
@@ -115,7 +116,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 						}
 					});*/
 				});
-	 		}); 
+			});
 		},
 
 		newTrack: function(param){
@@ -169,6 +170,9 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 				url:'/api/user/' + window._injectedData.user._id + '/listened/' + context.currentSongModel.get('_id')
 			});
 			var next = playlistModel.nextPlayedTrack('direct', this.get('repeatTrack'), this.get('currentTrack'));
+			if (window.localStorage.getItem('currentTab').substr(0, 9) === 'track/id/'){
+				router.navigate('track/id/' + context.currentSongCollection.models[next].attributes._id, true);
+			}
 			this.newTrack(next);
 			if ((this.get('currentTrack') > 0) && (playlistModel.get('numberOfTracks') > 0)) {
 				this.set({previousButtonState: false});
@@ -182,6 +186,9 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 
 			var previous = playlistModel.nextPlayedTrack('reverse', this.get('repeatTrack'), this.get('currentTrack'));
 
+			if (window.localStorage.getItem('currentTab').substr(0, 9) === 'track/id/'){
+				router.navigate('track/id/' + context.currentSongCollection.models[previous].attributes._id, true);
+			}
 			this.newTrack(previous);
 
 
@@ -276,7 +283,6 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		volumeLevelSetup : function(input){
 			this.set({volumeLevel: input});
 			audioHandler.volumeLevelSetup(input);
-
 		},
 
 		playbackPosition : function(input){

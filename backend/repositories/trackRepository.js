@@ -1,7 +1,9 @@
 var connection = require('../db/dbconnect.js');
 var Track = require('../schemas/track.js');
 var Repository = require('./generalRepository.js');
+var Lyric = require('./lyricRepository.js');
 var mongoose = require('mongoose');
+var VK = require('../social_network_wrapper/VKWrapper');
 
 function TrackRepository(){
 	Repository.prototype.constructor.call(this);
@@ -29,9 +31,10 @@ TrackRepository.prototype.getById = function(id, callback) {
 	query.exec(callback);
 };
 
-TrackRepository.prototype.getAll = function(callback) {
+TrackRepository.prototype.getAll = function(genre, callback) {
 	var model = this.model;
-	var query = model.find({}).populate('album').populate('singer').limit(50);
+	console.log(genre);
+	var query = model.find({}).populate('album', null, {'album.genres': {$in : [genre]}}).populate('singer').limit(50);
 	query.exec(callback);
 };
 
@@ -56,10 +59,39 @@ TrackRepository.prototype.getTitle = function(id, callback) {
 	query.exec(callback);
 };
 
-TrackRepository.prototype.getLirycs = function(id, callback) {
+TrackRepository.prototype.getLyrics = function(id, name, callback) {
 	var model = this.model;
-	var query = model.findOne({_id: id},'lyrics');
-	query.exec(callback);
+	var query = model.findOne({_id: id}).populate('lyricsText');
+	query.exec(function(err, data){
+		if (!data.lyricsText){
+
+			var options = {
+				query: encodeURIComponent(name),
+				sort: 2,
+				onlyArtist: 0,
+				auto_complete: 1,
+				count: 1
+			};
+
+			VK.getAudioSearch(options, function(results){
+				if (results !== 404 && results.lyrics_id !== undefined){
+					VK.getLyricsById(results.lyrics_id, function(lyrics){
+						var l_id = mongoose.Types.ObjectId();
+						Lyric.add({_id: l_id, lyric: lyrics.response.text}, function(){
+							model.findOneAndUpdate({_id:id}, {lyricsText: l_id}, function(){
+								callback(err, lyrics.response.text);
+							});
+						});
+						
+					});
+				} else {
+					callback(err, 'Sorry, we didn\'t find any lyrics...');
+				}
+			});
+		} else {
+			callback(err, data.lyricsText.lyric);
+		}
+	});
 };
 
 TrackRepository.prototype.getUrl = function(id, callback) {
