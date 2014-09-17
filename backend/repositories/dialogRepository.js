@@ -19,6 +19,13 @@ DialogRepository.prototype.getDialog = function(id1,id2,callback) {
 DialogRepository.prototype.addMessage = function(id1,id2,body, callback) {
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({user_auth_id1: id1, user_auth_id2: id2}, {$push: {dialogue:body}} );
+	userRepository.addAlert(id1, 
+		{
+			name : 'Message',
+			type : 'info',
+			additionalInfo : 'this notification has no additional information',
+			active : true
+		});
 	query.exec(callback);
 };
 
