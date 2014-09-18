@@ -1,0 +1,54 @@
+#sitetour
+	position absolute
+	overflow hidden
+	z-index 100
+
+	#sitetour-shadow
+		width 100%
+		height 100%
+		background rgba(0, 0, 0, 0.5)
+
+		#sitetour-arrow
+			position absolute
+			width 100px
+			height 100px
+			display none
+			cursor pointer
+
+		#sitetour-info
+			position absolute
+			width auto
+			height auto
+			background #fff
+			border hidden
+			border-radius 3px
+			padding 10px
+			box-sizing border-box
+			text-align center
+			display none
+			cursor pointer
+
+		#sitetour-bar
+			width 100%
+			height auto
+			position absolute
+			left 0
+			bottom 0
+
+			#sitetour-next-button, #sitetour-cancel-button
+				width 100px
+				height 30px
+				background #fff
+				margin 50px
+				line-height 30px
+				text-align center
+				border hidden
+				border-radius 3px
+				float right
+				cursor pointer
+
+				&:hover
+					background lightgray
+
+			#sitetour-cancel-button
+				float left

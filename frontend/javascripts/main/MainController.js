@@ -39,6 +39,7 @@ define(['marionette',
 	   './explorer/artist/tiles/ArtistCollection',
 	   './search/artist/ArtistTileView',
 	   '../shared/songlistmain/MainSongView',
+	   '../sitetour/SitetourView'
 	  ],
 	function(Marionette, 
 		_,
@@ -80,7 +81,8 @@ define(['marionette',
 		AlbumBarChildView,
 		ArtistCollection,
 		ArtistView,
-		MainSongView
+		MainSongView,
+		SitetourView
 		){
 	
 	var MainController = function(){		
@@ -646,6 +648,15 @@ define(['marionette',
 
 		Backbone.on('show-all-tracks', function(name){
 			this.initializeTracks(name);
+		},this);
+
+		Backbone.on('action:show-sitetour-view', function(){
+			var el = document.createElement('div');
+			el.id = 'sitetour';
+			document.getElementsByTagName('body')[0].appendChild(el);
+			this.sitetourView = new SitetourView({
+				el: el
+			});
 		},this);
 
 		Backbone.on('action:showUserView', function(id){
