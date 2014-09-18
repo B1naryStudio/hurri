@@ -99,6 +99,14 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
+	app.get('/api/user/:id/playlists/public', function(req, res, next){
+		userRepository.getPublicPlaylists(req.params.id, function(err, data){
+			res.data = data;
+			res.err = err;
+			next();
+		});
+	}, apiResponse);
+
 	app.get('/api/user/:id/playlists/:id_pl', function(req, res, next){
 		userRepository.getPlaylistsShare(req.params.id, req.params.id_pl, function(err, data){
 			res.data = data;

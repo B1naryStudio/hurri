@@ -462,6 +462,22 @@ UserRepository.prototype.getPlaylists = function(id, callback) {
 	query.exec(callback);
 };
 
+UserRepository.prototype.getPublicPlaylists = function(id, callback) {
+	var model = this.infoModel;
+	////console.log(id);
+	var query = model.findOne({user_auth_id: id, 'playlists.type': 'private'}, 'playlists', function(err, data){
+		for(var i = 0; i < data.playlists.length; i++){
+			if (data.playlists[i].type === 'private'){
+				data.playlists[i].remove();
+			}
+		}
+		console.log('error public pl', err);
+		console.log('data public pl', data);
+		callback(err, data);
+	});
+
+};
+
 UserRepository.prototype.getPlaylistsShare = function(id, pl_id, callback) {
 	var model = this.infoModel;
 	var query = model.findOne({user_auth_id: id, 'playlists._id' : pl_id},'playlists');
