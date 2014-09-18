@@ -10,15 +10,32 @@ function DialogRepository(){
 
 DialogRepository.prototype = new Repository();
 
-DialogRepository.prototype.getDialog = function(id1,id2,callback) {
+DialogRepository.prototype.addDialog = function(id1, id2, callback) {
+	var arr = [id1, id2];
+	arr.sort();
 	var model = this.createModel();
-	var query = model.findOne({user_auth_id1: id1, user_auth_id2: id2});
+	var newitem = new model({
+		user_auth_id1: arr[0],
+		user_auth_id2: arr[1],
+		dialogue: []
+	});
+	newitem.save(callback);
+};
+
+DialogRepository.prototype.getDialog = function(id1,id2,callback) {
+	var arr = [id1, id2];
+	arr.sort();
+	console.log('arr', arr);  
+	var model = this.createModel();
+	var query = model.findOne({user_auth_id1: arr[0], user_auth_id2: arr[1]});
 	query.exec(callback);
 };
 
 DialogRepository.prototype.addMessage = function(id1,id2,body, callback) {
+	var arr = [id1, id2];
+	arr.sort();
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({user_auth_id1: id1, user_auth_id2: id2}, {$push: {dialogue:body}} );
+	var query = model.findOneAndUpdate({user_auth_id1: arr[0], user_auth_id2: arr[1]}, {$push: {dialogue:body}} );
 	userRepository.addAlert(id1, 
 		{
 			name : 'Message',

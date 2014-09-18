@@ -11,8 +11,8 @@ module.exports = function(app){
 		});
 	}, apiResponse);
 
-	app.post('/api/dialogue', function(req, res, next){
-		dialogRepository.add(req.body, function(err, data){
+	app.post('/api/dialogue/:id1/:id2', function(req, res, next){
+		dialogRepository.addDialog(req.params.id1, req.params.id2, function(err, data){
 			res.err = err;
 			res.data = data;
 			next();

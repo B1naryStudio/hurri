@@ -1,9 +1,9 @@
 define(['backbone','./CommentCollection', 'underscore'], function(Backbone, CommentCollection, _){
 	var CommentModel = Backbone.Model.extend({
 		defaults:{
-			comment : 'hello moto',
-			userName : 'Guest',
-			date : 1,
+			comment : 'Comment this track!',
+			userName : 'Admin',
+			date : '18/09/2014',
 			avatar: ''
 		}
 	});
