@@ -27,11 +27,12 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 
 	socketHandler
 		.in({
-			'radio-channel-created': 'show-admin-view',
-			'change-track' : 'play-changed-track',
+			'radio-channel-created': 'update-admin-info',
+			'play-this-radio-track' : 'play-changed-track',
 			'change-position': 'change-track-position'
 		})
 		.out({
+			'sidebar:play-track' : 'play-this-track',
 			'backbone:radio-view':'add-user-to-radio',
 			'radio-view:create-radio' : 'create-radio-channel',
 			'radio-view:add-to-requiring' : 'ask-for-rights',

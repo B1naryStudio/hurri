@@ -31,7 +31,7 @@ module.exports = function(server){
 		socket.on('add-user-to-radio', function (radio_id) {
 			mediator.publish("add-user-to-radio", radio_id, socket.request.user._id);
 			roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
-			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
+			console.log('Add user to radio', roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
 
 		socket.on('create-radio-channel', function () {
@@ -58,10 +58,21 @@ module.exports = function(server){
 			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
 
-		mediator.on('radio-channel-created', function(){
-			context.io.emit('radio-channel-created', arguments[0]);
+		socket.on('play-this-track', function (object) {
+			//mediator.publish("remove-from-editors", socket.request.user._id);
+			console.log('Here comes!', object.id, object.radio);
+			console.log('Play this track', roomManager.getSocketsByRoom('radio_' + object.radio));
+			context.io.to('radio_' + object.radio).emit('play-this-radio-track', object.id);
+			//roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
+			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
 		
+	});
+
+	mediator.on('radio-channel-created', function(object){
+		console.log(object);
+		roomManager.addRoomToUser(object.userId, 'user_' + object.userId);
+		context.io.to('user_' + object.userId).emit('radio-channel-created', object);
 	});
 	
  return context.io;

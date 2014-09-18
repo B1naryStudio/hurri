@@ -3,7 +3,7 @@ script#radio-bar(type='text/template')
 		.left-side
 			.nameRadio {{-name}}
 			.first-track-in-list you will listen:
-			{{ var tracksnames = 2; if (listeners.length < 2) tracksnames = listeners.length; for (var i = 0; i < tracksnames; i ++){}}
+			{{ var tracksnames = 2; if (tracks.length < 2) tracksnames = tracks.length; for (var i = 0; i < tracksnames; i ++){}}
 			.tracksnames {{-tracks[i].title}}, 
 			{{}}}...
 			table.recommend-radio-wrapper
@@ -21,6 +21,8 @@ script#radio-bar(type='text/template')
 				img(src='{{-listeners[i].avatarUrl}}')
 				{{}}}
 			.playicon listen
+			.playicon ask for rights
+			.playicon stop listening...
 
 			
 

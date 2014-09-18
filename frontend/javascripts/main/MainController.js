@@ -429,9 +429,11 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.getAdminView = function(id){
+	MainController.prototype.initializeAdminView = function(id){
+		window.onbeforeunload=function() { return "Are you sure you wanna leave this page? You will stop radio broadcasting and you will dissapoint your listenrs? Maybe you can stay there for some time? Or perhaps stop the radio?"; };
 		$.ajax({url:'/api/group/' + id + '/members'}).done(function(data){
-			return new RadioAdminView({editors: data.editors});
+			console.log('USERS', data);
+			Backbone.trigger('show-admin', data);
 		});
 	};
 
@@ -620,6 +622,10 @@ define(['marionette',
 			this.initializeArtists(name);
 		},this);
 
+		Backbone.on('show-admin', function(data){
+			this.mainRegion.show( new RadioAdminView({editors: data.editors}));
+		},this);
+
 		Backbone.on('album-result-composite:show-more', function(name){
 			this.initializeFullAlbumResults(name);
 		},this);
@@ -740,12 +746,20 @@ define(['marionette',
 			this.mainRegion.show(this.getUserView(model));
 		},this);
 
+		Backbone.on('update-admin-info', function(object){
+			alert(object.useId + object.radioId);
+			context.radio.playing = true;
+			context.radio.id = object.radioId;
+			context.radio.role = 'admin';
+			this.initializeAdminView(object.radioId);
+		}, this);
+
 		Backbone.on('show-404', function(){
 			this.mainRegion.show(this.getNotFoundView());
 		}, this);
 
 		Backbone.on('show-admin-view', function(id){
-			this.mainRegion.show(this.getAdminView(id));
+			this.initializeAdminView(id);
 		},this);
 
 		Backbone.on('searchbar:show-more', function(input){

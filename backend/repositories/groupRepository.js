@@ -3,7 +3,7 @@ var Group = require('../schemas/radio.js');
 var Repository = require('./generalRepository.js');
 var _ = require('underscore');
 var mediator = require('../units/mediator');
-var roomManger = require('../io/roomManager');
+var roomManager = require('../io/roomManager');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
@@ -21,10 +21,10 @@ GroupRepository.prototype.bindListeners = function(){
 		}); 
 	});
 
-	mediator.on("create-radio-channel", function(){
-		self.add({user_auth_id : arguments[0], name: 'Radio Channel'}, function(err, data){
-			roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
-			mediator.publish("radio-channel-created", data.id);
+	mediator.on("create-radio-channel", function(id){
+		self.add({user_auth_id : id, name: 'Radio Channel'}, function(err, data){
+			roomManager.addRoomToUser(id, 'user_' + id);
+			mediator.publish("radio-channel-created", {userId:id, radioId: data.id});
 		}); 
 	});
 
