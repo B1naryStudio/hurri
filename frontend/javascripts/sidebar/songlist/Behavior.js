@@ -14,10 +14,8 @@ Behaviors.Sortable = Marionette.Behavior.extend({
 			items = this.view.children._views,
 			view;
 		this.setViewDataIds(items);
-		this.$el.sortable({
-			axis: this.options.axis || false,
-			grid: this.options.grid || false,
-			containment: this.options.containment || false,
+		this.$('#sidebar-songlist-container').sortable({
+			// containment: this.options.containment || false,
 			cursor: "move",
 			items: ".song-item",
 			handle:this.options.handle || false,
@@ -77,18 +75,20 @@ Behaviors.Draggable = Marionette.Behavior.extend({
 
 	onRender:function(){
 		
-		this.$el.sortable({
-			axis: this.options.axis || false,
-			grid: this.options.grid || false,
-			containment: this.options.containment || false,
-			cursor: "move",
-			handle:this.options.handle || false,
-			revert: this.options.revert || true,
-			opacity: this.options.opacity,
+		this.$el.draggable({
+			// axis: this.options.axis || false,
+			// grid: this.options.grid || false,
+			// containment: this.options.containment || false,
+			// cursor: "move",
+			// handle:this.options.handle || false,
+			// revert: this.options.revert || true,
+			// opacity: this.options.opacity,
 			zIndex: this.options.zIndex,
-			connectToSortable: this.options.connectToSortable,
-			drag: function( event, ui ) {
-				console.log('I drag till drop');
+			connectToSortable: '#sidebar-songlist-container',
+			helper: function(ev){
+				var el = $(ev.currentTarget).clone();
+				el.css({width: 300});
+				return el[0];
 			}
 		});		   
 	},

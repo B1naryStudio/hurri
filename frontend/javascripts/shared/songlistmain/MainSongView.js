@@ -11,7 +11,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 
 	behaviors: {
 		Draggable:{
-			connectToSortable: '.sidebarSongWrapper',
+			connectToSortable: '#sidebar-songlist-container',
 			containment:'body',
 			helper: "clone",
 			zIndex: 999999,
