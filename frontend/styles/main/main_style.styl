@@ -13,74 +13,91 @@
 	&.toggled-main
 		width 85%
 .main-song-item
-	width 90%
-	height 40px
+	width 95%
+	border-top 1px solid #eee
+	height 30px
 	margin auto
-	margin-bottom 2px
 	position relative
 	background #fff
-	border-radius 5px
-	box-shadow 0 2px 3px rgba(0, 0, 0, 0.4)
 	&.activesong
 		background lightblue
+		.main-song-cover
+			background url(/../images/main/media-pause.png) no-repeat
+			background-size 20px
+			opacity 0.5
+			&:hover
+				background url(/../images/main/media-pause.png) no-repeat
+				background-size 20px 
+				opacity 1
 	.main-share-song
-		width 16px
-		height 16px
+		width 14px
+		height 14px
 		background url(../images/main/share.png)
-		background-size 16px
+		background-size 14px
 		position absolute
 		z-index 15
-		right 2px
-		top 2px
+		right 56px
+		top 7px
 		opacity 0
 	.main-song-cover
-		width 30px
+		width 20px
 		margin 5px
-		height 30px
+		height 20px
 		float left
-		background url(/../images/default/cover.png) no-repeat
-		background-size 30px
+		background url(/../images/main/iMusic.png) no-repeat
+		background-size 20px
 		&:hover 
 			background url(/../images/songlist/play_mini.jpg) no-repeat
-			background-size 30px
+			background-size 20px
 
 	.main-song-info
+		padding-top 5px
 		float left
-		height 30px
+		height 20px
 		overflow hidden
 		display inline
 		width 80%
 
 		.main-song-name
-			padding-top 10px
-			height 20px
+			padding-top 3px
+			height 10px
 			text-overflow ellipsis
-		.main-song-album
-			display block
-			height 20px
-			font-size 12px
-	
+			font-weight bold
+			display inline
+			font-size 14px
+			color #333
+		.main-song-artist
+			display inline
+			color #555
+			height 10px
+			font-size 14px
+
 	.main-queue-add
-		width 16px
-		height 16px
-		background url(../images/main/nothing.png)
-		background-size 16px
+		width 14px
+		height 14px
+		background url(../images/main/add.png)
+		background-size 14px
 		position absolute
 		z-index 15
 		right 20px
-		top 2px
+		top 7px
 		opacity 0
 		&:hover
 			opacity 1 !important
+	.duration_min
+			float right
+			font-size 12px
+			padding-top 8px
+			padding-right 3px
 	.main-like-song
-		width 16px
-		height 16px
+		width 14px
+		height 14px
 		background url(../images/main/like.png)
-		background-size 16px
+		background-size 14px
 		position absolute
 		z-index 15
 		right 38px
-		top 2px
+		top 7px
 		opacity 0
 		&:hover
 			opacity 1 !important
@@ -88,21 +105,35 @@
 			opacity 1 !important
 		
 	&:hover
-		background #eee
+		background #eef
 		.main-share-song
 		.main-like-song
 			opacity 0.5
 		.main-queue-add
 			opacity 0.5
-
+		.duration_min
+			opacity 0
+		.main-song-cover
+			background url(/../images/main/media-play.png) no-repeat
+			background-size 20px
+			opacity 0.5
+			&:hover 
+				opacity 1
+		&.activesong
+			.main-song-cover
+				background url(/../images/main/media-pause.png) no-repeat
+				background-size 20px
+				opacity 0.5
+				&:hover
+					opacity 1
 			
 	.queueposmain
 		position absolute	
 		right 60px
 		
 .global-zeroclipboard-container:hover
-	background url(../images/main/share.png)
-	background-size 16px
+	background url(../images/main/share.png) no-repeat
+	background-size 14px
 	opacity 0.8
 
 #visualisation-container

@@ -5,6 +5,7 @@ define(['backbone'], function(Backbone){
 			id: undefined,
 			title : 'Song isn\'t playing',
 			duration : undefined,
+			duration_min : undefined,
 			position : 0,
 			release_date : new Date(1),
 			kbps : 320,
@@ -26,6 +27,14 @@ define(['backbone'], function(Backbone){
 			if (singer === null){
 				this.set('singer', {name : ''});
 			}
+
+			var duration = this.get('duration');
+			var minutes = Math.floor(duration/60);
+			var min_str = minutes < 10 ? '0'+ minutes : minutes;
+			var seconds = duration - minutes * 60;
+			var sec_str = seconds < 10 ? '0'+ seconds : seconds;
+			this.set('duration_min',  min_str + ':' + sec_str);
+			
 			
 			this.on('change:liked', function(){
 				var type = this.get('liked') ? 'PUT' : 'DELETE';
