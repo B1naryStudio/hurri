@@ -17,6 +17,27 @@
 			height 150px
 			padding 10px
 
+		.playlist-play
+			width 100px
+			height 100px
+			position absolute
+			left 50px
+			top 35px
+			&:hover
+				cursor pointer
+				background #333
+				opacity 0.4
+				&:after
+					content ''
+					position absolute
+					left 50%
+					top 50%
+					margin-top -18px
+					margin-left -15px
+					width 30px
+					height 36px
+					background: url('/images/player/player.png') no-repeat -575px 0
+
 	#header-playlist-info
 		position absolute
 		display inline
