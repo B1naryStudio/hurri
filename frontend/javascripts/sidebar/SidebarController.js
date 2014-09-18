@@ -275,6 +275,11 @@ define(['marionette',
 			});
 		}, this);
 
+		Backbone.on('play-changed-track', function(object){
+			var model = new SongModel(object);
+			context.currentSongCollection.reset(model);
+			Backbone.trigger('main:play-at-position', 0);
+		},this);
 	};
 
 

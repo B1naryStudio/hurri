@@ -15,6 +15,14 @@ var radioSchema = new Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'Userauth' 
 	}],
+	requiring:[{
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	}],
+	editors:[{
+		type: Schema.Types.ObjectId, 
+		ref: 'Userauth' 
+	}],
 	tracks : [{ 
 		type: Schema.Types.ObjectId, 
 		ref: 'Track' 

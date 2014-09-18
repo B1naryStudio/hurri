@@ -39,6 +39,7 @@ define(['marionette',
 	   './explorer/artist/tiles/ArtistCollection',
 	   './search/artist/ArtistTileView',
 	   '../shared/songlistmain/MainSongView',
+	   './radio/RadioAdminView'
 	  ],
 	function(Marionette, 
 		_,
@@ -80,7 +81,8 @@ define(['marionette',
 		AlbumBarChildView,
 		ArtistCollection,
 		ArtistView,
-		MainSongView
+		MainSongView,
+		RadioAdminView
 		){
 	
 	var MainController = function(){		
@@ -427,6 +429,12 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.getAdminView = function(id){
+		$.ajax({url:'/api/group/' + id + '/members'}).done(function(data){
+			return new RadioAdminView({editors: data.editors});
+		};
+	};
+
 	MainController.prototype.getArtistInnerView = function(){
 
 		return new AlbumCompleteView({
@@ -735,6 +743,10 @@ define(['marionette',
 		Backbone.on('show-404', function(){
 			this.mainRegion.show(this.getNotFoundView());
 		}, this);
+
+		Backbone.on('show-admin-view', function(id){
+			this.mainRegion.show(this.getAdminView(id));
+		},this);
 
 		Backbone.on('searchbar:show-more', function(input){
 			var self = this;
