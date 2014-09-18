@@ -9,6 +9,11 @@ define(['backbone'], function(Backbone){
 			albums_id : [],
 			genres : [],
 			modelType : 'artist'
+		},
+		initialize: function(){
+			var picture = this.get('picture');
+			if (picture.substr(-9) !== '?size=big')
+			this.set({'picture': picture + '?size=big'});
 		}
 	});
 	return ArtistModel;

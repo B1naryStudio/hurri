@@ -27,47 +27,64 @@
 		&:hover
 			background #39d
 
-.album-bar-wrapper
-	margin auto
+#main-child-container
+	width 100%
+	position absolute
+	height 100%
+	top 40px
 .album-bar 
-	width 150px
-	height 200px
-	background-size 150px
+	width 180px
+	height 280px
+	background-size 180px
 	border 1px solid #dedede
-	padding 5px
 	float left
 	margin 10px
 	position relative
 	overflow hidden
 	font-family Lucida Grande,Arial,sans-serif;
-	font-size 14px
+	font-size 15px
+	padding 5px
 	color #555
-	boder-radius 2px
+	boder-radius 5px
 	img.albumCover
-		width 150px
+		width 180px
+		border-bottom 1px solid #ccc
+	.nameAlbum
+		position relative
+		margin-top 15px
+		width 100%
+		height 16px
+		background white
+		opacity 1
+		color #333
+		overflow hidden
+		text-overflow hidden
+		font-weight medium
+
 
 	.artistAlbum
 		width 100%
 		background white
 		overflow hidden
 		opacity 1
+		font-size 12px
+		margin-top 1px
 		height 13px
-		color #ccc
+		color #999
 
-	.totalTracksAlbum
-		width 100%
-		height 13px		
-		background white
-		opacity 1
-		color #ddd
+	.add-to-sidebar-list-album
+		width 100px
+		height 23px
+		padding-top 7px
+		margin 15px auto 0
+		text-align center
+		border 1px solid lightgrey
+		border-radius 3px
+		background #eee
+		font-size 12px
+		font-weight bold
+		&:hover
+			background #ffe
+			cursor pointer
+			
 		
-	.nameAlbum
-		position relative
-		bottom 0
-		width 100%
-		height 16px
-		background white
-		opacity 1
-		color black
-		overflow hidden
-		text-overflow hidden

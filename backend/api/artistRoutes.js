@@ -20,7 +20,7 @@ module.exports = function(app){
 
 	app.get('/api/artist/id/:id/albums', function(req, res, next){
 		artistRepository.getArtistAlbums(req.params.id, function(err, data){
-			console.log(data);
+			console.log(err, data);
 			res.data = data;
 			res.err = err;
 			next();

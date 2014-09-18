@@ -228,6 +228,7 @@ define(['marionette',
 			context.currentSongCollection.add(collection);
 			var button = new UndoReplacement();
 			button.render();
+			setTimeout($('#undo').empty(), 1000);
 		}, this);
 
 
