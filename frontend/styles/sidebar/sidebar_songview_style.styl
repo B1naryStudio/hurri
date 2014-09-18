@@ -4,35 +4,52 @@
 .sidebar-song-wrap
 	width 100%
 	margin 0px auto
-	height 50px
+	height 38px
 	border-radius 0px
 	background #F3F4F8
 	position relative
-	border-bottom: 1px solid #DADADA;
-	border-top: 1px solid rgb(253, 253, 253);
+	border-bottom 1px solid #DFDFDF
 	
 	&:hover 
 		background linear-gradient(to top, rgba(73,192,240,0.2) 0%,rgba(44,175,227,0.2) 100%)
+		.add-song-to-queue
+		.delete-song-from-list
+			opacity 0.5
+		.sidebar-song-cover
+			background url('/../images/songlist/music.png') no-repeat
+			background-size 33px
+			opacity 0.8
+			cursor pointer
+			&:hover
+				opacity 1
+
 
 	.sidebar-song-img-box 
 		background grey
 		img
-			width 40px
-			height 40px
+			width 27px
+			height 27px
 			float left
 			padding 5px
 
 	.sidebar-song-header
-		padding 5px 0 5px 0
-		height 15px
+		padding 4px 0 0px 0
+		height 16px
 		overflow hidden
 		text-overflow ellipsis
 		display block
 		width 70%
-
+	.sidebar-song-cover
+		width 29px
+		height 29px
+		float left
+		padding 5px
+		background url('/../images/songlist/music.png') no-repeat
+		opacity 0.5
+		background-size 33px
 	.sidebar-song-info
-		margin-left 50px
-		height 20px
+		margin-left 35px
+		height 15px
 		text-overflow ellipsis
 		overflow hidden
 		display block
@@ -40,14 +57,14 @@
 		width 70%
 
 	.delete-song-from-list
-		width 12px
-		height 12px
+		width 13px
+		height 13px
 		position absolute
-		background: url('../images/notifications/delete.png') no-repeat;
-		background-size: 12px
+		background: url('/../images/notifications/delete.png') no-repeat;
+		background-size: 13px
 		right 2px
 		top 2px
-		opacity 0.3
+		opacity 0
 
 		&:hover 
 			opacity 1
@@ -55,7 +72,7 @@
 	.queuepos
 		position absolute
 		right 0
-		bottom 3px
+		bottom 1px
 		font-size 10px
 		font-weight bold
 		margin-right 4px
@@ -66,15 +83,15 @@
 		position absolute
 		background: url('../images/songlist/queue.png') no-repeat;
 		background-size: 12px
-		right 2px
-		top 16px
-		opacity 0.3
+		right 18px
+		top 2px
+		opacity 0
 
 		&:hover 
-			opacity 0.7
+			opacity 1
 
 	&.activesong
-		background linear-gradient(to top, rgba(73,192,240,1) 0%,rgba(44,175,227,1) 100%)
+		background rgba(73,192,240,1)
 		.gif
 			position absolute
 			left 0

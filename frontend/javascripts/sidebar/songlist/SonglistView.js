@@ -6,7 +6,7 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		events : {
 		 	'click .delete-song-from-list'  : 'deleteSong',
 			'click .add-song-to-queue' : 'addSongToQueue',
-			'dblclick .sidebar-song-img-box img' : 'playSong'
+			'dblclick .sidebar-song-cover' : 'playSong'
 		 },
 		
 		modelEvents : {

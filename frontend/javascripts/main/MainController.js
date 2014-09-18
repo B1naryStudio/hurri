@@ -432,7 +432,7 @@ define(['marionette',
 	MainController.prototype.getAdminView = function(id){
 		$.ajax({url:'/api/group/' + id + '/members'}).done(function(data){
 			return new RadioAdminView({editors: data.editors});
-		};
+		});
 	};
 
 	MainController.prototype.getArtistInnerView = function(){
