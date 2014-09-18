@@ -9,6 +9,7 @@ define(['underscore', 'backbone'], function(_, Backbone){
 			this.bindListeners();
 		},
 		playTrack: function(){ 
+			Backbone.trigger('audio-handler:play');
 			var self = this;
 			if (this.track){
 				console.log('canplay=', this.canPlay, Date.now());
@@ -25,6 +26,7 @@ define(['underscore', 'backbone'], function(_, Backbone){
 		},
 
 		pauseTrack: function(){
+			Backbone.trigger('audio-handler:pause');
 			if (this.track){
 				this.playing = false;
 				this.trigger('pause');
