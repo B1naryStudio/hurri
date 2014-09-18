@@ -7,15 +7,27 @@ function(Marionette, SongView){
 		childView	: SongView,
 
 		ui: {
-			chartsSelectButton 	: '.charts-select-button'
+			billboardSelectButton 	: '.billboard-select-button',
+			benmajorSelectButton	: '.ben-major-select-button',
+			itunesSelectButton		: '.itunes-select-button'
 		},
 
 		events: {
-			'click @ui.chartsSelectButton': 'selectChart'
+			'click @ui.billboardSelectButton'	: 'selectBillboard',
+			'click @ui.benmajorSelectButton'	: 'selectBenMajor',
+			'click @ui.itunesSelectButton'		: 'selectItunes'
 		},
 
-		selectChart: function() {
-			// load selected chart
+		selectBillboard: function() {
+			Backbone.trigger('charts:selected', 'http://localhost:3055/charts/billboard/100');
+		},
+
+		selectBenMajor: function() {
+			Backbone.trigger('charts:selected', 'http://localhost:3055/charts/ben-major/40');
+		},
+
+		selectItunes: function() {
+			Backbone.trigger('charts:selected', 'http://localhost:3055/charts/itunes/25');
 		}
 
 	});

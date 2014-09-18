@@ -11,3 +11,17 @@ script#song-template(type='text/template')
 		.queueposmain {{-queuepos}}
 	div#song-info-image 
 		img(src='{{-album.cover}}')
+
+script#chart-song-template(type='text/template')
+	.main-song-item
+		.main-song-cover
+		.main-song-info
+			.main-song-name
+				{{-title}} - {{-singer.name}}
+		.main-song-friends
+		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
+		.main-queue-add
+		.main-like-song
+		.queueposmain {{-queuepos}}
+	div#song-info-image 
+		img(src='{{-album.cover}}')

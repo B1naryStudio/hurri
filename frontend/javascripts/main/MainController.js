@@ -120,7 +120,7 @@ define(['marionette',
 
 		// this.initializeLayout();
 
-		this.initializeCharts();
+		this.initializeCharts('http://localhost:3055/charts/billboard/100');
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -456,27 +456,19 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeCharts = function(){
+	MainController.prototype.initializeCharts = function(url){
+		var self = this;
 		this.charts = {
 			collection: new ChartsCollection()
 		};
-		this.charts.collection.add([
-			{artist: 'The Beatles',  	title: 'Yesterday'},
-			{artist: 'John Lennon',  	title: 'Imagine'},
-			{artist: 'The Beatles',  	title: 'Let It Be'},
-			{artist: 'Pink Floyd',  	title: 'Time'},
-			{artist: 'Queen',  			title: 'The Show Must Go On'},
-			{artist: 'Queen',  			title: 'Bohemian Rhapsody'},
-			{artist: 'Led Zeppelin',  	title: 'Stairway To Heaven'},
-			{artist: 'Queen',  			title: 'We Are The Champions'},
-			{artist: 'The Beatles',  	title: 'Come Together'},
-			{artist: 'Pink Floyd',  	title: 'Shine On You Crazy Diamond'},
-			{artist: 'Pink Floyd',  	title: 'Another Brick In The Wall'},
-			{artist: 'Queen',  			title: 'We Will Rock You'},
-			{artist: 'Louis Armstrong', title: 'What A Wonderful World'},
-			{artist: 'Elvis Presley',  	title: 'Love Me Tender'},
-			{artist: 'Eagles',  		title: 'Hotel California'},
-		]);
+
+		$.ajax({
+			type:'GET',
+			dataType: "json", 
+			url: url
+		}).done(function(data){
+			self.charts.collection.reset(data);			
+		});
 		this.charts.view = this.getChartsView();
 	};
 
@@ -753,6 +745,12 @@ define(['marionette',
 			//this.getArtistResultView().render();
 			//this.getAlbumResultView().render();
 		},this);
+
+		Backbone.on('charts:selected', function (url){
+			this.initializeCharts(url);
+			this.mainRegion.show(this.getChartsView());
+		},this);
+
 	};
 
 	return MainController;
