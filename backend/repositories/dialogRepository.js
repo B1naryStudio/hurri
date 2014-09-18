@@ -1,6 +1,7 @@
 var connection = require('../db/dbconnect.js');
 var Dialog = require('../schemas/dialog.js');
 var Repository = require('./generalRepository.js');
+var userRepository = require('./userRepository.js');
 
 function DialogRepository(){
 	Repository.prototype.constructor.call(this);

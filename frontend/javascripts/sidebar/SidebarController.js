@@ -126,12 +126,19 @@ define(['marionette',
 	};
 
 	SidebarController.prototype.initializeDialogue = function(){
-		this.dialogue = {
+		var self =this;
+		var a = $.ajax({
+			url:'/api/dialogue/'+ window._injectedData.user._id +'/' + '54172e65cfea626c0bdf1168' , 
+			method: "GET"
+		}).done(function(data){
+		console.log('ajax', a);
+		self.dialogue = {
 			model: new DialogueModel(),
-			collection: new DialogueCollection()
+			collection: new DialogueCollection(data.dialogue)
 		};	
 
-		this.dialogue.view = this.getDialogueView();
+		self.dialogue.view = self.getDialogueView();
+		});
 	};
 
 	SidebarController.prototype.getDialogueView = function(){

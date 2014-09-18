@@ -26,6 +26,15 @@ define(['marionette', './DialogueView', './DialogueCollection', '../../app/conte
 				date: time,
 				message: text
 			});
+			$.ajax({
+				url:'/api/dialogue/'+ window._injectedData.user._id +'/' + '54172e65cfea626c0bdf1168' , 
+				method: "PUT",
+				data: {
+					user_auth_id: window._injectedData.user._id,
+					date: time,
+					message: text
+				}
+			});
 		},
 	});
 	return DialogueCompositeView;
