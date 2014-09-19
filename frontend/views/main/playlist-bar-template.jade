@@ -2,13 +2,15 @@ script#playlist-bar(type='text/template')
 	.playlist-left
 		.play-without-open play
 		.playlist-name 
-			{{-name}}
+			b{{-name}}
 		.playlist-play
+			img(src='/../images/main/logo-playlist.png')
 		.playlist-total
 			span Total tracks: {{-tracks.length}} Genre: {{-genre}} 
-		.playlist-private 
+		//.playlist-private 
 	.playlist-right
 		ol.songs-list
-			{{for (var i = 0; i < tracks.length; i ++){}}
-			li.songname-playlist{{-tracks[i].artist}} {{-tracks[i].title}}
+			{{ var tracksnames = 5; if (tracks.length < 5) tracksnames = tracks.length; for (var i = 0; i < tracksnames; i ++){}}
+			li.songname-playlist
+				{{-tracks[i].artist}} {{-tracks[i].title}}
 			{{}}}

@@ -6,17 +6,14 @@
 
 
 .playlist-bar
-	width 390px
+	width 90%
 	height 250px
 	position relative
 	float left
 	margin 5px 20px
-	&:hover
-		.playlist-right
-			position relative
-			height auto
-			z-index 10
-			box-shadow 0 1px 2px #9ACDDD
+	border 1px solid #9e9e9e
+	background #efefef
+
 	.playlist-date
 		font-size 15px
 		width 35px
@@ -27,15 +24,13 @@
 		margin auto
 
 	.playlist-left
-		width 120px
+		width 45%
 		float left
 		height 250px
 		padding 1px
 		margin-right 10px
 		text-align center
 		position relative
-		background url('/../images/main/logo-playlist.png') no-repeat
-		background-size 100%
 		.play-without-open
 			display none
 			width 30px
@@ -45,8 +40,10 @@
 			border 1px solid lightgray
 
 		.playlist-name
+			top 5px
+			left 35px
+			position absolute
 			font-size 28px
-			margin-top 120px
 			height 30px
 			text-overflow hidden
 			overflow hidden
@@ -76,26 +73,20 @@
 			height 120px
 			top 0px
 			position absolute
-			&:hover
-				cursor pointer
-				background #333
-				opacity 0.4
-				border-radius 10px
-				&:after
-					content ''
-					position absolute
-					left 35%
-					top 35%
-					width 30px
-					height 36px
-					background: url('/images/player/player.png') no-repeat -575px 0
+			img
+				width 150px
+				height 150px
+				position absolute
+				top 45px
+				left 15px	
+				&:hover
+					opacity 0.3
 
 
 	.playlist-right
 		padding 5px
-		margin-top 3px
 		float left
-		width 250px
+		width 45%
 		background #efefef
 		height 242px
 		min-height 240px
@@ -103,6 +94,7 @@
 		overflow hidden
 		box-sizing border-box
 		.songs-list
+			margin-top 40px
 			text-align left
 			list-style-type decimal-leading-zero
 			list-style-position inside
@@ -110,10 +102,13 @@
 			overflow hidden
 		.songname-playlist
 			border-bottom 1px solid #9e9e9e
+			border-top 1px solid #9e9e9e
+			line-height 35px
+			color #333333
 			text-overflow ellipsis
 			overflow hidden
-			font-size 15px
-			height 20px
+			font-size 18px
+			height 35px
 			width 90%
 			white-space nowrap
 
