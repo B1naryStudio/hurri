@@ -13,20 +13,22 @@ define(['marionette', './DialogueView', './DialogueCollection', '../../app/conte
 			inputMessage: '#new-dialogue'
 		},
 
-		addMessage: function(){
-			console.log('addComment');
+		addMessage: function(id){
 			var text = this.ui.inputMessage.val();
 			if (text === '')
 				return;
 			var d = new Date();
 			var time = d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
-			var model = this.collection.add({
-				user_auth_id: window._injectedData.user._id, 
+			var options = {
+				user_auth_id: window._injectedData.user._id,
+				recipient_id: this.model.get('recipient_id'), 
 				avatar: window._injectedData.user.avatarUrl,
 				date: time,
 				message: text
-			});
-			$.ajax({
+			};
+			var model = this.collection.add(options);
+			Backbone.trigger('dialogue:message-add', options);
+			/*$.ajax({
 				url:'/api/dialogue/'+ window._injectedData.user._id +'/' + '54172e65cfea626c0bdf1168' , 
 				method: "PUT",
 				data: {
@@ -34,7 +36,7 @@ define(['marionette', './DialogueView', './DialogueCollection', '../../app/conte
 					date: time,
 					message: text
 				}
-			});
+			});*/
 		},
 	});
 	return DialogueCompositeView;

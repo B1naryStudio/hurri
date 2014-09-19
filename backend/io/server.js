@@ -34,6 +34,16 @@ module.exports = function(server){
 			roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
 			console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
+		socket.on('add-message', function (options){
+			var id1 = socket.request.user._id;
+			var id2 = options.recipient_id;
+			mediator.publish('add-message-to-dialogue', {user_auth1: id1, user_auth2: id2});
+			var arr = [id1, id2];
+			arr.sort();
+			roomManager.addRoomToUser(id1, 'dialogue_' + arr[0] + '_' + arr[1]);
+			roomManager.addRoomToUser(id2, 'dialogue_' + arr[0] + '_' + arr[1]);
+			context.io.to('dialogue_' + arr[0] + '_' + arr[1]).emit('new-message',options);
+		});
 	});
 	
  return context.io;

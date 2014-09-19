@@ -15,6 +15,7 @@ define(['marionette',
 	 '../main/playlists/tiles/PlaylistBarModel',
 	 './songlist/UndoPlaylistReplacement',
 	 './dialogue/DialogueModel',
+	 './dialogue/DialogueControlModel',
 	 './dialogue/DialogueCollection',
 	 './dialogue/DialogueCompositeView'
 	 ], 
@@ -23,7 +24,7 @@ define(['marionette',
 			NotificationsModel, context, SonglistCollectionView,
 			SonglistCollection, SonglistModel, StatisticView, SonglistNaviView, UserModel,
 			FollowingsCollectionView, FollowingsCollection, PlaylistBarModel, UndoReplacement,
-			DialogueModel, DialogueCollection, DialogueCompositeView){
+			DialogueModel, DialogueControlModel, DialogueCollection, DialogueCompositeView){
 	
 	var SidebarController = function(){		
 	
@@ -43,7 +44,7 @@ define(['marionette',
 
 		this.initializeFollowings();
 
-		this.initializeDialogue();
+		//this.initializeDialogue();
 
 		this.sidebarRegion.show(this.song.view);
 
@@ -125,20 +126,23 @@ define(['marionette',
 		});
 	};
 
-	SidebarController.prototype.initializeDialogue = function(){
+	SidebarController.prototype.initializeDialogue = function(id){
+		console.log('id in dialogues=', id);
+		var arr = [window._injectedData.user._id, id];
+		arr = arr.sort();
 		var self =this;
 		var a = $.ajax({
-			url:'/api/dialogue/'+ window._injectedData.user._id +'/' + '54172e65cfea626c0bdf1168' , 
+			url:'/api/dialogue/'+ arr[0] +'/' + arr[1] , 
 			method: "GET"
 		}).done(function(data){
-		console.log('ajax', a);
+			self.dialogue.collection.reset(data.dialogue);
+		});
 		self.dialogue = {
-			model: new DialogueModel(),
-			collection: new DialogueCollection(data.dialogue)
+			model: new DialogueControlModel({recipient_id: id}),
+			collection: new DialogueCollection()
 		};	
 
 		self.dialogue.view = self.getDialogueView();
-		});
 	};
 
 	SidebarController.prototype.getDialogueView = function(){
@@ -198,7 +202,8 @@ define(['marionette',
 			this.sidebarRegion.show(this.getFollowingsView());
 		}, this);
 
-		Backbone.on('send-message', function(){
+		Backbone.on('send-message', function(id){
+			this.initializeDialogue(id);
 			this.sidebarRegion.show(this.getDialogueView());
 		}, this);
 

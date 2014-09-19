@@ -11,6 +11,10 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
   		this.socket.on('disconnect', function(){
    			self.onDisconnect();
   		});
+  		this.socket.on('socket:message-add', function(options){
+  			console.log('message-add', options);
+  			self.onMessageAdd();
+  		});
 	};
 	
 	SocketHandler.prototype.onConnect = function(){
@@ -27,10 +31,12 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 
 	socketHandler
 		.in({
-			'turn': 'socket:turn-network'
+			'turn'			: 'socket:turn-network',
+			'new-message' 	: 'socket:message-add' 
 		})
 		.out({
-			'backbone:radio-view':'add-user-to-radio'
+			'backbone:radio-view'	:'add-user-to-radio',
+			'dialogue:message-add'	:'add-message'
 		});
 
 	return socketHandler;
