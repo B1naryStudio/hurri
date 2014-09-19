@@ -28,8 +28,9 @@ module.exports = function (app) {
 			count: 1
 		};
 
-		VKWrapper.getAudioSearch(options, function(results){
-			res.json(results);
+		VKWrapper.getAudioSearch(options, function(results, status){
+			if (status) res.status(status).end();
+			else res.json(results);
 		});
 
 	});

@@ -65,7 +65,7 @@ module.exports = function () {
 		},
 		function (req, accessToken, refreshToken, profile, done) {
 			console.log('vk login');
-			VKWrapper.setAccessToken(accessToken);
+			VKWrapper.setAccessToken(accessToken || refreshToken);
 			if (!req.user) {
 				getUser(profile, accessToken, 'vk', done);
 			} else {

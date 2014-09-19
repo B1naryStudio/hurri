@@ -13,6 +13,10 @@ define(['marionette', './DialogueView', './DialogueCollection', '../../app/conte
 			inputMessage: '#new-dialogue'
 		},
 
+		initialize: function(){
+			this.bindListeners();
+		},
+
 		addMessage: function(id){
 			var text = this.ui.inputMessage.val();
 			if (text === '')
@@ -24,25 +28,30 @@ define(['marionette', './DialogueView', './DialogueCollection', '../../app/conte
 				recipient_id: this.model.get('recipient_id'), 
 				avatar: window._injectedData.user.avatarUrl,
 				date: time,
-				message: text
+				message: text,
+				uid: guid()
 			};
 			var model = this.collection.add(options);
 			Backbone.trigger('dialogue:message-add', options);
-			Backbone.on('socket:message-add', function(options){
-				console.log('message recieve', options);
-				this.collection.add(options);
-			});
-			/*$.ajax({
-				url:'/api/dialogue/'+ window._injectedData.user._id +'/' + '54172e65cfea626c0bdf1168' , 
-				method: "PUT",
-				data: {
-					user_auth_id: window._injectedData.user._id,
-					date: time,
-					message: text
-				}
-			});*/
 		},
+
+		bindListeners: function(){
+			var self = this;
+		}
 	});
+
+	var guid = (function() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+  }
+  return function() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+  };
+})();
+
 	return DialogueCompositeView;
 });
 
