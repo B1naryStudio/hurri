@@ -29,7 +29,11 @@ script#main-chart-song-bar(type='text/template')
 		.main-queue-add
 		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
 		.main-like-song
-		.queueposmain {{-positionChange}}
+		.poschange
+			{{if(positionChange>=0) { }}
+			{{ positionChange = '+' + positionChange }}
+			{{ } }}
+			{{-positionChange}}
 
 script#main-header-playlist-template(type='text/template')
 	#header-playlist-wrapper
