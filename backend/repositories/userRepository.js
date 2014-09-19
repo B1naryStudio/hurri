@@ -92,6 +92,7 @@ UserRepository.prototype.deleteFollowing = function(id, userid, callback) {
 };
 
 UserRepository.prototype.addAlert = function(id, alert, callback) {
+	mediator.publish('notifications:notification-add', {id: id, alert: alert});
 	var model = this.createModel();
 	var query = model.findOneAndUpdate({_id: id},{$push: {alerts:alert}} );
 	query.exec(callback);
