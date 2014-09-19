@@ -35,7 +35,8 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'play-this-radio-track' : 'play-changed-track',
 			'change-position'		: 'change-track-position',
 			'request-for-rights' 	: 'request-for-rights',
-			'new-message' 			: 'socket:message-add'
+			'new-message' 			: 'socket:message-add',
+			'new-notification'		: 'socket:notification-add'
 		})
 		.out({
 			'backbone:radio-view'			: 'add-user-to-radio',
@@ -46,7 +47,8 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'admin:give-rights'				: 'add-to-editors',
 			'admin:remove-rights' 			: 'remove-from-editors',
 			'admin:stop-broadcasting'		: 'stop-broadcasting',
-			'dialogue:message-add'			: 'add-message'
+			'dialogue:message-add'			: 'add-message',
+			'notifications:notification-add': 'add-notification'
 		});
 
 	return socketHandler;
