@@ -12,11 +12,6 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
    			self.onDisconnect();
   		});
 
-  		this.socket.on('socket:message-add', function(options){
-  			console.log('message-add', options);
-  			self.onMessageAdd();
-  		});
-
 	};
 	
 	SocketHandler.prototype.onConnect = function(){
@@ -35,23 +30,23 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 
 	socketHandler
 		.in({
-			'turn'			: 'socket:turn-network',
-			'radio-channel-created': 'update-admin-info',
+			'turn'					: 'socket:turn-network',
+			'radio-channel-created'	: 'update-admin-info',
 			'play-this-radio-track' : 'play-changed-track',
-			'change-position': 'change-track-position',
-			'request-for-rights' : 'request-for-rights',
-			'new-message' 	: 'socket:message-add'
+			'change-position'		: 'change-track-position',
+			'request-for-rights' 	: 'request-for-rights',
+			'new-message' 			: 'socket:message-add'
 		})
 		.out({
-			'backbone:radio-view'	:'add-user-to-radio',
-			'radio-view:stop-listening':'stop-listening',
-			'sidebar:play-track' : 'play-this-track',
-			'radio-view:create-radio' : 'create-radio-channel',
-			'radio-view:add-to-requiring' : 'ask-for-rights',
-			'admin:give-rights': 'add-to-editors',
-			'admin:remove-rights' : 'remove-from-editors',
-			'admin:stop-broadcasting' : 'stop-broadcasting',
-			'dialogue:message-add'	:'add-message'
+			'backbone:radio-view'			: 'add-user-to-radio',
+			'radio-view:stop-listening'		: 'stop-listening',
+			'sidebar:play-track' 			: 'play-this-track',
+			'radio-view:create-radio' 		: 'create-radio-channel',
+			'radio-view:add-to-requiring' 	: 'ask-for-rights',
+			'admin:give-rights'				: 'add-to-editors',
+			'admin:remove-rights' 			: 'remove-from-editors',
+			'admin:stop-broadcasting'		: 'stop-broadcasting',
+			'dialogue:message-add'			: 'add-message'
 		});
 
 	return socketHandler;

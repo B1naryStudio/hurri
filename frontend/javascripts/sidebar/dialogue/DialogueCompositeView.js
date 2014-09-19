@@ -28,6 +28,10 @@ define(['marionette', './DialogueView', './DialogueCollection', '../../app/conte
 			};
 			var model = this.collection.add(options);
 			Backbone.trigger('dialogue:message-add', options);
+			Backbone.on('socket:message-add', function(options){
+				console.log('message recieve', options);
+				this.collection.add(options);
+			});
 			/*$.ajax({
 				url:'/api/dialogue/'+ window._injectedData.user._id +'/' + '54172e65cfea626c0bdf1168' , 
 				method: "PUT",
