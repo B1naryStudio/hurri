@@ -66,6 +66,12 @@ module.exports = function(server){
 			//roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
 			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
+
+		socket.on('stop-listening', function () {
+			mediator.publish("stop-listening", socket.request.user._id);
+			//roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
+			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
+		});
 		
 	});
 

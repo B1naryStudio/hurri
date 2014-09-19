@@ -32,6 +32,7 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'change-position': 'change-track-position'
 		})
 		.out({
+			'radio-view:stop-listening':'stop-listening',
 			'sidebar:play-track' : 'play-this-track',
 			'backbone:radio-view':'add-user-to-radio',
 			'radio-view:create-radio' : 'create-radio-channel',
