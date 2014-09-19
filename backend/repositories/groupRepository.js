@@ -4,6 +4,7 @@ var Repository = require('./generalRepository.js');
 var _ = require('underscore');
 var mediator = require('../units/mediator');
 var roomManager = require('../io/roomManager');
+var userRepository = require('./userRepository');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
@@ -28,8 +29,15 @@ GroupRepository.prototype.bindListeners = function(){
 		}); 
 	});
 
-	mediator.on("add-to-requiring", function(){
-		self.addRequiring(arguments[0], arguments[1], function(err, data){
+	mediator.on("add-to-requiring", function(object){
+		self.addRequiring(object.radioId, object.userId, function(err, data){
+			self.deleteListener(object.radioId, object.userId, function(error, data){
+				self.getById(object.radioId, function(er, radio){
+					userRepository.addAlert(radio.user_auth_id, {name:'Request', type: 'info', additionalInfo: 'You have request for editor rights'}, function(err, alert){
+						mediator.publish("request-for-rights", {master:radio.user_auth_id, alert:alert});
+					});
+				});
+			});
 			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
 			//mediator.publish("radio-channel-created", data.id);
 		}); 
@@ -53,6 +61,22 @@ GroupRepository.prototype.bindListeners = function(){
 		self.deleteEditor(arguments[0], arguments[1], function(err, data){
 			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
 			//mediator.publish("radio-channel-created", data.id);
+		}); 
+	});
+
+	mediator.on("stop-listening", function(object){
+		self.deleteEditor(object.radioId, object.userId, function(err, data){
+			self.deleteRequiring(object.radioId, object.userId, function(err, data){
+
+			});
+			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
+			//mediator.publish("radio-channel-created", data.id);
+		}); 
+	});
+
+	mediator.on("stop-broadcasting", function(object){
+		self.delete(object.radioId, function(err, data){
+
 		}); 
 	});
 };

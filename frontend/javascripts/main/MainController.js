@@ -623,7 +623,7 @@ define(['marionette',
 		},this);
 
 		Backbone.on('show-admin', function(data){
-			this.mainRegion.show( new RadioAdminView({editors: data.editors}));
+			this.mainRegion.show( new RadioAdminView({data: data}));
 		},this);
 
 		Backbone.on('album-result-composite:show-more', function(name){
@@ -697,6 +697,10 @@ define(['marionette',
 			}
 		},this);
 
+		Backbone.on('request-for-rights', function(object){
+			context.notificationCollection.add(new Backbone.Model(object.alert));
+		}, this);
+
 		Backbone.on('show-artist-albums', function(id){
 			if (this.fullresults)
 				this.initializeArtistInner(id, this.fullresults.data[1]);
@@ -747,7 +751,6 @@ define(['marionette',
 		},this);
 
 		Backbone.on('update-admin-info', function(object){
-			alert(object.useId + object.radioId);
 			context.radio.playing = true;
 			context.radio.id = object.radioId;
 			context.radio.role = 'admin';

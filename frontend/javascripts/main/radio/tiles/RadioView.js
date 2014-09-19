@@ -10,13 +10,13 @@ define(['marionette', '../../../app/context'], function(Marionette,context){
       askRights: function(){
          this.$(' .ask-for-rights').css('display', 'none');
          this.$(' .stop-listening').css('display', 'block');
-         Backbone.trigger('radio-view:add-to-requiring');
+         Backbone.trigger('radio-view:add-to-requiring', this.model.attributes._id);
       },
 
       stopListening: function(){
         this.$(' .stop-listening').css('display', 'none');
         this.$('.playicon').css('display', 'block');
-        Backbone.trigger('radio-view:stop-listening');
+        Backbone.trigger('radio-view:stop-listening', this.model.attributes._id);
       },
 
   		showRadioMain: function() {

@@ -34,6 +34,7 @@ RoomManager.prototype.addRoomToUser = function(user_id, room_name) {
 	} else {
 		this.userRooms[user_id] = [room_name];
 		this.addSocketsToRoom(user_id, room_name);
+		console.log('ADD ROOM TO USER: ', user_id, room_name);
 	}
 };
 
@@ -49,8 +50,10 @@ RoomManager.prototype.onAddUserSocket = function(user_id, socket_id) {
 };
 
 RoomManager.prototype.addSocketsToRoom = function(user_id, room_name) {
-	for (var i in sockets[user_id]){
-		context.io.sockets.sockets[i].join(room_name);
+	for (var i = 0; i < sockets[user_id].length; i++){
+		console.log('SOCKETS UID:', sockets[user_id][i]);
+		console.log('SOCKETS CONTEXT:', context.io.sockets.sockets);
+		context.io.sockets.connected[sockets[user_id][i]].join(room_name);
 	}
 };
 

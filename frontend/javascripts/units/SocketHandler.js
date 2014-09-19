@@ -11,9 +11,12 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
   		this.socket.on('disconnect', function(){
    			self.onDisconnect();
   		});
+  		
 	};
 	
 	SocketHandler.prototype.onConnect = function(){
+		var sessionid = this.socket.io.engine.id;
+  		console.log(sessionid);
 		console.log('user connected!');
 	};
 
@@ -29,7 +32,8 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 		.in({
 			'radio-channel-created': 'update-admin-info',
 			'play-this-radio-track' : 'play-changed-track',
-			'change-position': 'change-track-position'
+			'change-position': 'change-track-position',
+			'request-for-rights' : 'request-for-rights'
 		})
 		.out({
 			'radio-view:stop-listening':'stop-listening',
@@ -38,7 +42,8 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'radio-view:create-radio' : 'create-radio-channel',
 			'radio-view:add-to-requiring' : 'ask-for-rights',
 			'admin:give-rights': 'add-to-editors',
-			'admin:remove-rights' : 'remove-from-editors'
+			'admin:remove-rights' : 'remove-from-editors',
+			'admin:stop-broadcasting' : 'stop-broadcasting'
 		});
 
 	return socketHandler;
