@@ -1,18 +1,26 @@
 #charts-header
 	width 100%
-	height 50px
+	height 100px
 	padding 5px 50px
 	box-sizing border-box
 
 	.charts-select-button
-		width auto
-		height auto
+		width 150px
+		height 70px
 		border 1px lightgray solid
 		border-radius 3px
 		padding 2px 5px
 		margin 5px
 		float left
 		cursor pointer
-
 		&:hover
 			background lightgray
+		&.billboard-select-button
+			background url('/../images/main/billboard.jpg') no-repeat
+			background-size cover
+		&.itunes-select-button
+			background url('/../images/main/itunes.jpeg') no-repeat
+			background-size cover
+		&.ben-major-select-button
+			background url('/../images/main/uktop40.jpg') no-repeat
+			background-size cover

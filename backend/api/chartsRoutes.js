@@ -20,8 +20,8 @@ module.exports = function (app) {
 		});
 	});
 
-	app.get('/charts/:id', function(req, res, next){
-		chartRepository.getChart(req.params.id, function(err, data){
+	app.get('/charts/:name/get', function(req, res, next){
+		chartRepository.getChartByName(req.params.name, function(err, data){
 			res.data = data;
 			res.err = err;
 			next();

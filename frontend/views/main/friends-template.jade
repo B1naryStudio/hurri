@@ -1,4 +1,11 @@
-script#friends-template(type='text/template')
+script#followers-template(type='text/template')
+	div.friend
+		img(src='{{-avatarUrl}}')
+		p {{-name}}
+		div.send-message
+			img(src='/../images/sidebar/message.png')
+
+script#followings-template(type='text/template')
 	div.friend
 		img(src='{{-avatarUrl}}')
 		p {{-name}}

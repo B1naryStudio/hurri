@@ -34,6 +34,12 @@ chartRepository.prototype.getChart = function(id, callback){
 	query.exec(callback);
 };
 
+chartRepository.prototype.getChartByName = function(name, callback){
+	var model = this.model;
+	var query = model.findOne({name: name}).populate('tracks');
+	query.exec(callback);
+};
+
 chartRepository.prototype.setPositionLw = function(name, list1, list2, callback){
 	var model = this.model;
 	var query = model.findOneAndUpdate({name: name}, {$set: {positionLw: list1, positionChange: list2}});

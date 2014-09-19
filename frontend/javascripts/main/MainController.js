@@ -120,7 +120,7 @@ define(['marionette',
 
 		// this.initializeLayout();
 
-		this.initializeCharts('http://localhost:3055/charts/billboard/100');
+		this.initializeCharts('billboard');
 	
 		if (window._is404Error) {
 			this.mainRegion.show(this.getNotFoundView());
@@ -456,7 +456,7 @@ define(['marionette',
 		});
 	};
 
-	MainController.prototype.initializeCharts = function(url){
+	MainController.prototype.initializeCharts = function(string){
 		var self = this;
 		this.charts = {
 			collection: new ChartsCollection()
@@ -465,9 +465,9 @@ define(['marionette',
 		$.ajax({
 			type:'GET',
 			dataType: "json", 
-			url: url
+			url: '/charts/'+ string +'/get'
 		}).done(function(data){
-			self.charts.collection.reset(data);			
+			self.charts.collection.reset(data.tracks);			
 		});
 		this.charts.view = this.getChartsView();
 	};
@@ -485,6 +485,13 @@ define(['marionette',
 		};
 
 		this.favoriteslist.view = this.getFavoritesSonglistView();
+	};
+	
+	MainController.prototype.getFavoritesSonglistView = function(){
+		return new MainSongCollectionView({
+			model: this.favoriteslist.model,
+			collection: this.favoriteslist.collection
+		});
 	};
 
 	MainController.prototype.initializeListened = function(){
@@ -530,17 +537,11 @@ define(['marionette',
 	// 	});
 	// };
 
-	MainController.prototype.getFavoritesSonglistView = function(){
-		return new MainSongCollectionView({
-			model: this.favoriteslist.model,
-			collection: this.favoriteslist.collection
-		});
-	};
 
 	MainController.prototype.getListenedView = function(){
 		return new MainSongCollectionView({
 			model: this.listened.model,
-			collection: this.listened.collection
+			collection: this.listened.collectionfavoriteslist
 		});
 	};
 
@@ -653,7 +654,8 @@ define(['marionette',
 		},this);
 
 		Backbone.on('show-favorites show-statistic-liked', function(){
-			this.mainRegion.show(this.getFavoritesSonglistView());
+			this.getFavoritesSonglistView().render();
+			this.mainRegion.show(this.getFavoritesSonglistView().render());
 		},this);
 
 		Backbone.on('show-charts', function(){
@@ -746,8 +748,16 @@ define(['marionette',
 			//this.getAlbumResultView().render();
 		},this);
 
-		Backbone.on('charts:selected', function (url){
-			this.initializeCharts(url);
+		Backbone.on('charts:billboard-selected', function (){
+			this.initializeCharts('billboard');
+			this.mainRegion.show(this.getChartsView());
+		},this);
+		Backbone.on('charts:ben-major-selected', function (){
+			this.initializeCharts('ben-major');
+			this.mainRegion.show(this.getChartsView());
+		},this);
+		Backbone.on('charts:itunes-selected', function (){
+			this.initializeCharts('itunes');
 			this.mainRegion.show(this.getChartsView());
 		},this);
 

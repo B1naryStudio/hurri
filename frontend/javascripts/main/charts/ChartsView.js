@@ -19,15 +19,24 @@ function(Marionette, SongView){
 		},
 
 		selectBillboard: function() {
-			Backbone.trigger('charts:selected', 'http://localhost:3055/charts/billboard/100');
+			Backbone.trigger('charts:billboard-selected');
+			mode = '.billboard-select-button .active';
+			this.ui.billboardSelectButton.removeClass();
+			this.ui.billboardSelectButton.addClass(mode);
 		},
 
 		selectBenMajor: function() {
-			Backbone.trigger('charts:selected', 'http://localhost:3055/charts/ben-major/40');
+			Backbone.trigger('charts:ben-major-selected');
+			mode = '.ben-major-select-button .active';
+			this.ui.benmajorSelectButton.removeClass();
+			this.ui.benmajorSelectButton.addClass(mode);
 		},
 
 		selectItunes: function() {
-			Backbone.trigger('charts:selected', 'http://localhost:3055/charts/itunes/25');
+			Backbone.trigger('charts:itunes-selected');
+			mode = '.itunes-select-button .active';
+			this.ui.itunesSelectButton.removeClass();
+			this.ui.itunesSelectButton.addClass(mode);
 		}
 
 	});

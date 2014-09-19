@@ -1,11 +1,11 @@
-define(['marionette', './FriendsView', './FollowingsCollection'],
- function(Marionette, FriendsView, FollowingsCollection){
+define(['marionette', './FollowingsView', './FollowingsCollection'],
+ function(Marionette, FollowingsView, FollowingsCollection){
 
 var FollowingsCollectionView = Marionette.CompositeView.extend({
 		initialize: function(){
 			this.maincollection = new FollowingsCollection(window._injectedData.following);
 		},
-		childView: FriendsView,
+		childView: FollowingsView,
   		template : '#sidebar-friends-navi',
   		ui: {
   			input : '#filter-friend'
