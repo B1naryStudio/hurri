@@ -142,6 +142,13 @@ define(['marionette',
 			collection: new DialogueCollection()
 		};	
 
+			
+		Backbone.on('socket:message-add', function(options){
+			if(!self.dialogue.collection.findWhere({uid: options.uid})){
+				self.dialogue.collection.add(options);
+			}
+		});
+
 		self.dialogue.view = self.getDialogueView();
 	};
 

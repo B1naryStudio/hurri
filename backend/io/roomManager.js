@@ -50,10 +50,10 @@ RoomManager.prototype.onAddUserSocket = function(user_id, socket_id) {
 };
 
 RoomManager.prototype.addSocketsToRoom = function(user_id, room_name) {
-	for (var i = 0; i < sockets[user_id].length; i++){
-		console.log('SOCKETS UID:', sockets[user_id][i]);
-		console.log('SOCKETS CONTEXT:', context.io.sockets.sockets);
-		context.io.sockets.connected[sockets[user_id][i]].join(room_name);
+	if (sockets[user_id]){
+			for (var i = 0; i < sockets[user_id].length; i++){
+				context.io.sockets.connected[sockets[user_id][i]].join(room_name);
+			}
 	}
 };
 
