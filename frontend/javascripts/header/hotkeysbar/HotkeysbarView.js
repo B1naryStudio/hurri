@@ -48,6 +48,7 @@ function(Backbone, Marionette, HotkeysView){
 
 		hideHotkeysView: function(event){
 			this.hotkeysView.el.style.display = 'none';
+			this.showed = false;
 		},
 
 		onDocumentClick: function(event) {

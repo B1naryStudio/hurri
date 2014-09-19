@@ -39,6 +39,8 @@ define(['marionette',
 	   './explorer/artist/tiles/ArtistCollection',
 	   './search/artist/ArtistTileView',
 	   '../shared/songlistmain/MainSongView',
+	   '../sitetour/SitetourView',
+	   './radio/RadioAdminView'
 	  ],
 	function(Marionette, 
 		_,
@@ -80,7 +82,9 @@ define(['marionette',
 		AlbumBarChildView,
 		ArtistCollection,
 		ArtistView,
-		MainSongView
+		MainSongView,
+		SitetourView,
+		RadioAdminView
 		){
 	
 	var MainController = function(){		
@@ -427,6 +431,14 @@ define(['marionette',
 		});
 	};
 
+	MainController.prototype.initializeAdminView = function(id){
+		window.onbeforeunload=function() { return "Are you sure you wanna leave this page? You will stop radio broadcasting and you will dissapoint your listenrs? Maybe you can stay there for some time? Or perhaps stop the radio?"; };
+		$.ajax({url:'/api/group/' + id + '/members'}).done(function(data){
+			console.log('USERS', data);
+			Backbone.trigger('show-admin', data);
+		});
+	};
+
 	MainController.prototype.getArtistInnerView = function(){
 
 		return new AlbumCompleteView({
@@ -605,6 +617,10 @@ define(['marionette',
 			this.initializeArtists(name);
 		},this);
 
+		Backbone.on('show-admin', function(data){
+			this.mainRegion.show( new RadioAdminView({data: data}));
+		},this);
+
 		Backbone.on('album-result-composite:show-more', function(name){
 			this.initializeFullAlbumResults(name);
 		},this);
@@ -639,6 +655,15 @@ define(['marionette',
 
 		Backbone.on('show-all-tracks', function(name){
 			this.initializeTracks(name);
+		},this);
+
+		Backbone.on('action:show-sitetour-view', function(){
+			var el = document.createElement('div');
+			el.id = 'sitetour';
+			document.getElementsByTagName('body')[0].appendChild(el);
+			this.sitetourView = new SitetourView({
+				el: el
+			});
 		},this);
 
 		Backbone.on('action:showUserView', function(id){
@@ -676,6 +701,10 @@ define(['marionette',
 				});
 			}
 		},this);
+
+		Backbone.on('request-for-rights', function(object){
+			context.notificationCollection.add(new Backbone.Model(object.alert));
+		}, this);
 
 		Backbone.on('show-artist-albums', function(id){
 			if (this.fullresults)
@@ -726,9 +755,20 @@ define(['marionette',
 			this.mainRegion.show(this.getUserView(model));
 		},this);
 
+		Backbone.on('update-admin-info', function(object){
+			context.radio.playing = true;
+			context.radio.id = object.radioId;
+			context.radio.role = 'admin';
+			this.initializeAdminView(object.radioId);
+		}, this);
+
 		Backbone.on('show-404', function(){
 			this.mainRegion.show(this.getNotFoundView());
 		}, this);
+
+		Backbone.on('show-admin-view', function(id){
+			this.initializeAdminView(id);
+		},this);
 
 		Backbone.on('searchbar:show-more', function(input){
 			var self = this;

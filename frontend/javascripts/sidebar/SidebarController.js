@@ -246,14 +246,16 @@ define(['marionette',
 
 		Backbone.on('main-view:play-songs', function(model_id, collection, set){
 			this.song.model._id = model_id;
-			if (context.currentSongCollection.length !== 0){
-				context.previousCollection.reset(context.currentSongCollection.models);
-			}
-			var button = new UndoReplacement();
-			button.render();
-			context.currentSongCollection.reset(collection.models);
-			if (!set)
-				Backbone.trigger('main:play-first');
+			if(!context.radio.playing){
+				if (context.currentSongCollection.length !== 0){
+					context.previousCollection.reset(context.currentSongCollection.models);
+				}
+				var button = new UndoReplacement();
+				button.render();
+				context.currentSongCollection.reset(collection.models);
+				if (!set)
+					Backbone.trigger('main:play-first');
+			} else {alert('Atata, you are currently translating radio');}
 		},this);
 
 		Backbone.on('song-view:play-song', function(model, i, id){
@@ -287,6 +289,12 @@ define(['marionette',
 			});
 		}, this);
 
+		Backbone.on('play-changed-track', function(id){
+			alert('Wow!' + id);
+			var model = new SongModel(object);
+			context.currentSongCollection.reset(model);
+			Backbone.trigger('main:play-at-position', 0);
+		},this);
 	};
 
 
