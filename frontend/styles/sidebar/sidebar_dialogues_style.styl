@@ -5,14 +5,26 @@
 	margin 1em 51% 1em 0.3em
 	padding 0 4px
 	position relative
+	z-index 3
+	.date
+		position absolute
+		left 2px
+		top -10px
+		font-size 9px
 
 .text-right
+	z-index 3
 	background-color #318abd
 	border-radius 15px
 	font 15px Helvetica, Arial, sans-serif
 	margin 1em 0.3em 1em 51%
 	padding 0 4px
 	position relative
+	.date
+		position absolute
+		right 2px
+		top -10px
+		font-size 9px
 
 p
 	padding 2px 8px 4px
@@ -26,6 +38,7 @@ p
 		height 30px
 
 #new-dialogue
+	z-index 9999
 	height 15px
 	border-radius 10px
 	border 1px solid #d2d2d2
@@ -36,6 +49,7 @@ p
 	position absolute
 	bottom 0px
 #send-message
+	z-index 9999
 	height 15px
 	border-radius 10px
 	border 1px solid #d2d2d2

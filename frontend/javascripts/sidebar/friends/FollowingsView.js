@@ -1,12 +1,15 @@
 define(['marionette', '../../app/routes'], 
 	function(Marionette, router){
-	var FollowersView = Marionette.ItemView.extend({
-		template: '#followers-template',
+	var FollowingsView = Marionette.ItemView.extend({
+		template: '#followings-template',
 		events : {
 		 	'click .delete-friend'  : 'deleteFriend',
 		 	'click .friend'			: 'showDetails',
 		 	'click .send-message'	: 'sendMessage'
 		},
+		deleteFriend: function(){
+	 		this.model.destroy();
+	 	},
 	 	showDetails: function(){
 	 		router.navigate('/user/'+ this.model.attributes._id,true);
 	 	},
@@ -15,5 +18,5 @@ define(['marionette', '../../app/routes'],
 			Backbone.trigger('send-message', this.model.attributes._id);
 	 	}
 	});
-	return FollowersView;
+	return FollowingsView;
 });
