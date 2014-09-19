@@ -226,6 +226,8 @@ define(['marionette',
 				context.previousCollection.reset(context.currentSongCollection.models);
 			}
 			context.currentSongCollection.add(collection);
+			if (context.radio.playing && context.radio.role === ('admin' || 'editor'))
+				Backbone.trigger('admin:add-tracks',{radio:context.radio.id, collection: collection});
 			var button = new UndoReplacement();
 			button.render();
 			setTimeout($('#undo').empty(), 1000);
@@ -263,6 +265,8 @@ define(['marionette',
 
 		Backbone.on('song-view:add-to-queue', function(model){
 			context.currentSongCollection.add(model);
+			if (context.radio.playing && context.radio.role === ('admin' || 'editor'))
+				Backbone.trigger('admin:add-tracks',{radio:context.radio.id, collection: model});
 		},this);
 
 		Backbone.on('songlist:save-to-existing-playlist', function(model_id, collection){
@@ -277,12 +281,19 @@ define(['marionette',
 			});
 		}, this);
 
-		Backbone.on('play-changed-track', function(id){
-			alert('Wow!' + id);
-			var model = new SongModel(object);
+		Backbone.on('play-changed-track', function(object){
+			var model = new SonglistModel(object);
 			context.currentSongCollection.reset(model);
 			Backbone.trigger('main:play-at-position', 0);
 		},this);
+
+		Backbone.on('add-to-your-collection', function(collection){
+			if (context.radio.role === 'admin' || context.radio.role === 'editor')
+				context.currentSongCollection.add(collection);
+		},this);
+
+
+		
 	};
 
 
