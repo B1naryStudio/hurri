@@ -36,17 +36,22 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'change-position'		: 'change-track-position',
 			'request-for-rights' 	: 'request-for-rights',
 			'new-message' 			: 'socket:message-add',
-			'new-notification'		: 'socket:notification-add'
+			'new-notification'		: 'socket:notification-add',
+			'added-to-editors' : 'added-to-editors',
+			'add-to-collection-from-socket' : 'add-to-your-collection',
+			'delete-track-from-radio' : 'delete-track-from-radio'
 		})
 		.out({
-			'backbone:radio-view'			: 'add-user-to-radio',
-			'radio-view:stop-listening'		: 'stop-listening',
-			'sidebar:play-track' 			: 'play-this-track',
-			'radio-view:create-radio' 		: 'create-radio-channel',
-			'radio-view:add-to-requiring' 	: 'ask-for-rights',
-			'admin:give-rights'				: 'add-to-editors',
-			'admin:remove-rights' 			: 'remove-from-editors',
-			'admin:stop-broadcasting'		: 'stop-broadcasting',
+			'radio-view:stop-listening':'stop-listening',
+			'sidebar:play-track' : 'play-this-track',
+			'backbone:radio-view':'add-user-to-radio',
+			'radio-view:create-radio' : 'create-radio-channel',
+			'radio-view:add-to-requiring' : 'ask-for-rights',
+			'admin:give-rights': 'add-to-editors',
+			'admin:remove-rights' : 'remove-from-editors',
+			'admin:stop-broadcasting' : 'stop-broadcasting',
+			'admin:add-tracks' : 'add-tracks-to-db',
+			'admin:delete-track-from-list' : 'delete-track-from-list',
 			'dialogue:message-add'			: 'add-message',
 			'notifications:notification-add': 'add-notification'
 		});

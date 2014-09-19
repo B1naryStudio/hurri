@@ -173,6 +173,8 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			if (window.localStorage.getItem('currentTab').substr(0, 9) === 'track/id/'){
 				router.navigate('track/id/' + context.currentSongCollection.models[next].attributes._id, true);
 			}
+			if (context.radio.playing)
+						Backbone.trigger('sidebar:play-track', {id:context.currentSongCollection.models[next].attributes._id, radio: context.radio.id});
 			this.newTrack(next);
 			if ((this.get('currentTrack') > 0) && (playlistModel.get('numberOfTracks') > 0)) {
 				this.set({previousButtonState: false});

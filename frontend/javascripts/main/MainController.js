@@ -773,6 +773,13 @@ define(['marionette',
 			this.initializeAdminView(id);
 		},this);
 
+		Backbone.on('added-to-editors', function(radio){
+			context.radio.role = 'editor';
+			context.radio.playing = 'true';
+			context.radio.id = radio;
+			console.log(context);
+		},this);
+
 		Backbone.on('searchbar:show-more', function(input){
 			var self = this;
 			this.initializeResults(input, function(obj){

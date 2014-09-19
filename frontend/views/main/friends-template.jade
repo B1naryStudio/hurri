@@ -13,3 +13,10 @@ script#followings-template(type='text/template')
 			img(src='/../images/sidebar/message.png')
 		div.delete-friend 
 			img(src='/../images/notifications/delete.png')
+
+
+script#admin-friend(type='text/template')
+	div.friend
+		img(src='{{-avatarUrl}}')
+		p {{-name}}
+		.give-rights-button Give rights

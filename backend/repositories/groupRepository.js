@@ -5,6 +5,7 @@ var _ = require('underscore');
 var mediator = require('../units/mediator');
 var roomManager = require('../io/roomManager');
 var userRepository = require('./userRepository');
+var trackRepository = require('./trackRepository');
 
 function GroupRepository(){
 	Repository.prototype.constructor.call(this);
@@ -43,8 +44,11 @@ GroupRepository.prototype.bindListeners = function(){
 		}); 
 	});
 
-	mediator.on("add-to-editors", function(){
-		self.addEditor(arguments[0], arguments[1], function(err, data){
+	mediator.on("add-to-editors", function(object){
+		self.addEditor(object.radio, object.id, function(err, data){
+			self.deleteRequiring(object.radio, object.id, function(err, data){
+				mediator.publish("added-to-editors");
+			});
 			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
 			//mediator.publish("radio-channel-created", data.id);
 		}); 
@@ -69,6 +73,33 @@ GroupRepository.prototype.bindListeners = function(){
 			self.deleteRequiring(object.radioId, object.userId, function(err, data){
 
 			});
+			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
+			//mediator.publish("radio-channel-created", data.id);
+		}); 
+	});
+
+	mediator.on("get-track-info", function(id){
+		trackRepository.getById(id, function(err, data){
+			console.log(err, data);
+			mediator.publish("track-info", data);
+			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
+			//mediator.publish("radio-channel-created", data.id);
+		}); 
+	});
+
+	mediator.on("add-tracks-to-db", function(object){
+		var tracks = _.pluck(object.collection, '_id');
+		console.log(tracks);
+		self.addTracks(object.radio, {track : tracks}, function(err, data){
+			console.log(err, data);
+			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
+			//mediator.publish("radio-channel-created", data.id);
+		}); 
+	});
+
+	mediator.on("delete-track-from-list", function(object){
+		self.deleteTrack(object.radio, object.id, function(err, data){
+			console.log(err, data);
 			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
 			//mediator.publish("radio-channel-created", data.id);
 		}); 
@@ -179,7 +210,7 @@ GroupRepository.prototype.deleteEditor = function(id, editorid, callback) {
 
 GroupRepository.prototype.addTracks = function(id, body, callback) {
 	var model = this.createModel();
-	var query = model.findOneAndUpdate({_id: id},{$push: {tracks:body.track}} );
+	var query = model.findOneAndUpdate({_id: id},{$pushAll: {tracks:body.track}} );
 	query.exec(callback);
 };
 

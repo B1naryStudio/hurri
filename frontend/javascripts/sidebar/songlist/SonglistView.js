@@ -29,12 +29,14 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 					Backbone.trigger('songlist-view:play-song', i);
 					if (context.radio.playing)
 						Backbone.trigger('sidebar:play-track', {id:this.model.attributes._id, radio: context.radio.id});
+					break;
 				}
 			}	
 		},
 
 		deleteSong: function(){
 		 	context.currentSongCollection.remove(this.model);
+		 	Backbone.trigger('admin:delete-track-from-list', {radio:context.radio.id, id: this.model.get('_id')});
 		 },
 
 		addSongToQueue: function(){

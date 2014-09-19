@@ -238,6 +238,8 @@ define(['marionette',
 				context.previousCollection.reset(context.currentSongCollection.models);
 			}
 			context.currentSongCollection.add(collection);
+			if (context.radio.playing && context.radio.role === ('admin' || 'editor'))
+				Backbone.trigger('admin:add-tracks',{radio:context.radio.id, collection: collection});
 			var button = new UndoReplacement();
 			button.render();
 			setTimeout($('#undo').empty(), 1000);
@@ -275,6 +277,8 @@ define(['marionette',
 
 		Backbone.on('song-view:add-to-queue', function(model){
 			context.currentSongCollection.add(model);
+			if (context.radio.playing && context.radio.role === ('admin' || 'editor'))
+				Backbone.trigger('admin:add-tracks',{radio:context.radio.id, collection: model});
 		},this);
 
 		Backbone.on('songlist:save-to-existing-playlist', function(model_id, collection){
@@ -289,12 +293,38 @@ define(['marionette',
 			});
 		}, this);
 
-		Backbone.on('play-changed-track', function(id){
-			alert('Wow!' + id);
-			var model = new SongModel(object);
-			context.currentSongCollection.reset(model);
-			Backbone.trigger('main:play-at-position', 0);
+		Backbone.on('play-changed-track', function(object){
+			var model = new SonglistModel(object);
+			var position = -1;
+			for (var i = 0 ; i < context.currentSongCollection.models.length; i++){
+				if (context.currentSongCollection.models[i].attributes._id === model.attributes._id){
+					{position = i;
+					context.currentSongModel = context.currentSongCollection.models[i];
+					break;}
+				}
+			}
+			if (position !== -1)
+				Backbone.trigger('main:play-at-position', i);
+			else {
+				context.currentSongCollection.reset(model);
+				Backbone.trigger('main:play-at-position', 0);
+			}
 		},this);
+
+		Backbone.on('add-to-your-collection', function(collection){
+			if (context.radio.role === 'admin' || context.radio.role === 'editor')
+				context.currentSongCollection.add(collection);
+		},this);
+
+		Backbone.on('delete-track-from-radio', function(id){
+			if (context.radio.role === 'admin' || context.radio.role === 'editor'){
+				var model = context.currentSongCollection.where({_id:id});
+				context.currentSongCollection.remove(model);
+			}
+		},this);
+
+
+		
 	};
 
 
