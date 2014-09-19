@@ -2,7 +2,14 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 	function(Marionette, playlistModel, ZeroClipboard, context){
 	var MainSongView = Marionette.ItemView.extend({
 	className: 'main-song-bar',
-	template : '#main-song-bar',
+	template : this.getTemplate,
+	getTemplate: function(){
+		if (this.model.get('positionChange') !== undefined){
+			return "#main-chart-song-bar";
+		} else {
+			return "#main-song-bar";
+		}
+	},
 	events : {
 		'click .main-queue-add' : 'addToQueue',
 		'click .main-like-song' : 'likeSong',

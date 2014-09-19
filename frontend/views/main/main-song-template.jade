@@ -18,6 +18,19 @@ script#main-song-bar(type='text/template')
 			{{-duration_min}}
 		.queueposmain {{-queuepos}}
 
+script#main-chart-song-bar(type='text/template')
+	.main-song-item
+		.main-song-cover
+		.main-song-info
+			.main-song-name
+				{{-title}}  
+			.main-song-artist
+				{{-singer.name}}
+		.main-queue-add
+		.main-share-song(data-clipboard-text='http://localhost:3055/track/id/{{-_id}}')
+		.main-like-song
+		.queueposmain {{-positionChange}}
+
 script#main-header-playlist-template(type='text/template')
 	#header-playlist-wrapper
 		#playlist-avatar-header

@@ -5,7 +5,12 @@ function(Marionette, SongView){
 
 		template 	: '#charts-template',
 		childView	: SongView,
-
+		childEvents: {
+			'song-view:play-collection' : function(info, models, position){
+				console.log('THIS', this.model);
+				Backbone.trigger('song-view:play-song', models, position, undefined);
+			}
+		},
 		ui: {
 			billboardSelectButton 	: '.billboard-select-button',
 			benmajorSelectButton	: '.ben-major-select-button',
@@ -20,23 +25,23 @@ function(Marionette, SongView){
 
 		selectBillboard: function() {
 			Backbone.trigger('charts:billboard-selected');
-			mode = '.billboard-select-button .active';
-			this.ui.billboardSelectButton.removeClass();
-			this.ui.billboardSelectButton.addClass(mode);
+		//	mode = '.billboard-select-button .active';
+		//	this.ui.billboardSelectButton.removeClass();
+		//	this.ui.billboardSelectButton.addClass(mode);
 		},
 
 		selectBenMajor: function() {
 			Backbone.trigger('charts:ben-major-selected');
 			mode = '.ben-major-select-button .active';
-			this.ui.benmajorSelectButton.removeClass();
-			this.ui.benmajorSelectButton.addClass(mode);
+		//	this.ui.benmajorSelectButton.removeClass();
+		//	this.ui.benmajorSelectButton.addClass(mode);
 		},
 
 		selectItunes: function() {
 			Backbone.trigger('charts:itunes-selected');
 			mode = '.itunes-select-button .active';
-			this.ui.itunesSelectButton.removeClass();
-			this.ui.itunesSelectButton.addClass(mode);
+		//	this.ui.itunesSelectButton.removeClass();
+		//	this.ui.itunesSelectButton.addClass(mode);
 		}
 
 	});

@@ -479,6 +479,9 @@ define(['marionette',
 			dataType: "json", 
 			url: '/charts/'+ string +'/get'
 		}).done(function(data){
+			for (var i = 0; i < data.tracks.length; i++){
+				data.tracks[i].positionChange = data.positionChange[i];
+			}
 			self.charts.collection.reset(data.tracks);			
 		});
 		this.charts.view = this.getChartsView();

@@ -105,6 +105,7 @@ chartParse.prototype.iTunesTop = function (callback) {
 				results[i].rankTw = i+1;
 				results[i].singer = parseResult.feed.entry[i]['im:artist'][0]._;
 				results[i].title = parseResult.feed.entry[i]['im:name'][0];
+				results[i].rankLw = i+1;
 			}
 			results.updated = parseResult.feed.entry.updated;
 			chartRepository.setChart('itunes', results, function(err, data){});
