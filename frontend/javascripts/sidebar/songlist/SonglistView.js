@@ -36,6 +36,7 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 
 		deleteSong: function(){
 		 	context.currentSongCollection.remove(this.model);
+		 	Backbone.trigger('admin:delete-track-from-list', {radio:context.radio.id, id: this.model.get('_id')});
 		 },
 
 		addSongToQueue: function(){

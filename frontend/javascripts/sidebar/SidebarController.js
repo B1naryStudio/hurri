@@ -292,6 +292,13 @@ define(['marionette',
 				context.currentSongCollection.add(collection);
 		},this);
 
+		Backbone.on('delete-track-from-radio', function(id){
+			if (context.radio.role === 'admin' || context.radio.role === 'editor'){
+				var model = context.currentSongCollection.where({_id:id});
+				context.currentSongCollection.remove(model);
+			}
+		},this);
+
 
 		
 	};

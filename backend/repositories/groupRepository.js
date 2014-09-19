@@ -97,6 +97,14 @@ GroupRepository.prototype.bindListeners = function(){
 		}); 
 	});
 
+	mediator.on("delete-track-from-list", function(object){
+		self.deleteTrack(object.radio, object.id, function(err, data){
+			console.log(err, data);
+			//roomManager.addRoomToUser(socket.request.user._id, 'user_' + radio_id);
+			//mediator.publish("radio-channel-created", data.id);
+		}); 
+	});
+
 	mediator.on("stop-broadcasting", function(object){
 		self.delete(object.radioId, function(err, data){
 

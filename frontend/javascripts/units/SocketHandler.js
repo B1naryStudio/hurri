@@ -35,7 +35,8 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'change-position': 'change-track-position',
 			'request-for-rights' : 'request-for-rights',
 			'added-to-editors' : 'added-to-editors',
-			'add-to-collection-from-socket' : 'add-to-your-collection'
+			'add-to-collection-from-socket' : 'add-to-your-collection',
+			'delete-track-from-radio' : 'delete-track-from-radio'
 		})
 		.out({
 			'radio-view:stop-listening':'stop-listening',
@@ -46,7 +47,8 @@ define(['socketio', './Sockiator'], function(io, Sockiator){
 			'admin:give-rights': 'add-to-editors',
 			'admin:remove-rights' : 'remove-from-editors',
 			'admin:stop-broadcasting' : 'stop-broadcasting',
-			'admin:add-tracks' : 'add-tracks-to-db'
+			'admin:add-tracks' : 'add-tracks-to-db',
+			'admin:delete-track-from-list' : 'delete-track-from-list'
 
 		});
 

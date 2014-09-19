@@ -85,6 +85,11 @@ module.exports = function(server){
 			mediator.publish("add-tracks-to-db", object);
 			context.io.to('radio_' + object.radio).emit('add-to-collection-from-socket', object.collection);
 		});
+
+		socket.on('delete-track-from-list', function (object) {
+			mediator.publish("delete-track-from-list", object);
+			context.io.to('radio_' + object.radio).emit('delete-track-from-radio', object.id);
+		});
 		
 	});
 
