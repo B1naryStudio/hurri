@@ -96,6 +96,7 @@ module.exports = function(server){
 	mediator.on('radio-channel-created', function(object){
 		console.log(object);
 		roomManager.addRoomToUser(object.userId, 'user_' + object.userId);
+		roomManager.addRoomToUser(object.userId, 'radio_' + object.radioId);
 		context.io.to('user_' + object.userId).emit('radio-channel-created', object);
 	});
 

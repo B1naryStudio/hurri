@@ -283,8 +283,20 @@ define(['marionette',
 
 		Backbone.on('play-changed-track', function(object){
 			var model = new SonglistModel(object);
-			context.currentSongCollection.reset(model);
-			Backbone.trigger('main:play-at-position', 0);
+			var position = -1;
+			for (var i = 0 ; i < context.currentSongCollection.models.length; i++){
+				if (context.currentSongCollection.models[i].attributes._id === model.attributes._id){
+					{position = i;
+					context.currentSongModel = context.currentSongCollection.models[i];
+					break;}
+				}
+			}
+			if (position !== -1)
+				Backbone.trigger('main:play-at-position', i);
+			else {
+				context.currentSongCollection.reset(model);
+				Backbone.trigger('main:play-at-position', 0);
+			}
 		},this);
 
 		Backbone.on('add-to-your-collection', function(collection){
