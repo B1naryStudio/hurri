@@ -19,7 +19,9 @@ define(['../shared/song/SongModel',
 			currentPlaylistBar: new PlaylistBarModel(),
 			currentSongCollection: new SonglistCollection(),
 			previousCollection: new SonglistCollection(),
-			toggled: false
+			radioCollection: new SonglistCollection(),
+			toggled: false,
+			radio: {playing: false, id: undefined, role:'user'}
 	};
 	context.currentUserModel.set({
 		liked: 		window._injectedData.liked.length,

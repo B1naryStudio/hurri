@@ -6,7 +6,7 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		events : {
 		 	'click .delete-song-from-list'  : 'deleteSong',
 			'click .add-song-to-queue' : 'addSongToQueue',
-			'dblclick .sidebar-song-img-box img' : 'playSong'
+			'dblclick .sidebar-song-cover' : 'playSong'
 		 },
 		
 		modelEvents : {
@@ -22,9 +22,13 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		},
 
 		playSong: function(){
+			
+
 			for (var i = 0; i < this.model.collection.length; i++){
 				if (this.model.cid === context.currentSongCollection.models[i].cid){
 					Backbone.trigger('songlist-view:play-song', i);
+					if (context.radio.playing)
+						Backbone.trigger('sidebar:play-track', {id:this.model.attributes._id, radio: context.radio.id});
 				}
 			}	
 		},

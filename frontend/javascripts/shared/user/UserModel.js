@@ -15,7 +15,8 @@ define(['backbone'], function(Backbone){
 			groups: [],
 			listened: [],
 			followers: [],
-			followings: []
+			followings: [],
+			broadcasting:false
 		}
 	});
 	return UserModel;

@@ -1,4 +1,4 @@
-define(['marionette'], function(Marionette){
+define(['marionette', './context'], function(Marionette, context){
 
 var HurriRoutes = Marionette.AppRouter.extend({
 	appRoutes: {
@@ -99,7 +99,10 @@ var HurriRoutes = Marionette.AppRouter.extend({
 	
 	RouteController.prototype.showRadios =  function(id){
 		console.log('radios show');
-		Backbone.trigger('show-groupes');
+		if (context.radio.playing && context.radio.role === ('admin' || 'editor'))
+			Backbone.trigger('show-admin-view', context.radio.id);
+		else
+			Backbone.trigger('show-groupes');
 		window.localStorage.setItem("currentTab", "user/"+id+"/groups");
 	};
 
