@@ -69,15 +69,19 @@ VKWrapper.prototype.getAudioSearch = function(options, callback){
 	this.vk.once('done:audio.search', function(result, error) {
 		console.log('res stream=', result);
 		console.log('err stream=', error);
-		if (result.response[1]){
-			var object = {
-				url: result.response[1].url,
-				duration: result.response[1].duration,
-				lyrics_id: result.response[1].lyrics_id
-			};
-			callback(object);
-		} else {
-			callback(404);
+		try {
+			if (result.response[1]){
+				var object = {
+					url: result.response[1].url,
+					duration: result.response[1].duration,
+					lyrics_id: result.response[1].lyrics_id
+				};
+				callback(object);
+			} else {
+				callback(null, 404);
+			}
+		} catch (e) {
+			callback(null, 404);
 		}
 	});
 

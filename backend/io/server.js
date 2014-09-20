@@ -44,11 +44,12 @@ module.exports = function(server){
 		socket.on('add-message', function (options){
 			var id1 = socket.request.user._id;
 			var id2 = options.recipient_id;
-			mediator.publish('add-message-to-dialogue', {user_auth1: id1, user_auth2: id2});
 			var arr = [id1, id2];
-			arr.sort();
+			arr = arr.sort();
+			mediator.publish('add-message-to-dialogue', {user_auth1: id1, user_auth2: id2, options: options});
 			roomManager.addRoomToUser(id1, 'dialogue_' + arr[0] + '_' + arr[1]);
 			roomManager.addRoomToUser(id2, 'dialogue_' + arr[0] + '_' + arr[1]);
+			console.log('asdasdas');
 			context.io.to('dialogue_' + arr[0] + '_' + arr[1]).emit('new-message',options);
 		});		
 
@@ -56,13 +57,11 @@ module.exports = function(server){
 		socket.on('create-radio-channel', function () {
 			mediator.publish("create-radio-channel", socket.request.user._id);
 			//roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
-			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
 
 		socket.on('ask-for-rights', function (radio_id) {
 			mediator.publish("add-to-requiring", {radioId: radio_id, userId: socket.request.user._id});
 			//roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
-			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
 
 		socket.on('add-to-editors', function (object) {
@@ -72,7 +71,6 @@ module.exports = function(server){
 				context.io.to('user_' + object.id).emit('added-to-editors', object.radio);
 			});
 			//roomManager.addRoomToUser(socket.request.user._id, 'radio_' + radio_id);
-			//console.log(roomManager.getSocketsByRoom('radio_' + radio_id));
 		});
 
 		socket.on('remove-from-editors', function () {
@@ -85,7 +83,6 @@ module.exports = function(server){
 			mediator.once("track-info", function(data){
 				context.io.to('radio_' + object.radio).emit('play-this-radio-track', data);
 			});
-			
 		});
 
 		socket.on('stop-listening', function (id) {
@@ -111,7 +108,6 @@ module.exports = function(server){
 	});
 
 	mediator.on('radio-channel-created', function(object){
-		console.log(object);
 		roomManager.addRoomToUser(object.userId, 'user_' + object.userId);
 		roomManager.addRoomToUser(object.userId, 'radio_' + object.radioId);
 		context.io.to('user_' + object.userId).emit('radio-channel-created', object);

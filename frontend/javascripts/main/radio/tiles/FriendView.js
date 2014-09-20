@@ -1,9 +1,9 @@
-define(['marionette', '../../app/routes', '../../app/context'], 
+define(['marionette', '../../../app/routes', '../../../app/context'], 
 	function(Marionette, router, context){
 	var FollowersView = Marionette.ItemView.extend({
 		template: this.getTemplate,
 		initialize: function(object){
-			this.friend = 'general';
+				this.friend = 'admin';
 		},
 
 		events : {

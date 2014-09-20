@@ -72,7 +72,7 @@ define(['backbone'], function(Backbone){
 			var self = this;
 			var url = this.get('url');
 				if (!url){
-					$.getJSON('/getStream',{query: self.get('title') + ' ' + self.get('singer')}, function(data){
+					$.getJSON('/getStream',{query: self.get('title')}, function(data){
 						self.set({url: data.url, duration: data.duration});
 					});
 		 		}

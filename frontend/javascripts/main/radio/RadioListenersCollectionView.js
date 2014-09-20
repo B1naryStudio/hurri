@@ -1,4 +1,4 @@
-define(['marionette', '../../sidebar/friends/FriendsView', '../../app/context'], 
+define(['marionette', './tiles/FriendView', '../../app/context'], 
 	function(Marionette, FriendsView, context){
 	var RadioListenersCollectionView = Marionette.CollectionView.extend({
 		el: '#requiring',
