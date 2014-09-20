@@ -1,8 +1,18 @@
 script#statistic-template(type='text/template')
 	div#statistic-title STATISTIC
 	div#statistic
-		div.statistic-info#listened Listened: {{-listenedCollection.length}}
-		div.statistic-info#playlists Playlists: {{-window._injectedData.playlists.length}}
-		div.statistic-info#followers Followers: {{-window._injectedData.followers.length}}
-		div.statistic-info#followings Followings: {{-window._injectedData.following.length}}
-		div.statistic-info#liked Liked: {{-liked}}
+		.stat-item
+			.statistic-name#listened Listened: 
+			.statistic-info{{-listenedCollection.length}}
+		.stat-item
+			.statistic-name#playlists Playlists: 
+			.statistic-info{{-window._injectedData.playlists.length}}
+		.stat-item
+			.statistic-name#followers Followers: 
+			.statistic-info{{-window._injectedData.followers.length}}
+		.stat-item
+			.statistic-name#followings Followings: 
+			.statistic-info{{-window._injectedData.following.length}}
+		.stat-item
+			.statistic-name#liked Liked: 
+			.statistic-info{{-liked}}
