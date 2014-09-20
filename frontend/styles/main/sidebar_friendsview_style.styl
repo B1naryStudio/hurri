@@ -10,19 +10,31 @@
 	&:last-child
 		border-bottom 1px solid #dedede
 	&:hover
-		background lightblue
+		background #4be
 		color white
 		border-color lightblue
+		opacity 0.8
 	.send-message
 		img
 			position absolute
 			top 30%
-			right 10px
+			right 25px
 			width 16px
 			height 16px	
 			opacity 0.3
 			&:hover
-				opacity 0.8	
+				opacity 0.8
+				-webkit-filter brightness(1000%)
+	.delete-friend
+		position absolute
+		top 30%
+		right 5px
+		width 18px
+		height 18px	
+		opacity 0.3
+		&:hover
+				opacity 0.8
+				-webkit-filter brightness(1000%)
 	img
 		width 30px
 		height 30px
@@ -39,36 +51,40 @@
 			height 12px
 
 #friends-navi
-	background Snow
+	background #9E9E9E
 	opacity 1
-	height 40px
-	border-top 1px solid #999
+	height 30px
 	.friends-navi
-		height 40px
-		line-height 40px
+		height 30px
+		line-height 30px
 		vertical-align middle
 		width 50%
 		float left
-		color white
-		background #333
+		color #333
+		background #9E9E9E
 		text-align center
 		cursor pointer
-		border-left 1px solid #fff
+		border-left 1px solid #888
 		box-sizing border-box
+		font-weight 600
+		font-size 14px
+		color white
 		&:first-child
 			border-left none
 		&:hover
-			background #39b
+			background #4be
+			color white
 
 
 #filter-friend
 	width 100%
-	height 30px
-	padding-left 30px
+	height 27px
+	padding-left 27px
+	box-sizing border-box
 img.filter-image
-	width 17px
+	width 14px
 	position absolute
-	top 49px
+	top 36px
 	left 6px
 
 .give-rights-button 
