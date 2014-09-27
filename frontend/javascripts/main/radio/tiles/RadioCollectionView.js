@@ -10,7 +10,8 @@ define(['marionette', './RadioView', '../../../app/context'],
 			context.currentUserModel.set({broadcasting: true});
 		},
 
-		childView: RadioView
+		childView: RadioView,
+		childViewContainer: '#radio-bars-container'
 	});
 	return RadioCollectionView;
 });

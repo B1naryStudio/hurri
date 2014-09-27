@@ -6,47 +6,48 @@ script#user-template(type='text/template')
 			a(href='/auth/twitter', data-type="tw").socialButton#addTw(title='Add Twitter account') Twitter
 			a(href='/auth/facebook', data-type="fb").socialButton#addFb(title='Add Facebook account') Facebook
 			a.socialButton#syncvk sync VK
-		div#userinfo
-			img#avatar('src={{-avatarUrl}}')
-			div#info
-				div.name {{-name}}
-				div.info-field Age: {{-age}}
-				div.info-field e-mail: {{-email}}
-				div.info-field Country: {{-country}}
-				div#music-statistic
-					div.statistic-title
-					div.statistic-field#byArtists by Artists
-					div.statistic-field#byGenres by Genres
-					div.statistic-bar
-						div.statistic-bar-strip(style='background-color: #000080')
-						div.statistic-bar-strip(style='background-color: #0000ff')
-						div.statistic-bar-strip(style='background-color: #4169e1')
-						div.statistic-bar-strip(style='background-color: #1e90ff')
-						div.statistic-bar-strip(style='background-color: #87ceeb')
-						div.statistic-bar-strip(style='background-color: #b0e0e6')
-						div.statistic-bar-strip(style='background-color: #e0ffff')
-					div.statistic-legend
-						div.legend-item
-							div.item-box(style='background-color: #000080')
-							div.item-name
-						div.legend-item
-							div.item-box(style='background-color: #0000ff')
-							div.item-name
-						div.legend-item
-							div.item-box(style='background-color: #4169e1')
-							div.item-name
-						div.legend-item
-							div.item-box(style='background-color: #1e90ff')
-							div.item-name
-						div.legend-item
-							div.item-box(style='background-color: #87ceeb')
-							div.item-name
-						div.legend-item
-							div.item-box(style='background-color: #b0e0e6')
-							div.item-name
-						div.legend-item
-							div.item-box(style='background-color: #e0ffff')
-							div.item-name
-		div#user-favorites
-		div#user-listened
-		div#user-playlists
+		div#userinfo-container
+			div#userinfo
+				img#avatar('src={{-avatarUrl}}')
+				div#info
+					div.name {{-name}}
+					div.info-field Age: {{-age}}
+					div.info-field e-mail: {{-email}}
+					div.info-field Country: {{-country}}
+					div#music-statistic
+						div.statistic-title
+						div.statistic-field#byArtists by Artists
+						div.statistic-field#byGenres by Genres
+						div.statistic-bar
+							div.statistic-bar-strip(style='background-color: #000080')
+							div.statistic-bar-strip(style='background-color: #0000ff')
+							div.statistic-bar-strip(style='background-color: #4169e1')
+							div.statistic-bar-strip(style='background-color: #1e90ff')
+							div.statistic-bar-strip(style='background-color: #87ceeb')
+							div.statistic-bar-strip(style='background-color: #b0e0e6')
+							div.statistic-bar-strip(style='background-color: #e0ffff')
+						div.statistic-legend
+							div.legend-item
+								div.item-box(style='background-color: #000080')
+								div.item-name
+							div.legend-item
+								div.item-box(style='background-color: #0000ff')
+								div.item-name
+							div.legend-item
+								div.item-box(style='background-color: #4169e1')
+								div.item-name
+							div.legend-item
+								div.item-box(style='background-color: #1e90ff')
+								div.item-name
+							div.legend-item
+								div.item-box(style='background-color: #87ceeb')
+								div.item-name
+							div.legend-item
+								div.item-box(style='background-color: #b0e0e6')
+								div.item-name
+							div.legend-item
+								div.item-box(style='background-color: #e0ffff')
+								div.item-name
+			div#user-favorites
+			div#user-listened
+			div#user-playlists

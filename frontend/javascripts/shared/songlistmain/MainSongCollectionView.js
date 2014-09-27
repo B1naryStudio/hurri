@@ -8,6 +8,7 @@ define(['marionette', './MainSongView', 'clipboard', '../../sidebar/songlist/Beh
 		},
 		
 		childView: MainSongView,
+		childViewContainer: '#mainsong-collection-container',
 		childEvents: {
 			'song-view:play-collection' : function(info, models, position){
 				console.log('THIS', this.model);

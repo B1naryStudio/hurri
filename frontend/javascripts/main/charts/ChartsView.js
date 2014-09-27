@@ -5,6 +5,7 @@ function(Marionette, SongView){
 
 		template 	: '#charts-template',
 		childView	: SongView,
+		childViewContainer : '#charts-container',
 		childEvents: {
 			'song-view:play-collection' : function(info, models, position){
 				console.log('THIS', this.model);

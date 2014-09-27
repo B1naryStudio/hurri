@@ -1,13 +1,21 @@
 #main
+	height 100%
+	position relative
 	&.toggled-main
 		width 85%
+	div.main-explorer-navi
+		overflow-y auto
+		position absolute
+		top 40px
+		bottom 0px
+		width 100%	
+
 #main-container
 	background white
 	float left
 	width 65%
-	overflow-y auto
 	position absolute
-	top 120px
+	top 100px
 	bottom 30px
 	margin-left 15%
 	&.toggled-main
@@ -143,7 +151,7 @@
 		padding-top 5px
 		background url(../images/main/Circle.png) no-repeat
 		background-size 30px
-		
+
 .global-zeroclipboard-container:hover
 	background url(../images/main/share.png) no-repeat
 	background-size 14px

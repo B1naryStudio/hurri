@@ -30,8 +30,12 @@
 #main-child-container
 	width 100%
 	position absolute
+	overflow-y auto
 	height 100%
 	top 40px
+	left 0px
+	right 0px
+	bottom 0
 .album-bar 
 	width 180px
 	height 280px
@@ -87,4 +91,21 @@
 			background #ffe
 			cursor pointer
 			
-		
+#complete-artist-container
+	overflow-y auto
+	position absolute
+	top 40px
+	bottom 0px
+	width 100%	
+#main
+	#album-complete-view
+		overflow-y auto
+		position absolute
+		top 40px
+		bottom 0px
+		width 100%	
+
+		.main-explorer-navi
+			display block
+			position relative
+	
