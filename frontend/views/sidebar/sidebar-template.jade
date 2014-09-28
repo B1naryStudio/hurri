@@ -15,7 +15,12 @@ script#song-item-template(type='text/template')
 			img.gif(src='/../images/songlist/blue_equalizer.gif')
 		.sidebar-song-header
 			h5(title='{{-title}} - {{-singer}}') {{-title}}
-		a.sidebar-song-info  
+		{{if (singer._id === '#'){}}
+		{{singer._id = '/search/nothing_found_sorry'}}
+		{{} else {}}
+		{{singer._id = '/artist/id/' + singer._id + '/albums'}}
+		{{}}}
+		a.sidebar-song-info(href='{{-singer._id}}')  
 			{{-singer.name}}
 		.delete-song-from-list
 		.add-song-to-queue

@@ -13,14 +13,15 @@ define(['backbone'], function(Backbone){
 			albumTitle : 'AlbumName',
 			albumCover: '/images/default/cover.png',
 			album: {cover : '/images/default/cover.png'},
-			singer: { name : 'Artist'},
+			singer: { name : 'Artist', _id : undefined},
 			url: undefined,
 			comment : [''],
 			queuepos : '',
 			liked: false,
 			likedId: [],
 			current : false,
-			modelType : 'song'
+			modelType : 'song',
+			type: 'deezer'
 		},
 		initialize: function(){
 			var singer = this.get('singer');
@@ -44,6 +45,13 @@ define(['backbone'], function(Backbone){
 					url:'/api/like/' + this.get('_id') + '/' + window._injectedData.user._id
 				});
 			});
+
+			if (this.get('type') === 'vk'){
+				var title = this.get('title');
+				var title_split = title.split(' - ');
+				this.set('title', title_split[0]);
+				this.set('singer', {name: title_split[1], _id : '#'});
+			}
 		},
 
 		getLyrics: function(){
