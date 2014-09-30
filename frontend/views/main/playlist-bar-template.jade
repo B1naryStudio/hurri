@@ -5,12 +5,19 @@ script#playlist-bar(type='text/template')
 			b{{-name}}
 		.playlist-play
 			img(src='/../images/main/logo-playlist.png')
-		.playlist-total
-			span Total tracks: {{-tracks.length}} Genre: {{-genre}} 
+
 		//.playlist-private 
 	.playlist-right
+		.right-list-header You will listen them first:
 		ol.songs-list
 			{{ var tracksnames = 5; if (tracks.length < 5) tracksnames = tracks.length; for (var i = 0; i < tracksnames; i ++){}}
 			li.songname-playlist
-				{{-tracks[i].artist}} {{-tracks[i].title}}
+				.bold {{-tracks[i].artist}} 
+				.normal{{-tracks[i].title}}
 			{{}}}
+		.playlist-total
+			span 
+				.bold Total tracks: 
+				.normal {{-tracks.length}} 
+				.bold Genre: 
+				.normal {{-genre}} 

@@ -1,3 +1,6 @@
+random(a,b)
+  return math(math(0, 'random')*(b - a + 1) + a, 'floor')
+
 #playlist-bar-wrapper
 	width 98%
 	margin-top 35px
@@ -15,8 +18,8 @@
 	position relative
 	float left
 	margin 5px 20px
-	border 1px solid #9e9e9e
-	background #efefef
+	border 1px solid #dedede
+	background #f4f4f4
 
 	.playlist-date
 		font-size 15px
@@ -28,13 +31,15 @@
 		margin auto
 
 	.playlist-left
-		width 45%
+		width 300px
 		float left
 		height 250px
 		padding 1px
 		margin-right 10px
 		text-align center
 		position relative
+		background: url('/images/main/playlistbg/3.jpg') no-repeat
+		background-size	auto 100%
 		.play-without-open
 			display none
 			width 30px
@@ -45,20 +50,13 @@
 
 		.playlist-name
 			top 5px
-			left 35px
 			position absolute
-			font-size 28px
-			height 30px
-			text-overflow hidden
-			overflow hidden
-			color #333333
-			margin-bottom 10px
-		.playlist-total
-			font-size 15px
-			position absolute
-			bottom 10px
-			left 20px
-			color #333333
+			width: 100%;
+			height: 30px;
+			font-size: 25px;
+			color: #777;
+			padding-bottom: 5px;
+
 
 		.playlist-private
 			position absolute
@@ -76,45 +74,70 @@
 			width 120px
 			height 120px
 			top 0px
+			left 80px
 			position absolute
 			img
-				width 150px
-				height 150px
+				width 100%
+				height 100%
 				position absolute
-				top 45px
-				left 15px	
+				top 60px
+				left 15px
+				opacity 0.5	
 				&:hover
-					opacity 0.3
+					opacity 0.8
+					cursor pointer
 
 
 	.playlist-right
 		padding 5px
 		float left
 		width 45%
-		background #efefef
+		background #f4f4f4
 		height 242px
 		min-height 240px
 		text-align center
 		overflow hidden
 		box-sizing border-box
 		.songs-list
-			margin-top 40px
+			margin-top 55x
 			text-align left
 			list-style-type decimal-leading-zero
 			list-style-position inside
 			height 240px
 			overflow hidden
 		.songname-playlist
-			border-bottom 1px solid #9e9e9e
-			border-top 1px solid #9e9e9e
-			line-height 35px
-			color #333333
+			border-top 1px solid #dedede
+			line-height 30px
+			color #333
 			text-overflow ellipsis
 			overflow hidden
-			font-size 18px
-			height 35px
+			font-size 15px
+			height 30px
 			width 90%
 			white-space nowrap
-
-
+			&:first-child
+				border none
+			.bold
+				color red
+			.normal
+				display inline
+		.playlist-total
+			font-size 14px
+			position absolute
+			bottom 10px
+			left 310px
+			color #333333
+			span
+				.bold
+				.normal
+					display inline
+	.right-list-header
+		width: 100%;
+		height: 20px;
+		font-size: 16px;
+		color: #a3c6df
+		padding-bottom: 5px;
+		padding-top 10px
+		text-align left
+		font-weight bold
 
