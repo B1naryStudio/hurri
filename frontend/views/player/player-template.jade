@@ -1,18 +1,27 @@
 script#player-template(type='text/template')
 	div#player-content
-		button#previous-button.player-button(type='button', {{ if (previousButtonState) print('disabled')}})
-		button#play-button.player-button(type='button', class='{{-playback}}')
+		button#previous-button.player-button.tooltips.big(type='button', {{ if (previousButtonState) print('disabled')}})
+			span Back
+		button#play-button.player-button.tooltips.big(type='button', class='{{-playback}}')
+			span Play
 			a(href='.active')
-		button#next-button.player-button(type='button', {{ if (nextButtonState) print('disabled')}})
-		button#volume.player-button(class='{{-mute}}')
+		button#next-button.player-button.tooltips.big(type='button',{{ if (nextButtonState) print('disabled')}})
+			span Next
+		button#volume.player-button.tooltips(class='{{-mute}}')
+			span Volume
 		input#volume-range(type='range', min='0', max='100', value='{{- volumeLevel}}')
 		div#song-block
 			div#song-name.song-info {{-currentTrackName}} - {{-currentArtistName}}
 			input#playback-range(type='range', min='0', max='{{-duration}}', value='{{-position}}')
 			div#song-position.song-info {{-positionFormat}}
 			div#song-duration.song-info {{-durationFormat}}
-		button#shuffle-button.player-button(type='button', class='{{-shuffle}}')
-		button#repeat-button.player-button(type='button', class='{{-repeatTrack}}') 
-		button#like-button.player-button(type='button')
-		button#comment-button.player-button(type='button')
-		button#visualisation-button.player-button(type='button')
+		button#shuffle-button.player-button.tooltips(type='button', class='{{-shuffle}}')
+			span Shuffle
+		button#repeat-button.player-button.tooltips(type='button', class='{{-repeatTrack}}') 
+			span Repeat
+		button#like-button.player-button.tooltips(type='button')
+			span Like song
+		button#comment-button.player-button.tooltips(type='button')
+			span Add comment
+		button#visualisation-button.player-button.tooltips(type='button')
+			span Open visualization

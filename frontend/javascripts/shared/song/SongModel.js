@@ -21,7 +21,8 @@ define(['backbone'], function(Backbone){
 			likedId: [],
 			current : false,
 			modelType : 'song',
-			type: 'deezer'
+			type: 'deezer',
+			artistLink: ''
 		},
 		initialize: function(){
 			var singer = this.get('singer');

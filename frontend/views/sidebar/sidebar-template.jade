@@ -1,9 +1,9 @@
 script#sidebar-template(type='text/template')
 	ul
-		li#hideButton
-		li#infoButton
-		li#musicButton
-		li#friendsButton
+		li#hideButton(title='Hide sidebar')
+		li#infoButton(title='My statistic')
+		li#musicButton(title='Song queue list')
+		li#friendsButton(title='My followers/followings')
 
 script#sidebar-default-template(type='text/template')
 	span test bar
@@ -28,13 +28,13 @@ script#song-item-template(type='text/template')
 
 script#sidebar-songlist-navi(type='text/template')
 	#songlist-navi
-		#unqueue
+		#unqueue(title='Unqueue songs')
 			.unqueue
-		#clearall
+		#clearall(title='Clear queue list')
 			.clearall
-		#save-playlist-from-queue
+		#save-playlist-from-queue(title='Save changes to current playlist')
 			.save-playlist-from-queue
-		#save-playlist-as
+		#save-playlist-as(title='Save to new playlist')
 			.save-playlist-as
 		.input-wrapper-sidebar
 			input.clearable.edit2

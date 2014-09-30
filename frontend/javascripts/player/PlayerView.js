@@ -70,18 +70,21 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			var mode = this.model.get('liked');
 			mode = 'player-button' + ' ' + mode;
 			this.ui.likeButton.removeClass();
-			this.ui.likeButton.addClass(mode);		
+			this.ui.likeButton.addClass(mode);
+			this.ui.likeButton.addClass('tooltips');		
 		},
 		likeState : function(){
 			var mode = this.model.likeState();
 			mode = 'player-button' + ' ' + mode;
 			this.ui.likeButton.removeClass();
 			this.ui.likeButton.addClass(mode);	
+			this.ui.likeButton.addClass('tooltips');
 		},
 		changeLiked: function(){
 			var mode = 'player-button' + ' ' + this.model.get('liked');
 			this.ui.likeButton.removeClass();
-			this.ui.likeButton.addClass(mode);		
+			this.ui.likeButton.addClass(mode);
+			this.ui.likeButton.addClass('tooltips');		
 		},
   		setUpVolume: function(){
   			this.flag = true;
@@ -158,6 +161,7 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			mode = 'player-button' + ' ' + mode;
 			this.ui.volume.removeClass();
 			this.ui.volume.addClass(mode);
+			this.ui.volume.addClass('tooltips');
 		},
 
 		shuffleMode : function(){
@@ -165,6 +169,7 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			mode = 'player-button' + ' ' + mode;
 			this.ui.shuffleButton.removeClass();
 			this.ui.shuffleButton.addClass(mode);
+			this.ui.shuffleButton.addClass('tooltips');	
 		},
 
 		repeatMode : function(){
@@ -172,6 +177,7 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			mode = 'player-button' + ' ' + mode;
 			this.ui.repeatButton.removeClass();
 			this.ui.repeatButton.addClass(mode);
+			this.ui.repeatButton.addClass('tooltips');	
 		},
 
 		toggleVisualisation: function(){
