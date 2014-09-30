@@ -249,7 +249,7 @@ define(['marionette',
 				Backbone.trigger('admin:add-tracks',{radio:context.radio.id, collection: collection});
 			var button = new UndoReplacement();
 			button.render();
-			setTimeout($('#undo').empty(), 1000);
+			setTimeout(function(){$('#undo').empty();}, 5000);
 		}, this);
 
 
@@ -261,6 +261,7 @@ define(['marionette',
 				}
 				var button = new UndoReplacement();
 				button.render();
+				setTimeout(function(){$('#undo').empty();}, 5000);
 				context.currentSongCollection.reset(collection.models);
 				if (!set)
 					Backbone.trigger('main:play-first');
@@ -274,6 +275,7 @@ define(['marionette',
 			}
 			var button = new UndoReplacement();
 			button.render();
+			setTimeout(function(){$('#undo').empty();}, 5000);
 			context.currentSongCollection.reset(model);
 			Backbone.trigger('main:play-at-position', i);
 		},this);
