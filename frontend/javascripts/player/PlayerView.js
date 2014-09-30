@@ -126,6 +126,8 @@ define(['marionette', './PlayerModel', '../app/routes','../app/context'],
 			mode = 'player-button' + ' ' + mode;
 			this.ui.playButton.removeClass();
 			this.ui.playButton.addClass(mode);
+			this.ui.playButton.addClass('tooltips');
+			this.ui.playButton.addClass('big');
 		},
 
 		stop: function() {

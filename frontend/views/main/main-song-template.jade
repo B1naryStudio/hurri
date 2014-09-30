@@ -43,4 +43,27 @@ script#main-header-playlist-template(type='text/template')
 		#header-playlist-info
 			#playlist-header-name {{-name}}
 			#playlist-header-tracks-num Genre: {{-genre}}
+			#playlist-header-tracks-num Tracks: {{-numberOfTracks}}
+	#mainsong-collection-container
+
+script#favorites-template(type='text/template')
+	#header-playlist-wrapper
+		#playlist-avatar-header
+			img#img(src='/./images/main/favorites.jpg')
+			.playlist-play
+		#header-playlist-info
+			#playlist-header-name FAVORITES
+			#playlist-header-tracks-num Genre: {{-genre}}
+			#playlist-header-tracks-num Tracks: {{-numberOfTracks}}
+	#mainsong-collection-container
+
+script#listened-template(type='text/template')
+	#header-playlist-wrapper
+		#playlist-avatar-header
+			img#img(src='/./images/main/listaned.jpg')
+			.playlist-play
+		#header-playlist-info
+			#playlist-header-name LISTENED
+			#playlist-header-tracks-num Favourite Genre: {{-genre}}
+			#playlist-header-tracks-num Total listened: {{-numberOfTracks}}
 	#mainsong-collection-container

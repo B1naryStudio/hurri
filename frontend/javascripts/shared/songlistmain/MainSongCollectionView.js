@@ -1,8 +1,12 @@
 define(['marionette', './MainSongView', 'clipboard', '../../sidebar/songlist/Behavior'], 
 	function(Marionette, MainSongView, ZeroClipboard){
 	var MainSongCollectionView = Marionette.CompositeView.extend({
+		template: this.getTemplate,
+		initialize: function(params, option){
+			this.option = option;
+		},
 		id: 'main-songlist-composite',
-		template: '#main-header-playlist-template',
+		
 		events: {
 			'click #playlist-avatar-header':'playSongs'
 		},
@@ -18,6 +22,18 @@ define(['marionette', './MainSongView', 'clipboard', '../../sidebar/songlist/Beh
 		},
 		playSongs: function(){
 			Backbone.trigger('main-view:play-songs', this.model.attributes._id, this.collection);
+		},
+
+		getTemplate: function(){
+			if (this.option){
+				if(this.option.type === 'favorites'){
+					return '#favorites-template';
+				} else if(this.option.type === 'listened'){
+					return '#listened-template';
+				} else {
+					return '#main-header-playlist-template';
+				}
+			} else return '#main-header-playlist-template';
 		}
 	});
 	return MainSongCollectionView;

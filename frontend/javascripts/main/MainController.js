@@ -506,7 +506,7 @@ define(['marionette',
 		return new MainSongCollectionView({
 			model: this.favoriteslist.model,
 			collection: this.favoriteslist.collection
-		});
+		}, {type:'favorites'});
 	};
 
 	MainController.prototype.initializeListened = function(){
@@ -557,7 +557,7 @@ define(['marionette',
 		return new MainSongCollectionView({
 			model: this.listened.model,
 			collection: this.listened.collectionfavoriteslist
-		});
+		}, {type:'listened'});
 	};
 
 	// MainController.prototype.initializeListened = function(){
