@@ -13,6 +13,10 @@ script#album-composite-template(type='text/template')
 	.album-singer 
 		span.bold Singer name: 
 		span {{-singer.name}}
+	.buttons-wrapper
+		.playnow-album Play now
+		.append-to-player Append to player
+		.share-album(data-clipboard-text='localhost:3055/album/id/{{-_id}}') Share
 	.total_tracks 
 		span.bold Total tracks: 
 		span{{-tracks.length}}
