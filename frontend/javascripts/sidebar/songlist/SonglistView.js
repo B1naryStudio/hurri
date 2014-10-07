@@ -1,4 +1,5 @@
-define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'], function(Marionette, context, playlistModel){
+define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel', '../../app/routes'], 
+	function(Marionette, context, playlistModel, router){
 	var SonglistView = Marionette.ItemView.extend({
 		className: 'song-item',
   		template : '#song-item-template',
@@ -6,7 +7,8 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 		events : {
 		 	'click .delete-song-from-list'  : 'deleteSong',
 			'click .add-song-to-queue' : 'addSongToQueue',
-			'dblclick .sidebar-song-cover' : 'playSong'
+			'dblclick .sidebar-song-cover' : 'playSong',
+			'click a[href^="/"]' : 'showAuthor'
 		 },
 		
 		modelEvents : {
@@ -32,6 +34,10 @@ define(['marionette', '../../app/context', '../../shared/playlist/PlaylistModel'
 					break;
 				}
 			}	
+		},
+		showAuthor: function(event){
+			event.preventDefault();
+    		router.navigate(event.currentTarget.attributes.href.value, true);
 		},
 
 		deleteSong: function(){

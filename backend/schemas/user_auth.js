@@ -23,10 +23,7 @@ var userAuthSchema = new Schema({
 	twToken: String,
 	fbToken: String,
 	age : {
-		type: Number, 
-		default: 18,
-		min: 0,
-		max: 130
+		type: String
 	},
 	followers : [{ 
 		type: Schema.Types.ObjectId, 

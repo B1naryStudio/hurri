@@ -80,11 +80,14 @@ define(['backbone'], function(Backbone){
 		getStream: function(){
 			var self = this;
 			var url = this.get('url');
-				if (!url){
-					$.getJSON('/getStream',{query: self.get('title')}, function(data){
+				//if (!url){
+					var title = self.get('title');
+					var singer = self.get('singer');
+					var query = singer.name + ' - ' + title;
+					$.getJSON('/getStream',{query: query}, function(data){
 						self.set({url: data.url, duration: data.duration});
 					});
-		 		}
+		 		//}
 
 			return self.get('url');
 		}

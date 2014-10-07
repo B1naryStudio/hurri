@@ -77,11 +77,12 @@ function getUser (profile, token, auth, done){
 				if (auth === 'vk'){
 					userRepository.add({
 						name : profile._json.first_name,
-						avatarUrl : profile._json.photo,
+						avatarUrl : profile._json.photo_max_orig,
 						accountType : auth,
 						idVk: profile._json.id,
 						vkToken: token
 					}, function(err, user){
+						console.log('ERRDATA', err, data);
 						if (err) { return done(err); }
 							userRepository.addUserInfo({user_auth_id: user._id}, function(err, data){
 								VK.getUserAudio(user.idVk, function(playlist){
@@ -149,12 +150,15 @@ function getUser (profile, token, auth, done){
 			} else {
 				if (auth === 'vk'){
 					console.log('update');
+					console.log('JSON',profile._json);
 					userRepository.update(profile._json.id, {
 						name : profile._json.first_name,
-						avatarUrl : profile._json.photo,
+						avatarUrl : profile._json.photo_max_orig,
 						accountType : auth,
 						idVk: profile._json.id,
-						vkToken: token
+						vkToken: token,
+						age: profile._json.bdate || 'Unknown',
+						country: profile._json.country.title || 'Unknown'
 					}, function(err, user){
 						if (err) { return done(err); }
 							done(null, user);				

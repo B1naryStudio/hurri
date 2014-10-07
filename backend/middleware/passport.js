@@ -61,9 +61,11 @@ module.exports = function () {
 			clientID:	 cnfg.oauth.vkontakte.clientID,
 			clientSecret: cnfg.oauth.vkontakte.clientSecret,
 			callbackURL:  cnfg.oauth.vkontakte.callbackURL,
+			profileFields: ['photo_max_orig', 'bdate', 'country'],
 			passReqToCallback: true
 		},
 		function (req, accessToken, refreshToken, profile, done) {
+			console.log('PROFILE', profile);
 			console.log('vk login');
 			VKWrapper.setAccessToken(accessToken || refreshToken);
 			if (!req.user) {
