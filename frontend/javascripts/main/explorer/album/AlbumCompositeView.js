@@ -25,9 +25,13 @@ define(['marionette', '../../../shared/songlistmain/MainSongView','../../../side
 			
 		},
 		onShow: function(){
-			ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
-									trustedDomains: location.host } );
+			// ZeroClipboard.config( { //moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
+			// 						trustedDomains: location.host,
+			// 						hoverClass: "zeroclipboard-is-hover",
+			// 						activeClass: "zeroclipboard-is-active" 
+			// 					} );
 			this.client = new ZeroClipboard( this.ui.share);
+
 		}
 	});
 	return AlbumCompositeView;

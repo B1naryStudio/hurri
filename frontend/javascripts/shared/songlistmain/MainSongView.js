@@ -35,7 +35,7 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 	ui : {
 			like : '.main-like-song',
 			song : '.main-song-item',
-			share : '.main-share-song'
+			shareSong : '.main-share-song'
 	},
 	onRender: function () {
 		this.changeLiked();			
@@ -76,9 +76,9 @@ define(['marionette', '../playlist/PlaylistModel','clipboard', '../../app/contex
 		this.ui.like.addClass(mode);		
 	},
 	onShow: function(){
-			ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
-									trustedDomains: location.host } );
-			this.client = new ZeroClipboard( this.ui.share);
+			// ZeroClipboard.config( { moviePath: '../../../bower_components/zeroclipboard/dist/ZeroClipboard.swf',
+			// 						trustedDomains: location.host } );
+			this.client = new ZeroClipboard( this.ui.shareSong);
 		}
 	});
 	return MainSongView;
