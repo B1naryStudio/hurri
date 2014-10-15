@@ -3,6 +3,7 @@ var Dialog = require('../schemas/dialog.js');
 var Repository = require('./generalRepository.js');
 var userRepository = require('./userRepository.js');
 var mediator = require('../units/mediator');
+//var emojione = require('emojione');
 
 function DialogRepository(){
 	Repository.prototype.constructor.call(this);
@@ -15,10 +16,11 @@ DialogRepository.prototype = new Repository();
 
 DialogRepository.prototype.bindListeners = function() {
 	var self = this;
-	mediator.on('add-message-to-dialogue', function(options){	
+
+	mediator.on('add-message-to-dialogue', function(options){
 		self.addMessage(options.user_auth1, options.user_auth2, {
 			user_auth_id: options.options.user_auth_id,
-			data: options.options.data,
+			date: options.options.date,
 			message: options.options.message
 		});
 	});

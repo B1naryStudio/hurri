@@ -1,4 +1,4 @@
-define(['marionette'], function(Marionette){
+define(['marionette', 'emojione'], function(Marionette, emojione){
 	var DialogueView = Marionette.ItemView.extend({
 		className: 'dialogue',
   		template : '#dialogue-item',

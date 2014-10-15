@@ -3,6 +3,7 @@ define(['backbone', 'underscore'], function(Backbone, _){
 		defaults:{
 			recipient_id: undefined
 		}
+		
 	});
 	return DialogueModel;
 });

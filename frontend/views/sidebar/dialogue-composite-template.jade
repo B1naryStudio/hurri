@@ -1,3 +1,8 @@
 script#dialogue-composite(type='text/template')
 	input#new-dialogue(type='text')
+	div#insert-smile smile
 	div#send-message add
+	div#smiles
+		{{ for (var i=0; i<100; i++) { }}
+		p{{-emojioneList}}
+		{{ } }}

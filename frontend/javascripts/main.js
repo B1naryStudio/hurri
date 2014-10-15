@@ -9,14 +9,18 @@ require.config({
 		marionette: '../../bower_components/marionette/lib/backbone.marionette',
 		localStorage: './libs/backbone.localStorage',
 		clipboard: '../../bower_components/zeroclipboard/dist/ZeroClipboard',
-		fetchCache: '../../bower_components/backbone-fetch-cache/backbone.fetch-cache'
-
+		fetchCache: '../../bower_components/backbone-fetch-cache/backbone.fetch-cache',
+		emojione: '../../bower_components/emojione/lib/js/emojione'
 	},
 
 	shim: {
 		'clipboard': {
 			exports: 'ZeroClipboard'
+		},
+		'emojione': {
+			exports: 'emojione'
 		}
+
 	}
 });
 

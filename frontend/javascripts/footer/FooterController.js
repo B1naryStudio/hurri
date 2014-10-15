@@ -15,8 +15,7 @@ define(['marionette', '../app/context', './SongInfoView',  '../sidebar/SidebarNa
 		footerRegion.show(songInfoView);
 		var sidebarView = new SidebarNavView();
 		sidebarView.render();
-
-
+		
 	};
 
 	return FooterController;

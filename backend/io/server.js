@@ -42,6 +42,7 @@ module.exports = function(server){
 		});
 
 		socket.on('add-message', function (options){
+			console.log('opts=', options);
 			var id1 = socket.request.user._id;
 			var id2 = options.recipient_id;
 			var arr = [id1, id2];
@@ -49,7 +50,6 @@ module.exports = function(server){
 			mediator.publish('add-message-to-dialogue', {user_auth1: id1, user_auth2: id2, options: options});
 			roomManager.addRoomToUser(id1, 'dialogue_' + arr[0] + '_' + arr[1]);
 			roomManager.addRoomToUser(id2, 'dialogue_' + arr[0] + '_' + arr[1]);
-			console.log('asdasdas');
 			context.io.to('dialogue_' + arr[0] + '_' + arr[1]).emit('new-message',options);
 		});		
 
