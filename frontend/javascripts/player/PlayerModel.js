@@ -203,6 +203,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 		},
 
 		setTrackInfoParams: function(){
+
 			this.set({
 				currentTrackName: context.currentSongModel.get('title'),
 				currentArtistName: context.currentSongModel.get('artist'),
@@ -213,6 +214,7 @@ define(['backbone', '../app/enums', '../app/context', 'localStorage', '../units/
 			this.volumeLevelSetup(this.get('volumeLevel'));
 			this.setPositionFormat();
 			this.setDurationFormat();
+			Backbone.trigger('changeCurrentSong', context.currentSongModel.get('title'), context.currentSongModel.get('artist'));
 		},
 
 		mute: function(){

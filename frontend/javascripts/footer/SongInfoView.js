@@ -1,13 +1,22 @@
-define(['marionette'], function(Marionette){
+define(['marionette', 'backbone'], function(Marionette, Backbone){
 	var SongInfoView = Marionette.ItemView.extend({
 		template: '#song-info-template',
-		modelEvents: {
-			'change': 'fieldsChanged'
+		initialize: function(){
+			this.bindListeners();
 		},
-
-		fieldsChanged: function() {
+		bindListeners: function(){
+			Backbone.on('changeCurrentSong', this.fieldsChanged, this);
+		},
+		fieldsChanged: function(first, second) {
 			clearInterval(this.titleInterval);
-			this.tabTitle(this.model.attributes.artist + " — " + this.model.attributes.title);
+			if (second === undefined){
+				this.tabTitle(first);
+				second = ' ';
+			}
+			else {
+				this.tabTitle(first + " — " + second);
+			}
+			this.model.set({'singer.name': second, 'title': first});
 			this.render();
 		},
 
@@ -23,5 +32,6 @@ define(['marionette'], function(Marionette){
 			}, 500);
 		}
 	});
+
 	return SongInfoView;
 });
