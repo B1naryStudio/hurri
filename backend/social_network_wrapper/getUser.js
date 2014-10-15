@@ -167,7 +167,7 @@ function getUser (profile, token, auth, done){
 				if (auth === 'fb'){
 					console.log('update fb');
 					userRepository.update(profile._json.id, {
-						name : profile._json.first_name,
+						//name : profile._json.first_name,
 						idFb: profile._json.id,
 						fbToken: token
 					}, function(err, user){
@@ -178,7 +178,7 @@ function getUser (profile, token, auth, done){
 				if (auth === 'tw'){
 					console.log('update tw');
 					userRepository.update(profile._json.id, {
-						name : profile._json.name,
+						//name : profile._json.name,
 						avatarUrl : profile._json.profile_image_url,
 						idTw: profile._json.id,
 						twToken: token
