@@ -46,8 +46,7 @@
     "passport-odnoklassniki": "~0.1.5",
     "passport-facebook": "~1.0.3",
     "passport-twitter": "~1.0.2",
-    "passport": "~0.2.0",
-    "winston-wrapper": "~1.0.1"
+    "passport": "~0.2.0"
   },
   "dependencies": {
     "async": "^0.9.0",

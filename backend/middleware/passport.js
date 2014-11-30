@@ -5,13 +5,13 @@ var TwitterStrategy = require('passport-twitter').Strategy;
 var OdnoklassnikiStrategy = require('passport-odnoklassniki').Strategy;
 var VKontakteStrategy = require('passport-vkontakte').Strategy;
 var cnfg = require('../config/');
-var log = require('winston-wrapper')(module);
+//var log = require('winston-wrapper')(module);
 var getUser = require('../social_network_wrapper/getUser.js');
 var addUser = require('../social_network_wrapper/addUser.js');
 var userRepository = require ('../repositories/userRepository');
 
 module.exports = function () {
-	log.info('someone trying to login');
+	//log.info('someone trying to login');
 
 	passport.use(new FacebookStrategy({
 			clientID: cnfg.oauth.facebook.clientID,

@@ -1,4 +1,4 @@
-var log = require('winston-wrapper')(module);
+//var log = require('winston-wrapper')(module);
 var passport = require('passport');
 
 module.exports = function (app) {
